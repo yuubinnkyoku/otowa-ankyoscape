@@ -1,9 +1,6 @@
 name: Temporary README research update 8
 
 on:
-  push:
-    paths:
-      - '.github/workflows/research-readme-20260820-8.yml'
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -12,7 +9,6 @@ permissions:
 
 jobs:
   update-readme:
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,37 +21,7 @@ jobs:
             echo 'README already updated.'
             exit 0
           fi
-          cat >> README.md <<'EOF'
-
----
-
-# 22. 追加調査（2026-08-20・第8回）
-
-## 22.1 高田町下水道築造記念碑：弦巻川暗渠化を含む下水道事業の計画・認可・起工時期を細分できる
-
-大鳥神社境内に現存する **「高田町下水道築造記念碑」** について、現地碑文を転記した複数のウェブ資料を照合した。碑そのものの存在と、大鳥神社脇の弦巻川暗渠化・鶴巻道路完成に関する記念碑であることは、豊島区立郷土資料館だより『かたりべ』104号でも確認できる。[S53] 一方、以下の細かな日付・金額は、今回オンラインで確認できた碑文転記に基づくため、**〔碑文転記／要現物再確認〕** として扱う。[S56]
-
-碑文転記によれば、高田町は **1929（昭和4）年6月に下水道施設計画を立て、1930（昭和5）年1月以降に実地調査を行い、同年10月14日に総工費190余万円・6か年継続事業とする案を町会で可決**した。その後、同年12月29日に内務省告示があり、**1931（昭和6）年5月23日に認可・許可を完了、6月17日に起工式**を行ったと読める。[S56]
-
-この年次は、既存READMEの[S23]にある **「1929年に調査費を計上し、1930年に実地調査・設計を終えて東京府へ申請」** という公的資料の整理と大筋で整合する。したがって、弦巻川の暗渠化を「1932年完成」という一点だけで捉えるより、少なくとも **1929年の計画化 → 1930年の調査・設計・町会議決 → 1931年の認可・起工 → 1932年の暗渠化・道路化** という段階を分けて追える可能性が高い。〔観察／既存資料との照合〕[S23][S53][S56]
-
-碑文はさらに、この下水道事業を **公衆衛生上の事業**であると同時に、**失業救済事業**、そして高田町の道路網計画と一体の事業として記し、主要道路として **「鶴巻道路」「日出道路」「根津道路」** を挙げている。[S56] 『高田町写真帖』で大鳥神社脇の弦巻川暗渠上に「鶴巻道路」が完成したとする説明[S53]とも対応するため、弦巻川の暗渠化は単なる河川覆蓋ではなく、**下水道・道路・都市化を一体で進めた町レベルの都市基盤整備**として捉えるべきことを補強する。〔観察〕
-
-ただし、碑文は高田町全体の下水道築造事業の概要を述べたものであり、記載された **総工費190余万円・6か年計画の全額や全期間を弦巻川暗渠区間だけの費用・工期とみなしてはいけない。** また転記サイト間には摩耗部分の判読差があるため、数字・語句は原碑の高精細写真、当時の町会議事録、内務省告示、工事設計書で再確認する必要がある。〔注意／未解決〕
-
-### ここから追えること
-
-- [ ] 大鳥神社の高田町下水道築造記念碑を高精細撮影し、判読不能字を含めて碑文を再翻刻する。
-- [ ] 1930年10月14日の高田町会議事録を探し、総工費・6か年計画・対象区域・管渠延長・弦巻川区間の扱いを確認する。
-- [ ] 1930年12月29日の内務省告示と1931年5月23日の認可文書を特定し、失業救済事業としての指定内容を確認する。
-- [ ] 「鶴巻道路」「日出道路」「根津道路」を1930年前後の道路計画図・高田町下水道設計平面図[S23]へ重ね、暗渠化と道路新設・拡幅の関係を区間ごとに分ける。
-
-## 追加出典
-
-- **[S56]** 大鳥神社境内「高田町下水道築造記念碑」（1932年9月、海老澤了之介識）の碑文転記。1929年6月の施設計画、1930年1月以降の実地調査、同年10月14日の町会可決、総工費190余万円・6か年事業、12月29日の内務省告示、1931年5月23日の認可完了、6月17日の起工式、失業救済事業、鶴巻道路・日出道路・根津道路を記す。摩耗部の転記には不確実性があるため要現物再確認。  
-  https://tokyotoshima.blog.shinobi.jp/%E9%9B%91%E5%8F%B8%E3%81%8C%E8%B0%B7/  
-  照合用転記：https://d-2-c.jp/column_back207.html
-EOF
+          printf '%s' 'Ci0tLQoKIyAyMi4g6L+95Yqg6Kq/5p+777yIMjAyNi0wOC0yMOODu+esrDjlm57vvIkKCiMjIDIyLjEg6auY55Sw55S65LiL5rC06YGT56+J6YCg6KiY5b+156KR77ya5bym5be75bed5pqX5rig5YyW44KS5ZCr44KA5LiL5rC06YGT5LqL5qWt44Gu6KiI55S744O76KqN5Y+v44O76LW35bel5pmC5pyf44KS57Sw5YiG44Gn44GN44KLCgrlpKfps6XnpZ7npL7looPlhoXjgavnj77lrZjjgZnjgosgKirjgIzpq5jnlLDnlLrkuIvmsLTpgZPnr4npgKDoqJjlv7XnopHjgI0qKiDjgavjgaTjgYTjgabjgIHnj77lnLDnopHmlofjgpLou6LoqJjjgZfjgZ/opIfmlbDjga7jgqbjgqfjg5bos4fmlpnjgpLnhaflkIjjgZfjgZ/jgILnopHjgZ3jga7jgoLjga7jga7lrZjlnKjjgajjgIHlpKfps6XnpZ7npL7ohIfjga7lvKblt7vlt53mmpfmuKDljJbjg7vptrTlt7vpgZPot6/lrozmiJDjgavplqLjgZnjgovoqJjlv7XnopHjgafjgYLjgovjgZPjgajjga/jgIHosYrls7bljLrnq4vpg7flnJ/os4fmlpnppKjjgaDjgojjgorjgI7jgYvjgZ/jgorjgbnjgI8xMDTlj7fjgafjgoLnorroqo3jgafjgY3jgovjgIJbUzUzXSDkuIDmlrnjgIHku6XkuIvjga7ntLDjgYvjgarml6Xku5jjg7vph5HpoY3jga/jgIHku4rlm57jgqrjg7Pjg6njgqTjg7Pjgafnorroqo3jgafjgY3jgZ/nopHmlofou6LoqJjjgavln7rjgaXjgY/jgZ/jgoHjgIEqKuOAlOeikeaWh+i7ouiomO+8j+imgeePvueJqeWGjeeiuuiqjeOAlSoqIOOBqOOBl+OBpuaJseOBhuOAgltTNTZdCgrnopHmlofou6LoqJjjgavjgojjgozjgbDjgIHpq5jnlLDnlLrjga8gKioxOTI577yI5pit5ZKMNO+8ieW5tDbmnIjjgavkuIvmsLTpgZPmlr3oqK3oqIjnlLvjgpLnq4vjgabjgIExOTMw77yI5pit5ZKMNe+8ieW5tDHmnIjku6XpmY3jgavlrp/lnLDoqr/mn7vjgpLooYzjgYTjgIHlkIzlubQxMOaciDE05pel44Gr57eP5bel6LK7MTkw5L2Z5LiH5YaG44O7NuOBi+W5tOe2mee2muS6i+alreOBqOOBmeOCi+ahiOOCkueUuuS8muOBp+WPr+axuioq44GX44Gf44CC44Gd44Gu5b6M44CB5ZCM5bm0MTLmnIgyOeaXpeOBq+WGheWLmeecgeWRiuekuuOBjOOBguOCiuOAgSoqMTkzMe+8iOaYreWSjDbvvInlubQ15pyIMjPml6Xjgavoqo3lj6/jg7voqLHlj6/jgpLlrozkuobjgIE25pyIMTfml6Xjgavotbflt6XlvI8qKuOCkuihjOOBo+OBn+OBqOiqreOCgeOCi+OAgltTNTZdCgrjgZPjga7lubTmrKHjga/jgIHml6LlrZhSRUFETUXjga5bUzIzXeOBq+OBguOCiyAqKuOAjDE5MjnlubTjgavoqr/mn7vosrvjgpLoqIjkuIrjgZfjgIExOTMw5bm044Gr5a6f5Zyw6Kq/5p+744O76Kit6KiI44KS57WC44GI44Gm5p2x5Lqs5bqc44G455Sz6KuL44CNKiog44Go44GE44GG5YWs55qE6LOH5paZ44Gu5pW055CG44Go5aSn562L44Gn5pW05ZCI44GZ44KL44CC44GX44Gf44GM44Gj44Gm44CB5bym5be75bed44Gu5pqX5rig5YyW44KS44CMMTkzMuW5tOWujOaIkOOAjeOBqOOBhOOBhuS4gOeCueOBoOOBkeOBp+aNieOBiOOCi+OCiOOCiuOAgeWwkeOBquOBj+OBqOOCgiAqKjE5MjnlubTjga7oqIjnlLvljJYg4oaSIDE5MzDlubTjga7oqr/mn7vjg7voqK3oqIjjg7vnlLrkvJrorbDmsbog4oaSIDE5MzHlubTjga7oqo3lj6/jg7votbflt6Ug4oaSIDE5MzLlubTjga7mmpfmuKDljJbjg7vpgZPot6/ljJYqKiDjgajjgYTjgYbmrrXpmo7jgpLliIbjgZHjgabov73jgYjjgovlj6/og73mgKfjgYzpq5jjgYTjgILjgJToprPlr5/vvI/ml6LlrZjos4fmlpnjgajjga7nhaflkIjjgJVbUzIzXVtTNTNdW1M1Nl0KCueikeaWh+OBr+OBleOCieOBq+OAgeOBk+OBruS4i+awtOmBk+S6i+alreOCkiAqKuWFrOihhuihm+eUn+S4iuOBruS6i+alrSoq44Gn44GC44KL44Go5ZCM5pmC44Gr44CBKirlpLHmpa3mlZHmuIjkuovmpa0qKuOAgeOBneOBl+OBpumrmOeUsOeUuuOBrumBk+i3r+e2suioiOeUu+OBqOS4gOS9k+OBruS6i+alreOBqOOBl+OBpuiomOOBl+OAgeS4u+imgemBk+i3r+OBqOOBl+OBpiAqKuOAjOm2tOW3u+mBk+i3r+OAjeOAjOaXpeWHuumBk+i3r+OAjeOAjOaguea0pemBk+i3r+OAjSoqIOOCkuaMmeOBkuOBpuOBhOOCi+OAgltTNTZdIOOAjumrmOeUsOeUuuWGmeecn+W4luOAj+OBp+Wkp+mzpeelnuekvuiEh+OBruW8puW3u+W3neaal+a4oOS4iuOBq+OAjOm2tOW3u+mBk+i3r+OAjeOBjOWujOaIkOOBl+OBn+OBqOOBmeOCi+iqrOaYjltTNTNd44Go44KC5a++5b+c44GZ44KL44Gf44KB44CB5bym5be75bed44Gu5pqX5rig5YyW44Gv5Y2Y44Gq44KL5rKz5bed6KaG6JOL44Gn44Gv44Gq44GP44CBKirkuIvmsLTpgZPjg7vpgZPot6/jg7vpg73luILljJbjgpLkuIDkvZPjgafpgLLjgoHjgZ/nlLrjg6zjg5njg6vjga7pg73luILln7rnm6TmlbTlgpkqKuOBqOOBl+OBpuaNieOBiOOCi+OBueOBjeOBk+OBqOOCkuijnOW8t+OBmeOCi+OAguOAlOims+Wvn+OAlQoK44Gf44Gg44GX44CB56KR5paH44Gv6auY55Sw55S65YWo5L2T44Gu5LiL5rC06YGT56+J6YCg5LqL5qWt44Gu5qaC6KaB44KS6L+w44G544Gf44KC44Gu44Gn44GC44KK44CB6KiY6LyJ44GV44KM44GfICoq57eP5bel6LK7MTkw5L2Z5LiH5YaG44O7NuOBi+W5tOioiOeUu+OBruWFqOmhjeOChOWFqOacn+mWk+OCkuW8puW3u+W3neaal+a4oOWMuumWk+OBoOOBkeOBruiyu+eUqOODu+W3peacn+OBqOOBv+OBquOBl+OBpuOBr+OBhOOBkeOBquOBhOOAgioqIOOBvuOBn+i7ouiomOOCteOCpOODiOmWk+OBq+OBr+aRqeiAl+mDqOWIhuOBruWIpOiqreW3ruOBjOOBguOCi+OBn+OCgeOAgeaVsOWtl+ODu+iqnuWPpeOBr+WOn+eikeOBrumrmOeyvue0sOWGmeecn+OAgeW9k+aZguOBrueUuuS8muitsOS6i+mMsuOAgeWGheWLmeecgeWRiuekuuOAgeW3peS6i+ioreioiOabuOOBp+WGjeeiuuiqjeOBmeOCi+W/heimgeOBjOOBguOCi+OAguOAlOazqOaEj++8j+acquino+axuuOAlQoKIyMjIOOBk+OBk+OBi+OCiei/veOBiOOCi+OBk+OBqAoKLSBbIF0g5aSn6bOl56We56S+44Gu6auY55Sw55S65LiL5rC06YGT56+J6YCg6KiY5b+156KR44KS6auY57K+57Sw5pKu5b2x44GX44CB5Yik6Kqt5LiN6IO95a2X44KS5ZCr44KB44Gm56KR5paH44KS5YaN57+75Yi744GZ44KL44CCCi0gWyBdIDE5MzDlubQxMOaciDE05pel44Gu6auY55Sw55S65Lya6K2w5LqL6Yyy44KS5o6i44GX44CB57eP5bel6LK744O7NuOBi+W5tOioiOeUu+ODu+WvvuixoeWMuuWfn+ODu+euoea4oOW7tumVt+ODu+W8puW3u+W3neWMuumWk+OBruaJseOBhOOCkueiuuiqjeOBmeOCi+OAggotIFsgXSAxOTMw5bm0MTLmnIgyOeaXpeOBruWGheWLmeecgeWRiuekuuOBqDE5MzHlubQ15pyIMjPml6Xjga7oqo3lj6/mlofmm7jjgpLnibnlrprjgZfjgIHlpLHmpa3mlZHmuIjkuovmpa3jgajjgZfjgabjga7mjIflrprlhoXlrrnjgpLnorroqo3jgZnjgovjgIIKLSBbIF0g44CM6ba05be76YGT6Lev44CN44CM5pel5Ye66YGT6Lev44CN44CM5qC55rSl6YGT6Lev44CN44KSMTkzMOW5tOWJjeW+jOOBrumBk+i3r+ioiOeUu+Wbs+ODu+mrmOeUsOeUuuS4i+awtOmBk+ioreioiOW5s+mdouWbs1tTMjNd44G46YeN44Gt44CB5pqX5rig5YyW44Go6YGT6Lev5paw6Kit44O75ouh5bmF44Gu6Zai5L+C44KS5Yy66ZaT44GU44Go44Gr5YiG44GR44KL44CCCgojIyDov73liqDlh7rlhbgKCi0gKipbUzU2XSoqIOWkp+mzpeelnuekvuWig+WGheOAjOmrmOeUsOeUuuS4i+awtOmBk+eviemAoOiomOW/teeikeOAje+8iDE5MzLlubQ55pyI44CB5rW36ICB5r6k5LqG5LmL5LuL6K2Y77yJ44Gu56KR5paH6Lui6KiY44CCMTkyOeW5tDbmnIjjga7mlr3oqK3oqIjnlLvjgIExOTMw5bm0MeaciOS7pemZjeOBruWun+WcsOiqv+afu+OAgeWQjOW5tDEw5pyIMTTml6Xjga7nlLrkvJrlj6/msbrjgIHnt4/lt6XosrsxOTDkvZnkuIflhobjg7s244GL5bm05LqL5qWt44CBMTLmnIgyOeaXpeOBruWGheWLmeecgeWRiuekuuOAgTE5MzHlubQ15pyIMjPml6Xjga7oqo3lj6/lrozkuobjgIE25pyIMTfml6Xjga7otbflt6XlvI/jgIHlpLHmpa3mlZHmuIjkuovmpa3jgIHptrTlt7vpgZPot6/jg7vml6Xlh7rpgZPot6/jg7vmoLnmtKXpgZPot6/jgpLoqJjjgZnjgILmkanogJfpg6jjga7ou6LoqJjjgavjga/kuI3norrlrp/mgKfjgYzjgYLjgovjgZ/jgoHopoHnj77nianlho3norroqo3jgIIgIAogIGh0dHBzOi8vdG9reW90b3NoaW1hLmJsb2cuc2hpbm9iaS5qcC8lRTklOUIlOTElRTUlOEYlQjglRTMlODElOEMlRTglQjAlQjcvICAKICDnhaflkIjnlKjou6LoqJjvvJpodHRwczovL2QtMi1jLmpwL2NvbHVtbl9iYWNrMjA3Lmh0bWwK' | base64 -d >> README.md
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
