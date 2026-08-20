@@ -1,19 +1,23 @@
 name: Temporary README research update
 
-# Second push to trigger the workflow after creation.
 on:
   push:
     paths:
       - '.github/workflows/research-readme-20260820-7.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
 
 jobs:
   update-readme:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append researched sources to README
         shell: bash
         run: |
