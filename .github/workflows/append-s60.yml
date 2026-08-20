@@ -1,15 +1,15 @@
 name: Append S60 research
 
 on:
-  push:
-    paths:
-      - '.github/workflows/append-s60.yml'
+  issues:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   update:
+    if: github.event.issue.title == 'run-append-s60'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
