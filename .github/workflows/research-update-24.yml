@@ -1,9 +1,8 @@
 name: Update river research README
 
 on:
-  push:
-    paths:
-      - '.github/workflows/research-update-24.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -13,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append verified research notes
         shell: python
         run: |
