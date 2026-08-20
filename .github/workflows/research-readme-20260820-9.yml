@@ -1,0 +1,28 @@
+name: Temporary README research update 9
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Append source note to README
+        shell: bash
+        run: |
+          if grep -q '^# 23\. 追加調査（2026-08-20・第9回）' README.md; then
+            exit 0
+          fi
+          printf '%s' 'Ci0tLQojIDIzLiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTIw44O756ysOeWbnu+8iQoKIyMgMjMuMSAxOTMz5bm044CO5Zyf5pyo5bu656+J5bel5LqL55S75aCx44CP44Gr5pen6auY55Sw55S644Gu6YO95biC6KiI55S76YGT6Lev5bel5LqL44KS5omx44GG5ZCM5pmC5Luj6KuW5paH44GM44GC44KLCgrlnJ/mnKjlrabkvJrlm7Pmm7jppKjjga7jgI7lnJ/mnKjlu7rnr4nlt6XkuovnlLvloLHjgI/nm67mrKHjgYvjgonjgIEqKuesrDnlt7vnrKw45Y+377yIMTkzM+W5tDjmnIjvvIlwcC4xM+KAkzE344Gr44CB5LiK5p2R54K65Lq644CM5pen6auY55Sw55S65Zyw5YaF6YO95biC6KiI55S76YGT6Lev6auY5L2O5Lqk5Y+J44Gr5bCx44Gm44CNKiog44GM5o6y6LyJ44GV44KM44Gm44GE44KL44GT44Go44KS56K66KqN44GX44Gf44CC5pit5ZKM6aSo44OH44K444K/44Or44Ki44O844Kr44Kk44OW44Gu5b6p5Yi754mI55uu5qyh44Gr44KC5ZCM6KuW5paH44GM5Y+O6Yyy44GV44KM44Gm44GE44KL44CC44CU5Y+y5paZ5omA5Zyo56K66KqN44CVW1M1N10KCuaXouWtmFJFQURNReOBp+OBr+OAgemrmOeUsOeUuuS4i+awtOmBk+eviemAoOiomOW/teeikeOBrueikeaWh+i7ouiomOOBi+OCieOAgeS4i+awtOmBk+S6i+alreOBjOOAjOm2tOW3u+mBk+i3r+OAjeOAjOaXpeWHuumBk+i3r+OAjeOAjOaguea0pemBk+i3r+OAjeOBquOBqeOBrumBk+i3r+e2suioiOeUu+OBqOS4gOS9k+OBp+mAsuOCgeOCieOCjOOBn+OBk+OBqOOCkuiomOmMsuOBl+OBn+OAgltTNTZdIOOBk+OBruirluaWh+OBr+OAgeOBneOBruebtOW+jOOBrjE5MzPlubTjgasqKuaXp+mrmOeUsOeUuuWGheOBrumDveW4guioiOeUu+mBk+i3r+OBqOmrmOS9juS6pOW3ruOCkuWwgumWgOeahOOBq+aJseOBo+OBn+WQjOaZguS7o+OBruWcn+acqOizh+aWmSoq44Gn44GC44KK44CB5pqX5rig5YyW5b6M44Gu5bym5be75bed5ZGo6L6644GM6YGT6Lev44O76LuM6YGT44O75Zyw5b2i44Go44Gp44GG6Kq/5pW044GV44KM44Gf44GL44KS5YW35L2T5YyW44Gn44GN44KL5Y+v6IO95oCn44GM44GC44KL44CC44CU6Kaz5a+f77yP5Y+y5paZ5L6h5YCk44CVW1M1Nl1bUzU3XQoK44Gf44Gg44GX44CB5LuK5Zue44Kq44Oz44Op44Kk44Oz44Gn56K66KqN44Gn44GN44Gf44Gu44Gv55uu5qyh44O75pu46KqM5oOF5aCx44G+44Gn44Gn44CBKipwcC4xM+KAkzE344Gu5pys5paH44O75Zuz6Z2i44Gv5pyq56K66KqNKirjgafjgYLjgovjgILjgZfjgZ/jgYzjgaPjgabjgIHoq5bmlofjgYzptrTlt7vpgZPot6/jgoTlvKblt7vlt53mmpfmuKDjgpLnm7TmjqXmibHjgYbjgajjga/jgb7jgaDmlq3lrprjgZfjgarjgYTjgILmnKzmlofkuK3jga7lr77osaHpgZPot6/lkI3jgIHkuqTlt67jgZnjgovpiYTpgZPjg7vou4zpgZPjgIHnuKbmlq3li77phY3jgIHmlr3lt6XkvY3nva7jgIHlubPpnaLlm7Pjg7vnuKbmlq3lm7PjgpLnorroqo3jgZfjgabjgYvjgonml6LlrZjjga7ml6fmsrPpgZPjg7vkuIvmsLTpgZPjg7vpgZPot6/jgajjga7lr77lv5zjgpLliKTmlq3jgZnjgovjgILjgJTmnKrop6PmsbrjgJUKCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIOS4iuadkeeCuuS6uuOAjOaXp+mrmOeUsOeUuuWcsOWGhemDveW4guioiOeUu+mBk+i3r+mrmOS9juS6pOWPieOBq+WwseOBpuOAjXBwLjEz4oCTMTfjga7mnKzmlofjg7vlm7PniYjjgpLnorroqo3jgZnjgovjgIIKLSBbIF0g6KuW5paH5Lit44Gu6YGT6Lev5ZCN44O76LuM6YGT5ZCN44O75Lqk5beu5Zyw54K544KS44CO6auY55Sw55S65YaZ55yf5biW44CPW1M1M13jgajpq5jnlLDnlLrkuIvmsLTpgZPnr4npgKDoqJjlv7XnopFbUzU2XeOBruOAjOm2tOW3u+mBk+i3r+OAjeetieOBq+eFp+WQiOOBmeOCi+OAggotIFsgXSDpq5jkvY7kuqTlt67jga7nuKbmlq3lm7PjgYzlvpfjgonjgozjgozjgbDjgIExOTMy5bm05YmN5b6M44Gu6YGT6Lev6YCg5oiQ6auY44Go5pen5bym5be75bed6LC35bqV44O75pqX5rig44Gu5L2N572u6Zai5L+C44KS5q+U6LyD44GZ44KL44CCCgojIyDov73liqDlh7rlhbgKCi0gKipbUzU3XSoqIOS4iuadkeeCuuS6uuOAjOaXp+mrmOeUsOeUuuWcsOWGhemDveW4guioiOeUu+mBk+i3r+mrmOS9juS6pOWPieOBq+WwseOBpuOAjeOAjuWcn+acqOW7uuevieW3peS6i+eUu+WgseOAj+esrDnlt7vnrKw45Y+3LCDlt6XkuovnlLvloLHnpL4sIDE5MzPlubQ45pyILCBwcC4xM+KAkzE377yI5pys5paH5pyq56K66KqN44CB5Zyf5pyo5a2m5Lya5Zuz5pu46aSo44O75pit5ZKM6aSo44OH44K444K/44Or44Ki44O844Kr44Kk44OW44Gn5pu46KqM56K66KqN77yJICAKICBodHRwczovL2xpYnJhcnkuanNjZS5vci5qcC9JbWFnZV9EQi9tYWcvZ2Foby9rZW5jaGlrdWtvdWppL2FsbDIuaHRtbCAgCiAgaHR0cHM6Ly9zZWFyY2guc2hvd2FrYW4uZ28uanAvc2VhcmNoL21hZ2F6aW5lL2RldGFpbC5waHA/bWF0ZXJpYWxfY29yZD0xNjAwMDEwNDAK' | base64 -d >> README.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'docs: add 1933 Takada urban-road source'
+          git push
