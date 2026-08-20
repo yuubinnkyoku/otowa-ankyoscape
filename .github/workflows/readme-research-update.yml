@@ -1,5 +1,6 @@
 name: One-off README research update
 
+# Temporary one-off workflow; remove after the README commit lands.
 on:
   push:
     paths:
