@@ -2,7 +2,7 @@ name: Append S60 research
 
 on:
   issues:
-    types: [opened]
+    types: [opened, edited]
 
 permissions:
   contents: write
