@@ -15,56 +15,12 @@ jobs:
         with:
           ref: main
       - name: Append verified research notes
-        shell: python
+        shell: bash
         run: |
-          from pathlib import Path
-          p = Path('README.md')
-          text = p.read_text(encoding='utf-8')
-          marker = '# 24. 追加調査（2026-08-20・第10回）'
-          if marker in text:
-              raise SystemExit('section already present')
-          addition = r'''
-
----
-
-# 24. 追加調査（2026-08-20・第10回）
-
-## 24.1 2000年の豊島区資料：弦巻川の幅・利用法と、参照すべき近世地誌が具体化
-
-豊島区の2000（平成12）年2月13日付プレスリリースは、雑司が谷旧宣教師館で開かれた講演会「弦巻川の昔を語る―名こそ流れて―」の内容を記録している。区の要約では、弦巻川を **幅七尺（約2 m）ばかりの小河川** とし、雑司が谷台地の田畑を潤す **農業用水**、地域の **生活用水** として利用され、夏は蛍、秋は月の名所として親しまれたと説明している。〔確認／豊島区プレスリリースによる講演内容の記録〕[S58]
-
-この「七尺」は河川全区間の実測幅を示す一次測量値とは確認できず、講演内容を区が要約した表現である。そのため、**弦巻川の全区間が一様に約2 m幅だったとは断定しない。** 一方、既存READMEで確認している『江戸名所図会』の大根洗い・水田利用[S44]に加えて、生活用水としての利用を明示する公的な記録が得られた点は、弦巻川が農村生活に組み込まれた水路だったことを補強する。〔観察〕[S44][S58]
-
-同リリースは、講演で **『雑司が谷村他沿革起立書上』『若葉抄』『遊歴雑記』** などの江戸時代の地誌を用いて、源流から下流までの川筋・橋・流域の人物を検証したと記している。さらに『遊歴雑記』に景観が記されたという庭園 **「潭弦亭」** と長田右兵衛屋敷の所在について、講師が現地調査を踏まえた推定を示したことも記録される。[S58]
-
-ただし、今回確認したのは講演会を紹介する区のプレスリリースであり、**上記3資料の本文そのものを再確認したわけではない。** とくに「幅七尺」「生活用水」「潭弦亭」の各記述が、どの原史料のどの箇所に基づくかは未確認なので、次段階では原文へ戻る必要がある。〔未解決〕
-
-## 24.2 『旧谷端川の橋の跡を探る』は67橋を対象に、流路図・橋跡写真まで収録していた
-
-既存READMEでは、豊島区立郷土資料館友の会が1999年12月に刊行した **『旧谷端川の橋の跡を探る』** を、橋名・位置を追う重要な二次資料候補として記録している。[S29]
-
-その刊行を紹介した2000（平成12）年1月21日付の豊島区プレスリリース本文を確認すると、冊子は谷端川の **源流から流末までに架かっていた67の橋** を対象とし、有名・無名の橋について名称の由来と現在の姿を写真で紹介したものだと分かる。さらに、暗渠化で消えた橋、谷端川親水公園で意匠として再現された橋、残存する橋銘板などの写真に加え、**谷端川の流路を示した地図** も掲載すると説明している。〔確認／豊島区プレスリリース〕[S59]
-
-これは、単に「橋の冊子が存在する」という既存情報より一歩進む。冊子本文を入手できれば、**67橋を位置基準点として旧河道を復元し、橋名・旧道路・現在の交差点・緑道上の意匠を対応させられる可能性が高い。** ただし、67橋すべてが同一年代に同時存在したのか、各橋の架設・改築・廃止年代まで冊子で確認できるのかは、本文未確認のためまだ分からない。〔観察／未解決〕[S59]
-
-### ここから追えること
-
-- [ ] 『雑司が谷村他沿革起立書上』『若葉抄』『遊歴雑記』の原文を確認し、「七尺」「農業用水」「生活用水」「潭弦亭」に対応する記述を特定する。
-- [ ] 弦巻川の幅について、1853年村方資料[B04]、地引絵図[S55]、高田町下水道設計平面図[S23]などで区間別の幅・水路敷を比較し、「七尺」がどの区間を指すか検証する。
-- [ ] 『旧谷端川の橋の跡を探る』本文を入手し、67橋の名称・位置・写真・橋銘板・由来を一覧化する。
-- [ ] 67橋の位置を明治・大正・昭和初期の地形図、現在の谷端川緑道、下水道幹線と重ね、旧河道の曲折を地点単位で復元する。
-- [ ] 各橋の架設・改築・撤去年代を道路・橋梁台帳、区史年表、写真資料で補い、「67橋」を単一年代の橋一覧と誤認しないよう年代層を分ける。
-
-## 追加出典
-
-- **[S58]** 豊島区「雑司が谷を語る集い『雑司が谷界わい』講演会『弦巻川の昔を語る－名こそ流れて－』」, 2000年2月13日―弦巻川を幅七尺（約2 m）ばかりと紹介し、農業用水・生活用水としての利用、蛍・月の景観、『雑司が谷村他沿革起立書上』『若葉抄』『遊歴雑記』を用いた地誌検証、潭弦亭に関する講演内容を記録  
-  https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH120213/data/pressH120213.pdf
-- **[S59]** 豊島区「かつて区内を流れていた川筋を辿って　冊子『旧谷端川の橋の跡を探る』」, 2000年1月21日―冊子が谷端川の源流から流末までの67橋を扱い、橋名の由来・現在写真・橋銘板・親水公園の橋意匠・流路図を収録すると紹介  
-  https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH120121/data/pressH120121.pdf
-'''
-          p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
-      - name: Commit README update
-        run: |
+          if grep -q '^# 24\. 追加調査（2026-08-20・第10回）' README.md; then
+            exit 0
+          fi
+          printf '%s' 'CgotLS0KCiMgMjQuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjDjg7vnrKwxMOWbnu+8iQoKIyMgMjQuMSAyMDAw5bm044Gu6LGK5bO25Yy66LOH5paZ77ya5bym5be75bed44Gu5bmF44O75Yip55So5rOV44Go44CB5Y+C54Wn44GZ44G544GN6L+R5LiW5Zyw6KqM44GM5YW35L2T5YyWCgrosYrls7bljLrjga4yMDAw77yI5bmz5oiQMTLvvInlubQy5pyIMTPml6Xku5jjg5fjg6zjgrnjg6rjg6rjg7zjgrnjga/jgIHpm5Hlj7jjgYzosLfml6flrqPmlZnluKvppKjjgafplovjgYvjgozjgZ/orJvmvJTkvJrjgIzlvKblt7vlt53jga7mmJTjgpLoqp7jgovigJXlkI3jgZPjgZ3mtYHjgozjgabigJXjgI3jga7lhoXlrrnjgpLoqJjpjLLjgZfjgabjgYTjgovjgILljLrjga7opoHntITjgafjga/jgIHlvKblt7vlt53jgpIgKirluYXkuIPlsLrvvIjntIQyIG3vvInjgbDjgYvjgorjga7lsI/msrPlt50qKiDjgajjgZfjgIHpm5Hlj7jjgYzosLflj7DlnLDjga7nlLDnlZHjgpLmvaTjgZkgKirovrLmpa3nlKjmsLQqKuOAgeWcsOWfn+OBriAqKueUn+a0u+eUqOawtCoqIOOBqOOBl+OBpuWIqeeUqOOBleOCjOOAgeWkj+OBr+ibjeOAgeeni+OBr+aciOOBruWQjeaJgOOBqOOBl+OBpuimquOBl+OBvuOCjOOBn+OBqOiqrOaYjuOBl+OBpuOBhOOCi+OAguOAlOeiuuiqje+8j+ixiuWztuWMuuODl+ODrOOCueODquODquODvOOCueOBq+OCiOOCi+ism+a8lOWGheWuueOBruiomOmMsuOAlVtTNThdCgrjgZPjga7jgIzkuIPlsLrjgI3jga/msrPlt53lhajljLrplpPjga7lrp/muKzluYXjgpLnpLrjgZnkuIDmrKHmuKzph4/lgKTjgajjga/norroqo3jgafjgY3jgZrjgIHorJvmvJTlhoXlrrnjgpLljLrjgYzopoHntITjgZfjgZ/ooajnj77jgafjgYLjgovjgILjgZ3jga7jgZ/jgoHjgIEqKuW8puW3u+W3neOBruWFqOWMuumWk+OBjOS4gOanmOOBq+e0hDIgbeW5heOBoOOBo+OBn+OBqOOBr+aWreWumuOBl+OBquOBhOOAgioqIOS4gOaWueOAgeaXouWtmFJFQURNReOBp+eiuuiqjeOBl+OBpuOBhOOCi+OAjuaxn+aIuOWQjeaJgOWbs+S8muOAj+OBruWkp+aguea0l+OBhOODu+awtOeUsOWIqeeUqFtTNDRd44Gr5Yqg44GI44Gm44CB55Sf5rS755So5rC044Go44GX44Gm44Gu5Yip55So44KS5piO56S644GZ44KL5YWs55qE44Gq6KiY6Yyy44GM5b6X44KJ44KM44Gf54K544Gv44CB5bym5be75bed44GM6L6y5p2R55Sf5rS744Gr57WE44G/6L6844G+44KM44Gf5rC06Lev44Gg44Gj44Gf44GT44Go44KS6KOc5by344GZ44KL44CC44CU6Kaz5a+f44CVW1M0NF1bUzU4XQoK5ZCM44Oq44Oq44O844K544Gv44CB6Kyb5ryU44GnICoq44CO6ZuR5Y+444GM6LC35p2R5LuW5rK/6Z2p6LW356uL5pu45LiK44CP44CO6Iul6JGJ5oqE44CP44CO6YGK5q206ZuR6KiY44CPKiog44Gq44Gp44Gu5rGf5oi45pmC5Luj44Gu5Zyw6KqM44KS55So44GE44Gm44CB5rqQ5rWB44GL44KJ5LiL5rWB44G+44Gn44Gu5bed562L44O75qmL44O75rWB5Z+f44Gu5Lq654mp44KS5qSc6Ki844GX44Gf44Go6KiY44GX44Gm44GE44KL44CC44GV44KJ44Gr44CO6YGK5q206ZuR6KiY44CP44Gr5pmv6Kaz44GM6KiY44GV44KM44Gf44Go44GE44GG5bqt5ZySICoq44CM5r2t5bym5Lqt44CNKiog44Go6ZW355Sw5Y+z5YW16KGb5bGL5pW344Gu5omA5Zyo44Gr44Gk44GE44Gm44CB6Kyb5bir44GM54++5Zyw6Kq/5p+744KS6LiP44G+44GI44Gf5o6o5a6a44KS56S644GX44Gf44GT44Go44KC6KiY6Yyy44GV44KM44KL44CCW1M1OF0KCuOBn+OBoOOBl+OAgeS7iuWbnueiuuiqjeOBl+OBn+OBruOBr+ism+a8lOS8muOCkue0ueS7i+OBmeOCi+WMuuOBruODl+ODrOOCueODquODquODvOOCueOBp+OBguOCiuOAgSoq5LiK6KiYM+izh+aWmeOBruacrOaWh+OBneOBruOCguOBruOCkuWGjeeiuuiqjeOBl+OBn+OCj+OBkeOBp+OBr+OBquOBhOOAgioqIOOBqOOBj+OBq+OAjOW5heS4g+WwuuOAjeOAjOeUn+a0u+eUqOawtOOAjeOAjOa9reW8puS6reOAjeOBruWQhOiomOi/sOOBjOOAgeOBqeOBruWOn+WPsuaWmeOBruOBqeOBrueuh+aJgOOBq+WfuuOBpeOBj+OBi+OBr+acqueiuuiqjeOBquOBruOBp+OAgeasoeautemajuOBp+OBr+WOn+aWh+OBuOaIu+OCi+W/heimgeOBjOOBguOCi+OAguOAlOacquino+axuuOAlQoKIyMgMjQuMiDjgI7ml6fosLfnq6/lt53jga7mqYvjga7ot6HjgpLmjqLjgovjgI/jga82N+api+OCkuWvvuixoeOBq+OAgea1gei3r+Wbs+ODu+api+i3oeWGmeecn+OBvuOBp+WPjumMsuOBl+OBpuOBhOOBnwoK5pei5a2YUkVBRE1F44Gn44Gv44CB6LGK5bO25Yy656uL6YO35Zyf6LOH5paZ6aSo5Y+L44Gu5Lya44GMMTk5OeW5tDEy5pyI44Gr5YiK6KGM44GX44GfICoq44CO5pen6LC356uv5bed44Gu5qmL44Gu6Leh44KS5o6i44KL44CPKiog44KS44CB5qmL5ZCN44O75L2N572u44KS6L+944GG6YeN6KaB44Gq5LqM5qyh6LOH5paZ5YCZ6KOc44Go44GX44Gm6KiY6Yyy44GX44Gm44GE44KL44CCW1MyOV0KCuOBneOBruWIiuihjOOCkue0ueS7i+OBl+OBnzIwMDDvvIjlubPmiJAxMu+8ieW5tDHmnIgyMeaXpeS7mOOBruixiuWztuWMuuODl+ODrOOCueODquODquODvOOCueacrOaWh+OCkueiuuiqjeOBmeOCi+OBqOOAgeWGiuWtkOOBr+iwt+err+W3neOBriAqKua6kOa1geOBi+OCiea1geacq+OBvuOBp+OBq+aetuOBi+OBo+OBpuOBhOOBnzY344Gu5qmLKiog44KS5a++6LGh44Go44GX44CB5pyJ5ZCN44O754Sh5ZCN44Gu5qmL44Gr44Gk44GE44Gm5ZCN56ew44Gu55Sx5p2l44Go54++5Zyo44Gu5ae/44KS5YaZ55yf44Gn57S55LuL44GX44Gf44KC44Gu44Gg44Go5YiG44GL44KL44CC44GV44KJ44Gr44CB5pqX5rig5YyW44Gn5raI44GI44Gf5qmL44CB6LC356uv5bed6Kaq5rC05YWs5ZyS44Gn5oSP5Yyg44Go44GX44Gm5YaN54++44GV44KM44Gf5qmL44CB5q6L5a2Y44GZ44KL5qmL6YqY5p2/44Gq44Gp44Gu5YaZ55yf44Gr5Yqg44GI44CBKirosLfnq6/lt53jga7mtYHot6/jgpLnpLrjgZfjgZ/lnLDlm7MqKiDjgoLmjrLovInjgZnjgovjgajoqqzmmI7jgZfjgabjgYTjgovjgILjgJTnorroqo3vvI/osYrls7bljLrjg5fjg6zjgrnjg6rjg6rjg7zjgrnjgJVbUzU5XQoK44GT44KM44Gv44CB5Y2Y44Gr44CM5qmL44Gu5YaK5a2Q44GM5a2Y5Zyo44GZ44KL44CN44Go44GE44GG5pei5a2Y5oOF5aCx44KI44KK5LiA5q2p6YCy44KA44CC5YaK5a2Q5pys5paH44KS5YWl5omL44Gn44GN44KM44Gw44CBKio2N+api+OCkuS9jee9ruWfuua6lueCueOBqOOBl+OBpuaXp+ays+mBk+OCkuW+qeWFg+OBl+OAgeapi+WQjeODu+aXp+mBk+i3r+ODu+ePvuWcqOOBruS6pOW3rueCueODu+e3kemBk+S4iuOBruaEj+WMoOOCkuWvvuW/nOOBleOBm+OCieOCjOOCi+WPr+iDveaAp+OBjOmrmOOBhOOAgioqIOOBn+OBoOOBl+OAgTY35qmL44GZ44G544Gm44GM5ZCM5LiA5bm05Luj44Gr5ZCM5pmC5a2Y5Zyo44GX44Gf44Gu44GL44CB5ZCE5qmL44Gu5p626Kit44O75pS556+J44O75buD5q2i5bm05Luj44G+44Gn5YaK5a2Q44Gn56K66KqN44Gn44GN44KL44Gu44GL44Gv44CB5pys5paH5pyq56K66KqN44Gu44Gf44KB44G+44Gg5YiG44GL44KJ44Gq44GE44CC44CU6Kaz5a+f77yP5pyq6Kej5rG644CVW1M1OV0KCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIOOAjumbkeWPuOOBjOiwt+adkeS7luayv+mdqei1t+eri+abuOS4iuOAj+OAjuiLpeiRieaKhOOAj+OAjumBiuattOmbkeiomOOAj+OBruWOn+aWh+OCkueiuuiqjeOBl+OAgeOAjOS4g+WwuuOAjeOAjOi+sualreeUqOawtOOAjeOAjOeUn+a0u+eUqOawtOOAjeOAjOa9reW8puS6reOAjeOBq+WvvuW/nOOBmeOCi+iomOi/sOOCkueJueWumuOBmeOCi+OAggotIFsgXSDlvKblt7vlt53jga7luYXjgavjgaTjgYTjgabjgIExODUz5bm05p2R5pa56LOH5paZW0IwNF3jgIHlnLDlvJXntbXlm7NbUzU1XeOAgemrmOeUsOeUuuS4i+awtOmBk+ioreioiOW5s+mdouWbs1tTMjNd44Gq44Gp44Gn5Yy66ZaT5Yil44Gu5bmF44O75rC06Lev5pW344KS5q+U6LyD44GX44CB44CM5LiD5bC644CN44GM44Gp44Gu5Yy66ZaT44KS5oyH44GZ44GL5qSc6Ki844GZ44KL44CCCi0gWyBdIOOAjuaXp+iwt+err+W3neOBruapi+OBrui3oeOCkuaOouOCi+OAj+acrOaWh+OCkuWFpeaJi+OBl+OAgTY35qmL44Gu5ZCN56ew44O75L2N572u44O75YaZ55yf44O75qmL6YqY5p2/44O755Sx5p2l44KS5LiA6Kan5YyW44GZ44KL44CCCi0gWyBdIDY35qmL44Gu5L2N572u44KS5piO5rK744O75aSn5q2j44O75pit5ZKM5Yid5pyf44Gu5Zyw5b2i5Zuz44CB54++5Zyo44Gu6LC356uv5bed57eR6YGT44CB5LiL5rC06YGT5bm557ea44Go6YeN44Gt44CB5pen5rKz6YGT44Gu5puy5oqY44KS5Zyw54K55Y2Y5L2N44Gn5b6p5YWD44GZ44KL44CCCi0gWyBdIOWQhOapi+OBruaetuioreODu+aUueevieODu+aSpOWOu+W5tOS7o+OCkumBk+i3r+ODu+api+aigeWPsOW4s+OAgeWMuuWPsuW5tOihqOOAgeWGmeecn+izh+aWmeOBp+ijnOOBhOOAgeOAjDY35qmL44CN44KS5Y2Y5LiA5bm05Luj44Gu5qmL5LiA6Kan44Go6Kqk6KqN44GX44Gq44GE44KI44GG5bm05Luj5bGk44KS5YiG44GR44KL44CCCgojIyDov73liqDlh7rlhbgKCi0gKipbUzU4XSoqIOixiuWztuWMuuOAjOmbkeWPuOOBjOiwt+OCkuiqnuOCi+mbhuOBhOOAjumbkeWPuOOBjOiwt+eVjOOCj+OBhOOAj+ism+a8lOS8muOAjuW8puW3u+W3neOBruaYlOOCkuiqnuOCi++8jeWQjeOBk+OBnea1geOCjOOBpu+8jeOAj+OAjSwgMjAwMOW5tDLmnIgxM+aXpeKAleW8puW3u+W3neOCkuW5heS4g+Wwuu+8iOe0hDIgbe+8ieOBsOOBi+OCiuOBqOe0ueS7i+OBl+OAgei+sualreeUqOawtOODu+eUn+a0u+eUqOawtOOBqOOBl+OBpuOBruWIqeeUqOOAgeibjeODu+aciOOBruaZr+ims+OAgeOAjumbkeWPuOOBjOiwt+adkeS7luayv+mdqei1t+eri+abuOS4iuOAj+OAjuiLpeiRieaKhOOAj+OAjumBiuattOmbkeiomOOAj+OCkueUqOOBhOOBn+WcsOiqjOaknOiovOOAgea9reW8puS6reOBq+mWouOBmeOCi+ism+a8lOWGheWuueOCkuiomOmMsiAgCiAgaHR0cHM6Ly9hZGVhYy5qcC92aWV3aXRlbS90b3NoaW1hLWhpc3Rvcnkvdmlld2VyL3ZpZXdlci9wcmVzc0gxMjAyMTMvZGF0YS9wcmVzc0gxMjAyMTMucGRmCi0gKipbUzU5XSoqIOixiuWztuWMuuOAjOOBi+OBpOOBpuWMuuWGheOCkua1geOCjOOBpuOBhOOBn+W3neeti+OCkui+v+OBo+OBpuOAgOWGiuWtkOOAjuaXp+iwt+err+W3neOBruapi+OBrui3oeOCkuaOouOCi+OAj+OAjSwgMjAwMOW5tDHmnIgyMeaXpeKAleWGiuWtkOOBjOiwt+err+W3neOBrua6kOa1geOBi+OCiea1geacq+OBvuOBp+OBrjY35qmL44KS5omx44GE44CB5qmL5ZCN44Gu55Sx5p2l44O754++5Zyo5YaZ55yf44O75qmL6YqY5p2/44O76Kaq5rC05YWs5ZyS44Gu5qmL5oSP5Yyg44O75rWB6Lev5Zuz44KS5Y+O6Yyy44GZ44KL44Go57S55LuLICAKICBodHRwczovL2FkZWFjLmpwL3ZpZXdpdGVtL3Rvc2hpbWEtaGlzdG9yeS92aWV3ZXIvdmlld2VyL3ByZXNzSDEyMDEyMS9kYXRhL3ByZXNzSDEyMDEyMS5wZGYK' | base64 -d >> README.md
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
