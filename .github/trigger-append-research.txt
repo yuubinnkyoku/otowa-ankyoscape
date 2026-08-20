@@ -1,1 +1,2 @@
 Temporary trigger for the 2026-08-20 README research update. Do not merge.
+Retrigger after workflow quoting fix.
