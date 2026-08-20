@@ -1,19 +1,21 @@
 name: Apply researched README update
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/append-research-20260820.yml
+  pull_request:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   update:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-append-research-20260820'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
       - name: Append verified research note
         shell: python
         run: |
@@ -70,13 +72,13 @@ jobs:
   年表：https://adeac.jp/toshima-history/timeline/tm000001_1?key=41%E6%96%87%E5%8C%96%E8%B2%A1%E3%83%BB%E9%83%B7%E5%9C%9F%E5%8F%B2%E6%96%99
 '''
               p.write_text(text.rstrip() + addition + "\n", encoding="utf-8")
-      - name: Commit README and remove temporary workflow
+      - name: Remove temporary files and commit
         shell: bash
         run: |
-          rm .github/workflows/append-research-20260820.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md .github/workflows/append-research-20260820.yml
-          if git diff --cached --quiet; then exit 0; fi
+          git rm .github/workflows/append-research-20260820.yml
+          rm -f .append-research-trigger
+          git add -A README.md .github/workflows/append-research-20260820.yml .append-research-trigger
           git commit -m "docs: add further river archive research"
-          git push
+          git push origin HEAD:${{ github.head_ref }}
