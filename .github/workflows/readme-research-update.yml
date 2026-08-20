@@ -1,7 +1,7 @@
 name: One-off README research update
 
-# Temporary one-off workflow; remove after the README commit lands.
 on:
+  create:
   push:
     paths:
       - '.github/workflows/readme-research-update.yml'
@@ -11,21 +11,22 @@ permissions:
 
 jobs:
   update-readme:
+    if: github.event_name == 'push' || github.event.ref_type == 'branch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append verified research findings
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
           marker = '# 16. 追加調査（2026-08-20・第2回）'
           if marker in text:
               raise SystemExit(0)
-
           addition = r'''
 
 ---
@@ -93,11 +94,9 @@ jobs:
       - name: Commit README update
         shell: bash
         run: |
-          if git diff --quiet -- README.md; then
-            exit 0
-          fi
+          if git diff --quiet -- README.md; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
           git commit -m 'docs: add Tsurumaki and Yabata river archive findings'
-          git push
+          git push origin HEAD:main
