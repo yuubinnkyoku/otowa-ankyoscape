@@ -1,6 +1,7 @@
 name: Append researched river notes
 
 on:
+  create:
   push:
     paths:
       - '.github/workflows/append-otowa-research.yml'
@@ -10,9 +11,12 @@ permissions:
 
 jobs:
   append:
+    if: github.event_name == 'push' || github.event.ref_type == 'branch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append new findings to README
         shell: bash
         run: |
@@ -85,4 +89,4 @@ UR都市機構は、造幣局東京支局跡地をIKE・SUNPARKとして整備�
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
           git commit -m 'Add drainage relic and Yabata promenade chronology'
-          git push
+          git push origin HEAD:main
