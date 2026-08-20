@@ -4,12 +4,15 @@ on:
   push:
     paths:
       - '.github/workflows/append-otowa-research.yml'
+  pull_request:
+    types: [opened, synchronize]
 
 permissions:
   contents: write
 
 jobs:
   append:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
