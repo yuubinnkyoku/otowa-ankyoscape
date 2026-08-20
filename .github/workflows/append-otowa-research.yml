@@ -1,44 +1,39 @@
-name: Append researched river notes
+name: Polish researched river notes
 
 on:
-  create:
   push:
     paths:
       - '.github/workflows/append-otowa-research.yml'
-  pull_request:
-    types: [opened, synchronize]
 
 permissions:
   contents: write
 
 jobs:
-  append:
-    if: github.event_name == 'push' || github.event_name == 'pull_request' || github.event.ref_type == 'branch'
+  polish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Append new findings to README
+      - name: Polish README wording
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import base64
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
-          marker = '# 18. 追加調査（2026-08-20・第4回）'
-          if marker in text:
-              raise SystemExit(0)
-          addition = base64.b64decode('CgotLS0KCiMgMTguIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjDjg7vnrKw05Zue77yJCgojIyAxOC4xIElLReODu1NVTlBBUkvjgavmrovjgZXjgozjgZ/mjpLmsLTlj6PvvJrmsLTnqqrlt53jgajjga7mjqXntprjga/jgIzmjqjlrprjgI3jgajjgZfjgabmibHjgYYKClVS6YO95biC5qmf5qeL44Gv44CB6YCg5bmj5bGA5p2x5Lqs5pSv5bGA6Leh5Zyw44KSSUtF44O7U1VOUEFSS+OBqOOBl+OBpuaVtOWCmeOBmeOCi+WJjeOBruWGmeecn+OBqyAqKuOAjOaVtOWCmeWJjeOBruefs+epjeOBv+OBqOaOkuawtOWPo+OAjSoqIOOCkuekuuOBl+OAgeaVtOWCmeW+jOOBq+OBr+OBneOBruaOkuawtOWPo+OCkuWckuWGheOBruODouODi+ODpeODoeODs+ODiOOBqOOBl+OBpuaui+OBl+OBn+OBk+OBqOOCkue0ueS7i+OBl+OBpuOBhOOCi+OAguWIpeOBrlVS5bqD5aCx44Gn44Gv44CB44GT44KM44KSICoq44CM5bej6bSo44OX44Oq44K644Oz5pmC5Luj44Gu5o6S5rC05Y+j44Gu5LiA6YOo44CNKiog44Go6Kqs5piO44GX44Gm44GE44KL44CC44CU56K66KqN77yP5YWs55qE5LqL5qWt6LOH5paZ44CVW1M0N10KCuOBk+OBruOBn+OCgeOAgeePvuWcqOOBruadseaxoOiiizTkuIHnm67jg7tJS0Xjg7tTVU5QQVJL44Gr44Gv44CB5ZCM5Zyw44Gu5bej6bSo5YiR5YuZ5omA44O75bej6bSo44OX44Oq44K644Oz5pyf44Gr55Sx5p2l44GZ44KL44GoVVLjgYzkvY3nva7jgaXjgZHjgovmjpLmsLTmlr3oqK3jga7kuIDpg6jjgYzjgIHml6flnJ/lnLDliKnnlKjjgpLnpLrjgZnniannmoTos4fmlpnjgajjgZfjgabkv53lrZjjgZXjgozjgabjgYTjgovjgZPjgajjgpLnorroqo3jgafjgY3jgovjgIJbUzQ3XQoK5LiA5pa044CBKirjgZPjga7mjpLmsLTlj6PjgYzlvZPmmYLjganjga7nrqHot6/jgpLpgJrjgorjgIHjganjga7lnLDngrnjgafmsLTnqqrlt53jgbjmjqXntprjgZfjgabjgYTjgZ/jgYvjga/jgIHku4rlm57norroqo3jgZfjgZ9VUuizh+aWmeOBoOOBkeOBp+OBr+eiuuWumuOBp+OBjeOBquOBhOOAgioqIOawtOeqquW3neOBqOOBrumWouS/guOCkuiqrOaYjuOBmeOCi+ePvuWcsOahiOWGheODu+WcsOWfn+izh+aWmeOBp+OBr+OAgeaOkuawtOWPo+OBjOWRqOi+uuOCkua1geOCjOOBpuOBhOOBn+awtOeqquW3neOBuOOBpOOBquOBjOOBo+OBpuOBhOOBn+WPr+iDveaAp+OBjOOBguOCi+OAgeOBqOOBhOOBhueVmeS/neS7mOOBjeOBruiqrOaYjuOBjOOBleOCjOOBpuOBhOOCi+OAguOBl+OBn+OBjOOBo+OBplJFQURNReOBp+OBr+OAgQoKLSAqKuOAlOeiuuiqjeOAlSoqIOaOkuawtOWPo+OBruS4gOmDqOOBjOS/neWtmOOBleOCjOOAgVVS44GM5bej6bSo44OX44Oq44K644Oz5pmC5Luj44Gu44KC44Gu44Go6Kqs5piO44GX44Gm44GE44KL44CCCi0gKirjgJTmjqjlrprvvI/opoHkuIDmrKHlm7PpnaLnorroqo3jgJUqKiDjgZ3jga7mjpLmsLTlhYjjgYzmsLTnqqrlt53jgaDjgaPjgZ/lj6/og73mgKfjgYzjgYLjgovjgIIKCuOBqOWIhuOBkeOCi+OAguWIkeWLmeaJgOODu+mAoOW5o+WxgOOBruaOkuawtOioreWCmeWbs+OAgeS4i+awtOmBk+WPsOW4s+OAgeaXp+eJiOWcsOWbs+OCkueqgeOBjeWQiOOCj+OBm+OCjOOBsOOAgeawtOeqquW3neOBjOi/keS7o+OBruWkp+imj+aooeaWveioreaOkuawtOOCkuWPl+OBkeOCi+awtOi3r+OBqOOBl+OBpuS9v+OCj+OCjOOBn+OBi+OCkuWFt+S9k+WMluOBp+OBjeOCi+WPr+iDveaAp+OBjOOBguOCi+OAggoKIyMgMTguMiDosLfnq6/lt53mmpfmuKDkuIrjga7jgIzopqrmsLTljJbjgI3jga8xOTgz772eODflubTjgavmrrXpmo7nmoTjgavpgLLjgpPjgafjgYTjgZ8KCuixiuWztuWMuuWFrOW8j+WMuuWPsuW5tOihqOOCkuWGjeeiuuiqjeOBmeOCi+OBqOOAgeiwt+err+W3neOBruays+W3neW7g+atouW+jOOBi+OCiTE5OTHlubTjga7nt5HpgZPlhajnt5rplovpgJrjgb7jgafjga7plpPjgavjgaTjgYTjgabjgIHml6LlrZhSRUFETUXjgojjgorntLDjgYvjgarmlbTlgpnml6XnqIvjgpLnorroqo3jgafjgY3jgovjgILjgJTnorroqo3vvI/lhaznmoToh6rmsrvkvZPlj7LjgJVbUzQ4XQoKLSAqKjE5ODPlubQ45pyIOeaXpSoq77ya5Yy644GM6LC356uv5bed6YGK5q2p6YGT6KiI55S744Gu5Zyw5YWD5L2P5rCR6Kqs5piO5Lya44KS5a6f5pa944CCCi0gKioxOTg05bm0NOaciDI55pelKirvvJrosLfnq6/lt53pgYrmranpgZPjgYzlrozmiJDjgIIKLSAqKjE5ODTlubQxMeaciCoq77ya44CM6LC356uv5bed44Gu57eR44Go5rC044Gu5pW05YKZ5bel5LqL44CN44KS6ZaL5aeL44CCCi0gKioxOTg15bm0NOaciDHml6UqKu+8muiwt+err+W3neimquawtOWFrOWcku+8iOaxoOiiizMtMi0177yJ44KS6ZaL6Kit44CCCi0gKioxOTg35bm0OOaciDHml6UqKu+8muiwt+err+W3neesrDLopqrmsLTlhazlnJLvvIjopb/msaDooos1LTIyLTEx77yJ44KS6ZaL6Kit44CCCi0gKioxOTg35bm0MTDmnIgzMeaXpSoq77ya6KW/5rGg6KKLNeS4geebruOBruiwt+err+W3neesrDLopqrmsLTlhazlnJLjgYzlrozmiJDjgZfjgIHplovlnJLlvI/jgpLlrp/mlr3jgIIKCuOBk+OCjOOBq+OCiOOCiuOAgeiwt+err+W3neaal+a4oOS4iumDqOOBruWkieWMluOBr+OAgTE5NjDvvZ43MOW5tOS7o+OBruWFkOerpemBiuWckuODu+mBiuatqemBk+WMluOBi+OCiTE5OTHlubTjga7nt5HpgZPlrozmiJDjgbjkuIDotrPpo5vjgbPjgavpgLLjgpPjgaDjga7jgafjga/jgarjgY/jgIEqKjE5ODPlubTjga7kvY/msJHoqqzmmI7jgIExOTg05bm044Gu6YGK5q2p6YGT5a6M5oiQ44Go44CM57eR44Go5rC044CN44Gu5pW05YKZ6ZaL5aeL44CBMTk4Ne+9njg35bm044Gu6Kaq5rC05YWs5ZyS6ZaL6Kit44KS57WM44Gm5q616ZqO55qE44Gr6YCy44KT44GgKirjgZPjgajjgYzliIbjgYvjgovjgIJbUzQ4XQoK44G+44Gf44CB5pei5a2Y44GuW1M0Nl3jgafjga8xOTg45bm044Gr56uL5pWZ5aSn5a2m5Zyw5Yy65LiN54eD5YyW44G+44Gh44Gl44GP44KK5Y2U6K2w5Lya44GM44CM6LC356uv5bed44OX44Ot44Og44OK44O844OJ5qeL5oOz44CN44KS5o+Q5qGI44GX44Gf44GT44Go44KS56K66KqN44GX44Gm44GE44KL44CC5LuK5Zue44Gu5bm06KGo44Gv44CBKirooYzmlL/lgbTjga7osLfnq6/lt53pgYrmranpgZPjg7vopqrmsLTljJbkuovmpa3jgYzjgZ3jga7mj5DmoYjjgojjgorliY3jga4xOTgz5bm044Gr44Gv5pei44Gr5YuV44GE44Gm44GE44GfKirjgZPjgajjgpLnpLrjgZnjgILjgZfjgZ/jgYzjgaPjgabjgIExOTg45bm05qeL5oOz44KS6LC356uv5bed57eR6YGT5pW05YKZ44Gd44Gu44KC44Gu44Gu5Ye655m654K544Go44Gv44G/44Gq44GV44Gq44GE44CC5LiA5pa044Gn44CB5L2P5rCR5YG05qeL5oOz44GM5pei6YCy6KGM44Gu6KGM5pS/5LqL5qWt44Gr44Gp44Gu44KI44GG44Gq5aSJ5pu044O76L+95Yqg44KS5LiO44GI44Gf44GL44Gv5pyq6Kej5rG644Gn44GC44KL44CCCgrjgZXjgonjgavlkIzjgZjlubTooajjgavjga/jgIEqKjE5NjDlubQxMuaciDEz5pel44Gr6LGK5bO244O75p2/5qmL44O75YyX44GuM+WMuuOBjOiwt+err+W3neayu+awtOOBq+OBpOOBhOOBpuaHh+irh+OBl+OAgTPljLrljZTlipvjgavjgojjgovop6PmsbrjgpLmpJzoqI7jgZfjgZ8qKuiomOmMsuOCguOBguOCi+OAguOAlOeiuuiqjeOAlVtTNDhdIDE5NTjlubTjga7ni6nph47lt53lj7DpoqjlvozjgIHosLfnq6/lt53jga7msrvmsLTjgYzosYrls7bljLrlhoXjgaDjgZHjgaflrozntZDjgZfjgarjgYTluoPln5/oqrLpoYzjgajjgZfjgabmibHjgo/jgozjgabjgYTjgZ/jgZPjgajjgpLnpLrjgZnjgYzjgIHlhbfkvZPnmoTjgarlhbHlkIzkuovmpa3jg7vosrvnlKjliIbmi4Xjgb7jgafjga/lubTooajjgYvjgonnorrlrprjgafjgY3jgarjgYTjgIIKCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIElLReODu1NVTlBBUkvjgavkv53lrZjjgZXjgozjgZ/mjpLmsLTlj6Pjga7ml6fkvY3nva7jgpLjgIHlt6PptKjliJHli5nmiYDjg7vpgKDluaPlsYDjga7phY3nva7lm7Pjgajml6fmsLTnqqrlt53nrYvjgavph43jga3jgabnorroqo3jgZnjgovjgIIKLSBbIF0g5o6S5rC05Y+j44GL44KJ5rC056qq5bed44G+44Gn44Gu566h6Lev44O76ZaL5rig44Gu5pyJ54Sh44KS44CB5YiR5YuZ5omA5pa96Kit5Zuz44O75LiL5rC06YGT5Y+w5biz44O75Zyw57GN5Zuz44Gn56K66KqN44GZ44KL44CCCi0gWyBdIDE5ODPlubTjga7osLfnq6/lt53pgYrmranpgZPoqIjnlLvoqqzmmI7kvJros4fmlpnjgajjgIExOTg05bm044CM57eR44Go5rC044Gu5pW05YKZ5bel5LqL44CN44Gu5bmz6Z2i5Zuz44O75LqL5qWt5Yy66ZaT44KS5o6i44GZ44CCCi0gWyBdIDE5ODXlubTjg7sxOTg35bm044GuMuOBi+aJgOOBruimquawtOWFrOWckuOBjOOAgeaXp+ays+mBk+ODu+ePvuWcqOOBruS4i+awtOmBk+W5uee3muODuzE5OTHlubTnt5HpgZPjga7jganjga7kvY3nva7jgavlr77lv5zjgZnjgovjgYvlnLDlm7PljJbjgZnjgovjgIIKLSBbIF0gMTk2MOW5tOOBruixiuWztuODu+adv+api+ODu+WMlzPljLrmsrvmsLTmh4foq4fjga7orbDkuovjg7vopoHmnJvmm7jjgpLmjqLjgZfjgIHni6nph47lt53lj7Dpoqjlvozjga7msrvmsLToqIjnlLvjgajjga7plqLkv4LjgpLnorroqo3jgZnjgovjgIIKCiMjIOi/veWKoOWHuuWFuAoKLSAqKltTNDddKiogVVLpg73luILmqZ/mp4vjgIzjgI7jgr/jgqTjg6Djg4jjg6rjg4Pjg5fjgI/osYrls7bljLrpgKDluaPlsYDlnLDljLrvvI/mnbHkuqzpg73osYrls7bljLrjgI0yMDIx5bm0OeaciDbml6XigJXmlbTlgpnliY3jga7nn7PnqY3jgb/jg7vmjpLmsLTlj6PjgajjgIFJS0Xjg7tTVU5QQVJL5YaF44Gr5L+d5a2Y44GV44KM44Gf5o6S5rC05Y+j44Oi44OL44Ol44Oh44Oz44OI44KS5YaZ55yf44Gn57S55LuL44CCVVIgUFJFU1Mgdm9sLjYz44Gu54m56ZuG44Gn44Gv44CM5bej6bSo44OX44Oq44K644Oz5pmC5Luj44Gu5o6S5rC05Y+j44Gu5LiA6YOo44CN44Go6Kqs5piOICAKICBodHRwczovL3d3dy51ci1uZXQuZ28uanAvbmV3cy8yMDIxMDkwNl90aW1ldHJpcF90b3NoaW1ha3UuaHRtbCAgCiAgaHR0cHM6Ly93d3cudXItbmV0LmdvLmpwL2Fib3V0dXMvcHVibGljYXRpb24vd2ViLXVycHJlc3M2My9zcGVjaWFsMS5odG1sCi0gKipbUzQ4XSoqIOixiuWztuWMuuOAjOOBqOOBl+OBvuOBsuOBmeOBqOOCiuOBg+OAjeiwt+err+W3nemWoumAo+W5tOihqOKAlTE5NjDlubQz5Yy65rK75rC05oeH6KuH44CBMTk4M+W5tOmBiuatqemBk+ioiOeUu+S9j+awkeiqrOaYjuS8muOAgTE5ODTlubTpgYrmranpgZPlrozmiJDjg7vnt5HjgajmsLTjga7mlbTlgpnplovlp4vjgIExOTg15bm06LC356uv5bed6Kaq5rC05YWs5ZyS44CBMTk4N+W5tOiwt+err+W3neesrDLopqrmsLTlhazlnJLjgarjgakgIAogIGh0dHBzOi8vYWRlYWMuanAvdG9zaGltYS1oaXN0b3J5L2RldGFpbGVkLXNlYXJjaD9tb2RlPXRpbWVsaW5lJndvcmQ9JUU4JUIwJUI3JUU3JUFCJUFGJUU1JUI3JTlECg==').decode('utf-8')
-          p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
+          text = text.replace('一斴', '一方')
+          old = '水窪川との関係を説明する現地案内・地域資料では、排水口が周辺を流れていた水窪川へつながっていた可能性がある、という留保付きの説明がされている。したがってREADMEでは、'
+          new = 'したがって、水窪川への接続については一次図面や管路資料が確認できるまで推定に留め、READMEでは、'
+          text = text.replace(old, new)
+          p.write_text(text, encoding='utf-8')
           PY
           if git diff --quiet -- README.md; then
-            echo 'No README change needed.'
+            echo 'No README polish needed.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git commit -m 'docs: add drainage relic and Yabata promenade chronology'
+          git commit -m 'docs: polish drainage connection caveat'
           git push origin HEAD:main
