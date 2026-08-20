@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/append-otowa-research.yml'
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -23,47 +23,13 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import base64
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
           marker = '# 20. 追加調査（2026-08-20・第6回）'
           if marker in text:
               raise SystemExit(0)
-          addition = r'''
-
----
-
-# 20. 追加調査（2026-08-20・第6回）
-
-## 20.1 2008年の雑司ヶ谷幹線再構築工事：既設幹線の区間・断面・人孔が具体化
-
-国土交通省が公開している東京都下水道局「雑司ヶ谷幹線再構築工事事故調査委員会」の『雑司ヶ谷幹線再構築工事 事故調査報告書』（2008年9月1日）には、事故原因だけでなく、当時の**既設雑司ヶ谷幹線の再構築区間と施設構成**が具体的に記録されている。〔確認／公的事故調査報告書〕[S51]
-
-工事場所は **豊島区雑司が谷一・二丁目、文京区目白台二丁目**。老朽化した既設雑司ヶ谷幹線の矩形渠を管渠内面被覆工法（製管工法）で更生する工事で、報告書の工事数量は **2,000 mm×1,460 mm、延長598.75 m**、既設人孔改造8か所、汚水ます83か所、取付管150～200 mm・延長195.85 mとされる。[S51]
-
-同報告書の関連施設位置図・施工区間図では、**既設No.20人孔を工事起点、No.10人孔を工事終点**とし、途中にNo.22・No.30人孔を示している。事故当日の作業区間はNo.20～No.22間で、事故発生場所は **豊島区雑司が谷二丁目22番地先の雑司ヶ谷幹線管内**。本文によれば、No.30はNo.22の58 m下流、No.10は516 m下流に位置する。図には神田川・後楽ポンプ所も関連施設として描かれる。〔確認〕[S51]
-
-さらに施工計画書の記載として、工事対象の雑司ヶ谷幹線は最下流で **48 haの雨水・汚水面積を背負う**とされ、50 mm/hの降雨時には等流水深がおよそ60～90 cm、無降雨時には約10 cmになる計算だったことも記録されている。〔確認〕[S51]
-
-この48 haや水深は、**2008年時点の下水道幹線について施工者が安全管理のために用いた水理計算**であり、暗渠化前の弦巻川の流域面積・平常流量を示す値ではない。この点は分けて扱う。
-
-一方、2008年8月5日の国土交通省による事故第一報では、同幹線を **「□2100×1600」**、工事概要をSPR工法による管きょ更生約600 mと記載している。〔確認／事故第一報〕[S52] 最終報告書の工事数量 **「□2,000×1,460 mm」** とは寸法が一致しない。内面更生前後の寸法、呼称上の違いなどの可能性はあるが、今回確認した資料だけでは理由を確定できないため、**既設矩形渠の原断面と更生後の有効断面を同一視しない**。〔未解決〕[S51][S52]
-
-この資料によって、現在の雑司ヶ谷幹線については単に名称だけでなく、2008年の約600 m区間を**人孔番号・番地・施工方向を用いて位置照合できる手掛かり**が得られた。〔観察〕 ただし、これはあくまで近現代の下水道施設であり、1932年以前の弦巻川旧河道と同じ線形だったことを示す資料ではない。既存の注意書きどおり、旧河道・初期の暗渠／下水道・既設雑司ヶ谷幹線・第二雑司ヶ谷幹線は別々に比較する必要がある。[S49][S51]
-
-### ここから追えること
-
-- [ ] 報告書の図1～5を現在地へ重ね、既設No.20・22・30・10人孔の地上位置を特定する。
-- [ ] 2008年再構築区間を、1930年の高田町下水道設計平面図、1932年暗渠化前後の弦巻川、第二雑司ヶ谷幹線と別レイヤーで比較する。
-- [ ] 雑司ヶ谷幹線の当初築造年・原断面・2008年更生後の有効断面を工事設計書や下水道台帳で確認し、2,100×1,600と2,000×1,460の差を説明できる資料を探す。
-- [ ] No.10より下流から後楽ポンプ所・神田川までの幹線接続を施設図で確認し、現在の排水経路を地図化する。
-
-## 追加出典
-
-- **[S51]** 東京都下水道局 雑司ヶ谷幹線再構築工事事故調査委員会『雑司ヶ谷幹線再構築工事 事故調査報告書』, 2008年9月1日―豊島区雑司が谷一・二丁目～文京区目白台二丁目の既設雑司ヶ谷幹線再構築、598.75 mの施工区間、矩形渠断面、人孔番号、事故地点、48 haの排水面積などを記載  
-  https://www.mlit.go.jp/common/000024056.pdf
-- **[S52]** 国土交通省「東京都　雑司ヶ谷幹線工事における事故について」, 2008年8月5日―事故第一報。SPR工法による管きょ更生L=600 m、雑司ヶ谷幹線を「□2100×1600」と記載  
-  https://www.mlit.go.jp/report/press/city13_hh_000009.html
-'''
+          addition = base64.b64decode('CgotLS0KCiMgMjAuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjDjg7vnrKw25Zue77yJCgojIyAyMC4xIDIwMDjlubTjga7pm5Hlj7jjg7bosLflubnnt5rlho3mp4vnr4nlt6XkuovvvJrml6LoqK3lubnnt5rjga7ljLrplpPjg7vmlq3pnaLjg7vkurrlrZTjgYzlhbfkvZPljJYKCuWbveWcn+S6pOmAmuecgeOBjOWFrOmWi+OBl+OBpuOBhOOCi+adseS6rOmDveS4i+awtOmBk+WxgOOAjOmbkeWPuOODtuiwt+W5uee3muWGjeani+evieW3peS6i+S6i+aVheiqv+afu+WnlOWToeS8muOAjeOBruOAjumbkeWPuOODtuiwt+W5uee3muWGjeani+evieW3peS6iyDkuovmlYXoqr/mn7vloLHlkYrmm7jjgI/vvIgyMDA45bm0OeaciDHml6XvvInjgavjga/jgIHkuovmlYXljp/lm6DjgaDjgZHjgafjgarjgY/jgIHlvZPmmYLjga4qKuaXouiorembkeWPuOODtuiwt+W5uee3muOBruWGjeani+evieWMuumWk+OBqOaWveioreani+aIkCoq44GM5YW35L2T55qE44Gr6KiY6Yyy44GV44KM44Gm44GE44KL44CC44CU56K66KqN77yP5YWs55qE5LqL5pWF6Kq/5p+75aCx5ZGK5pu444CVW1M1MV0KCuW3peS6i+WgtOaJgOOBryAqKuixiuWztuWMuumbkeWPuOOBjOiwt+S4gOODu+S6jOS4geebruOAgeaWh+S6rOWMuuebrueZveWPsOS6jOS4geebrioq44CC6ICB5py95YyW44GX44Gf5pei6Kit6ZuR5Y+444O26LC35bm557ea44Gu55+p5b2i5rig44KS566h5rig5YaF6Z2i6KKr6KaG5bel5rOV77yI6KO9566h5bel5rOV77yJ44Gn5pu055Sf44GZ44KL5bel5LqL44Gn44CB5aCx5ZGK5pu444Gu5bel5LqL5pWw6YeP44GvICoqMiwwMDAgbW3DlzEsNDYwIG1t44CB5bu26ZW3NTk4Ljc1IG0qKuOAgeaXouioreS6uuWtlOaUuemAoDjjgYvmiYDjgIHmsZrmsLTjgb7jgZk4M+OBi+aJgOOAgeWPluS7mOeuoTE1MO+9njIwMCBtbeODu+W7tumVtzE5NS44NSBt44Go44GV44KM44KL44CCW1M1MV0KCuWQjOWgseWRiuabuOOBrumWoumAo+aWveioreS9jee9ruWbs+ODu+aWveW3peWMuumWk+Wbs+OBp+OBr+OAgSoq5pei6KitTm8uMjDkurrlrZTjgpLlt6XkuovotbfngrnjgIFOby4xMOS6uuWtlOOCkuW3peS6i+e1gueCuSoq44Go44GX44CB6YCU5Lit44GrTm8uMjLjg7tOby4zMOS6uuWtlOOCkuekuuOBl+OBpuOBhOOCi+OAguS6i+aVheW9k+aXpeOBruS9nOalreWMuumWk+OBr05vLjIw772eTm8uMjLplpPjgafjgIHkuovmlYXnmbrnlJ/loLTmiYDjga8gKirosYrls7bljLrpm5Hlj7jjgYzosLfkuozkuIHnm64yMueVquWcsOWFiOOBrumbkeWPuOODtuiwt+W5uee3mueuoeWGhSoq44CC5pys5paH44Gr44KI44KM44Gw44CBTm8uMzDjga9Oby4yMuOBrjU4IG3kuIvmtYHjgIFOby4xMOOBrzUxNiBt5LiL5rWB44Gr5L2N572u44GZ44KL44CC5Zuz44Gr44Gv56We55Sw5bed44O75b6M5qW944Od44Oz44OX5omA44KC6Zai6YCj5pa96Kit44Go44GX44Gm5o+P44GL44KM44KL44CC44CU56K66KqN44CVW1M1MV0KCuOBleOCieOBq+aWveW3peioiOeUu+abuOOBruiomOi8ieOBqOOBl+OBpuOAgeW3peS6i+WvvuixoeOBrumbkeWPuOODtuiwt+W5uee3muOBr+acgOS4i+a1geOBpyAqKjQ4IGhh44Gu6Zuo5rC044O75rGa5rC06Z2i56mN44KS6IOM6LKg44GGKirjgajjgZXjgozjgIE1MCBtbS9o44Gu6ZmN6Zuo5pmC44Gr44Gv562J5rWB5rC05rex44GM44GK44KI44GdNjDvvZ45MCBjbeOAgeeEoemZjembqOaZguOBq+OBr+e0hDEwIGNt44Gr44Gq44KL6KiI566X44Gg44Gj44Gf44GT44Go44KC6KiY6Yyy44GV44KM44Gm44GE44KL44CC44CU56K66KqN44CVW1M1MV0KCuOBk+OBrjQ4IGhh44KE5rC05rex44Gv44CBKioyMDA45bm05pmC54K544Gu5LiL5rC06YGT5bm557ea44Gr44Gk44GE44Gm5pa95bel6ICF44GM5a6J5YWo566h55CG44Gu44Gf44KB44Gr55So44GE44Gf5rC055CG6KiI566XKirjgafjgYLjgorjgIHmmpfmuKDljJbliY3jga7lvKblt7vlt53jga7mtYHln5/pnaLnqY3jg7vlubPluLjmtYHph4/jgpLnpLrjgZnlgKTjgafjga/jgarjgYTjgILjgZPjga7ngrnjga/liIbjgZHjgabmibHjgYbjgIIKCuS4gOaWueOAgTIwMDjlubQ45pyINeaXpeOBruWbveWcn+S6pOmAmuecgeOBq+OCiOOCi+S6i+aVheesrOS4gOWgseOBp+OBr+OAgeWQjOW5uee3muOCkiAqKuOAjOKWoTIxMDDDlzE2MDDjgI0qKuOAgeW3peS6i+amguimgeOCklNQUuW3peazleOBq+OCiOOCi+euoeOBjeOCh+abtOeUn+e0hDYwMCBt44Go6KiY6LyJ44GX44Gm44GE44KL44CC44CU56K66KqN77yP5LqL5pWF56ys5LiA5aCx44CVW1M1Ml0g5pyA57WC5aCx5ZGK5pu444Gu5bel5LqL5pWw6YePICoq44CM4pahMiwwMDDDlzEsNDYwIG1t44CNKiog44Go44Gv5a+45rOV44GM5LiA6Ie044GX44Gq44GE44CC5YaF6Z2i5pu055Sf5YmN5b6M44Gu5a+45rOV44CB5ZG856ew5LiK44Gu6YGV44GE44Gq44Gp44Gu5Y+v6IO95oCn44Gv44GC44KL44GM44CB5LuK5Zue56K66KqN44GX44Gf6LOH5paZ44Gg44GR44Gn44Gv55CG55Sx44KS56K65a6a44Gn44GN44Gq44GE44Gf44KB44CBKirml6LoqK3nn6nlvaLmuKDjga7ljp/mlq3pnaLjgajmm7TnlJ/lvozjga7mnInlirnmlq3pnaLjgpLlkIzkuIDoppbjgZfjgarjgYQqKuOAguOAlOacquino+axuuOAlVtTNTFdW1M1Ml0KCuOBk+OBruizh+aWmeOBq+OCiOOBo+OBpuOAgeePvuWcqOOBrumbkeWPuOODtuiwt+W5uee3muOBq+OBpOOBhOOBpuOBr+WNmOOBq+WQjeensOOBoOOBkeOBp+OBquOBj+OAgTIwMDjlubTjga7ntIQ2MDAgbeWMuumWk+OCkioq5Lq65a2U55Wq5Y+344O755Wq5Zyw44O75pa95bel5pa55ZCR44KS55So44GE44Gm5L2N572u54Wn5ZCI44Gn44GN44KL5omL5o6b44GL44KKKirjgYzlvpfjgonjgozjgZ/jgILjgJToprPlr5/jgJUg44Gf44Gg44GX44CB44GT44KM44Gv44GC44GP44G+44Gn6L+R54++5Luj44Gu5LiL5rC06YGT5pa96Kit44Gn44GC44KK44CBMTkzMuW5tOS7peWJjeOBruW8puW3u+W3neaXp+ays+mBk+OBqOWQjOOBmOe3muW9ouOBoOOBo+OBn+OBk+OBqOOCkuekuuOBmeizh+aWmeOBp+OBr+OBquOBhOOAguaXouWtmOOBruazqOaEj+abuOOBjeOBqeOBiuOCiuOAgeaXp+ays+mBk+ODu+WIneacn+OBruaal+a4oO+8j+S4i+awtOmBk+ODu+aXouiorembkeWPuOODtuiwt+W5uee3muODu+esrOS6jOmbkeWPuOODtuiwt+W5uee3muOBr+WIpeOAheOBq+avlOi8g+OBmeOCi+W/heimgeOBjOOBguOCi+OAgltTNDldW1M1MV0KCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIOWgseWRiuabuOOBruWbszHvvZ4144KS54++5Zyo5Zyw44G46YeN44Gt44CB5pei6KitTm8uMjDjg7syMuODuzMw44O7MTDkurrlrZTjga7lnLDkuIrkvY3nva7jgpLnibnlrprjgZnjgovjgIIKLSBbIF0gMjAwOOW5tOWGjeani+evieWMuumWk+OCkuOAgTE5MzDlubTjga7pq5jnlLDnlLrkuIvmsLTpgZPoqK3oqIjlubPpnaLlm7PjgIExOTMy5bm05pqX5rig5YyW5YmN5b6M44Gu5bym5be75bed44CB56ys5LqM6ZuR5Y+444O26LC35bm557ea44Go5Yil44Os44Kk44Ok44O844Gn5q+U6LyD44GZ44KL44CCCi0gWyBdIOmbkeWPuOODtuiwt+W5uee3muOBruW9k+WIneeviemAoOW5tOODu+WOn+aWremdouODuzIwMDjlubTmm7TnlJ/lvozjga7mnInlirnmlq3pnaLjgpLlt6XkuovoqK3oqIjmm7jjgoTkuIvmsLTpgZPlj7DluLPjgafnorroqo3jgZfjgIEyLDEwMMOXMSw2MDDjgagyLDAwMMOXMSw0NjDjga7lt67jgpLoqqzmmI7jgafjgY3jgovos4fmlpnjgpLmjqLjgZnjgIIKLSBbIF0gTm8uMTDjgojjgorkuIvmtYHjgYvjgonlvozmpb3jg53jg7Pjg5fmiYDjg7vnpZ7nlLDlt53jgb7jgafjga7lubnnt5rmjqXntprjgpLmlr3oqK3lm7Pjgafnorroqo3jgZfjgIHnj77lnKjjga7mjpLmsLTntYzot6/jgpLlnLDlm7PljJbjgZnjgovjgIIKCiMjIOi/veWKoOWHuuWFuAoKLSAqKltTNTFdKiog5p2x5Lqs6YO95LiL5rC06YGT5bGAIOmbkeWPuOODtuiwt+W5uee3muWGjeani+evieW3peS6i+S6i+aVheiqv+afu+WnlOWToeS8muOAjumbkeWPuOODtuiwt+W5uee3muWGjeani+evieW3peS6iyDkuovmlYXoqr/mn7vloLHlkYrmm7jjgI8sIDIwMDjlubQ55pyIMeaXpeKAleixiuWztuWMuumbkeWPuOOBjOiwt+S4gOODu+S6jOS4geebru+9nuaWh+S6rOWMuuebrueZveWPsOS6jOS4geebruOBruaXouiorembkeWPuOODtuiwt+W5uee3muWGjeani+evieOAgTU5OC43NSBt44Gu5pa95bel5Yy66ZaT44CB55+p5b2i5rig5pat6Z2i44CB5Lq65a2U55Wq5Y+344CB5LqL5pWF5Zyw54K544CBNDggaGHjga7mjpLmsLTpnaLnqY3jgarjganjgpLoqJjovIkgIAogIGh0dHBzOi8vd3d3Lm1saXQuZ28uanAvY29tbW9uLzAwMDAyNDA1Ni5wZGYKLSAqKltTNTJdKiog5Zu95Zyf5Lqk6YCa55yB44CM5p2x5Lqs6YO944CA6ZuR5Y+444O26LC35bm557ea5bel5LqL44Gr44GK44GR44KL5LqL5pWF44Gr44Gk44GE44Gm44CNLCAyMDA45bm0OOaciDXml6XigJXkuovmlYXnrKzkuIDloLHjgIJTUFLlt6Xms5XjgavjgojjgovnrqHjgY3jgofmm7TnlJ9MPTYwMCBt44CB6ZuR5Y+444O26LC35bm557ea44KS44CM4pahMjEwMMOXMTYwMOOAjeOBqOiomOi8iSAgCiAgaHR0cHM6Ly93d3cubWxpdC5nby5qcC9yZXBvcnQvcHJlc3MvY2l0eTEzX2hoXzAwMDAwOS5odG1sCg==').decode('utf-8')
           p.write_text(text + addition, encoding='utf-8')
           PY
           if git diff --quiet -- README.md; then
