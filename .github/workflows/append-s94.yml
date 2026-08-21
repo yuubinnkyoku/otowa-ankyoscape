@@ -11,13 +11,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Append research note
+      - name: Append research notes
         shell: bash
         run: |
-          if grep -q '\[S94\]' README.md; then
-            echo 'S94 already present; nothing to do.'
+          if grep -q '\[S95\]' README.md; then
+            echo 'S95 already present; nothing to do.'
             exit 0
           fi
+          if ! grep -q '\[S94\]' README.md; then
           cat >> README.md <<'EOF'
 
 ---
@@ -48,11 +49,40 @@ jobs:
   https://www.city.bunkyo.lg.jp/documents/4231/ichiran2026.pdf  
   https://www.city.bunkyo.lg.jp/documents/4231/tebikichizu2026.pdf
 EOF
+          fi
+          cat >> README.md <<'EOF'
+
+---
+
+# 43. 追加調査（2026-08-21・第29回）
+
+## 43.1 谷端川上幹線の一部は「旧河川を石積みで嵩上げ」した構造だった
+
+東京都下水道局『東京都下水道局技術調査年報 2013』所収「大規模な道路切回しを伴う既設幹線の改造について」は、豊島区・板橋区境付近の **谷端川上幹線**について、補助173号線を横断する既設部分が **「旧河川を石積みで嵩上げして、その上に橋桁を設置した構造」**だったと記している。土被りがない状態だったため、2011～2012年度の工事では道路整備に合わせて幹線上部を切り下げ、橋台とPC版による橋梁形式へ改造した。〔確認／東京都下水道局技術報告〕[S95]
+
+これは、谷端川の現代下水道について重要な具体例である。既存READMEでは「現在の下水道幹線と旧河道を一対一で同一視しない」と注意してきたが、この地点に限れば逆に、**下水道施設の構造そのものに旧河川の石積み構造が取り込まれていた**ことが東京都の技術資料から確認できる。したがって、谷端川の下水道化は全区間で同じ方法だったのではなく、旧河道を利用・蓋掛けした区間と、別線に新設・増強された区間を分けて復元する必要がある。〔観察〕[S95]
+
+同じ工事では、浮間水再生センターの一部稼働に合わせて **谷端川上幹線から板橋幹線への分水構造を改造**し、新しい分水堰と連絡水路によって、汚水送水量を谷端川幹線側から板橋幹線側へ切り替えている。〔確認〕[S95] これは、旧河道を継承した構造が残る一方で、現代の排水先・水理系統は後世の工事でさらに組み替えられていることを示す。旧河道の線形と現在の「流域」「排水先」は別々に検討すべきである。〔観察〕[S95]
+
+なお、2016年の東京都議会答弁でも、下板橋駅付近の谷端川幹線が浅い位置のボックスカルバートで、道路アンダーパス整備には移設が必要と説明されている。[S40] ただし、今回の補助173号線横断部と2016年答弁の補助73号線・下板橋駅付近が同一箇所・同一構造を指すとは限らないため、両者は区別して扱う。〔未解決〕[S40][S95]
+
+### ここから追えること
+
+- [ ] 『技術調査年報 2013』掲載の施工箇所図を現代地図へ重ね、補助173号線横断部の正確な座標を確定する。
+- [ ] 改造前断面図から石積み部分・橋桁・谷端川上幹線の断面寸法を読み取り、旧河川護岸をどこまで継承していたか確認する。
+- [ ] 谷端川上幹線について、旧河川を利用した区間と新設管渠区間の境界を下水道台帳・竣工図で追う。
+- [ ] 2011～2012年度の分水変更前後で、谷端川幹線・板橋幹線・浮間水再生センターへの汚水送水系統がどう変化したかを図面で復元する。
+
+## 追加出典
+
+- **[S95]** 東京都下水道局『東京都下水道局技術調査年報 2013』「大規模な道路切回しを伴う既設幹線の改造について」―谷端川上幹線の補助173号線横断部を「旧河川を石積みで嵩上げして、その上に橋桁を設置した構造」と説明。2011～2012年度に上部切下げと橋梁形式への改造を実施し、あわせて谷端川上幹線から板橋幹線への分水構造を改造。  
+  https://www.opendata.metro.tokyo.lg.jp/gesui/R3/gijyututyousa/2013all.pdf
+EOF
       - name: Commit README
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git commit -m 'docs: add archaeological record for Mizukubo River' || exit 0
+          git commit -m 'docs: add archaeological and sewer-structure findings' || exit 0
           git push origin main
