@@ -1,21 +1,25 @@
 name: Append river research findings
 
 on:
-  push:
-    paths:
-      - '.github/workflows/append-river-research.yml'
+  issues:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   update-readme:
+    if: github.event.issue.title == 'trigger river research update S82-S83'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Append verified findings
         shell: bash
         run: |
+          if grep -q '\[S83\]' README.md; then
+            echo 'README already updated'
+            exit 0
+          fi
           cat >> README.md <<'EOF'
 
 ---
