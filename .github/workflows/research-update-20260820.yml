@@ -1,15 +1,17 @@
 name: Append river research update
 on:
-  issues:
+  pull_request:
     types: [opened]
 permissions:
   contents: write
 jobs:
   update:
-    if: github.event.issue.title == 'trigger river research update 20260820'
+    if: github.event.pull_request.title == 'trigger river research update 20260820'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append research findings
         shell: bash
         run: |
@@ -70,13 +72,11 @@ jobs:
   https://tr-mag.jp/80/navi.html  
   https://tokyotoshima.blog.shinobi.jp/%E5%8C%97%E5%A4%A7%E5%A1%9A/
 EOF
-      - name: Commit README
+      - name: Commit README and remove updater
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          if git diff --quiet README.md; then
-            exit 0
-          fi
           git add README.md
-          git commit -m 'Add 1953 Yabata drainage network research'
-          git push
+          git rm .github/workflows/research-update-20260820.yml
+          git commit -m 'docs: add 1953 Yabata drainage network research'
+          git push origin HEAD:main
