@@ -50,8 +50,6 @@ EOF
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
-          if git diff --cached --quiet; then
-            echo 'No README change; commit only workflow cleanup if needed'
-          fi
           git commit -m 'Add measured spring-flow evidence near Mizukubo River'
           git push
+# trigger update
