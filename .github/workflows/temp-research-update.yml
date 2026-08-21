@@ -3,19 +3,24 @@ name: One-shot README research update
 on:
   issues:
     types: [opened]
+  pull_request:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   update:
-    if: github.event.issue.title == '[research-updater] add S82'
+    if: (github.event_name == 'issues' && github.event.issue.title == '[research-updater] add S82') || (github.event_name == 'pull_request' && github.event.pull_request.title == '[research-updater] add S82')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append verified research finding
         shell: bash
         run: |
+          if grep -q '\[S82\]' README.md; then exit 0; fi
           cat >> README.md <<'EOF'
 
 ---
@@ -50,4 +55,4 @@ EOF
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "docs: add Yabata Bridge location evidence"
-          git push
+          git push origin HEAD:main
