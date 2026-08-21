@@ -1,23 +1,29 @@
-# trigger
-name: Append S88 research update
+name: Apply S88 river research update
+
 on:
-  push:
-    paths:
-      - '.github/workflows/append-s88.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
 permissions:
   contents: write
+
 jobs:
   update:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-river-research-update-20260821-s88'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Append README research note
-        shell: bash
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Append verified research note
+        shell: python
         run: |
-          if grep -q '\[S88\]' README.md; then
-            git rm .github/workflows/append-s88.yml
-          else
-            cat >> README.md <<'EOF'
+          from pathlib import Path
+          p = Path('README.md')
+          text = p.read_text(encoding='utf-8')
+          if '[S88]' not in text:
+              addition = r'''
 
 ---
 
@@ -45,11 +51,15 @@ jobs:
 
 - **[S88]** 豊島区立郷土資料館だより『かたりべ』141号, 2022年1月28日, 「90年前の高田町の三大事業 ビフォー＆アフター」―『高田町写真帖』をもとに、鶴巻川（弦巻川）の暗渠・下水道工事を1931年6月着手と整理。暗渠前写真について生活排水の流入・時折の洪水被害、暗渠後写真について鶴巻道路・大鳥神社・宝城寺・清立院・王子電車軌道の位置関係を説明。紙面の1930年12月起工式は神田川改修工事の説明。  
   https://www.city.toshima.lg.jp/documents/45001/kataribe141.pdf
-EOF
-            git rm .github/workflows/append-s88.yml
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md .github/workflows/append-s88.yml
-          git commit -m 'docs: add official source on 1931 Tsurumaki River works'
-          git push
+'''
+              p.write_text(text + addition, encoding='utf-8')
+      - name: Remove temporary workflow and trigger, then commit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/append-s88.yml
+          rm -f .s88-trigger
+          git add -A
+          git commit -m "docs: add official source on 1931 Tsurumaki River works"
+          git push origin HEAD:${{ github.head_ref }}
