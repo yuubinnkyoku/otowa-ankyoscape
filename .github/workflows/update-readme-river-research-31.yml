@@ -1,7 +1,7 @@
 name: Apply river research update 31
 
 on:
-  issues:
+  pull_request:
     types: [opened]
 
 permissions:
@@ -9,10 +9,12 @@ permissions:
 
 jobs:
   update:
-    if: github.event.issue.title == 'apply-readme-river-research-31'
+    if: github.event.pull_request.title == 'apply-readme-river-research-31'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append researched findings
         shell: bash
         run: |
@@ -75,4 +77,4 @@ EOF
           git add README.md
           git rm .github/workflows/update-readme-river-research-31.yml
           git commit -m 'docs: add prewar Yabata culvert campaign and Ikebukuro terrain'
-          git push
+          git push origin HEAD:main
