@@ -1,12 +1,12 @@
 name: Append river research update
 on:
-  push:
-    paths:
-      - '.github/workflows/research-update-20260820.yml'
+  issues:
+    types: [opened]
 permissions:
   contents: write
 jobs:
   update:
+    if: github.event.issue.title == 'trigger river research update 20260820'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
