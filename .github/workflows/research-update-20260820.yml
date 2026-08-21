@@ -1,0 +1,25 @@
+name: Append river research update
+on:
+  pull_request:
+    types: [opened, reopened]
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Apply staged update
+        shell: bash
+        run: |
+          if ! grep -q '^# 32\. 追加調査（2026-08-20・第18回）' README.md; then
+            cat .research-update-20260820.md >> README.md
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git rm -f .github/workflows/research-update-20260820.yml .research-update-20260820.md
+          git commit -m 'docs: add 1953 Yabata drainage network research'
+          git push origin HEAD:main
