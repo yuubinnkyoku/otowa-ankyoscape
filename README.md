@@ -1369,7 +1369,7 @@ UR都市機構は、造幣局東京支局跡地をIKE・SUNPARKとして整備�
   https://www.city.itabashi.tokyo.jp/kusei/shiryo/koubunsho/ichiran/1009264.html
 
 ---
-29. 追加調査（2026-08-21・第15回）
+# 29. 追加調査（2026-08-21・第15回）
 
 ## 29.1 暗渠化直前の弦巻川：衛生悪化・洪水・旧河道と下水道線形のずれ
 
