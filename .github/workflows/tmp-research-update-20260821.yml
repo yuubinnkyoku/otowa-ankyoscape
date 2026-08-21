@@ -78,3 +78,5 @@ jobs:
           git add README.md
           git commit -m "docs: add Maruike water-rights and Senkawa map dating"
           git push
+
+# trigger
