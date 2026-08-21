@@ -1,9 +1,8 @@
 name: append research 33
 
 on:
-  push:
-    paths:
-      - '.github/workflows/append-research-33.yml'
+  issues:
+    types: [reopened]
 
 permissions:
   contents: write
@@ -62,9 +61,8 @@ jobs:
   https://adeac.jp/viewitem/toshima-history/viewer/viewer/13_H150115_01/data/13_H150115_01.pdf  
   https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2011-3/03-11.html
 EOF
-          rm -f .github/workflows/append-research-33.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md .github/workflows/append-research-33.yml
+          git add README.md
           git commit -m "docs: add spring and sewer findings"
           git push
