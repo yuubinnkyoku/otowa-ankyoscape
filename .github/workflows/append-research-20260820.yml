@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   update:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-refine-river-sources-20260820'
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-append-research-20260820'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
