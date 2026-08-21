@@ -1,0 +1,36 @@
+name: Temporary README research update
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+
+jobs:
+  append-readme:
+    if: startsWith(github.event.issue.title, '[README研究更新]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append researched section
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          event = json.load(open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8'))
+          body = (event['issue'].get('body') or '').strip()
+          p = pathlib.Path('README.md')
+          text = p.read_text(encoding='utf-8')
+          if body and body not in text:
+              p.write_text(text.rstrip() + '\n\n' + body + '\n', encoding='utf-8')
+          PY
+      - name: Commit and push
+        shell: bash
+        run: |
+          if git diff --quiet -- README.md; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: add water Kubogawa map dating note"
+          git push
