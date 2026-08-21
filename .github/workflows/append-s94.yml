@@ -1,8 +1,7 @@
 name: append-s94
 on:
-  push:
-    paths:
-      - '.github/workflows/append-s94.yml'
+  pull_request:
+    types: [opened]
 permissions:
   contents: write
 jobs:
@@ -10,9 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append research note
         shell: bash
         run: |
+          if grep -q '\[S94\]' README.md; then
+            echo 'S94 already present; nothing to do.'
+            exit 0
+          fi
           cat >> README.md <<'EOF'
 
 ---
@@ -50,4 +55,4 @@ EOF
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
           git commit -m 'docs: add archaeological record for Mizukubo River' || exit 0
-          git push
+          git push origin main
