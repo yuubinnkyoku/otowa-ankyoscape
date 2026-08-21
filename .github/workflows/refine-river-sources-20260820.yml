@@ -42,7 +42,7 @@ jobs:
           text = text.replace(old, new, 1)
 
           old_src = '''  https://adeac.jp/toshima-history/viewer/mp404418/pressH051222/  
-  年表：https://adeac.jp/toshima-history/timeline/tm000001_1?key=41%E6%96%87%E5%8C%96%E8%B2%A1%E3%83%BB%E9%83%B7%E5%9C%9F%E5%8F%B2%E6%96%99'''
+  年表：https://adeac.jp/toshima-history/timeline/tm000001_1?key=41%E6%96%87%E5%8C%96%E8%B2%A1%E3%83%BB%E9%83%B7%E5%8F%B2%E6%96%99'''
           new_src = '''  https://adeac.jp/toshima-history/viewer/mp404418/pressH051222/  
   豊島区公式刊行物ページ（収録図「千川上水路図（完）」を明治14～17年頃と記載）：https://www.city.toshima.lg.jp/129/bunka/bunka/shiryokan/kankobutu/005951.html  
   年表：https://adeac.jp/toshima-history/timeline/tm000001_1?key=41%E6%96%87%E5%8C%96%E8%B2%A1%E3%83%BB%E9%83%B7%E5%9C%9F%E5%8F%B2%E6%96%99'''
@@ -51,13 +51,13 @@ jobs:
           text = text.replace(old_src, new_src, 1)
 
           p.write_text(text, encoding='utf-8')
-      - name: Commit README and remove temporary updater
+      - name: Remove temporary files and commit
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm -f .refine-river-sources-trigger
           git rm .github/workflows/refine-river-sources-20260820.yml
-          git add README.md
+          rm -f .refine-river-sources-trigger
+          git add -A
           git commit -m "docs: correct sources and date Senkawa map"
           git push origin HEAD:${{ github.head_ref }}
