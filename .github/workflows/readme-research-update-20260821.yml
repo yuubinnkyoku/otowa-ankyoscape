@@ -1,70 +1,38 @@
 name: Apply README research update
 
 on:
-  issues:
-    types: [opened, edited]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
 
 jobs:
   update:
-    if: github.event.issue.title == 'run-readme-research-update-20260821'
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-readme-research-update-20260821b'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
       - name: Append verified research notes
+        shell: python
+        run: |
+          from pathlib import Path
+          import base64
+          p = Path('README.md')
+          text = p.read_text(encoding='utf-8')
+          if '[S64]' not in text:
+              addition = base64.b64decode('Ci0tLQojIDI3LiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTIx44O756ysMTPlm57vvIkKCiMjIDI3LjEgMTk5MeW5tOOBruiwt+err+W3nee3kemBk+WFqOe3mumWi+mAmu+8muWQjOaZguS7o+OBruWFrOeahOWgsemBk+WGmeecn+ODu+ODl+ODrOOCueODquODquODvOOCueOBjOaui+OCiwoK6LGK5bO25Yy644CM44Go44GX44G+44Gy44GZ44Go44KK44GD44CN44Gu5bmz5oiQ5aCx6YGT5YaZ55yf576k44Gr44CBKioxOTkx77yI5bmz5oiQM++8ieW5tDTmnIgx5pel5LuY44CM6LC356uv5bed57eR6YGT5YWo57ea6ZaL6YCa44CNKirjga7lhpnnnJ/os4fmlpnjgYznmbvpjLLjgZXjgozjgabjgYTjgovjgILosYrls7bljLrjga7lubPmiJDlubTooajjgafjgoLlkIzml6XjgpLlhajnt5rplovpgJrml6XjgajjgZfjgIHlhbjmi6DjgajjgZfjgaYxOTkx5bm0NeaciDE05pel44Gu44OX44Os44K544Oq44Oq44O844K544KS5oyZ44GS44CB5YaZ55yf6LOH5paZ44G444Gu44Oq44Oz44Kv44KS5LuY44GX44Gm44GE44KL44CC44CU56K66KqN77yP5YWs55qE5YaZ55yf6LOH5paZ44O76Ieq5rK75L2T5Y+y5bm06KGo44CVW1M2NF0KCuOBleOCieOBq+WQjOODl+ODrOOCueODquODquODvOOCueOBr+OAgeizh+aWmeWQjeiHquS9k+OBjCAqKuOAjOODkOODqeOBjOWSsuOBhOOBn+W3neOBruS4iuOBrumBiuatqemBk+OAgOixiuWztuWMuuOAjuiwt+err+e3kemBk+OAj+WFqOe3muWujOaIkOOAjSoqIOOBqOOBquOBo+OBpuOBhOOCi+OAguOAlOeiuuiqje+8j+WFrOeahOODl+ODrOOCueODquODquODvOOCueabuOiqjOOAlVtTNjRdIOaXouWtmFJFQURNReOBp+OBrzE5OTDlubQxMOaciOOBrue3kemBk+aVtOWCmeW3peS6i+izh+aWmeOAgTE5OTHlubQy5pyI44Gu5p2h5L6L5pS55q2j6K2w5qGI44CBMTk5MeW5tDTmnIjjga7lhajnt5rplovpgJrjgb7jgafjgpLov73jgaPjgabjgYTjgZ/jgYxbUzYyXeOAgeS7iuWbnuOBruizh+aWmeOBq+OCiOOBo+OBpuOAgSoq5a6M5oiQ5pmC54K544Gu54q25oWL44KS5ZCM5pmC5Luj44Gu6KGM5pS/5YaZ55yf44Gn5qSc6Ki844Gn44GN44KL6LOH5paZ44Gu5omA5ZyoKirjgb7jgafmirzjgZXjgYjjgonjgozjgZ/jgIIKCuOBn+OBoOOBl+OAgeacrOiqv+afu+OBp+OCquODs+ODqeOCpOODs+aknOe0ouOBi+OCieeiuuiqjeOBp+OBjeOBn+OBruOBr+WGmeecn+izh+aWmeOBrueZu+mMsuaDheWgseOBqOODl+ODrOOCueODquODquODvOOCueOBruabuOiqjOODu+ihqOmhjOOBvuOBp+OBp+OBguOCiuOAgeWGmeecn+OBrue0sOmDqOOChOODl+ODrOOCueODquODquODvOOCueacrOaWh+WFqOS9k+OBr+OBvuOBoOeyvuiqreOBl+OBpuOBhOOBquOBhOOAguOBl+OBn+OBjOOBo+OBpuOAgeihqOmhjOOBruOAjOODkOODqeOAjeOBi+OCieakjeagveS9jee9ruODu+WTgeeoruODu+aVtOWCmeWMuumWk+OCkuaOqOa4rOOBl+OBn+OCiuOAgeWGmeecn+OBoOOBkeOCkuimi+OBmuOBq+aSruW9seWcsOeCueOCkuaWreWumuOBl+OBn+OCiuOBr+OBl+OBquOBhOOAguOAlOWPsuaWmeaJgOWcqOeiuuiqje+8j+imgeeUu+WDj+ODu+acrOaWh+eiuuiqjeOAlQoKIyMjIOOBk+OBk+OBi+OCiei/veOBiOOCi+OBk+OBqAoKLSBbIF0gMTk5MeW5tDTmnIgx5pel44CM6LC356uv5bed57eR6YGT5YWo57ea6ZaL6YCa44CN5aCx6YGT5YaZ55yf44Gu5Y6f55S75YOP44KS56K66KqN44GX44CB5pKu5b2x5Zyw54K544O75pa55ZCR44O75YaZ44Gj44Gm44GE44KL5qmL6Leh44KE6Kaq5rC05pa96Kit44KS54m55a6a44GZ44KL44CCCi0gWyBdIDE5OTHlubQ15pyIMTTml6Xjg5fjg6zjgrnjg6rjg6rjg7zjgrnmnKzmlofjgpLnorroqo3jgZfjgIHlhajnt5rlu7bplbfjgIHmlbTlgpnljLrplpPjgIHmpI3moL3jg7vopqrmsLTmlr3oqK3jgIHkuovmpa3osrvjgarjganjga7oqJjovInjgYzjgYLjgovjgYvnorroqo3jgZnjgovjgIIKLSBbIF0gMTk5MOW5tDEw5pyI44Gu5bel5LqL6LOH5paZW1M2Ml3jgIExOTkx5bm0MuaciOOBruadoeS+i+aUueato+izh+aWmVtTNjJd44CBNOaciOOBruWujOaIkOWGmeecn1tTNjRd44KS5a++5b+c44GV44Gb44CB6KiI55S75Zuz44Go5a6M5oiQ5b2i44Gu5beu44KS5qSc6Ki844GZ44KL44CCCgojIyAyNy4yIOiwt+err+W3neawtOezu+OBruWFiOWPsuaZguS7o+Wcn+WcsOWIqeeUqO+8muaxoOiii+iyneWhmuOBjOawtOezu+WIpeOBq+S9jee9ruOBpeOBkeOCieOCjOOBpuOBhOOCiwoK6LGK5bO25Yy644CM44Go44GX44G+44Gy44GZ44Go44KK44GD44CN44Gu5Y6f5aeL772e57mU6LGK5pyf5bm06KGo44Gv44CBKirmsaDooovmnKznlLoz5LiB55uu44O75rC35bed56We56S+5YyX5YG044Gu5rGg6KKL6LKd5aGa77yI5rC35bed56S+6KOP6LKd5aGa77yP5rGg6KKL5p2R6LKd5aGa77yJKirjgavjgaTjgYTjgabjgIHnuITmloflvozmnJ/jg7vmmanmnJ/jga7opIfmlbDlnovlvI/jga7lnJ/lmajjgoTnn7PlmajnrYnjgYzlh7rlnJ/jgZnjgovpgbrot6HjgajjgZfjgaboqJjpjLLjgZfjgabjgYTjgovjgILjgZXjgonjgavlvKXnlJ/mmYLku6Pjga7ljLrlhoXpgbrot6HjgpLmsLTns7vliKXjgavmlbTnkIbjgZfjgZ/poIXnm67jgafjga/jgIEqKuOAjOiwt+err+W3neawtOezu+OBq+axoOiii+iyneWhmu+8iOe4hOaWh+W+jOaZqeacn+OBqOOBruikh+WQiOmBuui3oe+8ieOAjSoq44Go5piO6KiY44GX44Gm44GE44KL44CC44CU56K66KqN77yP5YWs55qE6Ieq5rK75L2T5Y+y44CVW1M2NV0KCuOBk+OCjOOBr+iwt+err+W3neOBrueJueWumuW5tOS7o+OBruays+mBk+S9jee9ruODu+W3neW5heODu+awtOS9jeOCkuekuuOBmeizh+aWmeOBp+OBr+OBquOBhOOAguOBvuOBn+OAjOiwt+err+W3neawtOezu+OAjeOBqOOBhOOBhuWIhumhnuiHquS9k+OCguOAgeWFiOWPsuaZguS7o+OBrua1gei3r+OBjOePvuWcqOefpeOCieOCjOOCi+iwt+err+W3neOBqOWujOWFqOOBq+WQjOOBmOOBoOOBo+OBn+OBk+OBqOOCkuiovOaYjuOBmeOCi+OCguOBruOBp+OBr+OBquOBhOOAguOAlOazqOaEj+OAlQoK5LiA5pa544CB5rGg6KKL5pys55S65YG044Gu6LC356uv5bed5rWB5Z+f44Gr44Gk44GE44Gm44CBKirnuITmloflvozjg7vmmanmnJ/jgYvjgonlvKXnlJ/mnJ/jgavjgYvjgZHjgabkurrplpPmtLvli5Xjga7nl5Xot6HjgpLmjIHjgaTpgbrot6HjgYzmsLTns7vjgajjga7plqLkv4LjgafmlbTnkIbjgZXjgozjgabjgYTjgosqKuOBk+OBqOOBr+OAgei/keS4luODu+i/keS7o+S7peWJjeOBruWcn+WcsOWIqeeUqOOCkuiAg+OBiOOCi+Wfuuekjuizh+aWmeOBq+OBquOCi+OAguOAlOims+Wvn+OAlVtTNjVdIOS7iuW+jOOAgeiyneWhmuOBruaomemrmOODu+W+ruWcsOW9ouODu+eZuuaOmOWcsOeCueOCkuaXp+iwt+err+W3neiwt+W6leOBqOmHjeOBreOCjOOBsOOAgeWxheS9j+Wfn+OBqOS9juWcsOODu+awtOi+uuOBrui3nembouOCkuWFt+S9k+WMluOBp+OBjeOCi+WPr+iDveaAp+OBjOOBguOCi+OBjOOAgeePvuautemajuOBp+OBr+OAlOaOqOWumuOAleOBq+eVmeOCgeOCi+OAggoKIyMjIOOBk+OBk+OBi+OCiei/veOBiOOCi+OBk+OBqAoKLSBbIF0g44CO6LGK5bO25Yy65Y+yIOmAmuWPsue3qOS4gOOAjzQ144O7NTTvvZ41N+mggeebuOW9k+OBiuOCiOOBs+axoOiii+iyneWhmuOBrueZuuaOmOWgseWRiuOCkueiuuiqjeOBl+OAgeWcsOeCueODu+aomemrmOODu+mBuuani+mdouODu+iyneeoruODu+W5tOS7o+OCkueyvuafu+OBmeOCi+OAggotIFsgXSDmsaDooovosp3loZrjgajosLfnq6/lt53ml6fmsrPpgZPjg7vmsLflt53npZ7npL7jg7vlkajovrrmrrXkuJjpnaLjga7kvY3nva7plqLkv4LjgpLlnLDlvaLlm7Pjg7vpgbrot6HlnLDlm7Pjgafmr5TovIPjgZnjgovjgIIKLSBbIF0g44CM6LC356uv5bed5rC057O744CN44Go44GE44GG5Yy65Y+y5LiK44Gu5YiG6aGe44GM44CB44Gp44Gu5b6p5YWD5rWB6Lev44O75Zyw5b2i6KqN6K2Y44Gr5Z+644Gl44GP44GL56K66KqN44GZ44KL44CCCgojIyDov73liqDlh7rlhbgKCi0gKipbUzY0XSoqIOixiuWztuWMuuOAjOOBqOOBl+OBvuOBsuOBmeOBqOOCiuOBg+OAjeW5s+aIkOWgsemBk+WGmeecn+OAjOiwt+err+W3nee3kemBk+WFqOe3mumWi+mAmuOAjTE5OTHlubQ05pyIMeaXpeOAgeOBiuOCiOOBs+W5s+aIkDPlubTlubTooajvvIjlkIzml6XjgpLlhajnt5rplovpgJrml6XjgajjgZfjgIExOTkx5bm0NeaciDE05pel44OX44Os44K544Oq44Oq44O844K544KS5YW45oug44Go44GZ44KL77yJ44CC5ZCM44OX44Os44K544Oq44Oq44O844K544Gu6LOH5paZ5ZCN44Gv44CM44OQ44Op44GM5ZKy44GE44Gf5bed44Gu5LiK44Gu6YGK5q2p6YGT44CA6LGK5bO25Yy644CO6LC356uv57eR6YGT44CP5YWo57ea5a6M5oiQ44CNICAKICBodHRwczovL2FkZWFjLmpwL3Rvc2hpbWEtaGlzdG9yeS9jYXRhbG9nLWxpc3QvbGlzdDAwMDctMDMgIAogIGh0dHBzOi8vYWRlYWMuanAvdG9zaGltYS1oaXN0b3J5L3RpbWVsaW5lL3RtMDAwMDAxXzE/a2V5PSVFNSVCOSVCMyVFNiU4OCU5MDMlRTUlQjklQjQgIAogIGh0dHBzOi8vYWRlYWMuanAvdG9zaGltYS1oaXN0b3J5L2RldGFpbGVkLXNlYXJjaD9tb2RlPWNhdGFsb2cmd29yZD0wMDFiJUUzJTgzJTk3JUUzJTgzJUFDJUUzJTgyJUI5JUUzJTgzJUFBJUUzJTgzJUFBJUUzJTgzJUJDJUUzJTgyJUI5JUVGJUJDJTg4JUU1JUI5JUIzJUU2JTg4JTkwMyVFNSVCOSVCNCVFRiVCQyU4OQotICoqW1M2NV0qKiDosYrls7bljLrjgIzjgajjgZfjgb7jgbLjgZnjgajjgorjgYPjgI3ljp/lp4vvvZ7nuZTosYrmnJ/lubTooajigJXmsaDooovmnKznlLoz5LiB55uu5rC35bed56We56S+5YyX5YG044Gu5rGg6KKL6LKd5aGa77yI5rC35bed56S+6KOP6LKd5aGa77yP5rGg6KKL5p2R6LKd5aGa77yJ44Gu57iE5paH5b6M5pyf44O75pmp5pyf6LOH5paZ44Go44CB5byl55Sf6YG66Leh44Gu5rC057O75Yil5pW055CG44Gn44CM6LC356uv5bed5rC057O744Gr5rGg6KKL6LKd5aGa77yI57iE5paH5b6M5pmp5pyf44Go44Gu6KSH5ZCI6YG66Leh77yJ44CN44Go6KiY6LyJ44CC5YW45oug44Gv44CO6LGK5bO25Yy65Y+yIOmAmuWPsue3qOS4gOOAjzQ144O7NTTvvZ41N+mggeebuOW9kyAgCiAgaHR0cHM6Ly9hZGVhYy5qcC90b3NoaW1hLWhpc3RvcnkvdGltZWxpbmUvdG0wMDAwMDJfMQo=').decode('utf-8')
+              p.write_text(text.rstrip() + '\n\n' + addition.lstrip(), encoding='utf-8')
+      - name: Remove temporary files and commit
         shell: bash
         run: |
-          cat >> README.md <<'EOF'
-
----
-# 27. 追加調査（2026-08-21・第13回）
-
-## 27.1 1991年の谷端川緑道全線開通：同時代の公的報道写真・プレスリリースが残る
-
-豊島区「としまひすとりぃ」の平成報道写真群に、**1991（平成3）年4月1日付「谷端川緑道全線開通」**の写真資料が登録されている。豊島区の平成年表でも同日を全線開通日とし、典拠として1991年5月14日のプレスリリースを挙げ、写真資料へのリンクを付している。〔確認／公的写真資料・自治体史年表〕[S64]
-
-さらに同プレスリリースは、資料名自体が **「バラが咲いた川の上の遊歩道　豊島区『谷端緑道』全線完成」** となっている。〔確認／公的プレスリリース書誌〕[S64] 既存READMEでは1990年10月の緑道整備工事資料、1991年2月の条例改正議案、1991年4月の全線開通までを追っていたが[S62]、今回の資料によって、**完成時点の状態を同時代の行政写真で検証できる資料の所在**まで押さえられた。
-
-ただし、本調査でオンライン検索から確認できたのは写真資料の登録情報とプレスリリースの書誌・表題までであり、写真の細部やプレスリリース本文全体はまだ精読していない。したがって、表題の「バラ」から植栽位置・品種・整備区間を推測したり、写真だけを見ずに撮影地点を断定したりはしない。〔史料所在確認／要画像・本文確認〕
-
-### ここから追えること
-
-- [ ] 1991年4月1日「谷端川緑道全線開通」報道写真の原画像を確認し、撮影地点・方向・写っている橋跡や親水施設を特定する。
-- [ ] 1991年5月14日プレスリリース本文を確認し、全線延長、整備区間、植栽・親水施設、事業費などの記載があるか確認する。
-- [ ] 1990年10月の工事資料[S62]、1991年2月の条例改正資料[S62]、4月の完成写真[S64]を対応させ、計画図と完成形の差を検証する。
-
-## 27.2 谷端川水系の先史時代土地利用：池袋貝塚が水系別に位置づけられている
-
-豊島区「としまひすとりぃ」の原始～織豊期年表は、**池袋本町3丁目・氷川神社北側の池袋貝塚（氷川社裏貝塚／池袋村貝塚）**について、縄文後期・晩期の複数型式の土器や石器等が出土する遺跡として記録している。さらに弥生時代の区内遺跡を水系別に整理した項目では、**「谷端川水系に池袋貝塚（縄文後晩期との複合遺跡）」**と明記している。〔確認／公的自治体史〕[S65]
-
-これは谷端川の特定年代の河道位置・川幅・水位を示す資料ではない。また「谷端川水系」という分類自体も、先史時代の流路が現在知られる谷端川と完全に同じだったことを証明するものではない。〔注意〕
-
-一方、池袋本町側の谷端川流域について、**縄文後・晩期から弥生期にかけて人間活動の痕跡を持つ遺跡が水系との関係で整理されている**ことは、近世・近代以前の土地利用を考える基礎資料になる。〔観察〕[S65] 今後、貝塚の標高・微地形・発掘地点を旧谷端川谷底と重ねれば、居住域と低地・水辺の距離を具体化できる可能性があるが、現段階では〔推定〕に留める。
-
-### ここから追えること
-
-- [ ] 『豊島区史 通史編一』45・54～57頁相当および池袋貝塚の発掘報告を確認し、地点・標高・遺構面・貝種・年代を精査する。
-- [ ] 池袋貝塚と谷端川旧河道・氷川神社・周辺段丘面の位置関係を地形図・遺跡地図で比較する。
-- [ ] 「谷端川水系」という区史上の分類が、どの復元流路・地形認識に基づくか確認する。
-
-## 追加出典
-
-- **[S64]** 豊島区「としまひすとりぃ」平成報道写真「谷端川緑道全線開通」1991年4月1日、および平成3年年表（同日を全線開通日とし、1991年5月14日プレスリリースを典拠とする）。同プレスリリースの資料名は「バラが咲いた川の上の遊歩道　豊島区『谷端緑道』全線完成」  
-  https://adeac.jp/toshima-history/catalog-list/list0007-03  
-  https://adeac.jp/toshima-history/timeline/tm000001_1?key=%E5%B9%B3%E6%88%903%E5%B9%B4  
-  https://adeac.jp/toshima-history/detailed-search?mode=catalog&word=001b%E3%83%97%E3%83%AC%E3%82%B9%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%EF%BC%88%E5%B9%B3%E6%88%903%E5%B9%B4%EF%BC%89
-- **[S65]** 豊島区「としまひすとりぃ」原始～織豊期年表―池袋本町3丁目氷川神社北側の池袋貝塚（氷川社裏貝塚／池袋村貝塚）の縄文後期・晩期資料と、弥生遺跡の水系別整理で「谷端川水系に池袋貝塚（縄文後晩期との複合遺跡）」と記載。典拠は『豊島区史 通史編一』45・54～57頁相当  
-  https://adeac.jp/toshima-history/timeline/tm000002_1
-EOF
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm .github/workflows/readme-research-update-20260821.yml
+          rm -f .readme-research-trigger-20260821b
           git add -A
           git commit -m "docs: add greenway photo and archaeology sources"
-          git push origin HEAD:main
+          git push origin HEAD:${{ github.head_ref }}
