@@ -21,42 +21,16 @@ jobs:
           fetch-depth: 0
       - name: Append research note
         shell: bash
+        env:
+          S85_B64: CgotLS0KCiMgMzcuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjHjg7vnrKwyM+Wbnu+8iQoKIyMgMzcuMSDlvKblt7vlt53jga7nn7PmqYvjgpIxNzMz5bm044G+44Gn6YGh44KM44KL77ya55+z5qmL6KiY5b+15L6b6aSK5aGUCgrosYrls7bljLrmlZnogrLlp5Tlk6HkvJrjga4yMDA177yI5bmz5oiQMTfvvInlubQxMOaciDI45pel5LuY6LOH5paZ44Gv44CB6ZuR5Y+444GM6LC344Gu5paH5YyW6LKh6KaL5a2m5Lya44Gn5omx44GGICoq44CM55+z5qmL6KiY5b+15L6b6aSK5aGU44CNKiog44Gr44Gk44GE44Gm44CBKioxNzMz77yI5Lqr5L+dMTjvvInlubTjgavmnKjmnZHmsI/jgYzlvKblt7vlt53jgbjnn7PmqYvjgpLmnrbjgZHjgZ/oqJjlv7XjgajjgZfjgablu7rnq4vjgZXjgozjgIHkuqHjgY3kuKHopqrjga7kvpvppIrloZTjgoLlhbzjga3jgZ8qKiDjgajoqqzmmI7jgZfjgabjgYTjgovjgILjgZXjgonjgavjgIHjgZPjga7loLTmiYDjgafjga/jgYvjgaTjgabmnZHkurrjga7okaznpLzjg7vph47ovrrpgIHjgorjgYzooYzjgo/jgozjgZ/jgajjgYTjgYbjgILjgJTnorroqo3vvI/osYrls7bljLrmlZnogrLlp5Tlk6HkvJros4fmlpnjgJVbUzg1XQoK44GT44KM44Gv5pei5a2YUkVBRE1F44Gn56K66KqN44GX44Gm44GE44GfMTg1M++8iOWYieawuDbvvInlubTjga7pm5Hlj7jjg7bosLfmnZHmlrnos4fmlpnjgavlh7rjgovopIfmlbDjga7mqYtbQjA0XeOCiOOCiiAqKjEyMOW5tOaXqeOBhOOAgeW5tOS7o+OCkuS8tOOBhuW8puW3u+W3neOBruapi+aigeizh+aWmSoqIOOBq+OBquOCi+OAguWwkeOBquOBj+OBqOOCgjE45LiW57SA5YmN5Y2K44Gu6ZuR5Y+444O26LC35YG05bym5be75bed44Gr44Gv44CB5pyo5p2R5rCP44GM6LK755So44O75Yq05Yqb44KS6LKg5ouF44GX44Gf55+z5qmL44GM5a2Y5Zyo44GX44Gf44Go44GZ44KL5Zyw5Z+f5paH5YyW6LKh6LOH5paZ44GM5q6L44Gj44Gm44GE44KL44CC44CU6Kaz5a+f44CVW1M4NV0KCuS4gOaWueOAgeaXouWtmFtCMDRd44GuMTg1M+W5tOizh+aWmeOBq+OBguOCiyAqKuOAjOacqOadkeapi+OAjSoqIOOBqOOAgeOBk+OBrjE3MzPlubTjga7nn7PmqYvjgYzlkIzkuIDlnLDngrnjg7vlkIzkuIDns7vorZzjga7mqYvjgaDjgaPjgZ/jgYvjga/jgIHku4rlm57norroqo3jgZfjgZ/osYrls7bljLros4fmlpnjgaDjgZHjgafjga/nm7TmjqXoqLzmmI7jgafjgY3jgarjgYTjgILmsJHplpPjga7ooZfmranjgY3os4fmlpnjgavjga/nn7PloZTlgbTpnaLjga7jgIznlbbmiYDnn7PmqYvmlr3kuLsg5pyo5p2R5rCP44CN44Go44GE44GG6YqY44KE44CBMTc0Mu+8iOWvm+S/nTLvvInlubTjgavmnKjmnZHmn5DjgYznn7PmqYvjgpLmjpvjgZHmm7/jgYjjgIHjgZ3jga7lvozjgIzmnKjmnZHmqYvjgI3jgajlkbzjgbDjgozjgZ/jgajjgZnjgovlj6Tmlofmm7jlvJXnlKjjgoLopovjgonjgozjgovjgYzjgIHljp/lj7LmlpnjgpLmnKrnorroqo3jgarjga7jgadSRUFETUXjgafjga/norrlrprmg4XloLHjgavmjqHnlKjjgZfjgarjgYTjgILjgJTmnKrop6PmsbrjgJVbUzg1XQoK44G+44Gf44CB44GT44Gu5L6b6aSK5aGU44GM5qmL44Gu5pen5L2N572u44Gr54++5a2Y44GZ44KL44Gu44GL44CB5b6M5LiW44Gr56e76Kit44GV44KM44Gf44Gu44GL44KC5YWs55qE6LOH5paZ44Gg44GR44Gn44Gv56K65a6a44Gn44GN44Gq44GE44CC44GX44Gf44GM44Gj44Gm44CB5L6b6aSK5aGU44Gu54++5Zyo5Zyw44KS44Gd44Gu44G+44G+MTczM+W5tOOBruays+mBk+ODu+api+S9jee9ruOBqOOBl+OBpuaVsG3ljZjkvY3jgaflm7rlrprjgZnjgovjgZPjgajjga/pgb/jgZHjgovjgILjgJTms6jmhI/jgJUKCuOBk+OBruizh+aWmeOBq+OCiOOCiuOAgeW8puW3u+W3neOBruapi+aigeWPsuOBr+WwkeOBquOBj+OBqOOCgiAqKjE3MzPlubQg4oaSIDE4NTPlubTjga7mqYvlkI3liJfmjJkg4oaSIDE5MzHvvZ4zMuW5tOOBruS4i+awtOmBk+WMluODu+aal+a4oOWMlioqIOOBqOOBhOOBhuS4ieOBpOOBruaZgueCueOBp+i/veOBiOOCi+OCiOOBhuOBq+OBquOBo+OBn+OAguapi+OBr+WNmOOBquOCi+S6pOmAmuaWveioreOBp+OBr+OBquOBj+OAgeS+m+mkiuWhlOOChOiRrOekvOODu+mHjui+uumAgeOCiuOBruWgtOaJgOOBqOOCgue1kOOBs+OBpOOBhOOBpuOBiuOCiuOAgeW8puW3u+W3neOBjOadkeiQveepuumWk+OBruWig+eVjOODu+eUn+a0u+WLlee3muOBqOOBl+OBpuapn+iDveOBl+OBn+OBk+OBqOOCkuiAg+OBiOOCi+aJi+aOm+OBi+OCiuOBq+OCguOBquOCi+OAguOAlOims+Wvn+OAlVtTODVdW0IwNF0KCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIOefs+api+iomOW/teS+m+mkiuWhlOOBruePvueJqeODu+mrmOeyvue0sOWGmeecn+OCkueiuuiqjeOBl+OAgemKmOaWh+OAgeW7uueri+W5tOOAgeW7uueri+iAheOCkuWGjeeiuuiqjeOBmeOCi+OAggotIFsgXSDjgI7lmInmsLjlha3lubQg6ZuR5Y+444O26LC35p2R44G744GL5rK/6Z2p6LW356uL5pu45LiK44CPW0IwNF3jga7jgIzmnKjmnZHmqYvjgI3jgagxNzMz5bm044Gu55+z5qmL44GM5ZCM5LiA5Zyw54K544O75ZCM5LiA57O76K2c44GL44CB6KiY6L+w44Go57W15Zuz44Gn54Wn5ZCI44GZ44KL44CCCi0gWyBdIDE3NDLlubTjga7jgIzmjpvmm7/jgI3jgajjgZXjgozjgovlj6Tmlofmm7jjga7ljp/lhbjjgpLnibnlrprjgZfjgIExNzMz5bm05bu656uL44Gu5L6b6aSK5aGU44Go44Gu5bm05Luj5beu44KS5pW055CG44GZ44KL44CCCi0gWyBdIDE3NzLlubTpm5Hlj7josLfmnZHntbXlm7NbUzMxXVtTMzJd44Gn55+z5qmL44O76YGT6Lev44O75bym5be75bed44Gu5Lqk54K544KS56K66KqN44GX44CBMTjkuJbntIDjga7mqYvkvY3nva7jgpLnj77lnKjlnLDjgbjjgYrjgYrjgb7jgYvjgavlvqnlhYPjgZnjgovjgIIKCiMjIOi/veWKoOWHuuWFuAoKLSAqKltTODVdKiog6LGK5bO25Yy65pWZ6IKy5aeU5ZOh5Lya5LqL5YuZ5bGA5pWZ6IKy57eP5YuZ6Kqy5paH5YyW6LKh5L+C44CM5Zyw5Z+f44Gu5paH5YyW6LKh44KS55+l44KN44GG44CA6ZuR5Y+444GM6LC35paH5YyW6LKh6KaL5a2m5Lya44CN6Zai6YCj44OX44Os44K56LOH5paZLCAyMDA15bm0MTDmnIgyOOaXpeKAleefs+api+iomOW/teS+m+mkiuWhlOOBq+OBpOOBhOOBpuOAgTE3MzPvvIjkuqvkv50xOO+8ieW5tOOBq+acqOadkeawj+OBjOW8puW3u+W3neOBuOefs+api+OCkuaetuOBkeOBn+iomOW/teOBq+W7uueri+OBl+OAgeS6oeOBjeS4oeimquOBruS+m+mkiuWhlOOCkuWFvOOBreOAgeOBi+OBpOOBpuadkeS6uuOBruiRrOekvOODu+mHjui+uumAgeOCiuOBjOihjOOCj+OCjOOBn+OBqOiqrOaYjiAgCiAgaHR0cHM6Ly9hZGVhYy5qcC92aWV3aXRlbS90b3NoaW1hLWhpc3Rvcnkvdmlld2VyL3ZpZXdlci9wcmVzc0gxNzEwMjgvZGF0YS9wcmVzc0gxNzEwMjgucGRmCg==
         run: |
           python - <<'PY'
           from pathlib import Path
+          import base64, os
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
           if '[S85]' not in text:
-              addition = r'''
-
----
-
-# 37. 追加調査（2026-08-21・第23回）
-
-## 37.1 弦巻川の石橋を1733年まで遡れる：石橋記念供養塔
-
-豊島区教育委員会の2005（平成17）年10月28日付資料は、雑司が谷の文化財見学会で扱う **「石橋記念供養塔」** について、**1733（享保18）年に木村氏が弦巻川へ石橋を架けた記念として建立され、亡き両親の供養塔も兼ねた** と説明している。さらに、この場所ではかつて村人の葬礼・野辺送りが行われたという。〔確認／豊島区教育委員会資料〕[S85]
-
-これは既存READMEで確認していた1853（嘉永6）年の雑司ヶ谷村方資料に出る複数の橋[B04]より **120年早い、年代を伴う弦巻川の橋梁資料** になる。少なくとも18世紀前半の雑司ヶ谷側弦巻川には、木村氏が費用・労力を負担した石橋が存在したとする地域文化財資料が残っている。〔観察〕[S85]
-
-一方、既存[B04]の1853年資料にある **「木村橋」** と、この1733年の石橋が同一地点・同一系譜の橋だったかは、今回確認した豊島区資料だけでは直接証明できない。民間の街歩き資料には石塔側面の「當所石橋施主 木村氏」という銘や、1742（寛保2）年に木村某が石橋を掛け替え、その後「木村橋」と呼ばれたとする古文書引用も見られるが、原史料を未確認なのでREADMEでは確定情報に採用しない。〔未解決〕[S85]
-
-また、この供養塔が橋の旧位置に現存するのか、後世に移設されたのかも公的資料だけでは確定できない。したがって、供養塔の現在地をそのまま1733年の河道・橋位置として数m単位で固定することは避ける。〔注意〕
-
-この資料により、弦巻川の橋梁史は少なくとも **1733年 → 1853年の橋名列挙 → 1931～32年の下水道化・暗渠化** という三つの時点で追えるようになった。橋は単なる交通施設ではなく、供養塔や葬礼・野辺送りの場所とも結びついており、弦巻川が村落空間の境界・生活動線として機能したことを考える手掛かりにもなる。〔観察〕[S85][B04]
-
-### ここから追えること
-
-- [ ] 石橋記念供養塔の現物・高精細写真を確認し、銘文、建立年、建立者を再確認する。
-- [ ] 『嘉永六年 雑司ヶ谷村ほか沿革起立書上』[B04]の「木村橋」と1733年の石橋が同一地点・同一系譜か、記述と絵図で照合する。
-- [ ] 1742年の「掛替」とされる古文書の原典を特定し、1733年建立の供養塔との年代差を整理する。
-- [ ] 1772年雑司谷村絵図[S31][S32]で石橋・道路・弦巻川の交点を確認し、18世紀の橋位置を現在地へおおまかに復元する。
-
-## 追加出典
-
-- **[S85]** 豊島区教育委員会事務局教育総務課文化財係「地域の文化財を知ろう　雑司が谷文化財見学会」関連プレス資料, 2005年10月28日―石橋記念供養塔について、1733（享保18）年に木村氏が弦巻川へ石橋を架けた記念に建立し、亡き両親の供養塔を兼ね、かつて村人の葬礼・野辺送りが行われたと説明  
-  https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH171028/data/pressH171028.pdf
-'''
+              addition = base64.b64decode(os.environ['S85_B64']).decode('utf-8')
               p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
           PY
       - name: Commit README and remove temporary workflow
