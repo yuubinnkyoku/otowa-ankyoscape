@@ -1,36 +1,73 @@
 name: Temporary README research update
 
 on:
-  issues:
-    types: [opened]
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/temp-readme-research-update.yml'
 
 permissions:
   contents: write
 
 jobs:
-  append-readme:
-    if: startsWith(github.event.issue.title, '[README研究更新]')
+  update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - name: Append researched section
         shell: bash
         run: |
           python - <<'PY'
-          import json, os, pathlib
-          event = json.load(open(os.environ['GITHUB_EVENT_PATH'], encoding='utf-8'))
-          body = (event['issue'].get('body') or '').strip()
-          p = pathlib.Path('README.md')
+          from pathlib import Path
+          p = Path('README.md')
           text = p.read_text(encoding='utf-8')
-          if body and body not in text:
-              p.write_text(text.rstrip() + '\n\n' + body + '\n', encoding='utf-8')
+          if '[S86]' not in text:
+              addition = r'''
+
+---
+
+# 38. 追加調査（2026-08-21・第24回）
+
+## 38.1 東池袋の水窪川沿い土地利用：豊島区2024年資料は水田を明記するが、掲載古地図の年代表記には注意が必要
+
+豊島区が2024（令和6）年3月に策定した **『東池袋駅周辺まちづくり方針』** は、東池袋駅周辺地域の成り立ちを説明する中で、1903（明治36）年に池袋駅・大塚駅が開業した頃、沿道の集落を除く多くの土地が森林・農地であり、**「地区の南側には水窪川が流れており、周辺には水田が広がっていました」** と明記している。〔確認／豊島区公的都市計画資料〕[S86]
+
+これは既存READMEで、1880～84年の迅速測図では東池袋周辺が主に畑として描かれること、1682年江戸図では水窪川沿いに田が見えることを記録しているのに対し、**近代の東池袋について、水窪川と水田を結び付けて土地利用史を説明する豊島区の公的資料**を追加するものである。〔観察〕[S14][S15][S18][S86]
+
+ただし、同資料に掲載された古地図の年代には注意が必要である。豊島区資料は図を **「明治後期頃の『東京府下巣鴨町西巣鴨町全図』」** とし、出典を公益財団法人特別区協議会資料としている。[S86] 一方、特別区協議会の特別区自治デジタルアーカイブで、同一題名 **『東京府下巣鴨町西巣鴨町全図』** の書誌を確認すると、都築祐之編・文化地図普及會、縮尺1:6,000、**製作年1924（大正13）年12月10日** と登録されている。〔確認／公的アーカイブ書誌〕[S87]
+
+したがって、現時点では **豊島区資料の「明治後期頃」という図キャプションと、特別区協議会が同一題名資料に付した1924年という製作年が一致しない**。〔確認／公的資料間の年代表記差〕[S86][S87] この差が、豊島区資料の単純な年代整理によるものなのか、1924年版が明治後期の地理情報を基礎にしているのか、同題・類似題の別版を掲載しているのかは、今回確認した資料だけでは決められない。**掲載図を「明治後期の一次地図」としてそのまま年代根拠には使わない。**〔未解決／注意〕
+
+関連して、板橋区公文書館の地図一覧には別資料として **『東京府北豊島郡巣鴨町西巣鴨町全図（番地界入）』** が登録され、縮尺1:5,000、地図年代を **「明治44年頃」**、発行日を **1922（大正11）年8月1日**、東京逓信管理局編・川流堂小林又七発行としている。〔史料所在確認〕[S87] 題名・編者・縮尺が1924年の特別区協議会資料とは異なるため、両者を同一図とはみなさないが、豊島区資料の「明治後期頃」という説明を検証する際の比較対象になる。
+
+今回確実に採用できるのは、**豊島区が東池袋の近代土地利用を「水窪川の周辺に水田が広がる景観」と整理していること**である。地図そのものから水田分布を何年時点まで固定できるかは、掲載画像の版・原資料を同定してから別に判断する。
+
+### ここから追えること
+
+- [ ] 『東池袋駅周辺まちづくり方針』掲載の古地図画像を、特別区協議会所蔵1924年版『東京府下巣鴨町西巣鴨町全図』のIIIF画像と照合し、同一資料か確認する。
+- [ ] 板橋区公文書館所蔵『東京府北豊島郡巣鴨町西巣鴨町全図（番地界入）』（地図年代：明治44年頃、1922年発行）の画像を確認し、2024年豊島区資料の掲載図との関係を調べる。
+- [ ] 1909年1万分1地形図、1910年代～1920年代の町村全図を比較し、水窪川沿いの水田・畑・森林・集落の変化を年代別に分離する。
+- [ ] 水窪川の旧河道と水田分布を現在の街区・東池袋雨水調整池[S84]の集水域へ重ね、旧谷底の土地利用と現代の内水氾濫対策の関係を検証する。
+
+## 追加出典
+
+- **[S86]** 豊島区『東池袋駅周辺まちづくり方針』2024年3月策定、p.4相当―1903年の池袋駅・大塚駅開業頃の地域について森林・農地が多く、「地区の南側には水窪川が流れており、周辺には水田が広がっていました」と説明。「明治後期頃の『東京府下巣鴨町西巣鴨町全図』」を掲載し、出典を公益財団法人特別区協議会資料とする。  
+  https://www.city.toshima.lg.jp/405/documents/hpkoukaizoudo.pdf
+- **[S87]** 特別区協議会／特別区自治デジタルアーカイブ『東京府下巣鴨町西巣鴨町全図』目録―都築祐之編、文化地図普及會、1924年12月10日、縮尺1:6,000。あわせて板橋区公文書館「地図一覧」には別資料『東京府北豊島郡巣鴨町西巣鴨町全図（番地界入）』を地図年代「明治44年頃」、1922年8月1日発行、縮尺1:5,000として収録。  
+  https://adeac.jp/tokyo-23city/catalog/ct00000157  
+  https://www.city.itabashi.tokyo.jp/_res/projects/default_project/_page_/001/010/111/tizur8.pdf
+'''
+              p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
           PY
-      - name: Commit and push
+      - name: Commit README and remove temporary workflow
         shell: bash
         run: |
-          if git diff --quiet -- README.md; then exit 0; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/temp-readme-research-update.yml
           git add README.md
-          git commit -m "docs: add water Kubogawa map dating note"
-          git push
+          git commit -m 'docs: add Mizukubo River land-use map dating note'
+          git push origin HEAD:main
