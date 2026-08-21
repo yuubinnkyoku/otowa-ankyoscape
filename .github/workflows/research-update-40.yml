@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/research-update-40.yml'
+  pull_request:
+    types: [opened]
 
 permissions:
   contents: write
