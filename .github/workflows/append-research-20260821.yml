@@ -15,6 +15,7 @@ jobs:
       - name: Append verified research and remove workflow
         shell: bash
         run: |
+          # Apply only the verified S100/S101 additions.
           cat >> README.md <<'EOF'
 
 ---
