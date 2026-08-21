@@ -1,20 +1,20 @@
 name: Apply README research update
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  issues:
+    types: [opened, edited]
 
 permissions:
   contents: write
 
 jobs:
   update:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-readme-research-update-20260821'
+    if: github.event.issue.title == 'run-readme-research-update-20260821'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: main
           fetch-depth: 0
       - name: Append verified research notes
         shell: bash
@@ -65,7 +65,6 @@ EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm .github/workflows/readme-research-update-20260821.yml
-          rm -f .readme-research-trigger-20260821
           git add -A
           git commit -m "docs: add greenway photo and archaeology sources"
-          git push origin HEAD:${{ github.head_ref }}
+          git push origin HEAD:main
