@@ -1,12 +1,12 @@
 name: research-update-s100
 on:
-  push:
-    paths:
-      - .github/workflows/research-update-s100.yml
+  issues:
+    types: [opened]
 permissions:
   contents: write
 jobs:
   update:
+    if: github.event.issue.title == 'run-research-update-s100'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v7
