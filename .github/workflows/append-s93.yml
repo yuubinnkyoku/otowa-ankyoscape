@@ -1,8 +1,7 @@
 name: append-s93
 on:
-  push:
-    paths:
-      - '.github/workflows/append-s93.yml'
+  pull_request:
+    types: [opened]
 permissions:
   contents: write
 jobs:
@@ -10,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Append research note
         shell: bash
         run: |
