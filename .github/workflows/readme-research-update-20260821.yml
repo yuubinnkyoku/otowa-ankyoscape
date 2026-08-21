@@ -1,19 +1,21 @@
 name: Apply README research update
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/readme-research-update-20260821.yml'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
 
 jobs:
   update:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.title == 'run-readme-research-update-20260821'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
       - name: Append verified research notes
         shell: bash
         run: |
@@ -60,9 +62,10 @@ jobs:
   https://adeac.jp/toshima-history/timeline/tm000002_1
 EOF
 
-          rm .github/workflows/readme-research-update-20260821.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md .github/workflows/readme-research-update-20260821.yml
-          git commit -m "docs: add valley greenway photo and archaeology sources"
-          git push
+          git rm .github/workflows/readme-research-update-20260821.yml
+          rm -f .readme-research-trigger-20260821
+          git add -A
+          git commit -m "docs: add greenway photo and archaeology sources"
+          git push origin HEAD:${{ github.head_ref }}
