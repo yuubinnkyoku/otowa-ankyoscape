@@ -76,3 +76,5 @@ EOF
           git rm .github/workflows/update-readme-river-research-31.yml
           git commit -m 'docs: add prewar Yabata culvert campaign and Ikebukuro terrain'
           git push
+
+      # Updating this workflow file is only a trigger; the job removes it after applying the README change.
