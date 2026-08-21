@@ -1,15 +1,15 @@
 name: Temporary README research update
 
 on:
-  push:
-    paths:
-      - '.github/workflows/tmp-research-update-20260821.yml'
+  issues:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   update-readme:
+    if: github.event.issue.title == 'tmp-research-update-20260821'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -78,5 +78,3 @@ jobs:
           git add README.md
           git commit -m "docs: add Maruike water-rights and Senkawa map dating"
           git push
-
-# trigger
