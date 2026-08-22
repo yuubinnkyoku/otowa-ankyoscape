@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/append-s104-s105.yml'
+  issues:
+    types: [opened]
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
