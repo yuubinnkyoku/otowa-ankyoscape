@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - '.github/workflows/append-s104-s105.yml'
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -20,12 +23,11 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
           if '[S104]' in text or '[S105]' in text:
-              raise SystemExit('S104/S105 already present; refusing duplicate append')
-
+              print('S104/S105 already present')
+              raise SystemExit(0)
           addition = r'''
 
 ---
@@ -77,12 +79,14 @@ jobs:
   https://web.archive.org/web/20060512123655id_/http://www.city.toshima.tokyo.jp/news/20050805_menu.html  
   https://web.archive.org/web/20060520134258id_/http://www.city.toshima.tokyo.jp/news/20050805_6.pdf
 '''
-
           p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
           PY
-      - name: Commit
+      - name: Commit if changed
         shell: bash
         run: |
+          if git diff --quiet README.md; then
+            exit 0
+          fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
