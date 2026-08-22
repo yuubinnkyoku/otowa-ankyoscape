@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - '.github/workflows/append-s104-s105.yml'
+  pull_request:
+    types: [opened]
   issues:
     types: [opened]
   schedule:
