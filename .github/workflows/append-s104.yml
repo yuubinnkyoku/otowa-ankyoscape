@@ -60,3 +60,5 @@ EOF
           git rm .github/workflows/append-s104.yml
           git commit -m "docs: add Pleistocene terrain evidence for Yabata River"
           git push
+
+# trigger-v2
