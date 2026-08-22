@@ -1,0 +1,46 @@
+name: Append Otowa Ankyoscape research fixed
+
+on:
+  pull_request:
+    types: [synchronize]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  append-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Append researched findings
+        shell: bash
+        run: |
+          if grep -Fq '# 49. 追加調査（2026-08-22・第35回）' README.md; then
+            echo 'Section already present; nothing to append.'
+            exit 0
+          fi
+          python - <<'PY'
+          from pathlib import Path
+          src = Path('.github/workflows/append-research-20260822.yml').read_text(encoding='utf-8')
+          start = "          cat >> README.md <<'OTOWA_EOF'\n"
+          end = "\nOTOWA_EOF\n"
+          if start not in src or end not in src:
+              raise SystemExit('append payload markers not found')
+          payload = src.split(start, 1)[1].split(end, 1)[0]
+          p = Path('README.md')
+          p.write_text(p.read_text(encoding='utf-8').rstrip() + '\n' + payload + '\n', encoding='utf-8')
+          PY
+      - name: Commit if changed
+        shell: bash
+        run: |
+          if git diff --quiet README.md; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'docs: add Tsurumaki River shrine and memory findings'
+          git push origin HEAD:main
