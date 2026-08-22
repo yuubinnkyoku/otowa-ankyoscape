@@ -18,47 +18,14 @@ jobs:
           fetch-depth: 0
       - name: Append research to README
         shell: bash
+        env:
+          PAYLOAD_B64: LS0tCiMgNTAuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjLjg7vnrKwzNuWbnu+8iQoKIyMgNTAuMSAxOTgy5bm044Gu5rKz5bed5pS55L+u5b6M44CB6LGK5bO25Yy644Gu5rC05a6z44Gv44CM5rKz5bed5rC+5r+r44CN44GL44KJ44CM5LiL5rC06YGT5bm557ea5rK/44GE5L2O5Zyw44Gu5YaF5rC05rue55WZ44CN44G45oCn5qC844GM5aSJ44KP44Gj44GfCgrosYrls7bljLrjga7lhaznmoTos4fmlpnjgI7osYrls7bljLrjga7nj77ms4HjgajoqrLpoYzjgI/vvIjlubPmiJAzMOW5tOeJiO+8ieOBruawtOWus+eZuueUn+eKtuazgeOBr+OAgeWMuuWGheOBruawtOWus+OBq+OBpOOBhOOBpuOAgeW+k+adpeOBryAqKuelnueUsOW3nea1geWfn+OBrumrmOeUsOWcsOWMuuOCkuS4reW/g+OBqOOBmeOCi+ays+W3neawvua/qyoqIOOBjOS4u+OBoOOBo+OBn+OBjOOAgSoqMTk4Mu+8iOaYreWSjDU377yJ5bm0M+aciOOBq+ixiuWztuWMuumDqOWIhuOBruays+W3neaUueS/ruW3peS6i++8iDUwIG1t5a++562W77yJ44GM44G744G85a6M5LqGKirjgZfjgZ/jgZ/jgoHjgIHjgZ3jga7lvozjga/msrPlt53msL7mv6vjgavjgojjgovooqvlrrPjgYznmbrnlJ/jgZfjgabjgYTjgarjgYTjgajmlbTnkIbjgZfjgabjgYTjgovjgILjgJTnorroqo3vvI/osYrls7bljLrlhaznmoTos4fmlpnjgJVbUzEwOF0KCuS4gOaWueOBp+WQjOizh+aWmeOBr+OAgemDveW4guWMluOBrumAsuWxleOBq+S8tOOBhOOAgSoqMTk4M++8iOaYreWSjDU477yJ5bm0NuaciDEw5pel44Gu6ZuG5Lit6LGq6Zuo5Lul6ZmN44Gv44CM5LiL5rC06YGT5bm557ea5rK/44GE44Gu5L2O5Zyw44CN44KS5Lit5b+D44Gr44CB5YaF5rC05rue55WZ44Gr44KI44KL6KKr5a6z44GM55m655Sf44GZ44KL44KI44GG44Gr44Gq44Gj44GfKirjgajmmI7oqJjjgZfjgabjgYTjgovjgIJbUzEwOF0g44GT44KM44Gv44CB5pen5rKz5bed44KS5pqX5rig44O75LiL5rC06YGT5YyW44GZ44KM44Gw5rC05a6z5ZWP6aGM44Gd44Gu44KC44Gu44GM5raI44GI44KL44Gu44Gn44Gv44Gq44GP44CB5Zyw5b2i55qE44Gr5rC044GM6ZuG44G+44KK44KE44GZ44GE5L2O5Zyw44Go5Zyw5LiL5o6S5rC06IO95Yqb44Gu6Zai5L+C44G45ZWP6aGM44Gu5b2i44GM56e744Gj44Gf44GT44Go44KS56S644GZ6KGM5pS/5YG044Gu5pW055CG44Gn44GC44KL44CC44CU6Kaz5a+f44CVCgrlkIzos4fmlpnjga7kuIDopqfjgafjga/jgIHou6Lmj5vmnJ/liY3lvozjga7kuLvjgarmsLTlrrPjgajjgZfjgabmrKHjgYzoqJjpjLLjgZXjgozjgabjgYTjgovjgIJbUzEwOF0KCi0gKioxOTgx77yI5pit5ZKMNTbvvInlubQ35pyIMjLml6Xpm4bkuK3osarpm6gqKu+8mue3j+mbqOmHjzc4IG1t44CB5pmC6ZaT5pyA5aSnNTUgbW3jgIHluorkuIoyMjPku7bjg7vluorkuIs2Mjfku7bjgIIKLSAqKjE5ODHlubQxMOaciDIy5pel5Y+w6aKoMjTlj7cqKu+8mue3j+mbqOmHjzE5MiBtbeOAgeaZgumWk+acgOWkpzM3IG1t44CB5bqK5LiKNDgx5Lu244O75bqK5LiLMTkx5Lu244CCCi0gKioxOTgz5bm0NuaciDEw5pel6ZuG5Lit6LGq6ZuoKirvvJo0MOWIhumWk+OBqzQ3IG1t44CB5bqK5LiKMTTku7bjg7vluorkuIs0Nzbku7bjgIIKLSAqKjE5ODfvvIjmmK3lkow2Mu+8ieW5tDfmnIgzMeaXpembhuS4reixqumbqCoq77yaMzDliIbplpPjgas3NSBtbeOAgeaZgumWk+acgOWkpzYwIG1t44CB5bqK5LiKMTA55Lu244O75bqK5LiLMSwxMjPku7bjgIIKCuOBk+OBruihqOOBr+ixiuWztuWMuuWFqOWfn+OBruiiq+Wus+S7tuaVsOOBp+OBguOCiuOAgeWAi+OAheOBruawtOWus+OCkuawtOeqquW3neODu+W8puW3u+W3neODu+iwt+err+W3neOBruOBqeOCjOOBi+S4gOays+W3neOBuOebtOaOpeW4sOWxnuOBleOBm+OCi+OBk+OBqOOBr+OBp+OBjeOBquOBhOOAgueJueOBq+OAjOS4i+awtOmBk+W5uee3muayv+OBhOOBruS9juWcsOOAjeOBq+OBpOOBhOOBpuOAgeizh+aWmeacrOaWh+OBr+W5uee3muWQjeOChOiiq+Wus+WcsOeCueOCkuWIl+aMmeOBl+OBpuOBhOOBquOBhOOBn+OCgeOAgSoq5pen5rC056qq5bed44O75bym5be75bed44O76LC356uv5bed44Gu5ZCE5L2O5Zyw44Gn5L2V5Lu255m655Sf44GX44Gf44GL44Gv44CU5pyq6Kej5rG644CVKirjgafjgYLjgovjgIIKCuOBn+OBoOOBl+OAgeaXouWtmFJFQURNReOBp+eiuuiqjeOBl+OBpuOBhOOCi+adseaxoOiii+mbqOawtOiqv+aVtOaxoOOBjOOAjOaXp+awtOeqquW3neWRqOi+uuOBq+OBiuOBkeOCi+aBkuW4uOeahOOBquWGheawtOawvua/q+OBuOOBruWvvuetluOAjeOBqOOBl+OBpuaVtOWCmeOBleOCjOOBn+OBk+OBqFtTODRd44CB6LC356uv5bed5bm557ea44Gn5pen5qmL6YOo44Gu54ut56qE44KE57ep5Yu+6YWN44GM5rW45rC06KaB5Zug44Go44Gq44Gj44Gf44GT44GoW1M5OF3jgajlkIjjgo/jgZvjgovjgajjgIEqKuaal+a4oOWMluW+jOOCguaXp+iwt+WcsOW9ouODu+aXp+ays+mBk+eUseadpeOBruS9juWcsOOBqOS4i+awtOmBk+aWveioreOBruWItue0hOOBjOOAgeWGheawtOawvua/q+OBruWgtOaJgOOCkuimj+WumuOBl+e2muOBkeOBnyoq44Go44GE44GG55CG6Kej44KS5YWs55qE6LOH5paZ5ZCM5aOr44Gn6KOc5by344Gn44GN44KL44CC44CU6Kaz5a+f44CVW1M4NF1bUzk4XVtTMTA4XQoK44G+44Gf44CBMTk4MuW5tDPmnIjjga7jgIw1MCBtbeWvvuetluOAjeOBr+elnueUsOW3nea1geWfn+OBruays+W3neaUueS/ruOBq+OBpOOBhOOBpuOBruiomOi/sOOBp+OBguOCiuOAgSoq5rC056qq5bed44O75bym5be75bed44O76LC356uv5bed44Gu5pqX5rig5YyW5a6M5oiQ5pmC5pyf44KS56S644GZ44KC44Gu44Gn44Gv44Gq44GEKirjgILmsrPlt53mlLnkv67jgajkuIvmsLTpgZPjg7vmmpfmuKDlt6Xkuovjga/liKXjga7kuovmpa3lj7LjgajjgZfjgabmibHjgYbjgIIKCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIDE5ODHlubQ35pyI44O7MTDmnIjjgIExOTgz5bm0NuaciOOAgTE5ODflubQ35pyI44Gu5rW45rC05a6f57i+5Zuz44O75raI6Ziy77yP5rC06Ziy6KiY6Yyy44KS56K66KqN44GX44CB5pen5rC056qq5bed44O75bym5be75bed44O76LC356uv5bed5L2O5Zyw44Gu6KKr5a6z5Zyw54K544KS55Wq5Zyw5Y2Y5L2N44Gn5b6p5YWD44GZ44KL44CCCi0gWyBdIDE5ODLlubQz5pyI44Gr44CM44G744G85a6M5LqG44CN44Go44GV44KM44GfNTAgbW3lr77nrZbjga7lhbfkvZPnmoTjgarnpZ7nlLDlt53mlLnkv67ljLrplpPjg7vmlr3oqK3jgpLnorroqo3jgZfjgIHpq5jnlLDlnLDljLrjga7lpJbmsLTmsL7mv6vmuJvlsJHjgajjga7lr77lv5zjgpLov73jgYbjgIIKLSBbIF0gMTk4M+W5tOS7pemZjeOBruOAjOS4i+awtOmBk+W5uee3muayv+OBhOOBruS9juWcsOOAjeOBqOOAgembkeWPuOODtuiwt+W5uee3muODu+WdguS4i+W5uee3muODu+iwt+err+W3neW5uee3muOAgeaXp+ays+mBk+OAgeaomemrmOODu+eqquWcsOOCkkdJU+S4iuOBp+avlOi8g+OBmeOCi+OAggotIFsgXSAxOTg35bm0N+aciDMx5pel44Gu5aSn6KaP5qih5YaF5rC06KKr5a6z44GM44CB5b6M44Gu5p2x5rGg6KKL6Zuo5rC06Kq/5pW05rGgW1M4NF3jgoTosLfnq6/lt53kuIDlj7flubnnt5pbUzk4XeOBquOBqeOBruioiOeUu+WMluOBq+OBqeOBrueoi+W6puebtOaOpeOBpOOBquOBjOOBo+OBn+OBi+OAgeW9k+aZguOBruWnlOWToeS8muODu+S4i+awtOmBk+ioiOeUu+izh+aWmeOBp+eiuuiqjeOBmeOCi+OAggoKIyMg6L+95Yqg5Ye65YW4CgotICoqW1MxMDhdKiog6LGK5bO25Yy644CO6LGK5bO25Yy644Gu54++5rOB44Go6Kqy6aGM44CP77yI5bmz5oiQMzDlubTniYjvvInjgIw2LTQg54G95a6z44Gr5by344GE44G+44Gh44Gl44GP44KK77yPMy4g5rC05a6z55m655Sf54q25rOB44CN4oCV5b6T5p2l44Gu5rC05a6z44KS56We55Sw5bed5rWB5Z+f44O76auY55Sw5Zyw5Yy65Lit5b+D44Gu5rKz5bed5rC+5r+r44Go5pW055CG44GX44CBMTk4MuW5tDPmnIjjavljLrlhoXpg6jliIbjga7msrPlt53mlLnkv67vvIg1MCBtbeWvvuetlu+8ieOBjOOBu+OBvOWujOS6huOBl+OBn+W+jOOAgTE5ODPlubQ25pyIMTDml6Xku6XpmY3jga/kuIvmsLTpgZPlubnnt5rmsr/jgYTjga7kvY7lnLDjgpLkuK3lv4PjgajjgZnjgovlhoXmsLTmu57nlZnooqvlrrPjgbjnp7vjgaPjgZ/jgajoqqzmmI7jgIIxOTgx772eMTk5OeW5tOOBruS4u+OBqua1uOawtOS7tuaVsOODu+mZjembqOmHj+OCguaOsui8ieOAgiAgCiAgaHR0cHM6Ly9hZGVhYy5qcC92aWV3aXRlbS90b3NoaW1hLWhpc3Rvcnkvdmlld2VyL3ZpZXdlci8wMF8yMV9IMzAwOTAwL2RhdGEvMDBfMjFfSDMwMDkwMC5wZGYK
         run: |
           if grep -q '^# 50\. 追加調査（2026-08-22・第36回）' README.md; then
             echo 'Section already present; skipping append.'
           else
-            cat >> README.md <<'EOF'
-
-
----
-# 50. 追加調査（2026-08-22・第36回）
-
-## 50.1 1982年の河川改修後、豊島区の水害は「河川氾濫」から「下水道幹線沿い低地の内水滞留」へ性格が変わった
-
-豊島区の公的資料『豊島区の現況と課題』（平成30年版）の水害発生状況は、区内の水害について、従来は **神田川流域の高田地区を中心とする河川氾濫** が主だったが、**1982（昭和57）年3月に豊島区部分の河川改修工事（50 mm対策）がほぼ完了**したため、その後は河川氾濫による被害が発生していないと整理している。〔確認／豊島区公的資料〕[S108]
-
-一方で同資料は、都市化の進展に伴い、**1983（昭和58）年6月10日の集中豪雨以降は「下水道幹線沿いの低地」を中心に、内水滞留による被害が発生するようになった**と明記している。[S108] これは、旧河川を暗渠・下水道化すれば水害問題そのものが消えるのではなく、地形的に水が集まりやすい低地と地下排水能力の関係へ問題の形が移ったことを示す行政側の整理である。〔観察〕
-
-同資料の一覧では、転換期前後の主な水害として次が記録されている。[S108]
-
-- **1981（昭和56）年7月22日集中豪雨**：総雨量78 mm、時間最大55 mm、床上223件・床下627件。
-- **1981年10月22日台風24号**：総雨量192 mm、時間最大37 mm、床上481件・床下191件。
-- **1983年6月10日集中豪雨**：40分間に47 mm、床上14件・床下476件。
-- **1987（昭和62）年7月31日集中豪雨**：30分間に75 mm、時間最大60 mm、床上109件・床下1,123件。
-
-この表は豊島区全域の被害件数であり、個々の水害を水窪川・弦巻川・谷端川のどれか一河川へ直接帰属させることはできない。特に「下水道幹線沿いの低地」について、資料本文は幹線名や被害地点を列挙していないため、**旧水窪川・弦巻川・谷端川の各低地で何件発生したかは〔未解決〕**である。
-
-ただし、既存READMEで確認している東池袋雨水調整池が「旧水窪川周辺における恒常的な内水氾濫への対策」として整備されたこと[S84]、谷端川幹線で旧橋部の狭窄や緩勾配が浸水要因となったこと[S98]と合わせると、**暗渠化後も旧谷地形・旧河道由来の低地と下水道施設の制約が、内水氾濫の場所を規定し続けた**という理解を公的資料同士で補強できる。〔観察〕[S84][S98][S108]
-
-また、1982年3月の「50 mm対策」は神田川流域の河川改修についての記述であり、**水窪川・弦巻川・谷端川の暗渠化完成時期を示すものではない**。河川改修と下水道・暗渠工事は別の事業史として扱う。
-
-### ここから追えること
-
-- [ ] 1981年7月・10月、1983年6月、1987年7月の浸水実績図・消防／水防記録を確認し、旧水窪川・弦巻川・谷端川低地の被害地点を番地単位で復元する。
-- [ ] 1982年3月に「ほぼ完了」とされた50 mm対策の具体的な神田川改修区間・施設を確認し、高田地区の外水氾濫減少との対応を追う。
-- [ ] 1983年以降の「下水道幹線沿いの低地」と、雑司ヶ谷幹線・坂下幹線・谷端川幹線、旧河道、標高・窪地をGIS上で比較する。
-- [ ] 1987年7月31日の大規模内水被害が、後の東池袋雨水調整池[S84]や谷端川一号幹線[S98]などの計画化にどの程度直接つながったか、当時の委員会・下水道計画資料で確認する。
-
-## 追加出典
-
-- **[S108]** 豊島区『豊島区の現況と課題』（平成30年版）「6-4 災害に強いまちづくり／3. 水害発生状況」―従来の水害を神田川流域・高田地区中心の河川氾濫と整理し、1982年3月に区内部分の河川改修（50 mm対策）がほぼ完了した後、1983年6月10日以降は下水道幹線沿いの低地を中心とする内水滞留被害へ移ったと説明。1981～1999年の主な浸水件数・降雨量も掲載。  
-  https://adeac.jp/viewitem/toshima-history/viewer/viewer/00_21_H300900/data/00_21_H300900.pdf
-EOF
+            printf '\n\n' >> README.md
+            printf '%s' "$PAYLOAD_B64" | base64 --decode >> README.md
           fi
       - name: Remove temporary workflow and commit
         shell: bash
