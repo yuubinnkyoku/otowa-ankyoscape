@@ -2,7 +2,7 @@ name: Append research 34
 on:
   push:
     paths:
-      - '.research-trigger-34'
+      - '.github/workflows/append-research-34.yml'
 permissions:
   contents: write
 jobs:
@@ -63,3 +63,4 @@ EOF
           git add README.md .research-trigger-34
           git commit -m 'docs: add geomorphology and Kamakura Bridge research'
           git push
+# touch: trigger after workflow exists
