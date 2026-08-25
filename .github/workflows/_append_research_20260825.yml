@@ -17,42 +17,17 @@ jobs:
           fetch-depth: 0
       - name: Append verified findings and remove temporary workflow
         shell: bash
+        env:
+          ADDITION_B64: CgotLS0KCiMgNTguIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjXjg7vnrKw0NOWbnu+8iQoKIyMgNTguMSAxOTUz5bm044Gu6LC356uv5bed5pys5rWBMiw3MTMgbeOBr+Wkp+iwt+efs+epjeOBrumWi+a4oOKAleaUr+a1geawtOi3r+OBruS4gOmDqOaal+a4oOWMluOBqOWQjOaZguOBq+aui+OBo+OBpuOBhOOBnwoK5p2x5Lqs6YO95bu66Kit5bGA44GMMTk1M++8iOaYreWSjDI477yJ5bm0NOaciOOBq+WIiuihjOOBl+OBn+OAjuaZrumAmuays+W3neODu+awtOi3r+iqv+abuOOAj++8iDE5NTPlubQx5pyIMeaXpeaZgueCue+8ieOBruixiuWztuWMuuihqOOCkuWGjeeiuuiqjeOBmeOCi+OBqOOAgeaXouWtmFtTNzdd44Gn5pW055CG44GX44Gf44CM5Zyo5p2l5LiL5rC044CNMe+9njE35Y+344Go44Gv5Yil44Gr44CB44CM5rC06YGT5bGA6Zai5L+C5rC06Lev44CN44Go44GX44GmICoq6LC356uv5bedKiog44GM6KiY6Yyy44GV44KM44Gm44GE44KL44CC5Yy66ZaT44GvICoq6ZW35bSOMe+9njHjgYvjgonmsaDooos2772eMTkwMCoq44CB5qeL6YCg44GvICoq5aSn6LC355+z56mNKirjgIHnqK7liKXjga8gKirplovmuKAqKuOAgea4oOmrmCAqKjIuNzAgbSoq44CB5rig5bmFICoqNS4yMCBtKirjgIHlu7bplbcgKioyLDcxMyBtKirjgIHmlL7mtYHlhYjjga8gKirnpZ7nlLDlt50qKiDjgajjgZXjgozjgovjgILjgJTnorroqo3vvI/mnbHkuqzpg73lu7roqK3lsYDos4fmlpnjga7lvqnliLvooajjgpLnlLvlg4/norroqo3jgJVbUzc3XQoK44GT44Gu6KiY6Yyy44Gv44CB5ZCM44GYMTk1M+W5tOihqOOBp+WRqOWbsuOBruWcqOadpeS4i+awtOOBq+ODkuODpeODvOODoOeuoeODu+mJhOeti+OCs+ODs+OCr+ODquODvOODiOeuoeOBruaal+a4oOOBjOOBmeOBp+OBq+WtmOWcqOOBl+OBpuOBhOOBn+OBk+OBqFtTNzdd44Go5ZCI44KP44Gb44KL44Go6YeN6KaB44Gn44GC44KL44CC5bCR44Gq44GP44Go44KC6Kq/5pu45LiK44Gn44Gv44CBKirlpKfosLfnn7PnqY3jga7plovmuKDjgajjgZfjgabmrovjgovosLfnq6/lt53mnKzmtYHljLrplpPjgbjjgIHplovmuKDjga7mnp3msLTot6/jgajmmpfmuKDljJbmuIjjgb/jga7mjpLmsLTot6/jgYzmt7flnKjjgZfjgabmjqXntprjgZnjgovpgJTkuK3mrrXpmo4qKuOBjDE5NTPlubQx5pyI44Gr5a2Y5Zyo44GX44Gf44GT44Go44Gr44Gq44KL44CC44CU6Kaz5a+f44CVW1M3N10KCuOBl+OBn+OBjOOBo+OBpuOAgeaIpuW+jOOBruiwt+err+W3neS4iua1geWfn+OCkuOAjOmWi+a4oOOBi+OCieaal+a4oOOBuOOBguOCi+S4gOaZgueCueOBp+S4gOaWieOBq+WIh+OCiuabv+OCj+OBo+OBn+OAjeOBqOOBv+OBquOBmeOCiOOCiuOAgSoq5pys5rWB44O75pSv5rWB44O75Zyo5p2l5LiL5rC044GU44Go44Gr5qeL6YCg6Lui5o+b44Gu5pmC5pyf44GM55Ww44Gq44KL5rC06Lev57ayKirjgajjgZfjgablvqnlhYPjgZnjgovmlrnjgYzos4fmlpnjgavlkIjjgYbjgILml6LlrZhbUzI4XeOBrjE5NTblubTmlK/mtYHmmpfmuKDlt6XkuovjgoRbUzQ1XVtTMTAzXeOBruaYreWSjDMw5bm05Luj5b6M5Y2K772eMTk2NOW5tOWFqOWfn+aal+a4oOWMluOBqOOBhOOBhuW+jOW5tOaVtOeQhuOBqOOCguOAgeautemajueahOOBquaal+a4oOWMluOBqOOBhOOBhueCueOBp+OBr+aVtOWQiOOBmeOCi+OAguOAlOims+Wvn+OAlQoK44Gf44Gg44GX44CBKirmuKDluYU1LjIwIG3jg7vmuKDpq5gyLjcwIG3jgpLmrbTlj7LkuIrjga7osLfnq6/lt53lhajljLrplpPjga7kuIDmp5jjgarmsrPpgZPmlq3pnaLjgajop6Pph4jjgZfjgarjgYTjgIIqKiDjgZPjgozjga8xOTUz5bm06Kq/5pu444Gn44CM5rC06YGT5bGA6Zai5L+C5rC06Lev44O76LC356uv5bed44CN44Go5pW055CG44GV44KM44Gf5LiK6KiYMiw3MTMgbeWMuumWk+OBruiomOmMsuWApOOBp+OBguOCi+OAguOBvuOBn+W+qeWIu+irluaWh+iHqui6q+OBjOWOn+izh+aWmeOBruavgOaQjeODu+WIpOiqreS4jeiDveeuh+aJgOOChOmbu+WtkOWMluaZguOBruihqOiomOS/ruato+OCkuazqOaEj+OBl+OBpuOBhOOCi+OBn+OCgeOAgeaWremdouODu+aXp+WcsOeVquOBr+WOn+iqv+abuOOChOWIpeOBruW3peS6i+izh+aWmeOBp+OCgueFp+WQiOOBmeOCi+OAguOAlOazqOaEj+OAlVtTNzddCgojIyA1OC4yIOWQjOOBmDE5NTPlubTooajjga7jgIzljYPlt53jgI0yLDA1MCBt77ya57Sg5o6Y44Gu6ZaL5rig44Gg44GM44CB5Y2D5bed5LiK5rC044Go44Gu5ZCM5a6a44Gv5L+d55WZCgrlkIzooajjga7jgIzlvpPmnaXmma7pgJrmsrPlt53jgI3jgavjga/liKXjgasgKirjgIzljYPlt53jgI0qKiDjgYzjgYLjgorjgIEqKuakjuWQjeeUujjvvZ40Mjg144GL44KJ5Y2D5bedMu+9njI2KirjgIEqKue0oOaOmOODu+mWi+a4oCoq44CB5rig6auYICoqMi4wMCBtKirjgIHmuKDluYUgKioyLjcwIG0qKuOAgeW7tumVtyAqKjIsMDUwIG0qKiDjgajoqJjpjLLjgZXjgozjgabjgYTjgovjgILjgJTnorroqo3vvI/mnbHkuqzpg73lu7roqK3lsYDos4fmlpnjga7lvqnliLvooajjgpLnlLvlg4/norroqo3jgJVbUzc3XQoK5ZCN56ew44Go5L2N572u44GL44KJ5Y2D5bed5LiK5rC044O744Gd44Gu5YiG5rC057O744Go44Gu6Zai5L+C44GM55aR44KP44KM44KL44GM44CBKioxOTUz5bm06Kq/5pu444Gu6KGM5pS/5LiK44Gu44CM5Y2D5bed44CN44KS44CB44Gd44Gu44G+44G+5q205Y+y55qE44Gq5Y2D5bed5LiK5rC05pys5rWB44Go5ZCM5LiA6KaW44GZ44KL44GT44Go44Gv44Gn44GN44Gq44GE44CCKiog5pen5Zyw55Wq44KS54++5Zyo5Zyw44G46JC944Go44GX44CBMTg4Me+9njg05bm06aCD44Gu44CM5Y2D5bed5LiK5rC06Lev5Zuz44CNW1M3NF3jgIHljYPlt53lrrbmlofmm7hbUzE5XeOAgTE5NTPlubTooajjga7mtYHmnKvjg7vmnb/mqYvljLrlgbToqJjpjLLjgajnhaflkIjjgZfjgabjgYvjgonliKTmlq3jgZnjgovjgILjgJTmnKrop6PmsbrjgJVbUzE5XVtTNzRdW1M3N10KCiMjIyDjgZPjgZPjgYvjgonov73jgYjjgovjgZPjgagKCi0gWyBdIDE5NTPlubTjga7jgIzmsLTpgZPlsYDplqLkv4LmsLTot6/jg7vosLfnq6/lt53jgI0yLDcxMyBt44KS5pen5Zyw55Wq44GL44KJ54++5Zyo5Zyw44G46JC944Go44GX44CBMTkzNOW5tOaal+a4oOa4iOOBv+S4i+a1gemDqOODuzE5NTblubTmlK/mtYHlt6Xkuovjg7sxOTY05bm05YWo5Z+f5pqX5rig5YyW5pW055CG44Go44Gu5Yy66ZaT6Zai5L+C44KS5b6p5YWD44GZ44KL44CCCi0gWyBdIDE5NTPlubTjga7muKDluYU1LjIwIG3jg7vmuKDpq5gyLjcwIG3jgavjgaTjgYTjgabjgIHml6fmqYvpg6jjga7ni63nqoRbUzk4XeOAgeWkp+iwt+efs+epjeani+mAoFtTOTVd44CB6ZaL5rig5YaZ55yfW1M0NV3jgajnhaflkIjjgZfjgIHmlq3pnaLjgYzku6PooajlgKTjgYvljLrplpPliKXlrp/muKzlgKTjgYvnorroqo3jgZnjgovjgIIKLSBbIF0g44CM5b6T5p2l5pmu6YCa5rKz5bed44O75Y2D5bed44CNMiwwNTAgbeOCkuOAjOWNg+W3neS4iuawtOi3r+Wbs+OAjVtTNzRd44Go6YeN44Gt44CB5Y2D5bed5LiK5rC05pys5rWB44O75YiG5rC044O75Yil44Gu5pmu6YCa5rKz5bed44Gu44Gp44KM44Gr55u45b2T44GZ44KL44GL56K66KqN44GZ44KL44CCCg==
         run: |
           python3 - <<'PY'
+          import base64, os
           from pathlib import Path
-
           path = Path('README.md')
           text = path.read_text(encoding='utf-8')
           marker = '# 58. 追加調査（2026-08-25・第44回）'
           if marker not in text:
-              addition = r'''
-
----
-
-# 58. 追加調査（2026-08-25・第44回）
-
-## 58.1 1953年の谷端川本流2,713 mは大谷石積の開渠―支流水路の一部暗渠化と同時に残っていた
-
-東京都建設局が1953（昭和28）年4月に刊行した『普通河川・水路調書』（1953年1月1日時点）の豊島区表を再確認すると、既存[S77]で整理した「在来下水」1～17号とは別に、「水道局関係水路」として **谷端川** が記録されている。区間は **長崎1～1から池袋6～1900**、構造は **大谷石積**、種別は **開渠**、渠高 **2.70 m**、渠幅 **5.20 m**、延長 **2,713 m**、放流先は **神田川** とされる。〔確認／東京都建設局資料の復刻表を画像確認〕[S77]
-
-この記録は、同じ1953年表で周囲の在来下水にヒューム管・鉄筋コンクリート管の暗渠がすでに存在していたこと[S77]と合わせると重要である。少なくとも調書上では、**大谷石積の開渠として残る谷端川本流区間へ、開渠の枝水路と暗渠化済みの排水路が混在して接続する途中段階**が1953年1月に存在したことになる。〔観察〕[S77]
-
-したがって、戦後の谷端川上流域を「開渠から暗渠へある一時点で一斉に切り替わった」とみなすより、**本流・支流・在来下水ごとに構造転換の時期が異なる水路網**として復元する方が資料に合う。既存[S28]の1956年支流暗渠工事や[S45][S103]の昭和30年代後半～1964年全域暗渠化という後年整理とも、段階的な暗渠化という点では整合する。〔観察〕
-
-ただし、**渠幅5.20 m・渠高2.70 mを歴史上の谷端川全区間の一様な河道断面と解釈しない。** これは1953年調書で「水道局関係水路・谷端川」と整理された上記2,713 m区間の記録値である。また復刻論文自身が原資料の毀損・判読不能箇所や電子化時の表記修正を注意しているため、断面・旧地番は原調書や別の工事資料でも照合する。〔注意〕[S77]
-
-## 58.2 同じ1953年表の「千川」2,050 m：素掘の開渠だが、千川上水との同定は保留
-
-同表の「従来普通河川」には別に **「千川」** があり、**椎名町8～4285から千川2～26**、**素掘・開渠**、渠高 **2.00 m**、渠幅 **2.70 m**、延長 **2,050 m** と記録されている。〔確認／東京都建設局資料の復刻表を画像確認〕[S77]
-
-名称と位置から千川上水・その分水系との関係が疑われるが、**1953年調書の行政上の「千川」を、そのまま歴史的な千川上水本流と同一視することはできない。** 旧地番を現在地へ落とし、1881～84年頃の「千川上水路図」[S74]、千川家文書[S19]、1953年表の流末・板橋区側記録と照合してから判断する。〔未解決〕[S19][S74][S77]
-
-### ここから追えること
-
-- [ ] 1953年の「水道局関係水路・谷端川」2,713 mを旧地番から現在地へ落とし、1934年暗渠済み下流部・1956年支流工事・1964年全域暗渠化整理との区間関係を復元する。
-- [ ] 1953年の渠幅5.20 m・渠高2.70 mについて、旧橋部の狭窄[S98]、大谷石積構造[S95]、開渠写真[S45]と照合し、断面が代表値か区間別実測値か確認する。
-- [ ] 「従来普通河川・千川」2,050 mを「千川上水路図」[S74]と重ね、千川上水本流・分水・別の普通河川のどれに相当するか確認する。
-'''
+              addition = base64.b64decode(os.environ['ADDITION_B64']).decode('utf-8')
               path.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
           PY
           rm -f .github/workflows/_append_research_20260825.yml
@@ -62,8 +37,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md .github/workflows/_append_research_20260825.yml
-          if git diff --cached --quiet; then
-            exit 0
-          fi
           git commit -m 'Add 1953 Yabata River waterway findings'
           git push
