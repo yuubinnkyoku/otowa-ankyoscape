@@ -1,0 +1,32 @@
+name: Append river research 2026-08-26 run 55
+
+on:
+  push:
+    paths:
+      - '.github/workflows/append-research-20260826-55.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append verified research and clean workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! grep -q '\[S139\]' README.md; then
+            echo 'Ci0tLQoKIyA2OS4g6L+95Yqg6Kq/5p+777yIMjAyNi0wOC0yNuODu+esrDU15Zue77yJCgojIyA2OS4xIOawtOeqquW3neODu+S7iuWuruapi++8mumfs+e+vTHkuIHnm67jga7ot6/pnaLjgavml6fmqYvluorniYjjgajjgZXjgozjgovnn7PmnZDjgYzmrovjgosKCuacrOeUsOWJteOAjOaxoOiii+OBq+aui+OCi+KAnOa2iOOBiOOBn+W3neKAneOCkui/veOBo+OBpuOBv+OCi+OBqOKApuelnueUsOW3neOBuOWQkeOBi+OBhuOAjuawtOeqquW3neOAj+OBruaal+a4oOOBq+OBr+S9leOBjOOBguOCi++8n+OAje+8iDIwMjHlubQxMeaciDIw5pel77yJ44Gv44CB5rC056qq5bed5pen5rWB6Lev5rK/44GE44GuKirmlofkuqzljLrpn7Pnvr0x5LiB55uu44O75LuK5a6u56We56S+6bOl5bGF5YmNKirjgavjgaTjgYTjgabjgIHot6/pnaLjgavln4vjgoHovrzjgb7jgozjgZ/nn7Pmnb/jgpLjgIHjgYvjgaTjgabmsLTnqqrlt53jgavmnrbjgYvjgaPjgabjgYTjgZ8qKuOAjOS7iuWuruapi+OAjeOBrumBuuani+ODu+W6iueJiCoq44Go44GX44Gm5YaZ55yf5LuY44GN44Gn57S55LuL44GX44Gm44GE44KL44CC44CU56K66KqN77yPMjAyMeW5tOOBruePvuWcsOWGmeecn+izh+aWmeOBq+WGmeOCi+efs+adkOOBqOOAgeiomOS6i+OBq+OCiOOCi+mBuuani+WQjOWumuOAlVtTMTM5XQoK44GT44Gu6LOH5paZ44Gv44CB5rC056qq5bed5LiL5rWB44Gu5pen5rKz6YGT44KS54++5Zyo5Zyw44G45Zu65a6a44GZ44KL5omL5o6b44GL44KK44Gr44Gq44KL44CC5LuK5a6u56We56S+5LuY6L+R44Gv5pei5a2YUkVBRE1F44Gn44KC5rmn5rC05Zyw54K544Go44GX44Gm5omx44Gj44Gm44GE44KL44GM44CB5LuK5Zue44Gu6LOH5paZ44Gr44KI44Gj44Gm44CB5ZCM44GY5Zyw54K544GrKirmqYvmooHnlLHmnaXjgajjgZXjgozjgovniannmoTnl5Xot6EqKuOBjOaui+OCi+OBk+OBqOOBjOWKoOOCj+OBo+OBn+OAguaXp+a1gei3r+OBruS9jee9ruOAgeWPgumBk+ODu+mBk+i3r+OBqOOBruS6pOW3rumWouS/guOAgeapi+S7mOi/keOBruW3neW5heOCkuaknOiojuOBmeOCi+mam+OBruePvuWcsOWfuua6lueCueOBqOOBl+OBpuiomOmMsuS+oeWApOOBjOOBguOCi+OAguOAlOims+Wvn+OAlVtTMTM5XQoK44Gf44Gg44GX44CB55+z5p2/44GMKirku4rlrq7mqYvjga7luorniYjjgafjgYLjgovjgZPjgajjgpLnpLrjgZnmqYvmooHlj7DluLPjg7vpgZPot6/lj7DluLPjg7vlt6XkuovoqJjpjLLjgarjganjga7lhaznmoTos4fmlpnjga/ku4rlm57norroqo3jgafjgY3jgabjgYTjgarjgYQqKuOAguiomOS6i+OBruWGmeecn+OBi+OCieefs+adkOOBjOePvuWtmOOBmeOCi+OBk+OBqOiHquS9k+OBr+ims+Wvn+OBp+OBjeOCi+OBjOOAgeOBneOBrumDqOadkOeoruWIpeOAgeaetuapi+W5tOS7o+OAgeenu+ioreOBruacieeEoeOAgeWFg+S9jee9ruOBi+OCieWLleOBhOOBpuOBhOOBquOBhOOBi+OAgeato+eiuuOBquapi+mVt+ODu+api+W5heOBr+acqueiuuWumuOBp+OBguOCi+OAguOBvuOBn+iomOS6i+OBr+OAjOOBi+OBpOOBpuOBruW3neW5heOBjOOCj+OBi+OCi+OAjeOBqOOBmeOCi+OBjOOAgeePvuazgeefs+adkOOBoOOBkeOBi+OCieaXp+W3neW5heOCkueiuuWumuWApOOBqOOBl+OBpuaOoeeUqOOBl+OBquOBhOOAguOAlOazqOaEj++8j+acquino+axuuOAlVtTMTM5XQoKIyMjIOOBk+OBk+OBi+OCiei/veOBiOOCi+OBk+OBqAoKLSBbIF0g5paH5Lqs5Yy644O75pen5p2x5Lqs5biC44Gu6YGT6Lev77yP5qmL5qKB5Y+w5biz44CB6YGT6Lev5Y2g55So44O75pqX5rig5YyW5bel5LqL6LOH5paZ44GL44KJ44CM5LuK5a6u5qmL44CN44Gu5q2j5byP5ZCN56ew44CB5p625qmL44O75pS556+J44O75pKk5Y675bm05Luj44CB5qmL6ZW344O75qmL5bmF44KS56K66KqN44GZ44KL44CCCi0gWyBdIOaYjuayu++9nuaYreWSjOWIneacn+OBruWcsOW9ouWbs+ODu+eBq+eBveS/nemZuueJueauiuWcsOWbs+ODu+WcsOexjeWbs+OBp+S7iuWuruelnuekvuWPgumBk+OBqOawtOeqquW3neOBruS6pOW3ruS9jee9ruOCkueFp+WQiOOBmeOCi+OAggotIFsgXSDnj77lrZjnn7PmnZDjga7lkJHjgY3jg7vplbfjgZXjgpLnj77lnLDlrp/muKzjgZfjgIHml6fmsrPpgZPjga7kuKHlsrjnt5rjgoTmqYvou7jjgpLlvqnlhYPjgafjgY3jgovjgYvmpJzoqI7jgZnjgovjgIIKLSBbIF0g5pqX5rig5YyW5pmC44Gr5bqK54mI44KS44Gd44Gu5aC044G45q6L44GX44Gf44Gu44GL44CB6KiY5b+154mp44Go44GX44Gm5b6M44GL44KJ5Z+L44KB5oi744GX44Gf44Gu44GL44KS44CB5bel5LqL6KiY6Yyy44O75Zyw5Z+f5Y+y44O75Y+k5YaZ55yf44Gn56K66KqN44GZ44KL44CCCgojIyDov73liqDlh7rlhbgKCi0gKipbUzEzOV0qKiDmnKznlLDlibXjgIzmsaDooovjgavmrovjgovigJzmtojjgYjjgZ/lt53igJ3jgpLov73jgaPjgabjgb/jgovjgajigKbnpZ7nlLDlt53jgbjlkJHjgYvjgYbjgI7msLTnqqrlt53jgI/jga7mmpfmuKDjgavjga/kvZXjgYzjgYLjgovvvJ/jgI3mlofmmKXjgqrjg7Pjg6njgqTjg7PjgIEyMDIx5bm0MTHmnIgyMOaXpe+8iDXjg5rjg7zjgrjnm67vvInigJXku4rlrq7npZ7npL7ps6XlsYXliY3jga7ot6/pnaLjgavjgIHmsLTnqqrlt53jgavmnrbjgYvjgaPjgabjgYTjgZ/jgIzku4rlrq7mqYvjgI3jga7pgbrmp4vjg7vluorniYjjgajjgZnjgovnn7Pmnb/jgYzln4vjgoHovrzjgb7jgozjgabjgYTjgovmp5jlrZDjgpLlhpnnnJ/ku5jjgY3jgafntLnku4vjgIIgIAogIGh0dHBzOi8vYnVuc2h1bi5qcC9hcnRpY2xlcy8tLzUwMDMzP3BhZ2U9NQo=' | base64 -d >> README.md
+          fi
+          rm -f .github/workflows/append-research-20260826-55.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md .github/workflows/append-research-20260826-55.yml
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add river research update 55'
+            git push
+          fi
