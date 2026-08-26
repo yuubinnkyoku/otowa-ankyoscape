@@ -12,7 +12,7 @@ jobs:
     if: ${{ github.actor != 'github-actions[bot]' }}
     steps:
       - uses: actions/checkout@v4
-      - name: Append verified research and remove one-time workflow
+      - name: Append verified research and remove one-time files
         shell: bash
         run: |
           cat >> README.md <<'EOF'
@@ -56,9 +56,9 @@ jobs:
 - **[S136]** 練馬区「練馬わがまち資料館」『千川上水の分水を訪ねて（2）』2024年5月1日―長崎村外三村分水を要町3丁目45番付近から谷端川へ接続する分水として紹介。明治10年7月「千川用水組合村樋口伏替願」の「長崎村、中丸村、池袋村、金井窪村四ケ村用水」を引用。  
   https://www.nerima-archives.jp/column/3572/
 EOF
-          rm -f .github/workflows/append-research-20260826.yml
+          rm -f .github/workflows/append-research-20260826.yml .github/append-research-20260826.trigger
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add README.md .github/workflows/append-research-20260826.yml
+          git add README.md .github/workflows/append-research-20260826.yml .github/append-research-20260826.trigger
           git commit -m "docs: add Tsurumaki and Yabata water-history findings"
           git push
