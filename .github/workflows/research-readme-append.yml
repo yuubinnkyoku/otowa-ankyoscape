@@ -13,22 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Append verified research to README and clean helper
+      - name: Append verified research to README and clean helpers
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import base64
-          path = Path("README.md")
-          text = path.read_text(encoding="utf-8")
-          marker = "# 61. 追加調査（2026-08-25・第47回）"
-          addition = base64.b64decode("LS0tCgojIDYxLiDo||||...TRUNCATED_FOR_SUMMARY...||||").decode("utf-8")
+          readme = Path('README.md')
+          addition_file = Path('.github/research-addition.md')
+          text = readme.read_text(encoding='utf-8')
+          marker = '# 61. 追加調査（2026-08-25・第47回）'
           if marker not in text:
-              path.write_text(text.rstrip() + "\n\n" + addition.strip() + "\n", encoding="utf-8")
+              addition = addition_file.read_text(encoding='utf-8')
+              readme.write_text(text.rstrip() + '\n\n' + addition.strip() + '\n', encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm --ignore-unmatch .github/workflows/research-readme-append.yml
+          git rm --ignore-unmatch .github/workflows/research-readme-append.yml .github/research-addition.md
           git add README.md
           if git diff --cached --quiet; then
             exit 0
