@@ -10,7 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Append researched note
+      - name: Append and clean up
         shell: bash
         run: |
-          echo 'CiMgODguIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjfjg7vnrKw3MuWbnu+8iQoKIyMgODguMSDosLfnq6/lt53jgpLmiJDouYrlsI/lrabmoKHljYHnlLrlt53jgI3jgajjgYzjgpPjgZ/oqJjpjLLvvIjE5MTflubTvvIkKCi0gKio77oCUMueiuuiqje+8jOWkp+ato+acn+WtpuaVo+aWmeOCkuW8leeUqOOBmeOCiOS6jOaso+izh+aWme+8i+aWh+W/l+eiuuiqjeOAiOOBiuOBmOOCg+aZvuaso+OAjOaIkOiri+Wwj+WtpuaVo+OBruS4gOW5tOmWk+OAiyjmiJDouYrlrabmoKHjgIE5MTfjgJTlpKfmrYoxMuOAluW5tCnjgInjga/jgIHmsaDooovjga7miJDouYrlsI/lrabmoKHjgYvjgonlkajovrLjgbjjgYrlh7rjgYvjgZHjgovpmpvjgIHlrabmoKHjgYvjgonjga7mpoLnlbPop53pm6Ljgavlv5zjgZjjgabjgIzkuoznlLrmoYvjgI3jgIzkupTnlLrjga7mo67jgI3jgIzkuZ3nlLrnlLDlnI7jgI3jgajjg4bkvKbnlLrjgZfjgIHjgZ3jga7lhYjjga7ph4zlt53jgpLqKioO44CM5Y2B55S65bed44CNO44Go5ZG95ZCN44GX44Gf44CB44Go6KiY44GX44Gm44GE44KL44CC44GX44Gf44GM44Gj44Gm44CM5Y2B55S65bed44CN44Gv6LC354uv5bed44Gu5LiA6Iis55qE44O75YWs55qE44Gq5pen56ew44Go44G/44Gq44GZ44KI44KK44CB5bCR44Gq44GP44Go44KC44GT44Gu6LOH5paZ44Gn44GvKirmiJDouYrlsI/lrabmoKHlhoXjgafku5jjgZHjgonjgozjgZ/nlJ/mtLvjg7vmlZnogrLjgIHjga7lkbznp7Djg **too_long**
+          cat .s169-append.txt >> README.md
+          git rm .s169-append.txt .github/workflows/append-s169.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'Add research on Seikei name for Yabata River'
+          git push
