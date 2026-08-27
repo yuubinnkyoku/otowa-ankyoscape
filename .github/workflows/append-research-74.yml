@@ -16,4 +16,10 @@ jobs:
       - name: Append research findings
         shell: bash
         run: |
-          echo 'CgoKLS0tCgojIDkwLiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTI344O756ysNzTlm57vvIkKCiMjIDkwLjEg6LC356uv5bed77ya5qSZ5ZCN55S66aeF5ZGo6L6555qE54++6KGM5Zyw57GN5Zuz44Gr44CB5pys5rWB44Go44Gv5Yil44Gr6L+944GG44G544GN57Sw6ZW344GE5rC06Lev5pW344GM5q6L44KL77yKCi0gKip744CK56K66KqN77yP5YWs55qE5Zyw57GN5Zuz44CRKiog5p2x5Lqs6YO95Li756iO5bGA44GM5YWs6ZaL44GZ44KL5Luk5ZKMOOW5tOW6puWcsOexjeWbs++8iDIwMjblubQx5pyIMeaXpemBk+eCueOAgee4rumHujE6MSwwMDDvvInjga7osoroibIwMzblm7Pjga/jgIHplbfloIcx5LiB55uu44O76KW/5rGg6KKLNOmAgeebruODu+WNl+mbt+mVtzHkuIHnm67jgpLlkKvjgoDjgILmnbHkuqzpg73kuLvnpI7lsYDjga/jgZPjga7lnLDnsY3lm7PjgpLlnLDnlarjga7phY3nva7jgpLnpLrjgZnlj4LogIPlm7PjgajjgZfjgablhazplovjgZfjgabjgYrjgorjgIHlrp/pmZvjga7lnJ/lnLDjga7lvaLnirbjg7vlr7jms5Xjg7vnrYznlYznrYnjgpLlhaznmoTjgavoqLzmmI7jgZnjgovjgoLjga7jgafjga/jgarjgYTjgajjgoLmmI7oqJjjgZfjgabjgYTjgovjgILjgJTnorbooY3jgJNbUzE3MV0KLSAqKuOAlOimp+Wvn++8j+WcsOexjeWbs+ODu+ePvuWcsOavlOirgOOAlykqKiBOYXRyaXVtLmpwIOOBryDmnbHkuqzpg73kuLvnpI7lsYDlnLDnsY3lm7PjgajjgZzlrpznseLjg5Hjg4Pjg5fjgpLnlKjjgYTjgabvvIgyMDI15bm0MuasguOBq+aknOWQjeeUuumnhOWRq+i+uuOCkuWGjeiqvOafuOOBl++8jCoq5qSZ5ZCN55S6MeWPtabouI/lronku5jov5HjgYvjgonopb/mraDmsaDooovnt5rljJflgbjjgbjjgIHmnbHplbfloIjpqIXmiYvlia3jgb7jgafntLDplbfjgYTmsLTot6/mlePjgpLov73jgYjjgovjqoKjgajoqJjjgZfjgabjgYTjgovjgILmraTlkI3nlLrjgrXlj7fjg7vvvJjlj7fjg7vvvJHlj7fouI/lronku5jov5HjgafjgoLnt5roj5vlronjgavkvqfmuqbnirbjnYvjga7nqbrplpPjgYzntprjgY/jgILjgb7jgZ/jgIHnt5rotr/ljZfkvqfjgYvjgonljZfplbfloIjoirHlkLLlhazlnJLmlrné?'
+          cat .append-research-74.md >> README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git rm .append-research-74.md .github/workflows/append-research-74.yml
+          git commit -m "Add cadastral findings around Shiina Station"
+          git push
