@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Append research note
+      - name: Append, commit, and clean up
         shell: bash
         run: |
           cat >> README.md <<'EOF'
@@ -53,15 +53,10 @@ jobs:
   https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH100331/data/pressH100331.pdf  
   https://adeac.jp/viewitem/toshima-history/viewer/viewer/00_02_H090000/data/00_02_H090000.pdf  
   https://www.city.toshima.lg.jp/340/shisetsu/koen/030.html
-EOF
-      - name: Commit and push
-        shell: bash
-        run: |
+          EOF
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-          git commit -m 'docs: add research on Moto-Ikebukuro and second Zoshigaya trunk'
+          git rm .github/workflows/append-s168.yml
+          git commit -m 'docs: add S168 on Moto-Ikebukuro and second Zoshigaya trunk'
           git push
