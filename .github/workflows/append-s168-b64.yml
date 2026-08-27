@@ -1,0 +1,52 @@
+name: Append S168 research
+
+on:
+  push:
+    paths:
+      - '.github/workflows/append-s168-b64.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append and commit
+        shell: bash
+        env:
+          APPEND_B64: "CgotLS0KCiMgODUuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjfjg7vnrKw3MeWbnu+8iQoKIyMgODUuMSDlvKblt7vlt53jg7vk丸池：1991年からの元池袋公園休園は「第二雑司が谷幹線工事」の工事基地化だったCgoK6LGK5bO25Yy644CK5bqD5aCx44Go44GX44G+44CNMTk5OO+8iOW5sDEw77yJ5bmzM+aciDI15pel5Y+344Gv44CB5bym5be75bed5rC05rqQ44Gu5Li45rGg6Leh44Gr6Kit44GR44KJ44KM44Gm44GE44GfKirmnKzmsaDoo4vnr4DlhazlnJLjgYzjgIHlnLDkuIvkuIvmsLTpgZPlt6Xkuovjga7jgZ/jgoExOTkx77yI5bmzM++8iOW5tOOBi+OCieS8kemWi+KAjOOBZOOBoOOBqOioiOmMsuOBmeOCi+OAguWQjOWPtzpjgojjgozjgbDjgIE5NzfjgIjmnpjljow1Mu+8ieW5tOOBq+OBrOaxo+iiyuOBruWcs+WQjeeUseadpeOBruWcs+OCkuS/neWtmOOBmeOCi+OBn+OCgeOAgeWFrOWckuWGheOBq+aWsOOBlOOBhOaxoOOBqOiomOW/oOeogeOBjOioree9ruOBleOCjOOBpuOBhOOBnOOBjOOAgeWcs+S4i+W3peS6i+WujOS6huW+jOOBruS5neaxn+OBq+aWsOOBleOBhOWFrOWckuOBqOOBlOOBpuWGjeaVtOWCmeOBleOCjOOBnOOAguOBleOCieOBq+WQjOWPtzpjgIHlho3mlbTlgpnlvozjga7msLTmma/jgavjgaTjgYTjgabjgIHjgIzkvKLjgY7jga7jgojjgYbjgarkuLjmsaDjgpLlvpnlhYPjgZfjgZ/jgajjga/jgYTooIDjgYjjgarjgYTjgI3ml6jjgpLmmI7oqJjjgZfjgabjgYTjgovjgILjgJTnorroqo3vvI/osaPls7bljLrluqPloLHjgJXbUzE2OF0KCuiuoeOAjOWcs+S4i+S4i+awtOmBk+W3peS6i+OAjeOBjOS9leOBoOOBp+OBguOBo+OBnOOBi+OBq+OBp+OBp+OBhOOBpuOAgeixiuWztuWMuuOBruW5s+aIkDnlubTluqbkuovmpa3lrp/nuK7os4fmlpnjga/jgIHlhYPmsaDoo4vlj7LlhazlnJLjga7mlrDoqK3jgavjgaTjgYTjgabjgIAqKuOAjOS4i+awtOmBk+esrOS6jOmbkeaAneOBjOiwtOW5uee3muW3peS6i+OBjOe1guS6huOBl+OAgeW3peS6i+WfuuWcs+OBp+OBguOBo+OBnOWFrOWckueUqOWcs+OCkuaVtOWCmeOBl+OBnOOAjeOAjCoqIOOBqOaYjuiomOOBmeOCi+OAguOBl+OBnOOBjOOBpuOAgeTE5OTE5bm044GL44KJ5YWD5rGg6KKL5YWs5ZyS44KS5LyR5ZyS44GV44Gb44CB5pen5YWs5ZyS55So5Zyw44KS5bel5LqL5Z+65Zyw44Go44GX44Gm5L2/55So44GX44Gf5LiL5rC06YGT5bel5LqL44Gv44CB5bCR44Gq44GP44Go44KC6KGM5pS/6LOH5paZ5LiKICoq56ys5LqM6Zuc6ZuR5Y+45Y2Y5bm554m55bel5LqLKiog44Go54m55a6a44Gn44GN44KL44CC44〔確認／豊島区事業実績資料〕[S168]
+
+また、1998年3月31日の豊島区プレスリリースは、丸池について、明治末～大正期には湧水が枯れず「成蹊池」とも呼ばれ学生が泳いだこと、その後は鉄道教習所の敷地となって池が次第に縮小し、周囲を石材で築いたコンクリート造りの池となり、戦後は元池袋公園内でついに水が枯れて石積だけが残った、と整理している。〔確認／豊島区プレス資料〕[S168]
+
+これにより、丸池周辺の近現代変化は、少なくとも **自然湧水池 → 縮小・人工的な池形状化 → 戦後の涸渇 → 1977年の由来保存用の新しい池・碑 → 1991年から第二雑司が谷幹線工事基地 → 1998年に隣接地を含む史跡公園として再構成** と段階を分けて扱う必要がある。〔観察〕[S26][S168]
+
+とくに、現在の元池袋史跡公園にある池・碑・園地を、**旧丸池の正確な水面・湧水点・弦巻川流出口の原位置としてそのまま用いることはできない**。豊島区の現行公園ページも、旧元池袋公園が下水道工事のため隣接する現在地と土地交換され、1998年4月に元池袋史跡公園が開園したとする。〔確認＋注意〕[S168]
+
+一方、今回の資料だけでは、第二雑司が谷幹線の立坑・作業ヤードが旧公園内のどこに置かれたか、幹線本体が旧丸池の水面・湧水点・弦巻川上流線とどの位置関係で通過したかまでは分からない。また、自然湧水としての丸池が完全に涸れた正確な年月も確定しない。第二雑司が谷幹線の工事平面図・立坑位置図、旧公園平面図、1970～90年代の航空写真との照合が必要である。〔未解決〕[S168]
+
+### ここから追えること
+
+- [ ] 第二雑司が谷幹線の1990年代工事図・立坑位置図を探し、元池袋公園がどの工区の基地だったかを特定する。
+- [ ] 1977年の元池袋公園平面図と1998年の元池袋史跡公園平面図を重ね、記念池・碑・土地交換範囲を復元する。
+- [ ] 1940年代～1990年代の航空写真・住宅地図から、自然の丸池、石積だけが残った段階、1977年の新設池、工事基地化の変化を時系列で追う。
+- [ ] 第二雑司が谷幹線の中心線と旧丸池・弦巻川旧河道を重ね、地下下水道工事が旧水源地の物理的痕跡へ与えた影響を検証する。
+
+## 追加出典
+
+- **[S168]** 豊島区『広報としま』1998年3月25日号、豊島区「4月1日、池袋地名ゆかりの地に『元池袋史跡公園』オープン」（1998年3月31日）、豊島区平成9年度事業実績資料「公園・児童遊園新設改良費」、豊島区「元池袋史跡公園」―1977年の由来保存用の池・碑、1991年からの地下下水道工事による休園、工事が第二雑司が谷幹線工事で元池袋公園用地が工事基地だったこと、1998年の史跡公園再整備、自然の丸池をそのまま復元したものではないことを確認。  
+  https://toshima.rlibrary.jp/archive/19980325_1061/pdf/19980325_1061.pdf  
+  https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH100331/data/pressH100331.pdf  
+  https://adeac.jp/viewitem/toshima-history/viewer/viewer/00_02_H090000/data/00_02_H090000.pdf  
+  https://www.city.toshima.lg.jp/340/shisetsu/koen/030.html
+"
+        run: |
+          printf '%s' "$APPEND_B64" | base64 -d >> README.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'docs: add S168 on Moto-Ikebukuro and second Zoshigaya trunk'
+          git push
