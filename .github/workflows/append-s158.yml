@@ -1,0 +1,28 @@
+name: Append S158 research note
+
+on:
+  push:
+    paths:
+      - '.trigger-s158'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append research note
+        shell: bash
+        run: |
+          echo 'CgojIDc5LiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTI344O756ysNjXlm57vvIkKCiMjIDc5LjEg5p2x5rGg6KKL6Zuo5rC06Kq/5pW05rGg44GvMjAyNuW5tOOBq+iAkemcmui 補強の実施設計へ―旧水窪川低地の治水施設が「維持」から「震災対策」へCgonn既存[S84]では、旧水窪川周辺の恒常的な内水氾濫対策として、東池袋4丁目の豊島区立総合体育場地下に約14,000m³の東池袋雨水調整池が整備され、1994（平成6）年4月28日に運用開始したことを確認している。2026年の資料から、この施設が**耐震補強の実施設計段階に入った**ことが新たに確認できる。〔確認／2026年の事業動向〕[S158]
+' | base64 -d >> README.md
+          rm -f .trigger-s158
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md .trigger-s158
+          git commit -m 'docs: add East Ikebukuro detention basin seismic retrofit source S158'
+          git push
