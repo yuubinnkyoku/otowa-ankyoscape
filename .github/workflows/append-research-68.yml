@@ -14,19 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Append verified research
+      - name: Append and commit verified research
         shell: bash
         run: |
-          cat >> README.md <<'EOF'
-
-
----
-
-# 82. 追加調査（2026-08-27・第68回）
-
-## 82.1 高田・弦巻川周辺：学習院構内の湧水池は旧高田村の灌漑用溜池だった
-
-豊島区の2000（平成12）年10月7日プレス資料「豊島区の湧き水をたずねて　地域史講座でフィールドワーク」は、学習院大学構内の片隅にある溜池について、**旧高田村の灌漑用として利用されていた湧水池**であり、堀部安兵衛の伝説から「血洗いの池」とも呼ばれると明記している。〔確認／豊島区プレス資料〕[S165]
+          python3 - <<'PY'
+          import base64
+          data = base64.b64decode('CgoKLS0tCgojIDgyLiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTI344O756ysNjjlm57vvIkKCiMjIDgyLjEg6auY55Sw44O75bym5be75ZGo6L6556S+77ya5a2m57+S6Zmi5qeL5YaF44Gu5rmp5rC05rGg44Gv5pen6auY55Sw5p2R44Gu54Gq5ryJ55So5rqY5rGg44Gg44Gj44GfCgr豊島区の2000（平成12）年10月7日プレス資料「豊島区の湧き水をたずねて　地域史講座でフィールドワーク」は、学習院大学構内の片隅にある溜池について、**旧高田村の灌漑用として利用されていた湧水池**であり、堀部安兵衛の伝説から「血洗いの池」とも呼ばれると明記している。〔確認／豊島区プレス資料〕[S165]
 
 同資料は、高田について、**学習院の南崖下から神田川へ続く急崖の下に複数の湧水があり、池や用水路の流れを作っていた**と説明する。フィールドワークでは金乗院・南蔵院・根生院・氷川神社などの湧水池・井戸跡を巡り、その後、雑司が谷・南池袋側では暗渠化された弦巻川に沿って、屋敷庭園の池、崖下の湧水、大根洗い場の跡を辿っている。〔確認／豊島区プレス資料〕[S165]
 
@@ -53,13 +46,13 @@ jobs:
 
 - **[S165]** 豊島区「豊島区の湧き水をたずねて　地域史講座でフィールドワーク」2000年10月7日―学習院大学構内の溜池を旧高田村の灌漑用湧水池と記録。高田の崖下に複数の湧水があり池・用水路を形成していたこと、金乗院・南蔵院・根生院・氷川神社の湧水池・井戸跡、弦巻川沿いの庭園池・崖下湧水・大根洗い場を巡ったことも記載。  
   https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH121007/data/pressH121007.pdf
-EOF
+'.encode('utf-8')).decode('utf-8')
+          with open('README.md', 'a', encoding='utf-8') as f:
+              f.write(data)
+          PY
           rm -f .append-research-68-trigger .github/workflows/append-research-68.yml
-      - name: Commit
-        shell: bash
-        run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add README.md .append-research-68-trigger .github/workflows/append-research-68.yml
+          git add -A
           git commit -m 'docs: add research on Takada irrigation and Mizukubo paper making'
           git push
