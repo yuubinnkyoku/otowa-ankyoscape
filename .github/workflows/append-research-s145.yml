@@ -1,0 +1,23 @@
+name: append-research-s145
+on:
+  push:
+    branches: [main]
+    paths: ['.research-s145-trigger']
+permissions:
+  contents: write
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Append research note
+        shell: bash
+        run: |
+          cat .s145-append.txt >> README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: add Daimyo PTA Yabata park campaign history"
+          git push origin HEAD:main
