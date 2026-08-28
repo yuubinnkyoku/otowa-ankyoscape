@@ -1,43 +1,34 @@
-name: Deduplicate S205 research
+name: Fix S205 heading typo
 
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/append-s205.yml'
-      - '.s205-trigger'
 
 permissions:
   contents: write
 
 jobs:
-  deduplicate:
+  fix:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Remove duplicate research note if present
+      - name: Fix heading typo
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
-          marker = '\n\n---\n# 103. 追加調査（2026-08-29・第95回）'
-          pos = []
-          start = 0
-          while True:
-              i = text.find(marker, start)
-              if i < 0:
-                  break
-              pos.append(i)
-              start = i + len(marker)
-          if len(pos) > 1:
-              p.write_text(text[:pos[1]].rstrip() + '\n', encoding='utf-8')
+          text2 = text.replace('### ここら追えること', '### ここから追えること')
+          if text2 != text:
+              p.write_text(text2, encoding='utf-8')
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           git diff --cached --quiet && exit 0
-          git commit -m "docs: remove duplicate Takada sewer note"
+          git commit -m "docs: fix S205 heading typo"
           git push
