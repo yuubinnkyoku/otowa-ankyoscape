@@ -1,0 +1,56 @@
+name: Append research update 82
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/append-research-82.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append research update and remove one-shot workflow
+        shell: bash
+        run: |
+          if ! grep -q '\[S183\]' README.md; then
+            cat >> README.md <<'EOF'
+
+---
+
+# 82. 追加調査（2026-08-28・第82回）
+
+## 82.1 板橋駅の地下通路名に残る「矢畑川」：1980年にも谷端川の別表記が鉄道施設名として使われていた
+
+板橋区公文書館の電子展示室76号「板橋駅前！むかし写真館」は、**1980（昭和55）年に板橋駅地下通路の完成式典が行われた**ことを、当時の写真資料とともに紹介している。展示の注記では、この地下通路を **「矢畑川自由地下通路ガード／矢畑川自由通路地下道架道橋」** と記し、通常は「谷端川」の表記が多いが、**この地下道の名称には「矢畑川」が使われている**と明記する。〔確認／板橋区公文書館〕[S183]
+
+この資料は、谷端川が1962（昭和37）年に河川として廃止され、暗渠の下水道幹線となった後も、旧河道と重なる板橋駅付近の鉄道施設名に **「矢畑川」** という異表記が残ったことを示す。〔観察〕[S183] したがって、近現代資料で「矢畑川」と出た場合、別河川と即断せず、板橋駅・谷端川筋との位置関係を確認する必要がある。
+
+一方、この公文書館ページだけでは、**「矢畑川」という表記がいつ成立したのか、近世・近代から続く地域呼称なのか、国鉄・工事側で採用された施設固有の表記なのかは分からない。** また「ガード」「地下道架道橋」という名称が1980年の完成時に正式決定されたものか、それ以前の工事・鉄道台帳から継承されたものかも未確認である。したがって、現段階では「谷端川の古い正式名称」とは断定しない。〔未解決〕
+
+この地点は旧谷端川が国鉄赤羽線（現・埼京線）の線路帯と交差する場所でもあるため、鉄道施設台帳・架道橋図面・1980年の地下通路工事記録を確認できれば、暗渠化後の旧河道位置と鉄道構造物の対応を具体化できる可能性がある。〔推定／要図面確認〕
+
+### ここから追えること
+
+- [ ] 国鉄・JRの架道橋台帳や1980年の板橋駅地下通路工事図から「矢畑川自由通路地下道架道橋」の正式名称・起工／竣工年月を確認する。
+- [ ] 明治～昭和初期の地図・地籍・河川台帳で「矢畑川」「矢端川」等の表記例を探し、この異表記が地域呼称なのか施設固有名なのかを切り分ける。
+- [ ] 板橋駅付近の旧谷端川中心線と地下通路・線路・暗渠下水道幹線の位置を図面で照合する。
+
+## 追加出典
+
+- **[S183]** 板橋区公文書館 電子展示室76号「板橋駅前！むかし写真館」―1980（昭和55）年撮影の板橋駅地下通路完成式典写真を収録。地下通路を「矢畑川自由地下通路ガード／矢畑川自由通路地下道架道橋」とし、通常は「谷端川」表記が多いが、この地下道名では「矢畑川」を使用すると注記  
+  https://www.city.itabashi.tokyo.jp/kusei/shiryo/koubunsho/ichiran/1009231.html
+EOF
+          fi
+          rm -f .github/workflows/append-research-82.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md .github/workflows/append-research-82.yml
+          git commit -m 'Add research update 82: Yabata name at Itabashi Station'
+          git push
