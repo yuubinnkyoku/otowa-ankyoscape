@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/append-s205.yml'
+      - '.s205-trigger'
 
 permissions:
   contents: write
