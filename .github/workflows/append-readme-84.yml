@@ -1,0 +1,25 @@
+name: append-readme-84
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/append-readme-84.yml'
+      - '.append-readme-84.txt'
+permissions:
+  contents: write
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append research update and clean up
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .append-readme-84.txt >> README.md
+          git rm .append-readme-84.txt .github/workflows/append-readme-84.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'Add research update 84: Yabata memorial water parks chronology'
+          git push
