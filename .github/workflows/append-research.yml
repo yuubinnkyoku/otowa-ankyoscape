@@ -1,0 +1,30 @@
+name: Append research to README
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.readme-append.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Append research and clean temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .readme-append.txt >> README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git rm .readme-append.txt
+          git rm .github/workflows/append-research.yml
+          git commit -m "Add Mizukubo River planning research"
+          git push
