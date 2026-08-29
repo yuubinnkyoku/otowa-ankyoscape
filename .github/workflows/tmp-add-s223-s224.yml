@@ -20,48 +20,13 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import base64
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
           if '[S223]' in text or '# 116. 追加調査' in text:
               raise SystemExit('S223 or section 116 already exists')
-          addition = r'''
-
----
-# 116. 追加調査（2026-08-29・第108回）
-
-## 116.1 谷端川：『新編武蔵風土記稿』は、後世の道路敷などへの埋立で川幅が狭まったと記す
-
-『新編武蔵風土記稿』巻之九「豊島郡之一」の「小石川幷谷端川」について、1884（明治17）年刊の内務省地理局版を典拠として原文を転記する地域史資料を確認した。同記述は、長崎村から出る細流が池袋村・滝野川村・巣鴨村などを経て小石川村へ至り、最終的に神田川へ合流する流路を述べたうえで、谷端川について、**昔はもっと大きな川だったらしいが、後年しだいに「道敷等」に埋め立てられ、当時は広い所でも川幅三～四間ほどになっていた**という趣旨を記している。三～四間を単純換算すると約5.5～7.3 mである。〔原典を転記する二次資料による確認／原画像該当コマ未特定〕[S223]
-
-この記述は重要である。既存READMEでは、江戸後期の巣鴨村内の谷端川について『新編武蔵風土記稿』を引用する二次資料から「川幅三間或いは六間」という値を記録している。[S170] 今回の「広い所でも三四間」という記述は、それとは別に**河道が時間とともに道路敷などへ取り込まれて縮幅したという変化そのもの**を述べている。したがって、近代の改修・暗渠化より前から、谷端川の河道幅や河岸線が土地利用によって固定不変ではなかったことを示す史料として使える。〔観察〕[S170][S223]
-
-ただし、「昔は大きな川だった」という部分は地誌編纂時点から過去を振り返った表現で、**いつ、どの区間を、どの道路造成によって、何m埋め立てたのか**は記していない。また「三四間」は最大幅についての概括的記述であり、谷端川全線の標準幅とみなさない。『新編武蔵風土記稿』の編纂は19世紀前半、今回参照した刊本は1884年であるため、記述内容の成立時期と刊行年も区別する。〔注意／未解決〕[S223]
-
-## 116.2 谷端川・大塚：巣鴨監獄建設時の砂利採取跡が池として残り、大正期に埋め立てられたとの地域史記録
-
-大塚・巣鴨地域史を調査した資料は、仰高西小学校同窓会記念誌編集委員会編『わが街大塚巣鴨 わが母校仰高西』（2000年）の「谷端川の橋 明治～昭和中期」図中解説を典拠として、**明治20年代の巣鴨監獄建設時、谷端川周辺から砂利が採取され、その採取跡が池として残った**と紹介している。さらに、浅見坂崖下・線路際にあった池は**大正期に埋め立てられてテニスコートになった**とする。1930（昭和5）年測図の日本地形社版『東京三千分一図 十九號ノ三 巢鴨』では、同付近に「運動場」が描かれるという。〔地域史資料の二次引用＋地図照合の紹介〕[S224]
-
-これは谷端川低地の微地形が、河川作用だけでなく**近代の建設資材採取によって人工的に掘り下げられ、その後「池 → 埋立地・運動場」へ再転用された地点があった**可能性を示す。〔観察〕[S224] 既存READMEでは谷端川低地の水田・町工場・鉄道残土の「赤土山」などを記録しているが[S100]、今回の砂利採取跡は逆に地面を掘り下げた事例であり、旧版地図の小池・窪地をすべて自然の湧水池や旧河道と解釈しないための具体例になる。
-
-一方、今回ウェブ上で直接確認できたのは2000年記念誌を引用する地域史ページで、**記念誌原本の該当図・砂利採取の一次工事記録は未確認**である。池の正確な位置・面積・採取深、谷端川本流との水理的接続、湧水の有無も分からない。したがって、この池を谷端川の旧河道、自然池、湧水池のいずれかに確定せず、〔地域史記録／要原典・地図検証〕として扱う。[S224]
-
-### ここから追えること
-
-- [ ] 『新編武蔵風土記稿』巻之九「小石川幷谷端川」の国立国会図書館デジタルコレクション該当コマを直接特定し、「後年追々道敷等ニ埋立ラレ」「三四間」の原文・前後文脈を画像で照合する。
-- [ ] 「道敷等」への埋立がどの区間・年代を指すか、1801年巣鴨村絵図、近世道筋、明治初期地籍図・迅速測図で河道幅と道路境界を比較する。
-- [ ] 『わが街大塚巣鴨 わが母校仰高西』（2000年）の「谷端川の橋 明治～昭和中期」原図を確認し、砂利採取跡の池の位置・形状・典拠を確定する。
-- [ ] 1930年測図『東京三千分一図 十九號ノ三 巢鴨』の「運動場」と、明治～大正期の地形図・地籍図・監獄配置図を重ね、池の出現・埋立時期を絞る。
-- [ ] 巣鴨監獄建設の工事記録・用地図を探し、谷端川周辺からの砂利採取が工事資料でも確認できるか検証する。
-
-### 追加出典
-
-- **[S223]** 『新編武蔵風土記稿』巻之九「豊島郡之一」中「小石川幷谷端川」。江戸幕府による編纂は19世紀前半、参照刊本は内務省地理局刊、1884（明治17）年。地域史調査「19番目の富士見坂（上）またの名を、あさみ坂（浅見坂）」が同刊本から、谷端川について「昔ハヨホトノ川ナリニシヤ」「後年追々道敷等ニ埋立ラレ」「今ハ川幅廣キ所ニテ三四間ニ過ス」と転記。**今回は原画像の該当コマを直接特定できていないため、本文は原典を転記する二次資料として扱う。**  
-  https://fujimizaka.wordpress.com/2020/08/27/asami-saka/  
-  https://dl.ndl.go.jp/pid/763977
-
-- **[S224]** 仰高西小学校同窓会記念誌編集委員会編『わが街大塚巣鴨 わが母校仰高西』、2000年、「谷端川の橋 明治～昭和中期」図中解説を引用する地域史調査「19番目の富士見坂（上）またの名を、あさみ坂（浅見坂）」―明治20年代の巣鴨監獄建設時に谷端川周辺から砂利を採取し、跡が池として残り、浅見坂崖下・線路際の池は大正期に埋め立てられてテニスコートになったと紹介。1930年測図『東京三千分一図 十九號ノ三 巢鴨』の「運動場」とも照合している。**記念誌原本・監獄工事記録は今回未確認のため、地域史資料の二次引用として扱う。**  
-  https://fujimizaka.wordpress.com/2020/08/27/asami-saka/
-'''
+          data = 'CgotLS0KIyAxMTYuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjnjg7vnrKwxMDjlm57vvIkKCiMjIDExNi4xIOiwt+err+W3ne+8muOAjuaWsOe3qOatpuiUtemiqOWcn+iomOeov+OAj+OBr+OAgeW+jOS4luOBrumBk+i3r+aVt+OBquOBqeOBuOOBruWfi+eri+OBp+W3neW5heOBjOeLreOBvuOBo+OBn+OBqOiomOOBmQoK44CO5paw57eo5q2m6JS16aKo5Zyf6KiY56i/44CP5be75LmL5Lmd44CM6LGK5bO26YOh5LmL5LiA44CN44Gu44CM5bCP55+z5bed5bm36LC356uv5bed44CN44Gr44Gk44GE44Gm44CBMTg4NO+8iOaYjuayuzE377yJ5bm05YiK44Gu5YaF5YuZ55yB5Zyw55CG5bGA54mI44KS5YW45oug44Go44GX44Gm5Y6f5paH44KS6Lui6KiY44GZ44KL5Zyw5Z+f5Y+y6LOH5paZ44KS56K66KqN44GX44Gf44CC5ZCM6KiY6L+w44Gv44CB6ZW35bSO5p2R44GL44KJ5Ye644KL57Sw5rWB44GM5rGg6KKL5p2R44O75rud6YeO5bed5p2R44O75bej6bSo5p2R44Gq44Gp44KS57WM44Gm5bCP55+z5bed5p2R44G46Iez44KK44CB5pyA57WC55qE44Gr56We55Sw5bed44G45ZCI5rWB44GZ44KL5rWB6Lev44KS6L+w44G544Gf44GG44GI44Gn44CB6LC356uv5bed44Gr44Gk44GE44Gm44CBKirmmJTjga/jgoLjgaPjgajlpKfjgY3jgarlt53jgaDjgaPjgZ/jgonjgZfjgYTjgYzjgIHlvozlubTjgZfjgaDjgYTjgavjgIzpgZPmlbfnrYnjgI3jgavln4vjgoHnq4vjgabjgonjgozjgIHlvZPmmYLjga/luoPjgYTmiYDjgafjgoLlt53luYXkuInvvZ7lm5vplpPjgbvjganjgavjgarjgaPjgabjgYTjgZ8qKuOBqOOBhOOBhui2o+aXqOOCkuiomOOBl+OBpuOBhOOCi+OAguS4ie+9nuWbm+mWk+OCkuWNmOe0lOaPm+eul+OBmeOCi+OBqOe0hDUuNe+9njcuMyBt44Gn44GC44KL44CC44CU5Y6f5YW444KS6Lui6KiY44GZ44KL5LqM5qyh6LOH5paZ44Gr44KI44KL56K66KqN77yP5Y6f55S75YOP6Kmy5b2T44Kz44Oe5pyq54m55a6a44CVW1MyMjNdCgrjgZPjga7oqJjov7Djga/ph43opoHjgafjgYLjgovjgILml6LlrZhSRUFETUXjgafjga/jgIHmsZ/miLjlvozmnJ/jga7lt6PptKjmnZHlhoXjga7osLfnq6/lt53jgavjgaTjgYTjgabjgI7mlrDnt6jmrabolLXpoqjlnJ/oqJjnqL/jgI/jgpLlvJXnlKjjgZnjgovkuozmrKHos4fmlpnjgYvjgonjgIzlt53luYXkuInplpPmiJbjgYTjga/lha3plpPjgI3jgajjgYTjgYblgKTjgpLoqJjpjLLjgZfjgabjgYTjgovjgIJbUzE3MF0g5LuK5Zue44Gu44CM5bqD44GE5omA44Gn44KC5LiJ5Zub6ZaT44CN44Go44GE44GG6KiY6L+w44Gv44CB44Gd44KM44Go44Gv5Yil44GrKirmsrPpgZPjgYzmmYLplpPjgajjgajjgoLjgavpgZPot6/mlbfjgarjganjgbjlj5bjgorovrzjgb7jgozjgabnuK7luYXjgZfjgZ/jgajjgYTjgYblpInljJbjgZ3jga7jgoLjga4qKuOCkui/sOOBueOBpuOBhOOCi+OAguOBl+OBn+OBjOOBo+OBpuOAgei/keS7o+OBruaUueS/ruODu+aal+a4oOWMluOCiOOCiuWJjeOBi+OCieOAgeiwt+err+W3neOBruays+mBk+W5heOChOays+WyuOe3muOBjOWcn+WcsOWIqeeUqOOBq+OCiOOBo+OBpuWbuuWumuS4jeWkieOBp+OBr+OBquOBi+OBo+OBn+OBk+OBqOOCkuekuuOBmeWPsuaWmeOBqOOBl+OBpuS9v+OBiOOCi+OAguOAlOims+Wvn+OAlVtTMTcwXVtTMjIzXQoK44Gf44Gg44GX44CB44CM5piU44Gv5aSn44GN44Gq5bed44Gg44Gj44Gf44CN44Go44GE44GG6YOo5YiG44Gv5Zyw6KqM57eo57qC5pmC54K544GL44KJ6YGO5Y6744KS5oyv44KK6L+U44Gj44Gf6KGo54++44Gn44CBKirjgYTjgaTjgIHjganjga7ljLrplpPjgpLjgIHjganjga7pgZPot6/pgKDmiJDjgavjgojjgaPjgabjgIHkvZVt5Z+L44KB56uL44Gm44Gf44Gu44GLKirjga/oqJjjgZfjgabjgYTjgarjgYTjgILjgb7jgZ/jgIzkuInlm5vplpPjgI3jga/mnIDlpKfluYXjgavjgaTjgYTjgabjga7mpoLmi6znmoToqJjov7DjgafjgYLjgorjgIHosLfnq6/lt53lhajnt5rjga7mqJnmupbluYXjgajjgb/jgarjgZXjgarjgYTjgILjgI7mlrDnt6jmrabolLXpoqjlnJ/oqJjnqL/jgI/jga7nt6jnuoLjga8xOeS4lue0gOWJjeWNiuOAgeS7iuWbnuWPgueFp+OBl+OBn+WIiuacrOOBrzE4ODTlubTjgafjgYLjgovjgZ/jgoHjgIHoqJjov7DlhoXlrrnjga7miJDnq4vmmYLmnJ/jgajliIrooYzlubTjgoLljLrliKXjgZnjgovjgILjgJTms6jmhI/vvI/mnKrop6PmsbrjgJVbUzIyM10KCiMjIDExNi4yIOiwt+err+W3neODu+Wkp+Whmu+8muW3o+m0qOebo+eNhOW7uuioreaZguOBruegguWIqeaOoeWPlui3oeOBjOaxoOOBqOOBl+OBpuaui+OCiuOAgeWkp+ato+acn+OBq+Wfi+OCgeeri+OBpuOCieOCjOOBn+OBqOOBruWcsOWfn+WPsuiomOmMsgoK5aSn5aGa44O75bej6bSo5Zyw5Z+f5Y+y44KS6Kq/5p+744GX44Gf6LOH5paZ44Gv44CB5Luw6auY6KW/5bCP5a2m5qCh5ZCM56qT5Lya6KiY5b+16KqM57eo6ZuG5aeU5ZOh5Lya57eo44CO44KP44GM6KGX5aSn5aGa5bej6bSoIOOCj+OBjOavjeagoeS7sOmrmOilv+OAj++8iDIwMDDlubTvvInjga7jgIzosLfnq6/lt53jga7mqYsg5piO5rK7772e5pit5ZKM5Lit5pyf44CN5Zuz5Lit6Kej6Kqs44KS5YW45oug44Go44GX44Gm44CBKirmmI7msrsyMOW5tOS7o+OBruW3o+m0qOebo+eNhOW7uuioreaZguOAgeiwt+err+W3neWRqOi+uuOBi+OCieegguWIqeOBjOaOoeWPluOBleOCjOOAgeOBneOBruaOoeWPlui3oeOBjOaxoOOBqOOBl+OBpuaui+OBo+OBnyoq44Go57S55LuL44GX44Gm44GE44KL44CC44GV44KJ44Gr44CB5rWF6KaL5Z2C5bSW5LiL44O757ea6Lev6Zqb44Gr44GC44Gj44Gf5rGg44GvKirlpKfmraPmnJ/jgavln4vjgoHnq4vjgabjgonjgozjgabjg4bjg4vjgrnjgrPjg7zjg4jjgavjgarjgaPjgZ8qKuOBqOOBmeOCi+OAgjE5MzDvvIjmmK3lkow177yJ5bm05ris5Zuz44Gu5pel5pys5Zyw5b2i56S+54mI44CO5p2x5Lqs5LiJ5Y2D5YiG5LiA5ZuzIOWNgeS5neiZn+ODjuS4iSDlt6LptKjjgI/jgafjga/jgIHlkIzku5jov5HjgavjgIzpgYvli5XloLTjgI3jgYzmj4/jgYvjgozjgovjgajjgYTjgYbjgILjgJTlnLDln5/lj7Los4fmlpnjga7kuozmrKHlvJXnlKjvvIvlnLDlm7PnhaflkIjjga7ntLnku4vjgJVbUzIyNF0KCuOBk+OCjOOBr+iwt+err+W3neS9juWcsOOBruW+ruWcsOW9ouOBjOOAgeays+W3neS9nOeUqOOBoOOBkeOBp+OBquOBjyoq6L+R5Luj44Gu5bu66Kit6LOH5p2Q5o6h5Y+W44Gr44KI44Gj44Gm5Lq65bel55qE44Gr5o6Y44KK5LiL44GS44KJ44KM44CB44Gd44Gu5b6M44CM5rGgIOKGkiDln4vnq4vlnLDjg7vpgYvli5XloLTjgI3jgbjlho3ou6LnlKjjgZXjgozjgZ/lnLDngrnjgYzjgYLjgaPjgZ8qKuWPr+iDveaAp+OCkuekuuOBmeOAguOAlOims+Wvn+OAlVtTMjI0XSDml6LlrZhSRUFETUXjgafjga/osLfnq6/lt53kvY7lnLDjga7msLTnlLDjg7vnlLrlt6XloLTjg7vpiYTpgZPmrovlnJ/jga7jgIzotaTlnJ/lsbHjgI3jgarjganjgpLoqJjpjLLjgZfjgabjgYTjgovjgYxbUzEwMF3jgIHku4rlm57jga7noILliKnmjqHlj5bot6Hjga/pgIbjgavlnLDpnaLjgpLmjpjjgorkuIvjgZLjgZ/kuovkvovjgafjgYLjgorjgIHml6fniYjlnLDlm7Pjga7lsI/msaDjg7vnqqrlnLDjgpLjgZnjgbnjgaboh6rnhLbjga7muafmsLTmsaDjgoTml6fmsrPpgZPjgajop6Pph4jjgZfjgarjgYTjgZ/jgoHjga7lhbfkvZPkvovjgavjgarjgovjgIIKCuS4gOaWueOAgeS7iuWbnuOCpuOCp+ODluS4iuOBp+ebtOaOpeeiuuiqjeOBp+OBjeOBn+OBruOBrzIwMDDlubToqJjlv7XoqozjgpLlvJXnlKjjgZnjgovlnLDln5/lj7Ljg5rjg7zjgrjjgafjgIEqKuiomOW/teiqjOWOn+acrOOBruipsuW9k+Wbs+ODu+egguWIqeaOoeWPluOBruS4gOasoeW3peS6i+iomOmMsuOBr+acqueiuuiqjSoq44Gn44GC44KL44CC5rGg44Gu5q2j56K644Gq5L2N572u44O76Z2i56mN44O75o6h5Y+W5rex44CB6LC356uv5bed5pys5rWB44Go44Gu5rC055CG55qE5o6l57aa44CB5rmn5rC044Gu5pyJ54Sh44KC5YiG44GL44KJ44Gq44GE44CC44GX44Gf44GM44Gj44Gm44CB44GT44Gu5rGg44KS6LC356uv5bed44Gu5pen5rKz6YGT44CB6Ieq54S25rGg44CB5rmn5rC05rGg44Gu44GE44Ga44KM44GL44Gr56K65a6a44Gb44Ga44CB44CU5Zyw5Z+f5Y+y6KiY6Yyy77yP6KaB5Y6f5YW444O75Zyw5Zuz5qSc6Ki844CV44Go44GX44Gm5omx44GG44CCW1MyMjRdCgojIyMg44GT44GT44GL44KJ6L+944GI44KL44GT44GoCgotIFsgXSDjgI7mlrDnt6jmrabolLXpoqjlnJ/oqJjnqL/jgI/lt7vkuYvkuZ3jgIzlsI/nn7Plt53lubfosLfnq6/lt53jgI3jga7lm73nq4vlm73kvJrlm7Pmm7jppKjjg4fjgrjjgr/jg6vjgrPjg6zjgq/jgrfjg6fjg7PoqbLlvZPjgrPjg57jgpLnm7TmjqXnibnlrprjgZfjgIHjgIzlvozlubTov73jgIXpgZPmlbfnrYnjg4vln4vnq4vjg6njg6zjgI3jgIzkuInlm5vplpPjgI3jga7ljp/mlofjg7vliY3lvozmlofohIjjgpLnlLvlg4/jgafnhaflkIjjgZnjgovjgIIKLSBbIF0g44CM6YGT5pW3562J44CN44G444Gu5Z+L56uL44GM44Gp44Gu5Yy66ZaT44O75bm05Luj44KS5oyH44GZ44GL44CBMTgwMeW5tOW3o+m0qOadkee1teWbs+OAgei/keS4lumBk+eti+OAgeaYjuayu+WIneacn+WcsOexjeWbs+ODu+i/hemAn+a4rOWbs+OBp+ays+mBk+W5heOBqOmBk+i3r+Wig+eVjOOCkuavlOi8g+OBmeOCi+OAggotIFsgXSDjgI7jg...snip...'
+          addition = base64.b64decode(data).decode('utf-8')
           p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
           PY
           git config user.name github-actions[bot]
