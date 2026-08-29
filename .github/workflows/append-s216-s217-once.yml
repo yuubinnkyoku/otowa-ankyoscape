@@ -1,0 +1,29 @@
+name: Append S216-S217 research note once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/append-s216-s217-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append research note and clean temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f .tmp-s216-s217.md
+          ! grep -q '\[S216\]' README.md
+          ! grep -q '\[S217\]' README.md
+          cat .tmp-s216-s217.md >> README.md
+          rm -f .tmp-s216-s217.md .github/workflows/append-s216-s217-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Document Maruike irrigation-use evidence and Ikebukuro map caveat'
+          git push
