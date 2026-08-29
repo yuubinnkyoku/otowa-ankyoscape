@@ -1,0 +1,28 @@
+name: Append S218 research note once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/append-s218-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append research note and clean temporary files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f .tmp-s218.md
+          ! grep -q '\[S218\]' README.md
+          cat .tmp-s218.md >> README.md
+          rm -f .tmp-s218.md .github/workflows/append-s218-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Document post-culvert Tsurumaki valley railway traces'
+          git push
