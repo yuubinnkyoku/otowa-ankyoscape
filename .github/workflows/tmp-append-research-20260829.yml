@@ -19,63 +19,22 @@ jobs:
           fetch-depth: 0
       - name: Append new research
         shell: bash
+        env:
+          ADDITION_B64: Ci0tLQojIDExOS4g6L+95Yqg6Kq/5p+777yIMjAyNi0wOC0yOeODu+esrDExMeWbnu+8iQoKIyMgMTE5LjEg6LC356uv5bed44O75bCP55+z5bed57O744Gu54++5Luj5LiL5rC06YGT77ya5Y2D5bed5aKX5by35bm557ea44Gv5YWo5L2T6KiI55S757SENC44IGtt44CB44Gd44Gu44GG44Gh56ys5LiA5pyf57SEMi41IGtt44KS55u05b6EMy43NSBt44Gu6LKv55WZ566h44Go44GX44Gm5YWI6KGM5pW05YKZCgrmnbHkuqzpg73orbDkvJrlhazllrbkvIHmpa3lp5Tlk6HkvJrjga4yMDIw77yI5Luk5ZKMMu+8ieW5tOmAn+iomOmMsuOBp+OAgeadseS6rOmDveS4i+awtOmBk+WxgOW7uuioremDqOmVt+OBr+OAgeixiuWztuWMuuWNl+Wkp+WhmuWcsOWMuuOBrua1uOawtOWvvuetluOBqOOBl+OBpuOAgeaXouioreOBriAqKuWNg+W3neW5uee3muODu+esrOS6jOWNg+W3neW5uee3mioqIOOBruaOkuawtOiDveWKm+OCkuW8t+WMluOBmeOCiyAqKuWNg+W3neWil+W8t+W5uee3mioqIOOCkjIwMTjvvIjlubPmiJAzMO+8ieW5tOW6puOBi+OCieaVtOWCmeOBl+OBpuOBhOOCi+OBqOiqrOaYjuOBl+OBpuOBhOOCi+OAguWFqOS9k+ioiOeUu+OBryAqKuW7tumVt+e0hDQuOCBrbeODu+ebtOW+hDMuNzUgbSoqIOOBruS4i+awtOmBk+euoeOCkuesrOS4gOacn+ODu+esrOS6jOacn+OBq+WIhuOBkeOBpuaVtOWCmeOBmeOCi+OCguOBruOBp+OAgeesrOS4gOacn+OBryAqKue0hDIuNSBrbSoqIOOCkuOCt+ODvOODq+ODieW3peazleOBp+aWveW3peOBl+OAgeWujOaIkOW+jOOBr+S6i+alreWKueaenOOCkuaXqeacn+OBq+WHuuOBmeOBn+OCgSAqKuiyr+eVmeeuoeOBqOOBl+OBpuaaq+WumuWIqeeUqCoqIOOBmeOCi+ioiOeUu+OBqOOBleOCjOOCi+OAguOAlOeiuuiqje+8j+adseS6rOmDveitsOS8muODu+adseS6rOmDveS4i+awtOmBk+WxgOetlOW8geOAlVtTMjI4XQoK5pei5a2YUkVBRE1F44Gn44Gv44CB6LC356uv5bed5LiL5rWB44GM5bCP55+z5bed44O75Y2D5bed44Go5ZG844Gw44KM44CB5pqX5rig5YyW5b6M44Gr5Y2D5bed5bm557ea57O744Gu5LiL5rC06YGT44G456e76KGM44GX44Gf44GT44Go44KS6L+944Gj44Gm44GE44KL44CCW1MxMF1bUzI4XVtTMTAzXSDku4rlm57jga7os4fmlpnjga/jgIHjgZ3jga7ov5Hku6PmmpfmuKDjga7ns7vorZzkuIrjgavjgYLjgovnj77ku6Pjga7pm6jmsLTlr77nrZbjgYzjgIHljZjjgarjgovml6LoqK3nrqHoo5zkv67jgafjga/jgarjgY/jgIEqKuaXp+iwt+err+W3neODu+Wwj+efs+W3neS9juWcsOOCkuWQq+OCgOWNg+W3neW5uee3mua1geWfn+OBruaOkuawtOiDveWKm+OCkuWIpeOBruWkp+aWremdoueuoeOBp+Wil+W8t+OBmeOCi+S6i+alrSoq44Go44GX44Gm6KiI55S744GV44KM44Gm44GE44KL44GT44Go44KS5YW35L2T5YyW44GZ44KL44CC44CU6Kaz5a+f44CVW1MyMjhdCgrph43opoHjgarjga7jga/jgIHkuIDoiKzlkJHjgZHos4fmlpnjgafjgZfjgbDjgZfjgbDnpLrjgZXjgozjgovjgIzntIQyLjUga23jgI3jga8gKirnrKzkuIDmnJ/ljLrplpMqKiDjgafjgYLjgorjgIEyMDIw5bm044Gu6YO9562U5byB44Gn44Gv5YWo5L2T6KiI55S744KS57SENC44IGtt44Go44GX44Gm44GE44KL54K544Gn44GC44KL44CCMjAxOOW5tOOBruWwgumWgOiqjOOAjuODiOODs+ODjeODq+OBqOWcsOS4i+OAj+OBq+OCguOAjDHmmYLplpM3NW1t6ZmN6Zuo44Gr5a++5b+c44GZ44KL5LiL5rC06YGT5pa96Kit44KS44K344O844Or44OJ44OI44Oz44ON44Or44Gn5pW05YKZ4oCV5p2x5Lqs5LiL5rC06YGTIOWNg+W3neWil+W8t+W5uee3muOAjeOBqOOBhOOBhuaKgOihk+WgseWRiuOBjOaOsui8ieOBleOCjOOBpuOBiuOCiuOAgeS6i+alreOBjOaZgumWkzc1IG1t6ZmN6Zuo5a++5b+c44Gu5LiL5rC06YGT5by35YyW44Go44GX44Gm5L2N572u5LuY44GR44KJ44KM44Gm44GE44KL44GT44Go44KS5Yil57O757Wx44Gu5pu46KqM44GL44KJ44KC56K66KqN44Gn44GN44KL44CC44CU56K66KqN77yP5bCC6ZaA6KqM5pu46KqM44CVW1MyMjhdCgoyMDIw5bm05bqm44Gu5p2x5Lqs6YO96K2w5Lya5rG6566X5a+p5p+744Gn44Gv44CBMjAxM++8iOW5s+aIkDI177yJ5bm0OOaciOOBrumbhuS4reixqumbqOOBp+ixiuWztuODu+aWh+S6rOS4oeWMuuOBruWNg+W3neW5uee3mua1geWfn+OBq+Wkp+OBjeOBqua1uOawtOiiq+Wus+OBjOeUn+OBmOOBn+OBk+OBqOOCkui4j+OBvuOBiOOAgeesrOS4gOacn+OBruiyr+eVmeeuoeOCkiAqKuebtOW+hDMuNzUgbeODu+W7tumVtzIuNSBrbSoqIOOBqOOBl+OBpuaVtOWCmeOBl+OBpuOBhOOCi+OBk+OBqOOCgueiuuiqjeOBp+OBjeOCi+OAguOAlOeiuuiqje+8j+adseS6rOmDveitsOS8muOAlVtTMjI4XQoK44GV44KJ44GrMjAyNu+8iOS7pOWSjDjvvInlubQ45pyI54++5Zyo44CB5p2x5Lqs6YO95LiL5rC06YGT5bGA44Gu54++6KGM5bel5LqL5oOF5aCx44Gr44GvICoq44CM6LGK5bO25Yy65YyX5aSn5aGa5LqM5LiB55uu5LuY6L+R5p6d57ea5bel5LqL44CNKiog44GM5o6y6LyJ44GV44KM44CB5pa95bel566H5omA44KS5YyX5aSn5aGa5LqM5LiB55uu44CB5bel5pyf44KSICoqMjAyM++8iOS7pOWSjDXvvInlubQxMOaciO+9njIwMjbvvIjku6Tlkow477yJ5bm0OeaciCoqIOOBqOOBl+OBpuOBhOOCi+OAguOBl+OBn+OBjOOBo+OBpuOAgeesrOS4gOacn+OCt+ODvOODq+ODieacrOS9k+OBruWujOaIkOW+jOOCguOAgeaXouioreW5uee3muOBqOOBruaOpee2muODu+aenee3muaVtOWCmeOBjOe2mee2muOBl+OBpuOBhOOCi+OAguOAlOeiuuiqje+8j+adseS6rOmDveS4i+awtOmBk+WxgOePvuihjOW3peS6i+aDheWgseOAlVtTMjI4XQoK44Gf44Gg44GX44CB5Y2D5bed5aKX5by35bm557ea44Gu57ea5b2i44KS44Gd44Gu44G+44G+5pen6LC356uv5bed44Gu5rKz6YGT5Lit5b+D57ea44Go44G/44Gq44GZ44GT44Go44Gv44Gn44GN44Gq44GE44CC5aKX5by35bm557ea44Gv54++5Luj44Gu5rW45rC05a++562W5LiK44Gu5b+F6KaB5oCn44CB5Zyw5LiL5Z+L6Kit54mp44CB56uL5Z2R5L2N572u44Gq44Gp44KS6LiP44G+44GI44Gm6Kit6KiI44GV44KM44Gf5Zyw5LiL5pa96Kit44Gn44GC44KK44CBKirml6fmsrPpgZPjga7kvY3nva7lvqnlhYPos4fmlpnjgafjga/jgarjgYQqKuOAguaXp+iwt+err+W3neODu+WNg+W3neW5uee3muODu+esrOS6jOWNg+W3neW5uee3muODu+Wil+W8t+W5uee3muOBruW5s+mdoueahOOBquS4gOiHtO+8j+S4jeS4gOiHtOOBr+OAgeS4i+awtOmBk+WPsOW4s+OChOW3peS6i+W5s+mdouWbs+OCkumHjeOBreOBpuWIpemAlOaknOiovOOBmeOCi+W/heimgeOBjOOBguOCi+OAguOAlOazqOaEj++8j+acquino+axuuOAlQoKIyMgMTE5LjIg56ys5LqM5Y2D5bed5bm557ea44Gv5ZCI5rWB5byP5LiL5rC06YGT44Gn44CB5rC06YGT5qmL5YiG5rC06Lev44Gu5ZCQ5Y+j44GL44KJ5LiA5a6a6ZmN6Zuo5pmC44Gr5rKz5bed44G45pS+5rWB44GZ44KL5qeL6YCgCgrmnbHkuqzpg73kuIvmsLTpgZPlsYDjga8yMDIy77yI5Luk5ZKMNO+8ieW5tDEw5pyIMjXml6XjgIEqKuesrOS6jOWNg+W3neW5uee3muOBr+WQiOa1geW8j+S4i+awtOmBk+OBp+OBguOCiuOAgeawtOmBk+api+WIhuawtOi3r+OBq+aOpee2muOBmeOCi+WQkOWPo+OBi+OCieS4gOWumuOBrumZjembqOaZguOBq+S4i+awtOOCkuays+W3neOBuOaUvua1geOBmeOCi+ani+mAoCoq44Gn44GC44KL44Go5YWs6KGo44GX44Gm44GE44KL44CC5ZCM5bm044CB5omA5a6a44Gu5p2h5Lu244KI44KK5bCP44GV44GE54q25rOB44Gn44KC5rWB5Ye644GZ44KL44CM6KaP5a6a5aSW44Gu5rWB5Ye644CN44GM56K66KqN44GV44KM44CB6YO944Gv5pei44Gr5YGc5q2i44GX44Gf44Go6Kqs5piO44GX44Gf44CC44CU56K66KqN77yP5p2x5Lqs6YO95LiL5rC06YGT5bGA44CVW1MyMjldCgrjgZPjgozjga/jgIHml6fosLfnq6/lt53jg7vlsI/nn7Plt53jgYzmmpfmuKDljJbjgZXjgozjgabjgIzlnLDkuIrjgYvjgonmtojjgYjjgZ/jgI3lvozjgoLjgIHmsLTns7vjga7lkI3jgpLlvJXjgY3ntpnjgZDkuIvmsLTpgZPjgYzljZjntJTjgarplonpjpbnrqHot6/jgajjgZfjgablrozntZDjgZfjgabjgYTjgovjgo/jgZHjgafjga/jgarjgY/jgIEqKumZjembqOaZguOBq+OBr+awtOmBk+api+WBtOOBruWQkOWPo+OCkuS7i+OBl+OBpuays+W3neOBuOaOkuawtOOBmeOCi+ePvuS7o+OBruawtOW+queSsOODu+aOkuawtOezu+e1seOCkuaMgeOBpCoq44GT44Go44KS56S644GZ44CC44CU6Kaz5a+f44CVW1MyMjldCgrkuIDmlrnjgIHjgZPjga7lkJDlj6PjgYvjgonjga7mlL7mtYHlhYjjg7vmtYHph4/jg7vmlL7mtYHmnaHku7bjgpLjgIHmsZ/miLjmnJ/vvZ7ov5Hku6Pjga7osLfnq6/lt53jga7oh6rnhLbmtYHph4/jgoTmsrPpgZPjgajnm7TmjqXmr5TovIPjgZnjgovjgZPjgajjga/jgafjgY3jgarjgYTjgILjgb7jgZ/jgIzlkIjmtYHlvI/jgI3jgafjgYLjgovjgZ/jgoHjgIHmlL7mtYHmsLTjga/pm6jmsLTjgaDjgZHjgafjga/jgarjgYTjgILml6fmsrPlt53jga7lvqnlhYPjgajjga/liIbjgZHjgIEqKuaal+a4oOWMluW+jOOBrumDveW4guaOkuawtOWPsioq44Go44GX44Gm5omx44GG44CC44CU5rOo5oSP44CVW1MyMjldCgojIyMg44GT44GT44GL44KJ6L+944GI44KL44GT44GoCgotIFsgXSDljYPlt53lopflvLflubnnt5rjga7nrKzkuIDmnJ/jg7vnrKzkuozmnJ/jga7oqIjnlLvlubPpnaLlm7PjgpLlhaXmiYvjgZfjgIHntIQ0Ljgga23lhajkvZPjga7otbfntYLngrnjgajjgIHnrKzkuIDmnJ/ntIQyLjUga23ljLrplpPjgpLlnLDlm7PkuIrjgafliIbjgZHjgovjgIIKLSBbIF0g5pen6LC356uv5bed5rKz6YGT44CB5Y2D5bed5bm557ea44CB56ys5LqM5Y2D5bed5bm557ea44CB5Y2D5bed5aKX5by35bm557ea44KS5ZCM5LiA5bqn5qiZ57O744Gn6YeN44Gt44CB5pen5rKz6YGT44KS6LiP6KWy44GZ44KL5Yy66ZaT44Go54us56uL44GX44Gm6YCa44KL5Yy66ZaT44KS5Yy65Yil44GZ44KL44CCCi0gWyBdIOWMl+Wkp+WhmuS6jOS4geebruS7mOi/keaenee3muW3peS6i+OBruWujOaIkOW+jOizh+aWmeOCkueiuuiqjeOBl+OAgTIwMjblubQ55pyI44Gu5bel5pyf5b6M44Gr44Gp44Gu5o6l57aa5qmf6IO944GM5L6b55So44GV44KM44Gf44GL56K66KqN44GZ44KL44CCCi0gWyBdIOesrOS6jOWNg+W3neW5uee3muOBruawtOmBk+api+WIhuawtOi3r+WQkOWPo+OBruS9jee9ruOAgeaUvua1geWFiOOAgei2iua1geawtOS9jeODu+aUvua1geadoeS7tuOCkuadseS6rOmDveS4i+awtOmBk+WxgOizh+aWmeOBp+eiuuiqjeOBl+OAgeaal+a4oOWMluW+jOOBruS4i+a1geaOkuawtOezu+e1seOCkuWbs+WMluOBmeOCi+OAggoKIyMjIOesrDExMeWbnuOBrui/veWKoOWHuuWFuAoKLSAqKltTMjI4XSoqIOadseS6rOmDveitsOS8muOAjOS7pOWSjOS6jOW5tCDlhazllrbkvIHmpa3lp5Tlk6HkvJrpgJ/oqJjpjLLnrKzlm5vlj7fjgI3igJXmnbHkuqzpg73kuIvmsLTpgZPlsYDlu7roqK3pg6jplbfnrZTlvIHjgajjgZfjgabjgIHljYPlt53lopflvLflubnnt5rjgpIyMDE45bm05bqm44GL44KJ5pW05YKZ44CBKirlhajkvZPlu7bplbfntIQ0Ljgga23jg7vnm7TlvoQzLjc1IG0qKuOAgeesrOS4gOacn+e0hDIuNSBrbeOCkuOCt+ODvOODq+ODieW3peazleOBp+aVtOWCmeOBl+iyr+eVmeeuoeOBqOOBl+OBpuaaq+WumuWIqeeUqOOBmeOCi+ioiOeUu+OCkuiqrOaYjuOAguOBguOCj+OBm+OBpuOAjOS7pOWSjOS6jOW5tOW6puWFrOWWtuS8gealreS8muioiOaxuueul+eJueWIpeWnlOWToeS8muesrOS6jOWIhuenkeS8mumAn+iomOmMsuesrOWbm+WPt+OAjeOBp+OAgTIwMTPlubTosarpm6jjgpLlj5fjgZHjgZ/mmYLplpM3NSBtbemZjembqOWvvuW/nOOAgeebtOW+hDMuNzUgbeODu+W7tumVtzIuNSBrbeOBruesrOS4gOacn+iyr+eVmeeuoeOCkueiuuiqjeOAgkNpTmlp44Gn6KW/5bGx6YGU5Lmf44O75aSn5aGa5L+h5LiA44O75bK45a6X44CM6KiI55S7IDHmmYLplpM3NW1t6ZmN6Zuo44Gr5a++5b+c44GZ44KL5LiL5rC06YGT5pa96Kit44KS44K344O844Or44OJ44OI44Oz44ON44Or44Gn5pW05YKZIDog5p2x5Lqs5LiL5rC06YGTIOWNg+W3neWil+W8t+W5uee3muOAjeOAjuODiOODs+ODjeODq+OBqOWcsOS4i+OAjzQ5KDEwKSwgNzkz4oCTNzk4LCAyMDE45bm0MTDmnIjjga7mm7joqozjgpLnorroqo3jgILjgZXjgonjgavmnbHkuqzpg73kuIvmsLTpgZPlsYDjga7nj77ooYzjgIzlt6Xkuovmg4XloLHoqbPntLDvvIjosYrls7bljLrvvInjgI3jgafjgIHljJflpKfloZrkuozkuIHnm67jga7jgIzosYrls7bljLrljJflpKfloZrkuozkuIHnm67ku5jov5Hmnp3nt5rlt6XkuovjgI3jgpIyMDIz5bm0MTDmnIjvvZ4yMDI25bm0OeaciOOBruW3peacn+OBqOOBl+OBpuaOsui8ieOBl+OBpuOBhOOCi+OBk+OBqOOCkueiuuiqjeOAgiAgCiAgaHR0cHM6Ly93d3cuZ2lrYWkubWV0cm8udG9reW8ubGcuanAvcmVjb3JkL3B1YmxpYy1lbnRlcnByaXNlLzIwMjAtMDQuaHRtbCAgCiAgaHR0dHBzOi8vd3d3Lmdpa2FpLm1ldHJvLnRva3lvLmxnLmpwL3JlY29yZC9tdW5pY2lwYWwtdXRpbGl0eS1hY2NvdW50L2Z5MjAyMC0wOS5odG1sICAKICBodHRwczovL2Npci5uaWkuYWMuanAvY3JpZC8xNTIwNTczMzMwMDUwMzQ3NjQ4ICAKICBodHRwczovL3d3dy5nZXN1aTEubWV0cm8udG9reW8ubGcuanAvbGl2aW5nL2E1L2N1cnJlbnQvMTE2LwoKLSAqKltTMjI5XSoqIOadseS6rOmDveS4i+awtOmBk+WxgOePvuS7o+OAjOS4i+awtOmBk+W5uee3mu+8iOesrOS6jOWNg+W3neW5uee3mu+8ieOBi+OCieays+W3neOBuOaUvua1geeKtuazgeOBq+OBp+OBp+OAjTIwMjLlubQxMOaciDI15pel4oCV56ys5LqM5Y2D5bed5bm557ea44KSICoq5ZCI5rWB5byP5LiL5rC06YGTKiog44Go44GX44Gm44CB5rC06YGT5qmL5YiG5rC06Lev44Gr5o6l57aa44GZ44KL5ZCQ5Y+j44GL44KJ5LiA5a6a6ZmN6Zuo5pmC44Gr5LiL5rC044KS5rKz5bed44G45pS+5rWB44GZ44KL5qeL6YCg44Go6Kqs5piO44CC6KaP5a6a5aSW5rWB5Ye644KS56K66KqN44GX44CB5pei44Gr5YGc5q2i44GX44Gf44GT44Go44KC5YWs6KGo44CCICAKICBodHRwczovL3d3dy5nZXN1aS5tZXRyby50b2t5by5sZy5qcC9pbmZvcm1hdGlvbi90b3BpY3MvMjAyMi8xMC8yMDIyMTAyNTAxCg==
         run: |
           python - <<'PY'
+          import base64
           from pathlib import Path
           p = Path('README.md')
           text = p.read_text(encoding='utf-8')
-          marker = '[S228]'
-          if marker in text:
-              raise SystemExit(0)
-          addition = r'''
-
----
-# 119. 追加調査（2026-08-29・第111回）
-
-## 119.1 谷端川・小石川系の現代下水道：千川増強幹線は全体計画約4.8 km、そのうち第一期約2.5 kmを直径3.75 mの貯留管として先行整備
-
-東京都議会公営企業委員会の2020（令和2）年速記録で、東京都下水道局建設部長は、豊島区南大塚地区の浸水対策として、既設の **千川幹線・第二千川幹線** の排水能力を強化する **千川増強幹線** を2018（平成30）年度から整備していると説明している。全体計画は **延長約4.8 km・直径3.75 m** の下水道管を第一期・第二期に分けて整備するもので、第一期は **約2.5 km** をシールド工法で施工し、完成後は事業効果を早期に出すため **貯留管として暫定利用** する計画とされる。〔確認／東京都議会・東京都下水道局答弁〕[S228]
-
-既存READMEでは、谷端川下流が小石川・千川と呼ばれ、暗渠化後に千川幹線系の下水道へ移行したことを追っている。[S10][S28][S103] 今回の資料は、その近代暗渠の系譜上にある現代の雨水対策が、単なる既設管補修ではなく、**旧谷端川・小石川低地を含む千川幹線流域の排水能力を別の大断面管で増強する事業**として計画されていることを具体化する。〔観察〕[S228]
-
-重要なのは、一般向け資料でしばしば示される「約2.5 km」は **第一期区間** であり、2020年の都答弁では全体計画を約4.8 kmとしている点である。2018年の専門誌『トンネルと地下』にも「1時間75mm降雨に対応する下水道施設をシールドトンネルで整備―東京下水道 千川増強幹線」という技術報告が掲載されており、事業が時間75 mm降雨対応の下水道強化として位置付けられていることを別系統の書誌からも確認できる。〔確認／専門誌書誌〕[S228]
-
-2020年度の東京都議会決算審査では、2013（平成25）年8月の集中豪雨で豊島・文京両区の千川幹線流域に大きな浸水被害が生じたことを踏まえ、第一期の貯留管を **直径3.75 m・延長2.5 km** として整備していることも確認できる。〔確認／東京都議会〕[S228]
-
-さらに2026（令和8）年8月現在、東京都下水道局の現行工事情報には **「豊島区北大塚二丁目付近枝線工事」** が掲載され、施工箇所を北大塚二丁目、工期を **2023（令和5）年10月～2026（令和8）年9月** としている。したがって、第一期シールド本体の完成後も、既設幹線との接続・枝線整備が継続している。〔確認／東京都下水道局現行工事情報〕[S228]
-
-ただし、千川増強幹線の線形をそのまま旧谷端川の河道中心線とみなすことはできない。増強幹線は現代の浸水対策上の必要性、地下埋設物、立坑位置などを踏まえて設計された地下施設であり、**旧河道の位置復元資料ではない**。旧谷端川・千川幹線・第二千川幹線・増強幹線の平面的な一致／不一致は、下水道台帳や工事平面図を重ねて別途検証する必要がある。〔注意／未解決〕
-
-## 119.2 第二千川幹線は合流式下水道で、水道橋分水路の吐口から一定降雨時に河川へ放流する構造
-
-東京都下水道局は2022（令和4）年10月25日、**第二千川幹線は合流式下水道であり、水道橋分水路に接続する吐口から一定の降雨時に下水を河川へ放流する構造**であると公表している。同年、所定の条件より小さい状況でも流出する「規定外の流出」が確認され、都は既に停止したと説明した。〔確認／東京都下水道局〕[S229]
-
-これは、旧谷端川・小石川が暗渠化されて「地上から消えた」後も、水系の名を引き継ぐ下水道が単純な閉鎖管路として完結しているわけではなく、**降雨時には水道橋側の吐口を介して河川へ排水する現代の水循環・排水系統を持つ**ことを示す。〔観察〕[S229]
-
-一方、この吐口からの放流先・流量・放流条件を、江戸期～近代の谷端川の自然流量や河道と直接比較することはできない。また「合流式」であるため、放流水は雨水だけではない。旧河川の復元とは分け、**暗渠化後の都市排水史**として扱う。〔注意〕[S229]
-
-### ここから追えること
-
-- [ ] 千川増強幹線の第一期・第二期の計画平面図を入手し、約4.8 km全体の起終点と、第一期約2.5 km区間を地図上で分ける。
-- [ ] 旧谷端川河道、千川幹線、第二千川幹線、千川増強幹線を同一座標系で重ね、旧河道を踏襲する区間と独立して通る区間を区別する。
-- [ ] 北大塚二丁目付近枝線工事の完成後資料を確認し、2026年9月の工期後にどの接続機能が供用されたか確認する。
-- [ ] 第二千川幹線の水道橋分水路吐口の位置、放流先、越流水位・放流条件を東京都下水道局資料で確認し、暗渠化後の下流排水系統を図化する。
-
-### 第111回の追加出典
-
-- **[S228]** 東京都議会「令和二年 公営企業委員会速記録第四号」―東京都下水道局建設部長答弁として、千川増強幹線を2018年度から整備、**全体延長約4.8 km・直径3.75 m**、第一期約2.5 kmをシールド工法で整備し貯留管として暫定利用する計画を説明。あわせて「令和二年度公営企業会計決算特別委員会第二分科会速記録第四号」で、2013年豪雨を受けた時間75 mm降雨対応、直径3.75 m・延長2.5 kmの第一期貯留管を確認。CiNiiで西山達也・大塚信一・岸宗「計画 1時間75mm降雨に対応する下水道施設をシールドトンネルで整備 : 東京下水道 千川増強幹線」『トンネルと地下』49(10), 793–798, 2018年10月の書誌を確認。さらに東京都下水道局の現行「工事情報詳細（豊島区）」で、北大塚二丁目の「豊島区北大塚二丁目付近枝線工事」を2023年10月～2026年9月の工期として掲載していることを確認。  
-  https://www.gikai.metro.tokyo.lg.jp/record/public-enterprise/2020-04.html  
-  https://www.gikai.metro.tokyo.lg.jp/record/municipal-utility-account/fy2020-09.html  
-  https://cir.nii.ac.jp/crid/1520573330050347648  
-  https://www.gesui1.metro.tokyo.lg.jp/living/a5/current/116/
-
-- **[S229]** 東京都下水道局「下水道幹線（第二千川幹線）から河川への放流状況について」2022年10月25日―第二千川幹線を **合流式下水道** とし、水道橋分水路に接続する吐口から一定降雨時に下水を河川へ放流する構造と説明。規定外流出を確認し、既に停止したことも公表。  
-  https://www.gesui.metro.tokyo.lg.jp/information/topics/2022/10/2022102501
-'''
-          p.write_text(text.rstrip() + addition + '\n', encoding='utf-8')
+          if '[S228]' not in text:
+              addition = base64.b64decode(__import__('os').environ['ADDITION_B64']).decode('utf-8')
+              p.write_text(text.rstrip() + '\n' + addition.rstrip() + '\n', encoding='utf-8')
           PY
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git commit -m 'docs: add Senkawa sewer system research'
-          git push origin HEAD:main
+          if ! git diff --cached --quiet; then
+            git commit -m 'docs: add Senkawa sewer system research'
+            git push origin HEAD:main
+          fi
