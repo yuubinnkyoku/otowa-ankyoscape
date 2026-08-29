@@ -2,7 +2,7 @@ name: Temporary research append
 
 on:
   pull_request:
-    types: [opened]
+    types: [synchronize]
 
 permissions:
   contents: write
@@ -17,40 +17,8 @@ jobs:
       - name: Append verified research
         shell: bash
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('README.md')
-          t=p.read_text(encoding='utf-8')
-          if '[S230]' in t:
-              raise SystemExit('S230 already exists')
-          add=r'''
-
----
-
-# 120. 追加調査（2026-08-30・第106回）
-
-## 120.1 水窪川・弦巻川：現在の雨水幹線は音羽通り下で交差し、旧河口位置をそのまま踏襲していない
-
-水路跡を現地調査している Natrium.jp は、東京都下水道局の下水道台帳を参照したうえで、江戸川橋付近の現在の雨水排水について、**音羽通り東側の水窪川筋に対応する雨水管が音羽通りの下で西側へ渡り、江戸川橋西側の「坂下幹線」吐口へ出る一方、弦巻川側の雑司ヶ谷幹線は反対に音羽通りの下を交差して江戸川橋東側へ出る**と整理している。〔下水道台帳を参照した現地調査／二次資料〕[S230]
-
-この位置関係は、旧河道と現在の下水道を同一視しないための具体例になる。水窪川の近世・近代の下流は、現在の巻石通り付近にあった旧神田上水へ注いだとされる一方、現在の雨水はその旧河口位置をそのまま使わず、音羽通りを横断して西側の神田川へ排水される。弦巻川側も同様に、現在の吐口位置だけから歴史的河口を逆算することはできない。〔観察〕[S230]
-
-```mermaid
-flowchart LR
-    A[水窪川旧流路<br/>音羽通り東側] --> B[現在の雨水管]
-    B --> C[音羽通り下を西へ横断]
-    C --> D[坂下幹線吐口<br/>江戸川橋西側]
-
-    E[弦巻川旧流路<br/>音羽通り西側] --> F[雑司ヶ谷幹線]
-    F --> G[音羽通り下を東へ横断]
-    G --> H[雑司ヶ谷幹線吐口<br/>江戸川橋東側]
-```
-
-ただし、今回直接確認できた公開資料は Natrium.jp の現地調査記事であり、東京都下水道局の台帳画面そのものを保存・引用したものではない。**管径、上下関係、交差位置の数値、坂下幹線の正式な系統範囲**は、東京都下水道局の最新台帳または工事図面で再確認する必要がある。特に、現在の雨水管の線形をそのまま昭和初期の暗渠化時点の線形とみなさない。〔注意／要一次資料確認〕[S230]
-
-## 120.2 谷端川・小石川：猫又橋の1918年親柱と1975年の橋際ポケットパークが旧河道横断点を現在まで固定している
-
-谷端川下流の小石川筋にあった猫又橋について、現地調査資料では、都道437号（不忍通り）付近に残る親柱に **「ねこまたはし」「大正七年三月成」** と刻まれていることが確認されている。大正7年3月は1918年3月であり、少なくともこの時点の架橋・改築を示す現物資料になる。〔現存親柱の観察／現地調査〕[S231]
+          if grep -q '\[S230\]' README.md; then exit 1; fi
+          echo 'Ci0tLQoKIyAxMjAuIOi/veWKoOiqv+afpe+8iDIwMjYtMDgtMzDvvIznrKwxMDblm57vvIkKCiMjIDEyMC4xIOawtOeqquW3neODu+W8puW3u+W3ne+8muingeWcqOOBrumbqOawtOW5uee·muOBvemfs+e+j+mAmuOCiuS4reW3neWPo+S9jee9ruOCkuOBneOBruOBvuOBvumphumtlumBhemBorjpvpLjgYTjgoYKCua0gei3r+i3o+OCkuePvuecvOiqv+afpeOBl+OBpuOBhOOCiyBOYXRyaXVtLmpwIOOBryDjgIHmnbHkuqzpg73kuIvmsLTpgZPlsYDjga7kuIvmsLTpgZPlj7DluLPjgpLlj4LnhafjgZfjgZ/jgYbjgYjjgafjgIHmsZ/miLjmna7mqYvku5jov5Hjga7nj77lnKjjga7pm6jmsLTmjpLmsLTjgavjgaTjgYTjgabjgIHjgJDpn7Pnv73pgJrjgormmLHkvprjga7msLTnqprlt53nrYvjgavlr77lv5zjgZnjgovpm6jmsLTnrqHjgYzpnaLnv73pgJrjgorjga7kuIvjgafopb/kvprjgbjmuKHjgorjgIHmsZ/miLjmna7mqYvopb/kvprjga7jgIzlnYLkuIvlubnntr/jgI3lkJDlj6Pjgbjlh7rjgovkuIDmlrnvvIzlvKzlt7vlmajjga7pm5Hlj7jjg7bku6Plubnntr/jga/lj43lr77jgavpn7Pnv73pgJrjgorjga7kuIvjgpLkuqTlt67jgZfjgabmsZ/miLjmna7mqYvmnbHkvprjgbjlh7rjgovjgJHjgajjgZHnkIbljYfjgabjgYTjgovjgILjgJTkuIvmsLTpgZPlj7DluLPjgpLlj4LnhafjgZfjgZ/nj77lnLDoqr/mn7vjg7zkuozmrKHos4fmlpnjgJXbUzIzMF0KCuOBk+OBruS9jee9rumWouS/r+OBr+OAgeaXp+ays+mBk+OBqOePvuWcqOOBruS4i+awtOmBkOOCkuWQjOS4gOimluOBquOBhOOBn+OCgeOBruWFtOS9k+S+i+OBqOOBquOCi+OAguawtOeqquW3neOBruS7o+S4luODu+i/keS7o+OBruS4i+axgeOBr+OAgeePvuWcqOOBruW3u+ecn+OBiuOCiumAjuOCiuOS7mOOBq+OBguOBo+OBn+aXp+eln+eUsOS4i+awtOOBuOazqOOBhOOBqOOBleOCjOOCi+S4gOaWueOAgeePvuWcqOOBrumbqOawtOOBryOBneOBruaXp+ayn+WPo+S9jee9ruOCkuOBneOBruOBvuOBvuS9v+OCj+OBmuOAgea4q+m+nOmAmuOCiuW6leOBi+OBpiOOBpuS9v+OBrueln+eUsOW3neOBuOaOkuawtOOBleOCjOOCi+OAguW8puW3u+W3neWBtOOCguWQjOanmOOBq+OAgeePvuWcqOOBruWQkOWPo+S9ruOBhuOBkeOBi+OCieats+a/kOS4i+awtOOBruaxs+WPo+OCkumAh+eul+OBmeOCi+OBk+OBqOOBr+OBp+OBjeOBquOBhOOAguOClOimgueWvn+OAlVtTMjMwXQoKYGBgbWVybWFpZApmbG93Y2hhcnQgTFIKICAgIEFb5rC056qS5bed5pen5rWBPGJyLz7pn7Pnv73pgJrjgormnbHkvprdIC0tPiBCW+ePvuWcqOOBrumbqOawtOeuoV0KICAgIEIgLS0+IENb6Z+z576S6YCa44KK5LiL44KS6KW/44G45qiq5patXQogICAgQyAtLT4gRFvlnaLkuIvlubnntr/lkJDlj6M8YnIvPua1n+W3neapi+iopb/kvprdCgogICAgRVvlvKzlt7vlma7ml6fmuYHot688YnIvPumfs+e+j+mAmuOCiummluS+pl0gLS0+IEZb6ZuR5Y+45p2D44OO5bm557eaXQogICAgRiAtLT4gR1vpn7Pnv73pgJrjgorkuIvjgpLkuqTlt67dCiAgICBHIC0tPiBIXumbkeWPo+S9ruW5uee·muWQkOWPo+S9ruWPo+S9ruW4guW3neapiao8YnIvPua1n+W3neapiaoDlt7HkvprdCmBgYAoK44Gf44Gg44GX44CB5LuK5Zue55u05o6l56K66KqN44Gn44GN44Gf5YWs6ZaL6LOH5paZ44GvIE5hdHJpdW0uanAg44Gu54++5Zyw6Kq/5p+l6KiY5LqL44Gn44GC44KK44CB5p2x5Lqs6YO95LiL5rC06YGT5bGA44Gu5Y+w5biz55S76Z2i44Gd44Gu44KC44Gu44KS5L+d5a2Y44O75byV55So44GX44Gf44KC44Gu44Gn44Gv44Gq44GE44CCKueuoeeEtuOAgeS4i+awtOeuoeeUruOBruWvuee3reOBqOWFseWQjOOBruaWueW8j+OBq+OBn+i/m+OBmeaWueOBjOe3s+OBhOOBo+OBpuOBhOOCi+OBruOBi+OBr+WFtOiPsuOBruWPr+ihqOOBo+OBpuOBjeOBquOBhOOOAguS4i+awtOmBkOOBruW4guW3neapiaoODu+W3peS6i+WbnuWbvuOBqOWwhOeFp+OBmeOCi+W/heimgeOBjOOBguOCi+OAguOClOazqOaEj+OBlOimgeWFs+OAgVtTMjMwXQoKIyMgMTIwLjIg6LC355uv5bed44O75bCP55+z5bed77ya54yr5Y+I5qmL44GuMTkxOOW5tOi6qabmn7Hjgajjg4rjg4Pjg4jluqvjga7mqYvpmZvjg53jgrHjg4Pjg4jjg5Hjg7zjgq/jgYzml6fmsrPpgZPmqKrnqKHngrnjgpLnj77lnKjjgb7jgaflm7rlrprjgZfjgabjgYTjgovjgoYKCu谷端川下流の小石川筋にあった猫又橋について、現地調査資料では、都道437号（不忍通り）付近に残る親柱に **「ねこまたはし」「大正七年三月成」** と刻まれていることが確認されている。大正7年3月は1918年3月であり、少なくともこの時点の架橋・改築を示す現物資料になる。〔現存親柱の観察／現地調査〕[S231]
 
 さらに文京区『土木現況』（令和4年4月）は、旧橋際の**千石3-13と千石2-7**に「猫又橋際①」「猫又橋際②」という2か所のポケットパークがあり、いずれも **1975（昭和50）年3月設置**と記録している。①は79.6㎡で遊歩道・便所、②は51.5㎡で遊歩道を備える。〔確認／文京区公的土木資料〕[S231]
 
@@ -67,16 +35,14 @@ flowchart LR
 
 ## 第106回の追加出典
 
-- **[S230]** Natrium.jp「神田川周辺の水路敷群（水窪川）」「神田川周辺の水路敷群（弦巻川）」―東京都下水道局の下水道台帳を参照し、江戸川橋付近で水窪川側の雨水管が音羽通り下を西へ横断して坂下幹線吐口へ、弦巻川側の雑司ヶ谷幹線が東側の吐口へ出るとする現地調査。**台帳原画面は今回直接保存確認できていないため二次資料扱い。**  
-  https://natrium.jp/canal_lot/kanda/mizukubo/index.html  
+- **[S230]** Natrium.jp「神田川周辺の水路敷群（水窪川）」「神田川周辺の水路敷群（弦巻川）」―東京都下水道局の下水道台帳を参照し、江戸川橋付近で水窪川側の雨水管が音羽通り下を西へ横断して坂下幹線吐口へ、弦巻川側の雑司ヶ谷幹線が東側の吐口へ出るとする現地調査。**台帳原画面は今回直接保存確認できていないため二次資料扱い。**
+  https://natrium.jp/canal_lot/kanda/mizukubo/index.html
   https://natrium.jp/canal_lot/kanda/tsurumaki/index.html
 
-- **[S231]** 文京区『土木現況』令和4年4月、ポケットパーク一覧―「猫又橋際①」（千石3-13、79.6㎡）、「猫又橋際②」（千石2-7、51.5㎡）をともに1975（昭和50）年3月設置と記録。あわせて Natrium.jp「小石川の水路跡」が現存親柱の「ねこまたはし」「大正七年三月成」の刻字を写真確認している。**1918年は親柱刻字による橋梁の成立・改築時点であり、初架設年とは断定しない。**  
-  https://www.city.bunkyo.lg.jp/documents/4645/20237148241.pdf  
+- **[S231]** 文京区『土木現況』令和4年4月、ポケットパーク一覧―「猫又橋際①」（千石3-13、79.6㎡）、「猫又橋際②」（千石2-7、51.5㎡）をともに1975（昭和50）年3月設置と記録。あわせて Natrium.jp「小石川の水路跡」が現存親柱の「ねこまたはし」「大正七年三月成」の刻字を写真確認している。**1918年は親柱刻字による橋梁の成立・改築時点であり、初架設年とは断定しない。**
+  https://www.city.bunkyo.lg.jp/documents/4645/20237148241.pdf
   https://natrium.jp/canal_lot/yabata/koishikawa/index.html
-'''
-          p.write_text(t.rstrip()+add+'\n',encoding='utf-8')
-          PY
+' | base64 -d >> README.md
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add README.md
