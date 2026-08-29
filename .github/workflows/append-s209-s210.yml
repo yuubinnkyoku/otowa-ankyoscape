@@ -1,0 +1,60 @@
+name: append-s209-s210
+
+on:
+  push:
+    paths:
+      - '.github/workflows/append-s209-s210.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Append research note
+        shell: bash
+        run: |
+          printf '%s' 'CgotLS0KIyAxMDYuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjnjg7vnrKw5OOWbnu+8iQoKIyMgMTA2LjEg6LGK5bO25Yy644GuMjAyNuW5tOmDveW4gueoi+eUu+izh+aWme+8mua0tOeqqOW3neODu+W8puW3uOW3neODu+iwt+err+W3neOBr+ePvuWcqOOCguOAjuirseeCuOW9ouOCkuOBp+OBj+ayssOaxn+OAjeOBqOOBm+OBpuWcsOW9ouODu+WcsOebp+aKiuOBr+S9v+OCjOOCiwrCiuWzsOWMuuOBjzIwMjY77yI5Luk5ZKMOO+8ieW5tDLmnIgz5pel44Gr5YWs6KGo44GX44Gf44CMKirosaLltbbljLrpg73luILjgaXjgY/jg6rjg5Pjgrjjg6fjg7PvvIjmlLnlrprntKDmoYjvvInvvIoqKuOAvuekrDLnq6DjgIzosaLltbbljLrjga7nj77nirbjgajnibnmgKfjgI3jga/jgIHosbbls7bljLrjga7lnLDlvaLjgavjgaTjgYTjgabjgIHmrabolLXpo4DjgYzjgIDooqPmiLjlvozmnJ/jgIHosLfnq6/lt53jgIHlvKblt53jgIHosLfnq6/lt53jgavoqLjjga7mtYHjgozjgavjgojjgaPjgabliYrjgonjgozjgIHlj7DlnLDjgajopIfpm5LjgarosLfjgYzlvqLmiJDjgZXjgozjgZ/jgajjgZfjgabjgYTjgovjgILmj7LkvJrjgZXjgozjgovmqJnpo5jlnLDlvaLlm7Pjgafjga/jgIHjgZPjgozjgonjgavliqDjgYjjgabjgIAqKuawtOeqquW3nioqIOOCguaYjuekuuOBleOCjOOAgeePvuWcqOOBq+OBr+aaluadjOWMluODu+S4i+a0tOmBkOWMluOBl+OBn+S4ieayssOaxn+OCkuOAgeePvuS7oOOBru é 都市計画資料でも地形形成を読むための線として扱っている。〔確認／豊島区都市計画資料〕[S209]
+
+同資料は地盤について、台地面を覆う自然堆積の関東ローム層を比較的安定した地盤とする一方、小河川などに削られてできた **谷底低地には、台地を形成していた土砂が再堆積した土や有機質土（腐植土）などが分布し、台地面より軟弱な地盤である** と説明する。〔確認／豊島区都市計画資料〕[S209]
+
+〔観察〕これは、既存[S162]で確認した「谷底低地」という現行の地盤分類を一段具体化する資料になる。水窪川・弦巻川・谷端川が暗渠化され、地表の河川景観が失われても、**旧河川が刻んだ谷と、その谷を埋める再堆積土・有機質土という地下の条件は都市計画上の地形・地盤認識に残っている**。したがって、旧河道を現在の道路形状だけで追うのではなく、標高地形図・地形分類・ボーリング柱状図・地籍を重ねる意味がさらに強まる。[S162][S209]
+
+ただし、この資料は豊島区全域を概観する都市計画資料であり、**「有機質土がある場所＝水窪川・弦巻川・谷端川の特定年代の河道中心線」ではない。** 谷底には支谷、湿地、池、氾濫・盛土・後世の造成も含まれうるため、個々の地点の旧河道位置や更新世の流向を、この地盤説明だけから確定しない。とくに既存[S01]の「弦巻川・水窪川が更新世に谷端川へ流れていた」仮説は、今回の資料で直接証明されたわけではない。〔注意／仮説評価〕
+
+## 106.2 谷端川・小石川低地の現代治水：2013年豪雨後の「千川増強幹線」は2025年にも接続工事が続いていた
+
+東京都議会の2020（令和2）年度公営企業会計決算特別委員会では、**文京区千石地域・豊島区南大塚地域**について、2013（平成25）年8月の集中豪雨で大きな浸水被害が発生したことを受け、東京都下水道局が既設の千川幹線を増強する **「千川増強幹線」** を整備していることが説明されている。施設は **内径3.75 m、延長約2.5 kmの貯留管**を中心とし、時間75 mm降雨への対応を目的とする。〔確認／東京都議会・下水道局答弁〕[S210]
+
+この千石～南大塚の帯は、既存READMEで追っている谷端川（小石川）の旧低地と重なる地域である。〔観察〕したがって、谷端川が地表河川から暗渠・下水道へ変わった後も、**旧谷地形に雨水が集まりやすいという問題に対して、21世紀には旧河川を覆蓋した幹線とは別に大口径の貯留管を追加する段階まで排水系が再編されている** と捉えられる。[S98][S162][S210]
+
+整備年代には注意が必要である。2023年の紹介資料では2024年度の運用開始予定とされていたが、豊島区の2025（令和7）年4月15日「豊島副都心開発調査特別委員会」資料は、**千川幹線と千川増強幹線を接続する工事を2025年6月以降に東京都下水道局が実施する** と報告している。〔確認／豊島区委員会資料〕[S210] したがって、「2024年度に全系統が完成・接続済み」とは扱わず、貯留管本体、各人孔・連絡管、既設幹線との接続が段階的に整備されたものとして記録する。
+
+また名称を混同しない。ここでいう **千川増強幹線・千川幹線は近現代の下水道施設**であり、江戸期の **千川上水** とは別である。また、谷端川の名を引き継ぐ **谷端川幹線・谷端川一号幹線** とも別系統の施設名である。今回の資料は「千川増強幹線＝谷端川旧河道」と証明するものではなく、**谷端川・小石川の旧低地を含む地域の現在の浸水対策を具体化する資料**として扱う。〔注意〕[S98][S210]
+
+### ここから追えること
+
+- [ ] 豊島区都市づくりビジョンの標高地形図を基盤地図情報の数値標高モデルから再現し、水窪川・弦巻川・谷端川の旧河道、谷底低地分類、既存ボーリング地点を同一図上で比較する。
+- [ ] 水窪川・弦巻川・谷端川沿いの公開ボーリング柱状図から、有機質土・盛土・沖積性堆積物の厚さと谷横断方向の変化を拾い、旧河道中心・湿地・人工埋立を区別できるか検討する。
+- [ ] 千川増強幹線の平面図・縦断図を東京都下水道局資料から確認し、谷端川旧河道、既設千川幹線、旧橋位置、2013年浸水地点との位置関係を地図化する。
+- [ ] 2024年度予定と2025年接続工事の関係を、工事竣工資料・供用開始資料で追い、「本体完成」「一部効果発現」「全接続・本格運用」を年代別に分ける。
+- [ ] 「千川幹線」という現代下水道名がいつ成立したかを下水道台帳・工事誌で確認し、千川上水や谷端川の歴史名称との関係／非関係を整理する。
+
+## 追加出典
+
+- **[S209]** 豊島区『豊島区都市づくりビジョン（改定素案）』第2章「豊島区の現状と特性」、2026年2月3日公表―谷戸川・神田川・弦巻川・谷端川などが武蔵野台地を削って複雑な谷を形成したと整理。標高地形図には水窪川・弦巻川・谷端川を表示。谷底低地には再堆積土や有機質土（腐植土）などが分布し、台地面より軟弱と説明。**改定素案段階の資料であることに注意。**  
+  https://www.city.toshima.lg.jp/295/kuse/iken/publiccomment/2512041223.html
+
+- **[S210]** 東京都議会「令和二年度公営企業会計決算特別委員会第二分科会速記録第四号」―文京区千石・豊島区南大塚地域の2013年8月集中豪雨後、時間75 mm降雨対応として千川増強幹線（内径3.75 m、延長約2.5 kmの貯留管）を整備しているとする下水道局関係答弁。あわせて、豊島区「千川増強幹線事業について」（2025年4月15日・豊島副都心開発調査特別委員会資料）は、千川幹線と千川増強幹線の接続工事を2025年6月以降に東京都下水道局が実施予定と報告。  
+  https://www.gikai.metro.tokyo.lg.jp/record/municipal-utility-account/fy2020-09.html  
+  https://adeac.jp/viewitem/toshima-history/viewer/viewer/mp15003420/data/mp15003420.pdf
+' | base64 -d >> README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: add valley geology and Senkawa sewer research"
+          git push origin HEAD:main
