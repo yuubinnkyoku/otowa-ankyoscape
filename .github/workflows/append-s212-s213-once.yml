@@ -19,50 +19,7 @@ jobs:
           set -euo pipefail
           grep -q '# 107. 追加調査（2026-08-29・第99回）' README.md
           if ! grep -q '\[S212\]' README.md; then
-            cat >> README.md <<'EOF'
-
-
----
-# 108. 追加調査（2026-08-29・第100回）
-
-## 108.1 谷端川：河川廃止後の覆蓋上部は、児童遊園→遊歩道→緑道へ段階的に転用された
-
-既存READMEでは、谷端川の暗渠化・下水道幹線化や現在の緑道を扱ってきたが、河川としての廃止後に**旧河川空間の地上部がいつ、どのような公共空間へ転用されたか**の行政年代は十分に固定できていなかった。
-
-豊島区公式「谷端川南緑道」は、谷端川について**1962（昭和37）年に河川として廃止され、暗渠の下水道幹線として使用されるようになった**とする。そのうえで、覆蓋上部について、**1966（昭和41）年に谷端川第1～第3児童遊園、1967（昭和42）年に第4児童遊園、1980（昭和55）年に遊歩道として都下水道局の承認を受け開放**したと記している。さらに1983（昭和58）年から施設改修整備が始まり、1990（平成2）年に終了し、西武池袋線から川越街道までが現在の谷端川南緑道となり、施設情報では**1991（平成3）年4月開園**とされる。〔確認／豊島区公式〕[S212]
-
-北側についても、豊島区公式「谷端川北緑道」は同じく1962年の河川廃止・下水道幹線化を記し、覆蓋上部を**1971（昭和46）年に谷端川第5児童遊園および遊歩道として都下水道局の承認を受け開放**したとする。その後、1990（平成2）年に施設改修が行われ、**西前橋から東武東上線下板橋駅前の自転車置場に至る区間**が谷端川北緑道となり、こちらも1991年4月開園とされる。〔確認／豊島区公式〕[S212]
-
-〔観察〕したがって、少なくとも豊島区内の旧谷端川空間は、河川廃止後ただちに現在の一体的な緑道になったわけではない。資料上は、**1962年の河川廃止・下水道幹線化 → 1966～71年の複数の児童遊園・遊歩道化 → 1983～90年を中心とする再整備 → 1991年の南北緑道開園**という段階を踏んでいる。旧河道上の現在の細長い公共空間を読む際には、「暗渠化工事の時期」と「覆蓋上部の公園・歩道としての供用時期」を分ける必要がある。[S212]
-
-一方、**1962年の「河川として廃止」だけから、谷端川の全区間で同年に物理的な暗渠工事が完了したとは断定しない。** 豊島区ページは行政上の河川廃止と現在の下水道利用を示すが、区間ごとの覆蓋工事・下水管施工の完成年月や施工順序までは示していない。また、児童遊園等については都下水道局の承認を受けたことが明記されるため、旧河川敷の上部利用には下水道施設管理との調整があったことまでは確認できるが、土地所有権・管理権の法的な移転時期は別史料で確認する必要がある。〔注意／未解決〕
-
-## 108.2 1985・1987年には、旧河道上で「谷端川の清流」を意図的に想起させる親水空間が開園していた
-
-豊島区公式「谷端川親水公園」は、池袋3-2-5の公園について、谷端川第二親水公園とともに**「かつての清流を偲んで」つくられた谷端川南緑道沿いの親水公園**と説明し、開園を**1985（昭和60）年4月**としている。〔確認／豊島区公式〕[S213]
-
-さらに「谷端川第二親水公園」（西池袋5-22-11）は、現在は暗渠となった谷端川について、**かつて子どもたちの遊び場でもあった清流を偲んで造られた**と明記する。園内には石造りの半円形の池と小噴水があり、開園は**1987（昭和62）年8月**である。〔確認／豊島区公式〕[S213]
-
-〔観察〕この2園の開園年は、南緑道全体の施設改修期（1983～1990年）の途中に入る。したがって、谷端川の地上空間では遅くとも1985年には、単に旧河道を歩道・児童遊園として使うだけでなく、**水景施設や名称によって消えた川を意図的に記憶させる整備**が具体化していたとみられる。[S212][S213]
-
-ただし、親水公園の水が旧谷端川の湧水・河川水・下水道水をそのまま利用しているとは資料にない。**現在の水景施設の水源・循環方式と旧河川の水理的連続性は未確認**であり、「河川の復活」ではなく、現段階では旧河川を想起させる公園施設として扱う。〔注意／未解決〕
-
-### ここから追えること
-
-- [ ] 1962年の河川廃止に対応する東京都の告示・河川台帳を確認し、対象区間と行政上の廃止年月日を確定する。
-- [ ] 1966～71年の谷端川第1～第5児童遊園について、都下水道局の上部占用・使用承認文書を探し、各遊園の位置・範囲と下水道施設の管理区分を確定する。
-- [ ] 1983～90年の谷端川南・北緑道施設改修の設計図・事業記録を探し、旧橋位置を模した欄干、舗装、水景施設が旧河道・旧橋とどの程度対応するか検証する。
-- [ ] 谷端川親水公園・第二親水公園の竣工図や設備台帳を確認し、水景施設の給水・循環・排水方式を明らかにする。
-
-## 追加出典
-
-- **[S212]** 豊島区「谷端川南緑道」（ページID 7285、更新日2015年2月25日）／「谷端川北緑道」（ページID 7294、更新日2015年2月25日）。南緑道ページは、谷端川の1962年河川廃止・下水道幹線化、1966年第1～第3児童遊園、1967年第4児童遊園、1980年遊歩道としての承認・開放、1983～90年の改修、1991年4月開園を記載する。北緑道ページは1971年第5児童遊園・遊歩道としての承認・開放、1990年改修、1991年4月開園を記載する。いずれも2026年8月29日閲覧。  
-  https://www.city.toshima.lg.jp/340/shisetsu/koen/033.html  
-  https://www.city.toshima.lg.jp/340/shisetsu/koen/042.html
-- **[S213]** 豊島区「谷端川親水公園」（ページID 7291、更新日2024年10月23日）／「谷端川第二親水公園」（ページID 7287、更新日2015年2月25日）。前者は池袋3-2-5、1985年4月開園、後者は西池袋5-22-11、1987年8月開園。両者を「かつての清流を偲んで」設けた親水公園と説明し、第二親水公園には半円形の池・小噴水がある。2026年8月29日閲覧。  
-  https://www.city.toshima.lg.jp/340/shisetsu/koen/039.html  
-  https://www.city.toshima.lg.jp/340/shisetsu/koen/035.html
-EOF
+            printf '%s' 'CgotLS0KIyAxMDguIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMjnjg7vnrKwxMDDlm57vvIkKCiMjIDEwOC4xIOiwt+err+W3ne+8muays+W3neW7g+atouW+jOOBruimhuiTi+S4iumDqOOBr+OAgeWFkOerpemBiuWckuKGkumBiuatqemBk+KGkue3kemBk+OBuOautemajueahOOBq+i7oueUqOOBleOCjOOBnwoK5pei5a2YUkVBRE1F44Gn44Gv44CB6LC356uv5bed44Gu5pqX5rig5YyW44O75LiL5rC06YGT5bm557ea5YyW44KE54++5Zyo44Gu57eR6YGT44KS5omx44Gj44Gm44GN44Gf44GM44CB5rKz5bed44Go44GX44Gm44Gu5buD5q2i5b6M44GrKirml6fmsrPlt53nqbrplpPjga7lnLDkuIrpg6jjgYzjgYTjgaTjgIHjganjga7jgojjgYbjgarlhazlhbHnqbrplpPjgbjou6LnlKjjgZXjgozjgZ/jgYsqKuOBruihjOaUv+W5tOS7o+OBr+WNgeWIhuOBq+WbuuWumuOBp+OBjeOBpuOBhOOBquOBi+OBo+OBn+OAggoK6LGK5bO25Yy65YWs5byP44CM6LC356uv5bed5Y2X57eR6YGT44CN44Gv44CB6LC356uv5bed44Gr44Gk44GE44GmKioxOTYy77yI5pit5ZKMMzfvvInlubTjgavmsrPlt53jgajjgZfjgablu4PmraLjgZXjgozjgIHmmpfmuKDjga7kuIvmsLTpgZPlubnnt5rjgajjgZfjgabkvb/nlKjjgZXjgozjgovjgojjgYbjgavjgarjgaPjgZ8qKuOBqOOBmeOCi+OAguOBneOBruOBhuOBiOOBp+OAgeimhuiTi+S4iumDqOOBq+OBpOOBhOOBpuOAgSoqMTk2Nu+8iOaYreWSjDQx77yJ5bm044Gr6LC356uv5bed56ysMe+9nuesrDPlhZDnq6XpgYrlnJLjgIExOTY377yI5pit5ZKMNDLvvInlubTjgavnrKw05YWQ56ul6YGK5ZyS44CBMTk4MO+8iOaYreWSjDU177yJ5bm044Gr6YGK5q2p6YGT44Go44GX44Gm6YO95LiL5rC06YGT5bGA44Gu5om/6KqN44KS5Y+X44GR6ZaL5pS+KirjgZfjgZ/jgajoqJjjgZfjgabjgYTjgovjgILjgZXjgonjgasxOTgz77yI5pit5ZKMNTjvvInlubTjgYvjgonmlr3oqK3mlLnkv67mlbTlgpnjgYzlp4vjgb7jgorjgIExOTkw77yI5bmz5oiQMu+8ieW5tOOBq+e1guS6huOBl+OAgeilv+atpuaxoOiii+e3muOBi+OCieW3nei2iuihl+mBk+OBvuOBp+OBjOePvuWcqOOBruiwt+err+W3neWNl+e3kemBk+OBqOOBquOCiuOAgeaWveioreaDheWgseOBp+OBryoqMTk5Me+8iOW5s+aIkDPvvInlubQ05pyI6ZaL5ZySKirjgajjgZXjgozjgovjgILjgJTnorroqo3vvI/osYrls7bljLrlhazlvI/jgJVbUzIxMl0KCuWMl+WBtOOBq+OBpOOBhOOBpuOCguOAgeixiuWztuWMuuWFrOW8j+OAjOiwt+err+W3neWMl+e3kemBk+OAjeOBr+WQjOOBmOOBjzE5NjLlubTjga7msrPlt53lu4PmraLjg7vkuIvmsLTpgZPlubnnt5rljJbjgpLoqJjjgZfjgIHopobok4vkuIrpg6jjgpIqKjE5NzHvvIjmmK3lkow0Nu+8ieW5tOOBq+iwt+err+W3neesrDXlhZDnq6XpgYrlnJLjgYrjgojjgbPpgYrmranpgZPjgajjgZfjgabpg73kuIvmsLTpgZPlsYDjga7mib/oqo3jgpLlj5fjgZHplovmlL4qKuOBl+OBn+OBqOOBmeOCi+OAguOBneOBruW+jOOAgTE5OTDvvIjlubPmiJAy77yJ5bm044Gr5pa96Kit5pS55L+u44GM6KGM44KP44KM44CBKiropb/liY3mqYvjgYvjgonmnbHmrabmnbHkuIrnt5rkuIvmnb/mqYvpp4XliY3jga7oh6rou6Lou4rnva7loLTjgavoh7PjgovljLrplpMqKuOBjOiwt+err+W3neWMl+e3kemBk+OBqOOBquOCiuOAgeOBk+OBoeOCieOCgjE5OTHlubQ05pyI6ZaL5ZyS44Go44GV44KM44KL44CC44CU56K66KqN77yP6LGK5bO25Yy65YWs5byP44CVW1MyMTJdCgrjgJToprPlr5/jgJXjgZfjgZ/jgYzjgaPjgabjgIHlsJHjgarjgY/jgajjgoLosYrls7bljLrlhoXjga7ml6fosLfnq6/lt53nqbrplpPjga/jgIHmsrPlt53lu4PmraLlvozjgZ/jgaDjgaHjgavnj77lnKjjga7kuIDkvZPnmoTjgarnt5HpgZPjgavjgarjgaPjgZ/jgo/jgZHjgafjga/jgarjgYTjgILos4fmlpnkuIrjga/jgIEqKjE5NjLlubTjga7msrPlt53lu4PmraLjg7vkuIvmsLTpgZPlubnnt5rljJYg4oaSIDE5NjbvvZ43MeW5tOOBruikh+aVsOOBruWFkOerpemBiuWckuODu+mBiuatqemBk+WMliDihpIgMTk4M++9njkw5bm044KS5Lit5b+D44Go44GZ44KL5YaN5pW05YKZIOKGkiAxOTkx5bm044Gu5Y2X5YyX57eR6YGT6ZaL5ZySKirjgajjgYTjgYbmrrXpmo7jgpLouI/jgpPjgafjgYTjgovjgILml6fmsrPpgZPkuIrjga7nj77lnKjjga7ntLDplbfjgYTlhazlhbHnqbrplpPjgpLoqq3jgoDpmpvjgavjga/jgIHjgIzmmpfmuKDljJblt6Xkuovjga7mmYLmnJ/jgI3jgajjgIzopobok4vkuIrpg6jjga7lhazlnJLjg7vmranpgZPjgajjgZfjgabjga7kvpvnlKjmmYLmnJ/jgI3jgpLliIbjgZHjgovlv4XopoHjgYzjgYLjgovjgIJbUzIxMl0KCuS4gOaWueOAgSoqMTk2MuW5tOOBruOAjOays+W3neOBqOOBl+OBpuW7g+atouOAjeOBoOOBkeOBi+OCieOAgeiwt+err+W3neOBruWFqOWMuumWk+OBp+WQjOW5tOOBq+eJqeeQhueahOOBquaal+a4oOW3peS6i+OBjOWujOS6huOBl+OBn+OBqOOBr+aWreWumuOBl+OBquOBhOOAgioqIOixiuWztuWMuuODmuODvOOCuOOBr+ihjOaUv+S4iuOBruays+W3neW7g+atouOBqOePvuWcqOOBruS4i+awtOmBk+WIqeeUqOOCkuekuuOBmeOBjOOAgeWMuumWk+OBlOOBqOihjOaUv+S4iuOBruW7g+atouW5tOaciOaXpeOCkueiuuWumuOBmeOCi+OAggotIFsgXSAxOTY2772eNzHlubTjga7osLfnq6/lt53nrKwx772e56ysNeWFkOerpemBiuWckuOBq+OBpOOBhOOBpuOAgemDveS4i+awtOmBk+WxgOOBruS4iumDqOWNoOeUqOODu+S9v+eUqOaJv+iqjeaWh+abuOOCkuaOouOBl+OAgeWQhOmBiuWckuOBruS9jee9ruODu+evhOWbsuOBqOS4i+awtOmBk+aWveioreOBrueuoeeQhuWMuuWIhuOCkueiuuWumuOBmeOCi+OAggotIFsgXSAxOTgz772eOTDlubTjga7osLfnq6/lt53ljZfjg7vljJfnt5HpgZPmlr3oqK3mlLnkv67jga7oqK3oqIjlm7Pjg7vkuovmpa3oqJjpjLLjgpLmjqLjgZfjgIHml6fmqYvkvY3nva7jgpLmqKHjgZfjgZ/mrITlubLjgIHoiJfoo4XjgIHmsLTmma/mlr3oqK3jgYzml6fmsrPpgZPjg7vml6fmqYvjgajjganjga7nqIvluqblr77lv5zjgZnjgovjgYvmpJzoqLzjgZnjgovjgIIKLSBbIF0g6LC356uv5bed6Kaq5rC05YWs5ZyS44O756ys5LqM6Kaq5rC05YWs5ZyS44Gu56uj5bel5Zuz44KE6Kit5YKZ5Y+w5biz44KS56K66KqN44GX44CB5rC05pmv5pa96Kit44Gu57Wm5rC044O75b6q55Kw44O75o6S5rC05pa55byP44KS5piO44KJ44GL44Gr44GZ44KL44CCCgojIyDov73liqDlh7rlhbgKCi0gKipbUzIxMl0qKiDosYrls7bljLrjgIzosLfnq6/lt53ljZfnt5HpgZPjgI3vvIjjg5rjg7zjgrhJRCA3Mjg144CB5pu05paw5pelMjAxNeW5tDLmnIgyNeaXpe+8ie+8j+OAjOiwt+err+W3neWMl+e3kemBk+OAje+8iOODmuODvOOCuElEIDcyOTTjgIHmm7TmlrDml6UyMDE15bm0MuaciDI15pel77yJ44CC5Y2X57eR6YGT44Oa44O844K444Gv44CB6LC356uv5bed44GuMTk2MuW5tOays+W3neW7g+atouODu+S4i+awtOmBk+W5uee3muWMluOAgTE5NjblubTnrKwx772e56ysM+WFkOerpemBiuWckuOAgTE5NjflubTnrKw05YWQ56ul6YGK5ZyS44CBMTk4MOW5tOmBiuatqemBk+OBqOOBl+OBpuOBruaJv+iqjeODu+mWi+aUvuOAgTE5ODPvvZ45MOW5tOOBruaUueS/ruOAgTE5OTHlubQ05pyI6ZaL5ZyS44KS6KiY6LyJ44GZ44KL44CC5YyX57eR6YGT44Oa44O844K444GvMTk3MeW5tOesrDXlhZDnq6XpgYrlnJLjg7vpgYrmranpgZPjgajjgZfjgabjga7mib/oqo3jg7vplovmlL7jgIExOTkw5bm05pS55L+u44CBMTk5MeW5tDTmnIjplovlnJLjgpLoqJjovInjgZnjgovjgILjgYTjgZrjgozjgoIyMDI25bm0OOaciDI55pel6Zay6Kan44CCICAKICBodHRwczovL3d3dy5jaXR5LnRvc2hpbWEubGcuanAvMzQwL3NoaXNldHN1L2tvZW4vMDMzLmh0bWwgIAogIGh0dHBzOi8vd3d3LmNpdHkudG9zaGltYS5sZy5qcC8zNDAvc2hpc2V0c3Uva29lbi8wNDIuaHRtbAotICoqW1MyMTNdKiog6LGK5bO25Yy644CM6LC356uv5bed6Kaq5rC05YWs5ZyS44CN77yI44Oa44O844K4SUQgNzI5MeOAgeabtOaWsOaXpTIwMjTlubQxMOaciDIz5pel77yJ77yP44CM6LC356uv5bed56ys5LqM6Kaq5rC05YWs5ZyS44CN77yI44Oa44O844K4SUQgNzI4N+OAgeabtOaWsOaXpTIwMTXlubQy5pyIMjXml6XvvInjgILliY3ogIXjga/msaDoooszLTItNeOAgTE5ODXlubQ05pyI6ZaL5ZyS44CB5b6M6ICF44Gv6KW/5rGg6KKLNS0yMi0xMeOAgTE5ODflubQ45pyI6ZaL5ZyS44CC5Lih6ICF44KS44CM44GL44Gk44Gm44Gu5riF5rWB44KS5YGy44KT44Gn44CN6Kit44GR44Gf6Kaq5rC05YWs5ZyS44Go6Kqs5piO44GX44CB56ys5LqM6Kaq5rC05YWs5ZyS44Gr44Gv5Y2K5YaG5b2i44Gu5rGg44O75bCP5Zm05rC044GM44GC44KL44CCMjAyNuW5tDjmnIgyOeaXpemWsuimp+OAgiAgCiAgaHR0cHM6Ly93d3cuY2l0eS50b3NoaW1hLmxnLmpwLzM0MC9zaGlzZXRzdS9rb2VuLzAzOS5odG1sICAKICBodHRwczovL3d3dy5jaXR5LnRvc2hpbWEubGcuanAvMzQwL3NoaXNldHN1L2tvZW4vMDM1Lmh0bWwK' | base64 -d >> README.md
           fi
           rm -f .github/workflows/append-s212-s213-once.yml
           git config user.name 'github-actions[bot]'
@@ -72,5 +29,3 @@ EOF
             git commit -m 'Add Yabata River post-culvert land-use chronology'
             git push
           fi
-
-# trigger
