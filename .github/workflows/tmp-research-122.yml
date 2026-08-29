@@ -18,16 +18,11 @@ jobs:
       - name: Append research findings
         shell: bash
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import base64
-          p = Path('README.md')
-          text = p.read_text(encoding='utf-8')
-          if '[S234]' in text or '[S235]' in text:
-              raise SystemExit('S234/S235 already present')
-          appendix = base64.b64decode('CgotLS0KIyAxMjIuIOi/veWKoOiqv+afu++8iDIwMjYtMDgtMzDjg7vnrKwxMDjlm57vvIkKCiMjIDEyMi4xIOadv+api+mnheWcsOS4i+S4reW9k+OBq+OAjOefoueVkeW3neOAjOOBruWQjeOBjOaui+OCi++8mjE5ODDlubTlrpHmupDlvI/jga7lhazmloflm7jppqjlhpnnnJ/jgafnorroqoYKCuadv+api+WMuuWFrOaWh+mkqOOBrumbuOWtkOWxl+ekuuWupDcyNuWPt+OAjOadv+api+mnheWJje+8geOCg+OBi+OBlyOWGmeecn+mkqOOAjeOBr+OAgeaYreWSjDU177yIMTk4MO+8ieW5tOaSruW9seOBruWGmeecn+eVquWPtzM1NTY2OOOCkuaEjOadv+api+mnheS4i+S4remAmui3r++8iOOAjOefoueVkeW3neiHqueUseS4i+S4remAmui3r+OCr+ODvOODi+ivveefoueVkeW3neiHqueUseS4i+S4remAmui3r+S4i+S4remBk+eUseaekO+8i+OBrOWujOaIkOW8j+WFu+OAjOOBqOOBlyOBpuWFrOmWi+OBl+OBpuOBh+OCi+OAgOOBleOCieWQjOmkqOiHquS4u+OBjOOAge+mAm+W4uOOBryLjjuLjg6/jq6/lt53jgI3jga7ooajoqJjjgYzlpJrjgYTkuIDmlrnvvIzjgJDjgZPjga7lnLDkuIvpganjga7lkI3np7Djgavjga/jgIznn6Llhatlt53jgI3jgYzkvb/nlKjjgZXjgozjgabjgYTjgovjgJfjgajjgY/ml6jooJjjgZfjgabjgYTjgovjgILjgJTnorroqo/vvI/mtbflhYvloLPlhazmloflm7jppqjjgJVVpDM0XQoK5pei5a2YUkVBRE1F44Gn44Gv44CB6LC35p62W3Xjga7liKXooajoqJjjg7vmj4Qjga7liKXooajoqJjjg7vmj4Qjga7kvb/nlKjjg7vmnK3msoHpp4Xlkajovrnjga7ml6fmsrPpgZPkvY3nva7jgpLopoHmlbDmlofjgYvjgonov73jgaPjgabjgYTjgovjgYzjgIHjgJDmmqfmrrnjljJblrpjjga7lkI3nq7vjgavjgIznn6Llhatlt53jgI3jga7lkI3jgYzmr4/jgaPjgabjgYTjgZ/jgJfjgZPjgajjga/mnKrooqvlhoXjgaDjgaPjgZ/jgILmsrPlt53jgZ3jga7jgoLjga7jgYwxOTYy5bm044Gr5buD5q2i44GV44KM44Gf5b6M44KC44CB5peL5rKz6YGT44KS5qiq5pat44O75Yip55So44GZ44KL6YO95biC5pa955Sz44Gu5ZCN56ew44Gr5peL5rKz5ZCN44Gu55Ww6KGo6KiY44GM57aZ5om/44GV44KM44Gf5L6L44Go44GX44Gm5L6h5YCk44GM44GC44KL44CC44CQ6Kaz5a+f44CRW1MyMzRdCgrjgZ/jgaDjgZfjgIHjgZPjga7lkI3np7DjgaDjgZHjgYvjgonjgIHlnLDkuIvpganjga7kuK3lv4PnspnjgYzmmqfmrrnjljJblib3jga7osLfnq6/lt53msrPpgZPkuK3lv4PjgajjgIDoh7TjgZnjgovjgajjmlq3lrprjgZfjgarjgYTjgILnj77lnKjjga7mraHopYzogIXlnLDkuIvpganjgIHpjYTpgZPmnrbjgZPjIHkuIvpganjgIHkuIvmsLTpgZPmnKzmgrnjgIHml6fmsrPpgZPjga7kvY3nva7plqLkv4Ljga/liKXjgIXjgavmtYvph4/lm7Pjg7vkuIvmsLTpgZPlj7Dlu5Djg7vpjYTpgZPlm7PpnaLjgafnhaflkIjjgZnjgovlv4XopoHjgYzjgYLjgovjgILmnb/oppbljLrlhazmloflm7jppqjjga7lhpnnnJ/ot4zmlpnjga/jgJDxOTgw5bm044Gr44Gd44Gu5ZCN56ew44Gu5Zyw5LiL6YGT44GM5a6M5oiQ44GX44Gf44GT44Go44CR44KS56S644GZ44GM44CB5ZCN56ew5Yi25a6a44Gu57WM57ev44KE44CM55+i55WR5bed44CN6KGo6KiY44KS6YG444KT44Gg5Li75L2T44G+44Gn44Gv6Kqs5piO44GX44Gm44GE44Gq44GE44CC44CQ5rOo5oSP77yP5pyq6Kej5rG644CRW1MyMzRdCgrjgJDogrDlrp/jgJHlnLDlkI3jg7vmsrPlt53lkI3jga7oqJjmhZjgajjgYTjgYbngrnjgafjga/jgIHosLfnq6/lt53jgYzlnLDooajjgYvjgonmtojjgYjjgZ/lvozjgoLjgIHntJjpgZPjg7vmqYrnrYTlubLjg7vo¦quawtOWFrOWckuOBoOOBkeOBp+OBquOBj+OAgeOAkumJhOmBk+S4i+OBruWcsOS4i+emAmui3r+WQjeOBq+OCguaXp+ays+W3neOBruiomOaHo+OBjOS/neWtmOOBleOCjOOBnOOAkQ==').decode('utf-8')
-          p.write_text(text.rstrip() + appendix + '\n', encoding='utf-8')
-          PY
+          if grep -q '\[S234\]' README.md || grep -q '\[S235\]' README.md; then
+            echo 'S234/S235 already present'
+            exit 0
+          fi
+          cat .tmp-research-122-appendix.md >> README.md
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
