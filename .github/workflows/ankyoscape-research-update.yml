@@ -15,11 +15,13 @@ jobs:
       - name: Append researched findings
         shell: bash
         run: |
-          python -c "from pathlib import Path; import base64; p=Path('README.md'); s=p.read_text(encoding='utf-8'); a=base64.b64decode('CgotLS0KCiMgMTI0LiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTMw44O756ysMTEw5Zue77yJCgojIyAxMjQuMSDosLfnq6/lt53kuIvmtYHjgajjgYLjgos56We55Sw5LiK5rC077ya6aOy55So5LiK5rC05bu65q2i5b6M44KC56C砲...').decode('utf-8'); p.write_text(s.rstrip()+a+'\n', encoding='utf-8') if '**[S238]**' not in s else None"
-      - name: Remove one-shot workflow and commit
+          if ! grep -q '\[S238\]' README.md; then
+            cat .research-update-124.md >> README.md
+          fi
+      - name: Remove staging files and commit
         shell: bash
         run: |
-          git rm .github/workflows/ankyoscape-research-update.yml
+          git rm .github/workflows/ankyoscape-research-update.yml .research-update-124.md
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
