@@ -1,0 +1,56 @@
+name: temporary append research 127
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-append-research-127.yml'
+permissions:
+  contents: write
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append research section
+        shell: bash
+        env:
+          PAYLOAD: 'CgotLS0KCiMgMTI3LiDov73liqDoqr/mn7vvvIgyMDI2LTA4LTMw44O756ysMTI35Zue77yJCgojIyAxMjcuMSDosrfnq6/lt53kuIvmtYHjgavjga/msbHlgLLjgYvjgonjgIzmjIfjg7bntLfjga7mu5/msLTjgI3jgYzlkIjmtYHjgZfjgZ/jgJoxOTM15bm044OO44CP5bCP55+z5bed5Yy65Y+y44CP44Gn5p+x55S66ZmE6L+R44G+44Gn5Zyw54K55YyWCu谷端川が文京区内へ入り「千川」「小石川」と呼ばれる下流部について、東京市小石川区編『小石川区史』（1935年）に、既存READMEではまだ拾っていない支流系の記述がある。同書の本文を転記した地域史資料によれば、小石川は丸山町から区内へ入り、林町・白山御殿町の台地と大塚台地の間を南東へ流れ、**柳町附近で「本郷台下より来る指ヶ谷の溝水」を合わせた**とされる。〔史料所在確認＋本文は二次転記〕[S243]
+
+国立国会図書館サーチでは『小石川区史』を、**東京市小石川区が1935（昭和10）年に刊行した993頁の区史**として確認でき、国立国会図書館デジタルコレクションでインターネット公開されている。文京区も2026年2月12日更新の「過去の区史刊行物について」で、1935年『小石川区史』を前身区の公式区史として掲げ、地域資料デジタルアーカイブ等で閲覧できるとしている。〔確認／公的書誌・公的アーカイブ案内〕[S243]
+
+〔観察〕この記述は、谷端川下流を一本の本流だけで捉える図式を修正する。少なくとも1935年時点の区史編纂者は、**本郷台側から指ヶ谷の低地を通ってきた別系統の排水・小流が、柳町付近で千川へ合流する**という水系像を採っていたことになる。現在の文京区も、千石緑地を「白山台地と、指ヶ谷の低地の境界」にある傾斜地と説明しており、「指ヶ谷」が実際の低地地形に対応することは公的資料からも確認できる。[S243]
+
+現在地への粗い対応では、文京区立指ケ谷小学校は**白山2-28-4**、柳町小学校は**小石川1-23-16**にある。これは旧町名そのものの境界や水路中心線を示すものではないが、「本郷台下→指ヶ谷低地→柳町付近→千川」という流向を現代地図で検討する際の地域単位の目安にはなる。〔観察／位置の補助情報〕[S243]
+
+一方、後世の暗渠調査ではこの指ヶ谷側の流れを**「東大下水」**と呼ぶ例があり、小石川本流側を「西大下水」とする整理も見られる。しかし、今回確認した1935年『小石川区史』の転記部分は「指ヶ谷の溝水」と記すだけで、**「東大下水」が1935年時点の公式名称だったことまでは確認できない**。また、国会図書館は原本画像を公開しているものの、今回の調査では該当頁画像を直接高精細確認できていないため、本文の語句は二次転記として扱う。〔注意／未解決〕[S243]
+
+この支流の存在が確かなら、谷端川下流の洪水・下水道化を考える際にも、本流上流域だけでなく本郷台・白山台側から集まる水を考慮する必要がある。ただし、1935年の記述から近世以前にも同じ人工水路が連続して存在したとは断定しない。町屋化に伴って排水路が整備・付替えられた可能性も残る。〔推定／要古地図・下水道資料照合〕[S243]
+
+### ここから追えること
+
+- [ ] 国立国会図書館デジタルコレクションの『小石川区史』該当頁を直接確認し、頁番号・原文表記・前後文脈を固定する。
+- [ ] 1850年代の小石川絵図、1883年『東京五千分一』、1909・1921年1万分1地形図を重ね、指ヶ谷低地から柳町へ向かう水路を年代別に追う。
+- [ ] 東京市の下水道図・道路台帳等で「東大下水」「西大下水」の名称と線形を一次資料側から確認し、1935年区史の「指ヶ谷の溝水」と同一系統か検証する。
+- [ ] 柳町付近の合流点を旧町界・地籍・標高と照合し、谷端川本流との合流位置を街区単位まで絞る。
+
+## 追加出典
+
+- **[S243]** 東京市小石川区編『小石川区史』、東京市小石川区、1935年。国立国会図書館サーチは書誌（993頁、NDL永続的識別子 `info:ndljp/pid/1875569`）とインターネット公開を確認できる。文京区「過去の区史刊行物について」（2026年2月12日更新）も前身区の区史として掲載。本文の「柳町附近で本郷台下より来る指ヶ谷の溝水を合わせる」という内容は、今回、同書を転記する「小石川 歴史散歩」で確認したため、**原本該当頁を直接照合するまでは二次転記として扱う**。地形の補助根拠として文京区「千石緑地」は白山台地と指ヶ谷低地の境界を明記する。  
+  https://ndlsearch.ndl.go.jp/books/R100000039-I1875569  
+  https://www.city.bunkyo.lg.jp/b001/p005257.html  
+  https://ma-maison.sakura.ne.jp/hill/hist_koishikawa2/hist_koishikawa2_3.html  
+  https://www.city.bunkyo.lg.jp/b036/p004895.html
+'
+        run: |
+          python - <<'PY'
+          import os, base64
+          from pathlib import Path
+          p = Path('README.md')
+          p.write_text(p.read_text(encoding='utf-8') + base64.b64decode(os.environ['PAYLOAD']).decode('utf-8'), encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'Add Sasugaya tributary note to Yabata River research'
+          git push
