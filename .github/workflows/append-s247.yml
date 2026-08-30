@@ -17,11 +17,38 @@ jobs:
       - name: Append researched note
         shell: bash
         run: |
-          python - <<'PY'
-          import base64
-          from pathlib import Path
-          p = Path('README.md')
-          text = p.read_text(encoding='utf-8')
-          marker = '# 130. 追加調査（2026-08-30・第130回）'
-          if marker not in text:
-              payload = base64.b64decode('LS0tCgojIDEzMC4g6L+95Yqg6Kq/5p+777yIMjAyNi0wOC0zMOODu+esrDEzMOWbnu+8iQoKIyMgMTMwLjEg6LC356uv5bed77yaMTk5OOW5tOOBruixiuWztOWMuuW6g+WgseOBr+OAjOWkp+ato+W5tOS7o+OBvuOBp+eUn+a0u+eUqOawt+ODu+eBiuebugOawt+OAjOOBo+aVtOeQhuOBl+OAgea2iOOBi+W3neWQjeOCkuWcsOWfn+iusOaGhuOBq+OBo+OBpuWGjeWIqeeUqOOBmeOBpuOBhgovnmoQKCuixiuWztOWMuuW6g+WgseiqsuOBjCAqKjE5OTgo5bmz5oiQMTDvvInlubQ55pyIMTHml6UgKuOBq+eZuuihqOOBm+OBnOOItuOAgijooZfjga7oqbHpoYzjgInjgIzoirHjga7jgYrmsZ/jgafdsaDooovjgavlgpLjgIDjgIDlnLDlhYPjg5bjg6njg7Pjg4nmnbXphZLjgI7jgoTjgbDjgZ/lt53jgI/kuovlo7LjgI3jga/jgIHllYblk4HntLnku4vjga7liY3mj5DjgajjgZfjgabosbfjgYzjga7mnaXmrZfjgpLjgb7jgajjgoHjgabjgYTjgovjgILjgZ3jgZPjgafjga/jgIHosbfnq6/lt53jgpL**6KaB55S644O754K957O25bO255Sx56S+44Gu6Ieq54S25rmr5rC05rGg44KS5rC05rqQ44Go44GX44CB5pen6ZW35bSO5p2R44O75rud6YeO5bed5p2R44O75beo6bO25p2R44KS57WM44Gm5bCP55/z5bed5p2R44G454+j44KK44CB56We55Sw5bed44G45ZCI5rWB44GZ44KL5bu26ZW344GKMTEga23jga7msrPlt53**44Go6Kqs5piO44GX44Gf44GG44GI44Gn44CB**5rGf5oi45pmC5Luj44Gr44Gv5Y2D5bed5LiK5rC044GL44KJ5YiG5rC044KS5Y+X44GR44CB5aSn5q2j5pmC5Luj44G+44Gn5rWB5Z+f44Gu55Sf5rS755So5rC044O754Gv5rqi55So5rC044Go44GX44Gm5Yip55So44GV44KM44Gf**44Go6KiY44GX44Gm44GE44KL44CC44CQ56K66KqN77yP6LGK5bO25Yy65bqD5aCx6LOH5paZ44CRW1MyNDddCgrmsLTmupDjg7vlu7bplbfjg7vljYPlt53kuIrmsLTjgYvjgonjga7liIbmsLToh6rkvZPjga/mh4blrZjjg7njg7zjg4nkuK3jga5bUzA5XVtTMTBdW1MxMV1bUzE5NF3jgafnoLbooYzmuIjjgb/jgafjgYLjgorjgIHku4rlm57jga7mlrDoqIjjgZfjgZfjga/kuLvjgav**6LGK5bO25Yy66Ieq6Lqr44GM19985bm05pmC54K544Gn44CM5aSn5q2j5pmC5Luj44G+44Gn44CN44Go5Yip55So5pmC5pyf44Gu5LiL6ZmQ44KS56S644GX44Gm44GE44KL44GT44Go**44Gr44GC44KL44CC44CQ6Kaz5a+f44CRW1MyNDddIOOBnOOBo+OBl+OAgeOBk+OBruW6g+Wgseizh+aWmeOBr+OAjuixiuWztOWMuuWPs+OAj+OCk+imgee0hOBl+OBpuOBhOOCi+OCguOBruOBp+OAgeWAi+OAheOBruWPlua0j+ODu+a0lOOBhOWgt+ODu+a4sOi3r+ODu+aBkOa8keOBl+aWveOBjOWkp+ato+acn+OBruS9leW5tOOBvuOBp+WtmOe2muOBl+OBnOOBi+OCk+ekuuOBmeS4gOasoeeahOOBqua0t+WIqeeJiOOBruawt+WIqeeUtOiomOmMh+OBp+OBquOBhOOAguOB—> ...
+          if ! grep -Fq '# 130. 追加調査（2026-08-30・第130回）' README.md; then
+            cat >> README.md <<'EOF'
+
+---
+
+# 130. 追加調査（2026-08-30・第130回）
+
+## 130.1 谷端川：1998年の豊島区広報は「大正時代まで生活用水・灌漑用水」と整理し、消えた川名を地域記憶として再利用している
+
+豊島区広報課が **1998（平成10）年9月11日** に発表した〈街の話題〉「花のお江戸は池袋に候　地元ブランド清酒『やばた川』発売」は、商品紹介の前提として谷端川の来歴をまとめている。そこでは、谷端川を**要町・粟島神社の自然湧水池を水源とし、旧長崎村・滝野川村・巣鴨村を経て小石川村へ至り、神田川へ合流する延長約11 kmの河川**と説明したうえで、**江戸時代には千川上水から分水を受け、大正時代まで流域の生活用水・灌漑用水として利用された**と記している。〔確認／豊島区広報資料〕[S247]
+
+水源・延長・千川上水からの分水自体は既存READMEの[S09][S10][S11][S194]で確認済みであり、今回の新規性は主に**豊島区自身が1998年時点で「大正時代まで」と利用時期の下限を示していること**にある。〔観察〕[S247] ただし、この広報資料は『豊島区史』を要約しているもので、個々の取水・洗い場・灌漑施設が大正期の何年まで存続したかを示す一次的な水利記録ではない。したがって「谷端川流域の全地点で大正末まで生活用水・灌漑利用が継続した」とは断定しない。〔注意〕[S247]
+
+同資料はさらに、暗渠化され公園緑地遊歩道となった谷端川の名を **「やばた川」** として1998年の地域商品名に採用し、ラベルに池袋御嶽神社氏子16町会の祭半纏の印を配し、題字を同神社宮司が揮毫したと記録する。〔確認／豊島区広報資料〕[S247] これは河川工学上の情報ではないが、**川が物理的に消えた後も、旧河川名が地域共同体の歴史記憶・地域表象として再利用されていた具体的な時点**を示す。既存READMEで追っている暗渠上部の緑道化や橋名・旧河川名の残存とは異なる種類の「暗渠化後の記憶」の証拠になる。〔観察〕[S247]
+
+なお、広報本文は谷端川沿いの「池袋貝塚」に触れ、弥生時代には流域に集落が形成されていたことがうかがえるともするが、考古学的な年代・遺跡範囲はこの広報記事だけでは検証できないため、今回は新規事実として採用しない。〔注意〕
+
+### ここから追えること
+
+- [ ] 広報資料が参照した『豊島区史』の該当頁を特定し、「大正時代まで生活用水・灌漑用水」の根拠となる史料・聞き取り・年代記述を確認する。
+- [ ] 大正期の旧版地形図、耕地整理資料、水利組合資料から、谷端川沿いの水田・洗い場・取水施設がいつまで残ったかを地点別に絞る。
+- [ ] 1998年の「やばた川」命名と、谷端川緑道・旧橋名表示・地域祭礼などを比較し、暗渠化後に旧河川名がどの媒体で継承されたかを時系列化する。
+
+## 追加出典
+
+- **[S247]** 豊島区広報課〈街の話題〉「花のお江戸は池袋に候　地元ブランド清酒『やばた川』発売」、1998年9月11日。谷端川について、要町粟島神社の自然湧水池を水源、延長約11 km、江戸期に千川上水から分水を受け、**大正時代まで流域の生活用水・灌漑用水として活用**されたと記す。また、暗渠化後の旧河川名「やばた川」が1998年に地域表象として商品名へ用いられたことを確認できる。**河川史部分は同資料が『豊島区史』を要約した二次的整理であり、利用終期の一次史料は未確認。**  
+  https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH100911/data/pressH100911.pdf
+EOF
+          fi
+          rm -f .github/workflows/append-s247.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md .github/workflows/append-s247.yml
+          git commit -m 'docs: add 1998 public record on Yabata River use and memory'
+          git push
