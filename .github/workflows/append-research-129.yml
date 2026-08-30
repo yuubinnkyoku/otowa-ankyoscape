@@ -13,11 +13,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Append research on existing branch
+      - name: Switch research branch
+        run: |
+          git fetch origin research-129
+          git switch research-129
+      - name: Append README
         shell: bash
         run: |
-          git fetch origin research-129:research-129
-          git switch research-129
           if ! grep -qF '[S245]' README.md; then
             cat >> README.md <<'EOF'
 
@@ -55,8 +57,13 @@ jobs:
   https://dl.ndl.go.jp/pid/2957668
 EOF
           fi
+      - name: Configure git
+        run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - name: Commit README
+        run: |
           git add README.md
           git commit -m 'docs: add Takada sewer approval chronology'
-          git push origin research-129
+      - name: Push research branch
+        run: git push origin research-129
