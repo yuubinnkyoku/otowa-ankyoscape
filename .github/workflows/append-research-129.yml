@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Append research and clean up
+      - name: Append research
         shell: bash
         run: |
           if ! grep -qF '[S245]' README.md; then
@@ -51,10 +51,9 @@ jobs:
   https://dl.ndl.go.jp/pid/2957668
 EOF
           fi
-          rm -f .github/workflows/append-research-129.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
+          git add README.md
           if ! git diff --cached --quiet; then
             git commit -m 'docs: add Takada sewer approval chronology'
             git push
