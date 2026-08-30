@@ -17,10 +17,6 @@ jobs:
       - name: Append verified research note
         shell: bash
         run: |
-          if grep -q '^# 131\. 追加調査' README.md; then
-            echo 'Section already exists; nothing to do.'
-            exit 0
-          fi
           cat >> README.md <<'EOF'
 
 ---
