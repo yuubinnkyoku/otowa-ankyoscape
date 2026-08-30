@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/append-research-132.yml'
+      - '.github/research-trigger-132.txt'
 
 permissions:
   contents: write
