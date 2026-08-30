@@ -1,0 +1,46 @@
+name: append-s247-trigger3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.research-trigger-s247-3'
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append researched note
+        shell: bash
+        run: |
+          if ! grep -Fq '# 130. 追加調査（2026-08-30・第130回）' README.md; then
+            echo 'Ci0tLQojIDEzMC4g6L+95Yqg6Kq/5p+777yIMjAyNi0wOC0zMOODu+esrDEzMOWbnu+8iQoKIyMgMTMwLjEg6LC356uv5bed77yaMTk5OOW5tOOBruixiuWztOWMuuW6g+WgseOBr+OAjOWkp+ato+W5tOS7o+OBvuOBp+eUn+a0u+eUqOawt+ODu+eBiuebugOawt+OAjOOBo+aVtOeQhuOBl+OAgea2iOOBi+W3neWQjeOCkuWcsOWfn+iusOaGhuOBq+OBo+OBpuWGjeWIqeeUqOOBmeOBpuOBhgovnmoQKCuixiuWztOWMuuW6g+WgseiqsuOBjCAqKjE5OTgo5bmz5oiQMTDvvInlubQ55pyIMTHml6UgKuOBq+eZuuihqOOBm+OBnOOItuOAgijooZfjga7oqbHpoYzjgInjgIzoirHjga7jgYrmsZ/jgafdsaDooovjgavlgpLjgIDjgIDlnLDlhYPjg5bjg6njg7Pjg4nmnbXphZLjgI7jgoTjgbDjgZ/lt53jgI/kuovlo7LjgI3jga/jgIHllYblk4HntLnku4vjga7liY3mj5DjgajjgZfjgabosbfjgYzjga7mnaXmrZfjgpLjgb7jgajjgoHjgabjgYTjgovjgILjgZ3jgZPjgafjga/jgIHosbfnq6/lt53jgpLlrpzmmYbojbHnpL7jga7oh6rnhLblrabmsLTmsaDjgpLmsLTmupDjgajjgZfjgIHml6fplbfltI7mnZHjg7vmu5Xph47lt53mnZHjg7vlt6jpsrXmnZHjgpLntYzjgablsI/nm7Plt53mnZHjgbjoh7PjgorjgIHnpZ7nlLDlt53jgbjlkIjlub/jgZnjgovlu7bplbfntIoxMSBrbeOBruays+W3neOBo+aWh+aYjuOBl+OBnOS4iuOBp+OAgeaxn+ 戸時代には千川上水から分水を受け、大正時代まで流域の生活用水・灌漑用水として利用された**と記している。〔確認／豊島区広報資料〕[S247]
+
+水源・延長・千川上水からの分水自体は既存READMEの[S09][S10][S11][S194]で確認済みであり、今回の新規性は主に**豊島区自身が1998年時点で「大正時代まで」と利用時期の下限を示していること**にある。〔観察〕[S247] ただし、この広報資料は『豊島区史』を要約しているもので、個々の取水・洗い場・灌漑施設が大正期の何年まで存続したかを示す一次的な水利記録ではない。したがって「谷端川流域の全地点で大正末まで生活用水・灌漑利用が継続した」とは断定しない。〔注意〕[S247]
+
+同資料はさらに、暗渠化され公園緑地遊歩道となった谷端川の名を **「やばた川」** として1998年の地域商品名に採用し、ラベルに池袋御嶽神社氏子16町会の祭半纏の印を配し、題字を同神社宮司が揮毫したと記録する。〔確認／豊島区広報資料〕[S247] これは河川工学上の情報ではないが、**川が物理的に消えた後も、旧河川名が地域共同体の歴史記憶・地域表象として再利用されていた具体的な時点**を示す。既存READMEで追っている暗渠上部の緑道化や橋名・旧河川名の残存とは異なる種類の「暗渠化後の記憶」の証拠になる。〔観察〕[S247]
+
+なお、広報本文は谷端川沿いの「池袋貝塚」に触れ、弥生時代には流域に集落が形成されていたことがうかがえるともするが、考古学的な年代・遺跡範囲はこの広報記事だけでは検証できないため、今回は新規事実として採用しない。〔注意〕
+
+### ここから追えること
+
+- [ ] 広報資料が参照した『豊島区史』の該当頁を特定し、「大正時代まで生活用水・灌漑用水」の根拠となる史料・聞き取り・年代記述を確認する。
+- [ ] 大正期の旧版地形図、耕地整理資料、水利組合資料から、谷端川沿いの水田・洗い場・取水施設がいつまで残ったかを地点別に絞る。
+- [ ] 1998年の「やばた川」命名と、谷端川緑道・旧橋名表示・地域祭礼などを比較し、暗渠化後に旧河川名がどの媒体で継承されたかを時系列化する。
+
+## 追加出典
+
+- **[S247]** 豊島区広報課〈街の話題〉「花のお江戸は池袋に候　地元ブランド清酒『やばた川』発売」、1998年9月11日。谷端川について、要町粟島神社の自然湧水池を水源、延長約11 km、江戸期に千川上水から分水を受け、**大正時代まで流域の生活用水・灌漑用水として活用**されたと記す。また、暗渠化後の旧河川名「やばた川」が1998年に地域表象として商品名へ用いられたことを確認できる。**河川史部分は同資料が『豊島区史』を要約した二次的整理であり、利用終期の一次史料は未確認。**
+  https://adeac.jp/viewitem/toshima-history/viewer/viewer/pressH100911/data/pressH100911.pdf
+' | base64 -d >> README.md
+          fi
+          rm -f .research-trigger-s247 .research-trigger-s247-2 .research-trigger-s247-3 .github/workflows/append-s247.yml .github/workflows/append-s247-trigger.yml .github/workflows/append-s247-trigger2.yml .github/workflows/append-s247-trigger3.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'docs: add 1998 public record on Yabata River use and memory'
+          git push
