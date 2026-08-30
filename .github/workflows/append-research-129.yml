@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Append research on branch
+        with:
+          fetch-depth: 0
+      - name: Append research on existing branch
         shell: bash
         run: |
-          git checkout -b research-129
+          git fetch origin research-129:research-129
+          git switch research-129
           if ! grep -qF '[S245]' README.md; then
             cat >> README.md <<'EOF'
 
@@ -56,4 +59,4 @@ EOF
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add README.md
           git commit -m 'docs: add Takada sewer approval chronology'
-          git push origin HEAD:refs/heads/research-129
+          git push origin research-129
