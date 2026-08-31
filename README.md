@@ -8,6 +8,14 @@
 > このリポジトリでは、既知の河川史をまとめるだけでなく、**まだ決着していない流路・接続・成立年代を史料から検証すること**を重視します。
 > とくに「水窪川と弦巻川はどこかで合流していたのか」「音羽通り西側の弦巻川下流はいつ成立したのか」「弦巻川・水窪川側と谷端川側の更新世旧河道はどちら向きに流れていたのか」は中心的な未解決問題です。
 
+<p align="center">
+  <a href="docs/open-questions/tsurumaki-mizukubo-confluence.md">
+    <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Otowa_ezu_%28IA_dr_otowa-ezu-15059016%29.jpg?width=1000" alt="幕末の音羽・雑司ヶ谷周辺を描いた尾張屋版 Otowa ezu" width="760">
+  </a>
+</p>
+
+<p align="center"><sub>幕末の音羽・雑司ヶ谷周辺を描いた尾張屋版 <i>Otowa ezu</i>。画像：David Rumsey Map Collection / Wikimedia Commons。1851年近吾堂版とは別史料。画像をクリックすると合流問題の検討ページへ移動します。</sub></p>
+
 ## 未解決問題
 
 このリポジトリの中心です。解決していない問題は川別の概要へ埋め込まず、できるだけ独立した文書として追跡します。
