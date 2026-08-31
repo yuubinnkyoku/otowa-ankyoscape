@@ -9,7 +9,7 @@
 > とくに「水窪川と弦巻川はどこかで合流していたのか」「音羽通り西側の弦巻川下流はいつ成立したのか」「弦巻川・水窪川側と谷端川側の更新世旧河道はどちら向きに流れていたのか」は中心的な未解決問題です。
 
 <p align="center">
-  <a href="docs/open-questions/tsurumaki-mizukubo-confluence.md">
+  <a href="docs/open-questions/水窪川と弦巻川の合流・接続問題.md">
     <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Otowa_ezu_%28IA_dr_otowa-ezu-15059016%29.jpg?width=1000" alt="幕末の音羽・雑司ヶ谷周辺を描いた尾張屋版 Otowa ezu" width="760">
   </a>
 </p>
@@ -22,7 +22,7 @@
 
 | 問題 | 現状 |
 | --- | --- |
-| **水窪川と弦巻川は合流していたのか** | [独立文書で検討中](docs/open-questions/tsurumaki-mizukubo-confluence.md) |
+| **水窪川と弦巻川は合流していたのか** | [独立文書で検討中](docs/open-questions/水窪川と弦巻川の合流・接続問題.md) |
 | **音羽谷西側の弦巻川下流はいつ成立したのか** | 1681年前後の造成、水田開発・灌漑再編、段階的な水路拡張など複数案が残る |
 | **更新世の旧河道はどちら向きに流れていたのか** | 滝口志郎（2019）が谷端川側への接続可能性を提示するが、流向は未決着 |
 | **千川上水から弦巻川・水窪川へ直接分水したのか** | 谷端川への分水は確認できるが、両河川への直接分水は未確認 |
@@ -73,15 +73,15 @@ flowchart TD
 
 | テーマ | 文書 |
 | --- | --- |
-| **主要出典一覧** | [docs/sources.md](docs/sources.md) |
-| 水窪川 | [docs/mizukubo-gawa.md](docs/mizukubo-gawa.md) |
-| 弦巻川 | [docs/tsurumaki-gawa.md](docs/tsurumaki-gawa.md) |
-| 谷端川 | [docs/tanibata-gawa.md](docs/tanibata-gawa.md) |
-| 千川上水・更新世旧河道・音羽谷の二流など | [docs/cross-cutting-themes.md](docs/cross-cutting-themes.md) |
-| 護国寺周辺の水系 | [docs/gokokuji-water-system.md](docs/gokokuji-water-system.md) |
-| 護国寺星谷の水系 | [docs/gokokuji-hoshiyato-water-system.md](docs/gokokuji-hoshiyato-water-system.md) |
-| 『江戸名所図会』護国寺図の検討 | [docs/gokokuji-edo-meisho-zue-analysis.md](docs/gokokuji-edo-meisho-zue-analysis.md) |
-| 歴史地形・流向シミュレーション計画 | [docs/historical-terrain-and-flow-simulation-plan.md](docs/historical-terrain-and-flow-simulation-plan.md) |
+| **主要出典一覧** | [docs/出典一覧.md](docs/出典一覧.md) |
+| 水窪川 | [docs/水窪川.md](docs/水窪川.md) |
+| 弦巻川 | [docs/弦巻川.md](docs/弦巻川.md) |
+| 谷端川 | [docs/谷端川.md](docs/谷端川.md) |
+| 千川上水・更新世旧河道・音羽谷の二流など | [docs/横断テーマ.md](docs/横断テーマ.md) |
+| 護国寺境内の旧水系 | [docs/護国寺境内の旧水系.md](docs/護国寺境内の旧水系.md) |
+| 護国寺星谷の水系 | [docs/護国寺星谷の水系.md](docs/護国寺星谷の水系.md) |
+| 『江戸名所図会』護国寺図の検討 | [docs/江戸名所図会・護国寺図の検討.md](docs/江戸名所図会・護国寺図の検討.md) |
+| 歴史地形・流路シミュレーション方針 | [docs/歴史地形・流路シミュレーション方針.md](docs/歴史地形・流路シミュレーション方針.md) |
 | 文書一覧 | [docs/README.md](docs/README.md) |
 
 ## 記号
@@ -94,6 +94,6 @@ flowchart TD
 
 ## 出典の扱い
 
-分割後の本文では、**主張の直後から出典へ到達できること**を原則とします。共通書誌は [docs/sources.md](docs/sources.md) に整理しています。
+分割後の本文では、**主張の直後から出典へ到達できること**を原則とします。共通書誌は [docs/出典一覧.md](docs/出典一覧.md) に整理しています。
 
-分割前のREADME全文は、情報落ちを避けるため [docs/research-notes-full.md](docs/research-notes-full.md) に保存しています。ただし、これは調査経緯・旧出典番号の保存版であり、分割後の本文が出典を省略する理由にはしません。
+分割前のREADME全文は、情報落ちを避けるため [docs/分割前README全文.md](docs/分割前README全文.md) に保存しています。ただし、これは調査経緯・旧出典番号の保存版であり、分割後の本文が出典を省略する理由にはしません。
