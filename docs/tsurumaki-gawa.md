@@ -8,6 +8,14 @@
 
 豊島区公式資料は、西池袋にあった丸池を弦巻川の源流と明記している。丸池は「池袋」の地名由来とも関係づけられている。
 
+<p align="center">
+  <a href="https://commons.wikimedia.org/wiki/File:Moto-Ikebukuro_Historic_Park.JPG">
+    <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Moto-Ikebukuro_Historic_Park.JPG?width=900" alt="元池袋史跡公園" width="700">
+  </a>
+</p>
+
+<p align="center"><sub>元池袋史跡公園（2010年撮影）。かつての丸池と「池袋」の地名由来を伝える場所。写真：Abasaa / Wikimedia Commons（パブリックドメイン）。現在の公園そのものを丸池の現存遺構とみなすのではなく、丸池の記憶を継承する史跡公園として掲載する。</sub></p>
+
 雑司ヶ谷霊園西側から本流へ注ぐ支谷もあり、現在の地形や水路敷から追うことができる。
 
 ## 1772年の雑司谷村絵図
@@ -23,6 +31,8 @@
 したがって、「幕末まで弦巻川は護国寺境内で完全に終わっていた」とする単純な案は弱い。
 
 ただし、この短い水路がそのまま音羽町西側を神田川まで連続していたのか、途中で水窪川へ接続したのかは、切絵図だけでは決められない。
+
+この区間の切絵図比較は、[未解決問題：水窪川と弦巻川は合流していたのか](open-questions/tsurumaki-mizukubo-confluence.md) に画像付きでまとめている。
 
 ## 暗渠化と流路変更
 
