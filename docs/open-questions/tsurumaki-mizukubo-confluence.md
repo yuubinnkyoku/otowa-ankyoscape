@@ -4,6 +4,17 @@
 
 この問題は、単に「合流点を探す」だけでは済まない。**時代によって接続関係そのものが変化した可能性**があるためである。
 
+## 参照画像：幕末の音羽・雑司ヶ谷
+
+<p align="center">
+  <a href="https://commons.wikimedia.org/wiki/File:Otowa_ezu_(IA_dr_otowa-ezu-15059016).jpg">
+    <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Otowa_ezu_%28IA_dr_otowa-ezu-15059016%29.jpg?width=1200" alt="尾張屋版 Otowa ezu（音羽・雑司ヶ谷周辺）" width="900">
+  </a>
+</p>
+
+> **比較用の参照図。** 尾張屋版 *Otowa ezu*。Wikimedia Commons 掲載資料では1857・1863年の版として整理されている。後述する**1851年の近吾堂版とは別系統の史料**なので、この画像だけを水窪川・弦巻川の合流・非合流の直接証拠には用いない。幕末期の音羽・護国寺・雑司ヶ谷周辺の水路配置を把握し、版による描写差を比較するために掲載する。  
+> 画像：David Rumsey Map Collection / Wikimedia Commons — [画像ページ](https://commons.wikimedia.org/wiki/File:Otowa_ezu_(IA_dr_otowa-ezu-15059016).jpg)
+
 ## 問い
 
 現在の中心的な問いは次の三つである。
@@ -73,6 +84,8 @@ flowchart TB
 - 少し下流で東へ寄り水窪川へ合流するのか
 
 までは切絵図だけでは決められない。
+
+なお、上の掲載画像は尾張屋版であり、この1851年近吾堂版そのものではない。**版ごとの水路描写差こそが、この問題で「地図に描かれない＝不存在」と単純化できない理由の一つ**である。
 
 ## 1878年：『東京府村誌』の「西青柳町ニ通ス」が重要
 
