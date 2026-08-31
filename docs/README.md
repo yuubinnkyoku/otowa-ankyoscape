@@ -2,6 +2,15 @@
 
 このディレクトリには、水窪川・弦巻川・谷端川と護国寺・音羽周辺についての詳細調査を置きます。
 
+## 未解決問題
+
+このリポジトリの中心的な論点です。
+
+- [未解決問題一覧](open-questions/README.md)
+- [水窪川と弦巻川の合流・接続問題](open-questions/tsurumaki-mizukubo-confluence.md)
+
+今後、十分に大きな論点は横断テーマや川別ページへ埋め込まず、`open-questions/` に独立させます。
+
 ## 川別
 
 - [水窪川](mizukubo-gawa.md)
