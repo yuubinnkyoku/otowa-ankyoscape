@@ -9,10 +9,10 @@ files:
 * ``nodes_corrected.tsv`` with columns
   ``node_id, node_domain, node_name, node_domain_id``
 
-This exporter keeps the conservative policy used by the other KGE exporters:
-by default only ``confirmed`` and ``observation`` claims, predictable
-relations, and claims with an explicit integer year are included. It never
-invents a year for a period/range/note.
+By default this exporter uses the narrower ``temporal_predictable`` relation
+policy rather than static ``predictable``. Dated construction/alteration event
+nodes are useful in the evidence graph but are poor Hakken-style future-link
+targets because the event entity itself does not exist in the earlier graph.
 """
 
 from __future__ import annotations
@@ -71,9 +71,15 @@ def parse_args() -> argparse.Namespace:
         help="output directory relative to repository root",
     )
     parser.add_argument(
+        "--relation-policy",
+        choices=("temporal", "static"),
+        default="temporal",
+        help="temporal uses temporal_predictable; static uses predictable",
+    )
+    parser.add_argument(
         "--include-nonpredictable",
         action="store_true",
-        help="also export relations marked predictable=false",
+        help="ignore relation policy and export all retained relations",
     )
     return parser.parse_args()
 
@@ -83,8 +89,9 @@ def main() -> int:
     statuses = {s.strip() for s in args.statuses.split(",") if s.strip()}
 
     relation_cfg = load_json(ROOT / "ontology" / "relations.json")
-    predictable = {
-        row["id"]: bool(row.get("predictable", False))
+    policy_key = "temporal_predictable" if args.relation_policy == "temporal" else "predictable"
+    allowed = {
+        row["id"]: bool(row.get(policy_key, row.get("predictable", False)))
         for row in relation_cfg["relations"]
     }
 
@@ -105,6 +112,7 @@ def main() -> int:
     # preserves duplicate support without duplicating identical edge rows.
     fact_counts: Counter[tuple[str, str, str, int]] = Counter()
     skipped_without_exact_year = 0
+    skipped_relation_policy = 0
 
     for claim in claims:
         if claim.get("evidence_status") not in statuses:
@@ -113,7 +121,8 @@ def main() -> int:
         relation = claim.get("relation")
         if not isinstance(relation, str):
             raise ValueError(f"claim {claim.get('id', '?')} has invalid relation")
-        if not args.include_nonpredictable and not predictable.get(relation, False):
+        if not args.include_nonpredictable and not allowed.get(relation, False):
+            skipped_relation_policy += 1
             continue
 
         time = claim.get("time") or {}
@@ -190,15 +199,14 @@ def main() -> int:
     domains = sorted({str(entity_index[entity_id]["type"]) for entity_id in used_entity_ids})
 
     print(f"read {len(entities)} entities and {len(claims)} claims")
+    print(f"relation policy: {args.relation_policy} ({policy_key})")
     print(f"wrote {len(fact_counts)} Hakken THiGER edge rows to {edges_path.relative_to(ROOT)}")
     print(f"wrote {len(used_entity_ids)} Hakken THiGER nodes to {nodes_path.relative_to(ROOT)}")
     if years:
         print(f"year range: {years[0]}..{years[-1]} ({len(years)} distinct years)")
     print(f"domains: {', '.join(domains)}")
-    print(
-        "skipped conservative predictable claims without exact integer year: "
-        f"{skipped_without_exact_year}"
-    )
+    print(f"skipped retained claims by relation policy: {skipped_relation_policy}")
+    print(f"skipped retained claims without exact integer year: {skipped_without_exact_year}")
     return 0
 
 
