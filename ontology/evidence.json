@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "evidence_statuses": [
+    {"id": "confirmed", "description": "本研究で根拠資料を確認し、主張として採用できる"},
+    {"id": "observation", "description": "地図・写真・現地等から本研究が直接読み取った観察。史料作成者自身の説明とは区別する"},
+    {"id": "inference", "description": "複数の事実・観察から導いた推定"},
+    {"id": "secondary_transcription", "description": "原資料未確認で、二次資料による転記・引用に依存する"},
+    {"id": "source_location_only", "description": "史料の所在・書誌のみ確認済みで、該当内容は未確認"},
+    {"id": "pending", "description": "有力候補だが追加確認が必要"},
+    {"id": "unconfirmed", "description": "未確認。学習用の正例としては扱わない"}
+  ],
+  "source_classes": [
+    "primary",
+    "official_secondary",
+    "research",
+    "book",
+    "secondary",
+    "oral_history",
+    "observation_record"
+  ],
+  "rules": [
+    "描かれていないことを不存在へ変換しない",
+    "二次転記を原資料確認済みに格上げしない",
+    "不明な年代・位置を推測で補わない",
+    "一つの記録に複数の独立主張を詰め込まず分割する",
+    "未解決の候補は claims ではなく hypotheses に置く",
+    "LLM出力は構造検証を通し、史料上の真偽は人間または別工程で確認する"
+  ]
+}
