@@ -10,6 +10,7 @@
     {"id": "branches_from", "description": "分岐元を示す", "predictable": true, "symmetric": false},
     {"id": "located_at", "description": "地物・出来事が地点に所在する", "predictable": false, "symmetric": false},
     {"id": "topographically_continuous_with", "description": "谷・地形が連続する。水流方向や水路接続そのものは意味しない", "predictable": false, "symmetric": true},
+    {"id": "same_as", "description": "史料間で同一地物であるという同定。未確定の場合は hypothesis にのみ使う", "predictable": false, "symmetric": true},
     {"id": "crosses", "description": "水路・道路等が交差する", "predictable": true, "symmetric": true},
     {"id": "bridge_over", "description": "橋が水路に架かる", "predictable": true, "symmetric": false},
     {"id": "constructed", "description": "人工的に築造された", "predictable": true, "symmetric": false},
