@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Export selected claims to a simple subject-relation-object TSV.
 
-This is deliberately a small, model-agnostic export. It preserves the richer
-historical evidence in data/claims.jsonl and produces a flattened view for a
-first ComplEx/DistMult-style link prediction experiment.
+The evidence-rich JSONL remains the source of truth. Base claims and optional
+``data/claims.d/*.jsonl`` shards are flattened into a model-agnostic view for
+initial ComplEx/DistMult-style experiments.
 """
 
 from __future__ import annotations
@@ -28,6 +28,15 @@ def load_jsonl(path: Path) -> list[dict]:
             if not line or line.startswith("#"):
                 continue
             rows.append(json.loads(line))
+    return rows
+
+
+def load_claims() -> list[dict]:
+    rows = load_jsonl(ROOT / "data" / "claims.jsonl")
+    fragment_dir = ROOT / "data" / "claims.d"
+    if fragment_dir.is_dir():
+        for path in sorted(fragment_dir.glob("*.jsonl")):
+            rows.extend(load_jsonl(path))
     return rows
 
 
@@ -61,7 +70,7 @@ def main() -> int:
         for row in relation_config["relations"]
     }
 
-    claims = load_jsonl(ROOT / "data" / "claims.jsonl")
+    claims = load_claims()
     triples: set[tuple[str, str, str]] = set()
     skipped_timeful_duplicates = 0
 
@@ -82,6 +91,7 @@ def main() -> int:
         for subject, relation, obj in sorted(triples):
             f.write(f"{subject}\t{relation}\t{obj}\n")
 
+    print(f"read {len(claims)} claims")
     print(f"wrote {len(triples)} triples to {output.relative_to(ROOT)}")
     if skipped_timeful_duplicates:
         print(
