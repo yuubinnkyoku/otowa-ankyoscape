@@ -1,0 +1,10 @@
+{"id":"river:mizukubo","type":"River","label":"水窪川","aliases":["水久保川","日の出川","音羽川"]}
+{"id":"river:tsurumaki","type":"River","label":"弦巻川","aliases":["布引川"]}
+{"id":"river:yabata","type":"River","label":"谷端川","aliases":["小石川","礫川","氷川"]}
+{"id":"canal:senkawa","type":"Canal","label":"千川上水","aliases":[]}
+{"id":"pond:maruike","type":"Pond","label":"丸池","aliases":[]}
+{"id":"pond:benten_awashima","type":"Pond","label":"粟島神社境内の弁天池","aliases":["弁天池"]}
+{"id":"place:zoshigaya","type":"Place","label":"雑司ヶ谷","aliases":["雑司谷"]}
+{"id":"place:gokokuji_area","type":"Place","label":"護国寺周辺","aliases":[]}
+{"id":"place:gokokuji_southwest","type":"Place","label":"護国寺南西端付近","aliases":[]}
+{"id":"place:nishi_aoyagi","type":"AdministrativeArea","label":"西青柳町","aliases":[]}
