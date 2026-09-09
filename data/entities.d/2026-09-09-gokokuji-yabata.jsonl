@@ -19,3 +19,4 @@
 {"id":"event:yabata_waterwheel_application_1895","type":"ConstructionEvent","label":"1895年谷端川新規水車設立願","aliases":[]}
 {"id":"bridge:gokokuji_southwest_1851","type":"Bridge","label":"1851年切絵図の護国寺南西端の橋","aliases":[]}
 {"id":"event:otowa_paddy_reorganization","type":"ConstructionEvent","label":"音羽谷の水田開発・灌漑再編（時期未確定）","aliases":[]}
+{"id":"canal:nagasaki_three_village","type":"Canal","label":"長崎村外三村分水","aliases":["長崎村外三村分水路"]}
