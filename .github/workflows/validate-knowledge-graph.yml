@@ -10,6 +10,7 @@ on:
       - "scripts/export_kge.py"
       - "scripts/make_kge_split.py"
       - "scripts/collect_tagged_passages.py"
+      - "scripts/graph_stats.py"
   pull_request:
     paths:
       - "ontology/**"
@@ -19,6 +20,7 @@ on:
       - "scripts/export_kge.py"
       - "scripts/make_kge_split.py"
       - "scripts/collect_tagged_passages.py"
+      - "scripts/graph_stats.py"
 
 permissions:
   contents: read
@@ -32,6 +34,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/validate_graph.py
+      - run: python scripts/graph_stats.py
       - run: python scripts/collect_tagged_passages.py --summary-only
       - run: python scripts/export_kge.py
       - run: python scripts/make_kge_split.py
