@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "relations": [
+    {"id": "source_of", "description": "水源である", "predictable": true, "symmetric": false},
+    {"id": "flows_to", "description": "下流側で通じる・流れる", "predictable": true, "symmetric": false},
+    {"id": "flows_through", "description": "地点・区域を通過する", "predictable": true, "symmetric": false},
+    {"id": "supplies", "description": "分水・用水などとして水を供給する", "predictable": true, "symmetric": false},
+    {"id": "receives_water_from", "description": "別水系・湧水等から水を受ける", "predictable": true, "symmetric": false},
+    {"id": "connects_to", "description": "水路同士が接続する", "predictable": true, "symmetric": true},
+    {"id": "branches_from", "description": "分岐元を示す", "predictable": true, "symmetric": false},
+    {"id": "located_at", "description": "地物・出来事が地点に所在する", "predictable": false, "symmetric": false},
+    {"id": "crosses", "description": "水路・道路等が交差する", "predictable": true, "symmetric": true},
+    {"id": "bridge_over", "description": "橋が水路に架かる", "predictable": true, "symmetric": false},
+    {"id": "constructed", "description": "人工的に築造された", "predictable": true, "symmetric": false},
+    {"id": "modified", "description": "改修・付替え等を受けた", "predictable": true, "symmetric": false},
+    {"id": "culverted", "description": "暗渠化された", "predictable": true, "symmetric": false},
+    {"id": "abandoned", "description": "廃止・放棄された", "predictable": true, "symmetric": false},
+    {"id": "supports", "description": "主張・仮説を支持する", "predictable": false, "symmetric": false},
+    {"id": "contradicts", "description": "主張・仮説と矛盾する", "predictable": false, "symmetric": true},
+    {"id": "alternative_to", "description": "代替仮説の関係にある", "predictable": false, "symmetric": true}
+  ]
+}
