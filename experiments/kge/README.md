@@ -1,14 +1,15 @@
-# KGE experiments
+# KGE 実験
 
-このディレクトリは、`data/claims.jsonl` から派生した知識グラフ埋め込み（KGE）実験用データを置く。
-
-まずは以下で三つ組を生成する。
+このディレクトリは `data/claims.jsonl` から再生成できる派生データだけを扱う。
 
 ```bash
 python scripts/validate_graph.py
 python scripts/export_kge.py
+python scripts/make_kge_split.py
 ```
 
-生成される `triples.tsv` は派生物であり、研究上の正本ではない。出典・年代・証拠状態は `data/claims.jsonl` に保持する。
+既定の `export_kge.py` は `confirmed` / `observation` のみを対象とし、`predictable=true` の relation だけを書き出す。
 
-次の段階では、既知辺を train / validation / test に分割して ComplEx / DistMult で復元性能を測る。十分なデータ量が集まるまでは、未解決問題への予測スコアを史実の確率として解釈しない。
+`make_kge_split.py` は、validation / test 側にだけ現れる entity・relation を作らない coverage-aware split を行う。現在の規模と実際の分割結果は [STATUS.md](STATUS.md) を参照。
+
+HakkenOSS の ComplEx / DistMult を接続する場合も、ここで作る TSV を入力境界とし、Hakken 側の形式へ変換する。証拠状態・年代・出典を持つ正本は `data/claims.jsonl` であり、TSV を手編集しない。
