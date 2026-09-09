@@ -62,32 +62,36 @@ def relation_counts(rows: list[Triple]) -> Counter[str]:
     return Counter(r for _, r, _ in rows)
 
 
-def can_hold_out(
-    triple: Triple,
-    entities: Counter[str],
-    relations: Counter[str],
-) -> bool:
+def can_hold_out(triple: Triple, entities: Counter[str], relations: Counter[str]) -> bool:
     s, r, o = triple
-    # Keep at least one training occurrence of every entity and relation.
-    # For a self-loop, removing the edge removes two endpoint incidences.
-    needed_s = 2 if s == o else 1
-    needed_o = 2 if s == o else 1
-    return (
-        entities[s] > needed_s
-        and entities[o] > needed_o
-        and relations[r] > 1
-    )
+    if s == o:
+        return entities[s] > 2 and relations[r] > 1
+    return entities[s] > 1 and entities[o] > 1 and relations[r] > 1
 
 
-def remove_from_counts(
-    triple: Triple,
-    entities: Counter[str],
-    relations: Counter[str],
-) -> None:
+def remove_from_counts(triple: Triple, entities: Counter[str], relations: Counter[str]) -> None:
     s, r, o = triple
     entities[s] -= 1
     entities[o] -= 1
     relations[r] -= 1
+
+
+def allocate_holdout(selected: list[Triple], desired_valid: int, desired_test: int) -> tuple[list[Triple], list[Triple]]:
+    if not selected:
+        return [], []
+    if desired_valid == 0:
+        return [], selected
+    if desired_test == 0:
+        return selected, []
+    if len(selected) == 1:
+        # Prefer test for a one-edge holdout, but record the lack of validation.
+        return [], selected
+
+    total_requested = desired_valid + desired_test
+    valid_count = round(len(selected) * desired_valid / total_requested)
+    valid_count = max(1, min(valid_count, len(selected) - 1))
+    test_count = len(selected) - valid_count
+    return selected[:valid_count], selected[valid_count:valid_count + test_count]
 
 
 def main() -> int:
@@ -104,6 +108,7 @@ def main() -> int:
 
     desired_valid = max(1, round(len(triples) * args.valid_fraction)) if args.valid_fraction else 0
     desired_test = max(1, round(len(triples) * args.test_fraction)) if args.test_fraction else 0
+    desired_total = desired_valid + desired_test
 
     rng = random.Random(args.seed)
     candidates = triples.copy()
@@ -112,21 +117,19 @@ def main() -> int:
     entities = entity_counts(triples)
     relations = relation_counts(triples)
     train_set = set(triples)
-    valid: list[Triple] = []
-    test: list[Triple] = []
+    selected: list[Triple] = []
 
-    # Fill test first because it is the primary masked-edge evaluation set.
-    for bucket, target in ((test, desired_test), (valid, desired_valid)):
-        for triple in candidates:
-            if len(bucket) >= target:
-                break
-            if triple not in train_set:
-                continue
-            if can_hold_out(triple, entities, relations):
-                train_set.remove(triple)
-                remove_from_counts(triple, entities, relations)
-                bucket.append(triple)
+    for triple in candidates:
+        if len(selected) >= desired_total:
+            break
+        if triple not in train_set:
+            continue
+        if can_hold_out(triple, entities, relations):
+            train_set.remove(triple)
+            remove_from_counts(triple, entities, relations)
+            selected.append(triple)
 
+    valid, test = allocate_holdout(selected, desired_valid, desired_test)
     train = sorted(train_set)
     out_dir = ROOT / args.output_dir
     write_triples(out_dir / "train.tsv", train)
@@ -161,9 +164,7 @@ def main() -> int:
 
     print(json.dumps(metadata, ensure_ascii=False))
     if len(valid) < desired_valid or len(test) < desired_test:
-        print(
-            "note: holdout size was reduced to preserve entity/relation coverage in train"
-        )
+        print("note: holdout size was reduced to preserve entity/relation coverage in train")
     return 0
 
 
