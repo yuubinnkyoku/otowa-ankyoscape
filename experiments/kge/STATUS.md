@@ -1,50 +1,111 @@
 # KGE 実験の現状
 
-2026-09-09 時点の最初の抽出・検証結果。
+2026-09-09 時点の抽出・検証結果。
 
 ## 現在の規模
 
 GitHub Actions 上で次を確認した。
 
-- entities: **50**
-- sources: **20**
-- claims: **44**
-- hypotheses: **10**
-- `confirmed` / `observation` かつ予測対象 relation に限定した KGE 三つ組: **26**
+- entities: **111**
+- sources: **40**
+- claims: **118**
+- hypotheses: **15**
+- `confirmed`: **62**
+- `observation`: **15**
+- `secondary_transcription`: **21**
+- `pending`: **20**
+- `confirmed` / `observation` かつ `predictable=true` の relation に限定した KGE 三つ組: **50**
+
+当初の 44 claims / 26 triples からはかなり増え、**claims 100件超**という最初の目標は越えた。一方、KGE に安全に使う辺はまだ50件であり、数を増やすために二次転記・未確認情報を正例へ格上げすることはしない。
 
 年代違いで同一の三つ組になる claim は、最初の非時系列実験では一つへ畳んでいる。
 
+## 証拠を増やすだけでは足りない
+
+`python scripts/graph_stats.py` で、予測に使う保守的な三つ組の疎さも確認する。
+
+現在は KGE に参加する55実体のうち、
+
+- degree = 1: **42実体（76.4%）**
+- degree <= 2: **47実体**
+
+となっている。
+
+つまり、実体数を増やし続けても「一度しか現れない地点」が増えるだけならリンク予測には効きにくい。今後は、すでにある河川・橋・地区・河道区間へ複数の独立した辺を結び、**同じ実体が異なる史料・年代・関係で繰り返し現れる密度**を高める必要がある。
+
 ## coverage-aware split
 
-`python scripts/make_kge_split.py` の既定設定では、学習データから実体・関係が完全に消えないように既知辺を隠す。
+`python scripts/make_kge_split.py` は、学習データから実体・関係が完全に消えない範囲で既知辺を隠す。
 
-現在の 26 三つ組では、要求した 30% holdout をそのまま作れず、実際には次までしか安全に分割できなかった。
+現在の50三つ組では、要求した30% holdoutをそのまま作れず、実際には次までしか安全に分割できなかった。
 
 ```text
-train  23
-valid   1
-test    2
+train  44
+valid   2
+test    4
 ```
 
-これは失敗ではなく、**現時点のグラフがリンク予測を評価するにはまだ疎すぎる**ことを示す診断結果として扱う。
+要求値は `valid=5`, `test=10` だった。まだ評価標本が小さすぎるので、仮に ComplEx / DistMult の評価値が高くても、河川史上の「発見能力」があるとは解釈しない。
 
-## ここからの目標
+## 関係の意味も整理した
 
-HakkenOSS の KGE を本格的に接続する前に、まず既存 `docs/` から抽出を続ける。
+辺数を増やす途中で、単に数を稼ぐと意味が崩れる例も出たため修正した。
 
-目安：
+- 旧初音町の「千川」は、谷端川と別水路が物理的に接続する `connects_to` ではなく、谷端川下流区間であることを表す `part_of` とした。
+- 東池袋雨水調整池が東池袋3・4丁目の浸水対策を担う関係は、物理的河道を意味する `flows_through` ではなく `serves_area` とした。
 
-- claims: 100〜300 以上
-- conservative KGE triples: 100 以上
-- 各主要 relation について複数の subject / object を持たせる
-- test / validation の辺を隠しても、対応する entity と relation が train に十分残る状態にする
+この2関係は初期KGEでは `predictable=false` とし、歴史河道のリンク予測へ誤って混入させない。
 
-量を増やすために未確認情報を `confirmed` へ格上げしてはならない。`pending` / `secondary_transcription` / hypothesis はそのまま残し、必要なら別条件の exploratory export で比較する。
+## HakkenOSS への接続
+
+静的な最初の実験については、**HakkenOSS の fork は不要**と分かった。
+
+HakkenOSS には一般的な `TextKGDataset` があり、`train / val / test` の三つ組TSVを直接読める。このリポジトリには設定例として
+
+```text
+experiments/kge/hakken/otowa.yaml
+```
+
+を置いた。
+
+したがって最初は、
+
+```text
+Markdown
+  ↓
+evidence-aware claims
+  ↓
+conservative triples
+  ↓
+coverage-aware train/val/test
+  ↓
+HakkenOSS TextKGDataset
+  ↓
+ComplEx / DistMult
+```
+
+まで、HakkenOSS本体を改造せず試せる。
+
+## 次に増やすべきもの
+
+次の目安は **conservative triples 100以上**。ただし、単純な件数より密度を優先する。
+
+優先順位は次の通り。
+
+1. 既存の `River` / `ChannelSegment` と複数地点を結ぶ `flows_through`
+2. 同じ河川について複数の橋を結ぶ `bridge_over`
+3. 同一地点・同一河道を異なる年代の一次史料で再観察する claim
+4. 分水・支流について、`branches_from` / `flows_to` / `receives_water_from` を一つの経路として揃える
+5. 暗渠化・改修は、河川全体ではなく可能なら対象 `ChannelSegment` を切って年代別に記録する
+
+未確認資料は `pending` / `secondary_transcription` のまま残す。原資料確認が取れた時だけ、対応する claim を根拠付きで更新する。
 
 ## 再現
 
 ```bash
 python scripts/validate_graph.py
+python scripts/graph_stats.py
+python scripts/collect_tagged_passages.py --summary-only
 python scripts/export_kge.py
 python scripts/make_kge_split.py
 cat experiments/kge/split/metadata.json
