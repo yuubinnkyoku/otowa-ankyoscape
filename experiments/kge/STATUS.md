@@ -54,7 +54,7 @@ test    4
 - 旧初音町の「千川」は、谷端川と別水路が物理的に接続する `connects_to` ではなく、谷端川下流区間であることを表す `part_of` とした。
 - 東池袋雨水調整池が東池袋3・4丁目の浸水対策を担う関係は、物理的河道を意味する `flows_through` ではなく `serves_area` とした。
 
-この2関係は初期KGEでは `predictable=false` とし、歴史河道のリンク予測へ誤って混入させない。
+この2関係は初期KGEでは `predictable=false` とし、歴史河道のリンク予測へ誤って混入させない。この修正により、保守的KGE辺は52件から50件へ減った。**件数より意味の整合性を優先した結果**である。
 
 ## HakkenOSS への接続
 
@@ -85,6 +85,8 @@ ComplEx / DistMult
 ```
 
 まで、HakkenOSS本体を改造せず試せる。
+
+なお、HakkenOSS の `TextKGDataset` 自体は `subject / relation / object / date` の4列も扱えるため、将来的な年代付き出力の入口もある。ただし、どのKGE/時間モデルへ接続するかは別途モデル側の対応を確認してから決める。
 
 ## 次に増やすべきもの
 
