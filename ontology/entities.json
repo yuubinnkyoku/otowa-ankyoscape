@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "entity_types": [
+    {"id": "River", "description": "河川・旧河川そのもの"},
+    {"id": "ChannelSegment", "description": "特定時期・区間の河道。River と区別して位置・年代を持たせる"},
+    {"id": "Spring", "description": "湧水点・湧水地"},
+    {"id": "Pond", "description": "池・湧水池"},
+    {"id": "Canal", "description": "上水・用水・分水路などの人工水路"},
+    {"id": "Bridge", "description": "橋・橋跡"},
+    {"id": "Drain", "description": "下水・排水路・暗渠管"},
+    {"id": "Road", "description": "道路・旧道"},
+    {"id": "Place", "description": "地点・地区・局所的な場所"},
+    {"id": "Parcel", "description": "筆・地番区画"},
+    {"id": "Village", "description": "旧村・町村"},
+    {"id": "Temple", "description": "寺社・境内"},
+    {"id": "AdministrativeArea", "description": "町・区などの行政区域"},
+    {"id": "Map", "description": "絵図・地形図・実測図"},
+    {"id": "Document", "description": "文書・書籍・行政資料"},
+    {"id": "Photograph", "description": "写真・絵葉書"},
+    {"id": "Person", "description": "人物"},
+    {"id": "ConstructionEvent", "description": "造成・改修・暗渠化などの出来事"}
+  ]
+}
