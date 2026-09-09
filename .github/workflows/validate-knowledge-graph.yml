@@ -5,16 +5,20 @@ on:
     paths:
       - "ontology/**"
       - "data/**"
+      - "docs/**"
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
       - "scripts/make_kge_split.py"
+      - "scripts/collect_tagged_passages.py"
   pull_request:
     paths:
       - "ontology/**"
       - "data/**"
+      - "docs/**"
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
       - "scripts/make_kge_split.py"
+      - "scripts/collect_tagged_passages.py"
 
 permissions:
   contents: read
@@ -28,6 +32,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/validate_graph.py
+      - run: python scripts/collect_tagged_passages.py --summary-only
       - run: python scripts/export_kge.py
       - run: python scripts/make_kge_split.py
       - name: Show generated split
