@@ -8,6 +8,7 @@ on:
       - "docs/**"
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
+      - "scripts/export_temporal_kge.py"
       - "scripts/make_kge_split.py"
       - "scripts/collect_tagged_passages.py"
       - "scripts/graph_stats.py"
@@ -18,6 +19,7 @@ on:
       - "docs/**"
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
+      - "scripts/export_temporal_kge.py"
       - "scripts/make_kge_split.py"
       - "scripts/collect_tagged_passages.py"
       - "scripts/graph_stats.py"
@@ -38,9 +40,11 @@ jobs:
       - run: python scripts/collect_tagged_passages.py --summary-only
       - run: python scripts/export_kge.py
       - run: python scripts/make_kge_split.py
+      - run: python scripts/export_temporal_kge.py
       - name: Show generated split
         run: |
           cat experiments/kge/split/metadata.json
           echo "--- train" && wc -l experiments/kge/split/train.tsv
           echo "--- valid" && wc -l experiments/kge/split/valid.tsv
           echo "--- test" && wc -l experiments/kge/split/test.tsv
+          echo "--- temporal" && wc -l experiments/kge/temporal/all.tsv
