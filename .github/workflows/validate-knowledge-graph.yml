@@ -6,11 +6,15 @@ on:
       - "ontology/**"
       - "data/**"
       - "scripts/validate_graph.py"
+      - "scripts/export_kge.py"
+      - "scripts/make_kge_split.py"
   pull_request:
     paths:
       - "ontology/**"
       - "data/**"
       - "scripts/validate_graph.py"
+      - "scripts/export_kge.py"
+      - "scripts/make_kge_split.py"
 
 permissions:
   contents: read
@@ -24,3 +28,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/validate_graph.py
+      - run: python scripts/export_kge.py
+      - run: python scripts/make_kge_split.py
+      - name: Show generated split
+        run: |
+          cat experiments/kge/split/metadata.json
+          echo "--- train" && wc -l experiments/kge/split/train.tsv
+          echo "--- valid" && wc -l experiments/kge/split/valid.tsv
+          echo "--- test" && wc -l experiments/kge/split/test.tsv
