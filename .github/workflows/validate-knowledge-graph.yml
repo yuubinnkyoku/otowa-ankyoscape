@@ -9,6 +9,7 @@ on:
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
       - "scripts/export_temporal_kge.py"
+      - "scripts/export_discovery_kge.py"
       - "scripts/export_hakken_thiger_raw.py"
       - "scripts/make_kge_split.py"
       - "scripts/make_temporal_backtest.py"
@@ -23,6 +24,7 @@ on:
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
       - "scripts/export_temporal_kge.py"
+      - "scripts/export_discovery_kge.py"
       - "scripts/export_hakken_thiger_raw.py"
       - "scripts/make_kge_split.py"
       - "scripts/make_temporal_backtest.py"
@@ -49,6 +51,8 @@ jobs:
       - run: python scripts/export_temporal_kge.py
       - run: python scripts/scan_temporal_cutoffs.py
       - run: python scripts/make_temporal_backtest.py --train-end 1930 --val-end 1960
+      - run: python scripts/export_discovery_kge.py
+      - run: python scripts/scan_temporal_cutoffs.py --input experiments/kge/discovery/all.tsv --output experiments/kge/discovery/cutoff-scan.json
       - run: python scripts/export_hakken_thiger_raw.py
       - name: Show generated split
         run: |
@@ -56,8 +60,10 @@ jobs:
           echo "--- train" && wc -l experiments/kge/split/train.tsv
           echo "--- valid" && wc -l experiments/kge/split/valid.tsv
           echo "--- test" && wc -l experiments/kge/split/test.tsv
-          echo "--- temporal" && wc -l experiments/kge/temporal/all.tsv
-          echo "--- temporal cutoff scan" && cat experiments/kge/temporal/cutoff-scan.json
-          echo "--- chronological backtest" && cat experiments/kge/temporal/backtest/metadata.json
+          echo "--- historical-time temporal facts" && wc -l experiments/kge/temporal/all.tsv
+          echo "--- historical-time cutoff scan" && cat experiments/kge/temporal/cutoff-scan.json
+          echo "--- historical-time chronological backtest" && cat experiments/kge/temporal/backtest/metadata.json
+          echo "--- corpus-evidence discovery facts" && wc -l experiments/kge/discovery/all.tsv
+          echo "--- corpus-evidence cutoff scan" && cat experiments/kge/discovery/cutoff-scan.json
           echo "--- Hakken THiGER raw edges" && wc -l experiments/kge/hakken/raw/edges.tsv
           echo "--- Hakken THiGER raw nodes" && wc -l experiments/kge/hakken/raw/nodes_corrected.tsv
