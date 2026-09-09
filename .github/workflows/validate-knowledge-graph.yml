@@ -9,6 +9,7 @@ on:
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
       - "scripts/export_temporal_kge.py"
+      - "scripts/export_hakken_thiger_raw.py"
       - "scripts/make_kge_split.py"
       - "scripts/collect_tagged_passages.py"
       - "scripts/graph_stats.py"
@@ -20,6 +21,7 @@ on:
       - "scripts/validate_graph.py"
       - "scripts/export_kge.py"
       - "scripts/export_temporal_kge.py"
+      - "scripts/export_hakken_thiger_raw.py"
       - "scripts/make_kge_split.py"
       - "scripts/collect_tagged_passages.py"
       - "scripts/graph_stats.py"
@@ -41,6 +43,7 @@ jobs:
       - run: python scripts/export_kge.py
       - run: python scripts/make_kge_split.py
       - run: python scripts/export_temporal_kge.py
+      - run: python scripts/export_hakken_thiger_raw.py
       - name: Show generated split
         run: |
           cat experiments/kge/split/metadata.json
@@ -48,3 +51,5 @@ jobs:
           echo "--- valid" && wc -l experiments/kge/split/valid.tsv
           echo "--- test" && wc -l experiments/kge/split/test.tsv
           echo "--- temporal" && wc -l experiments/kge/temporal/all.tsv
+          echo "--- Hakken THiGER raw edges" && wc -l experiments/kge/hakken/raw/edges.tsv
+          echo "--- Hakken THiGER raw nodes" && wc -l experiments/kge/hakken/raw/nodes_corrected.tsv
