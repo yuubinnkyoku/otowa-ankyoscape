@@ -8,15 +8,17 @@ GitHub Actions 上で次を確認している。
 
 - entities: **111**
 - sources: **40**
-- claims: **118**
+- claims: **119**
 - hypotheses: **15**
-- `confirmed`: **62**
+- `confirmed`: **63**
 - `observation`: **15**
 - `secondary_transcription`: **21**
 - `pending`: **20**
 - `confirmed` / `observation` かつ `predictable=true` の relation に限定した静的 KGE 三つ組: **50**
 
-当初の 44 claims / 26 triples からは増えたが、KGE に安全に使う辺はまだ50件である。数を増やすために二次転記・未確認情報を正例へ格上げしない。
+当初の 44 claims / 26 triples からは増えたが、KGE に安全に使う静的辺はまだ50件である。数を増やすために二次転記・未確認情報を正例へ格上げしない。
+
+今回、既存の豊島区1999年資料から「水窪川 — flows_through → 辻広場」を既存オーラルヒストリーとは別の公的二次資料で再確認し、`confirmed` claim を1件追加した。ただし同一 base triple なので静的50 triples自体は増えない。**同じ関係を独立資料で再確認できたこと**を証拠密度として保持する。
 
 ## 証拠を増やすだけでは足りない
 
@@ -67,11 +69,13 @@ test    4
 
 現在の出力は、
 
-- **31 facts**
+- **37 facts**
 - **1682〜2024年**
 - **12 distinct years**
 
 である。
+
+前回の31 factsから6件増えた。内訳は、練馬区資料 `S11` の資料年を公式ページ上で確認して2024年と記録したことで5 base triplesが timeline に入ったことと、豊島区1999年資料による辻広場の独立再確認を追加したことで1 base tripleが1999年側に入ったことによる。
 
 これは「人類がその事実を初めて発見した年」ではない。あくまで**現在このリポジトリに結び付いている資料群の中での最古の証拠年**であり、史料追加によって過去へ動く可能性がある。
 
@@ -101,16 +105,50 @@ test                   5
 
 ### discovery-time の診断
 
-cutoff scan では、historical-time より seen future が増える。例として、
+CI では `train < 2016`, `2016 <= valid < 2021`, `test >= 2021` で厳密に分割する。現在は、
 
-- `train < 2016`, `2016 <= valid < 2021`, `test >= 2021` では、scan 上 `test_seen=2`
-- `train < 2021`, `2021 <= valid < 2024`, `test >= 2024` では、scan 上 `valid_seen=2`
+```text
+train                 22
+valid                  1
+  valid_seen            0
+  valid_cold_start      1
+test                  14
+  test_seen             2
+  test_cold_start      12
+```
 
-が得られている。
+である。
 
-まだ validation と test の両方に十分な seen fact が揃う段階ではないが、**「後年資料で新しい関係が追加されたか」を試す時間軸としてはこちらの方が適切**である。
+S11の資料年確定で2024年側の事実が増えたため test の総数と cold-start は増えた。これはモデル性能が悪化したという意味ではなく、**今まで timeline から欠落していた後年資料の関係が正しく評価集合へ入った**結果である。
 
-CI では `train < 2016`, `2016 <= valid < 2021`, `test >= 2021` の discovery-time backtest も生成し、cold-start と seen を毎回確認する。
+まだ validation と test の双方に十分な seen fact が揃う段階ではないため、現時点で MRR / Hits@K を「未来発見能力」と解釈しない。
+
+## 研究キューを自動生成する
+
+`python scripts/build_research_queue.py` を追加した。モデルを回す前に、現状のグラフで何を調べると時系列密度が上がるかを機械的に出す。
+
+現在の診断は、
+
+- temporal-predictable な保守的 base triples: **42**
+- historical time が1件以上ある triples: **22**
+- historical time が2年代以上ある再観測 triples: **2**
+- discovery/evidence time に入れる triples: **37**
+- source year 不明だけが理由で discovery timeline に入らない base triples: **5**
+- conservative graph で degree <= 2 の中核水系実体: **37**
+
+である。
+
+特に重要なのは、**42 base triplesのうち、同一関係を2年代以上の historical time で直接再観測できているものがまだ2件しかない**ことである。現状ではモデル選定より、既存実体を別年代の一次史料で再観測する作業の方が価値が高い。
+
+残る discovery-time 欠損5 base triplesは、
+
+- 1956年の谷端川・千早町〜長崎区間 `flows_through` 2件
+- 1956年の谷端川・要町区間 `flows_through` 2件
+- 千川上水 `branches_from` 玉川上水 1件
+
+である。前4件は `TOSHIMA_YABATA_TIMELINE`、最後の1件は `S08` の source year を推測せず保留している。Webページの最終更新日を資料作成年と同一視しない。
+
+生成先は `experiments/kge/research-queue.md`。CIで毎回再生成し、A: source year欠損、B: historical再観測不足、C: low-degree中核実体の三方向から次の史料調査候補を出す。
 
 ## HakkenOSS への接続
 
@@ -144,7 +182,7 @@ python scripts/export_hakken_thiger_raw.py \
 | 軸 | edge rows | nodes | 年代範囲 |
 |---|---:|---:|---|
 | historical | 24 | 30 | 1682〜2016 |
-| discovery/evidence | 31 | 38 | 1682〜2024 |
+| discovery/evidence | 37 | 42 | 1682〜2024 |
 
 生成物はそれぞれ、
 
@@ -208,6 +246,7 @@ python scripts/export_hakken_thiger_raw.py
 python scripts/export_hakken_thiger_raw.py \
   --input experiments/kge/discovery/all.tsv \
   --output-dir experiments/kge/hakken/raw-discovery
+python scripts/build_research_queue.py
 ```
 
 抽出時の規則は [`prompts/extract-knowledge-graph.md`](../../prompts/extract-knowledge-graph.md) を使う。
