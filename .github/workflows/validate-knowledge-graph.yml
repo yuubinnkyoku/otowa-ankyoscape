@@ -59,6 +59,9 @@ jobs:
       - run: python scripts/export_discovery_kge.py --exclude-year-kinds page_update --output experiments/kge/discovery/no-page-update.tsv
       - run: python scripts/scan_temporal_cutoffs.py --input experiments/kge/discovery/no-page-update.tsv --output experiments/kge/discovery/no-page-update-cutoff-scan.json
       - run: python scripts/make_temporal_backtest.py --input experiments/kge/discovery/no-page-update.tsv --output-dir experiments/kge/discovery/no-page-update-backtest --train-end 2016 --val-end 2021
+      - run: python scripts/export_discovery_kge.py --exclude-year-kinds page_update,unspecified,unknown --output experiments/kge/discovery/classified-only.tsv
+      - run: python scripts/scan_temporal_cutoffs.py --input experiments/kge/discovery/classified-only.tsv --output experiments/kge/discovery/classified-only-cutoff-scan.json
+      - run: python scripts/make_temporal_backtest.py --input experiments/kge/discovery/classified-only.tsv --output-dir experiments/kge/discovery/classified-only-backtest --train-end 2016 --val-end 2021
       - run: python scripts/export_hakken_thiger_raw.py
       - run: python scripts/export_hakken_thiger_raw.py --input experiments/kge/discovery/all.tsv --output-dir experiments/kge/hakken/raw-discovery
       - run: python scripts/build_research_queue.py
@@ -77,6 +80,9 @@ jobs:
           echo "--- no-page-update discovery facts" && wc -l experiments/kge/discovery/no-page-update.tsv
           echo "--- no-page-update cutoff scan" && cat experiments/kge/discovery/no-page-update-cutoff-scan.json
           echo "--- no-page-update chronological backtest" && cat experiments/kge/discovery/no-page-update-backtest/metadata.json
+          echo "--- classified-only discovery facts" && wc -l experiments/kge/discovery/classified-only.tsv
+          echo "--- classified-only cutoff scan" && cat experiments/kge/discovery/classified-only-cutoff-scan.json
+          echo "--- classified-only chronological backtest" && cat experiments/kge/discovery/classified-only-backtest/metadata.json
           echo "--- Hakken THiGER historical raw edges" && wc -l experiments/kge/hakken/raw-historical/edges.tsv
           echo "--- Hakken THiGER historical raw nodes" && wc -l experiments/kge/hakken/raw-historical/nodes_corrected.tsv
           echo "--- Hakken THiGER discovery raw edges" && wc -l experiments/kge/hakken/raw-discovery/edges.tsv
