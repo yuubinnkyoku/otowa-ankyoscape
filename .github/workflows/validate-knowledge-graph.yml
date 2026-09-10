@@ -53,6 +53,7 @@ jobs:
       - run: python scripts/make_temporal_backtest.py --train-end 1930 --val-end 1960
       - run: python scripts/export_discovery_kge.py
       - run: python scripts/scan_temporal_cutoffs.py --input experiments/kge/discovery/all.tsv --output experiments/kge/discovery/cutoff-scan.json
+      - run: python scripts/make_temporal_backtest.py --input experiments/kge/discovery/all.tsv --output-dir experiments/kge/discovery/backtest --train-end 2016 --val-end 2021
       - run: python scripts/export_hakken_thiger_raw.py
       - run: python scripts/export_hakken_thiger_raw.py --input experiments/kge/discovery/all.tsv --output-dir experiments/kge/hakken/raw-discovery
       - name: Show generated split
@@ -66,6 +67,7 @@ jobs:
           echo "--- historical-time chronological backtest" && cat experiments/kge/temporal/backtest/metadata.json
           echo "--- corpus-evidence discovery facts" && wc -l experiments/kge/discovery/all.tsv
           echo "--- corpus-evidence cutoff scan" && cat experiments/kge/discovery/cutoff-scan.json
+          echo "--- corpus-evidence chronological backtest" && cat experiments/kge/discovery/backtest/metadata.json
           echo "--- Hakken THiGER historical raw edges" && wc -l experiments/kge/hakken/raw-historical/edges.tsv
           echo "--- Hakken THiGER historical raw nodes" && wc -l experiments/kge/hakken/raw-historical/nodes_corrected.tsv
           echo "--- Hakken THiGER discovery raw edges" && wc -l experiments/kge/hakken/raw-discovery/edges.tsv
