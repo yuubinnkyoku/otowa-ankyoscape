@@ -1,10 +1,10 @@
 # KGE 実験の現状
 
-2026-09-09 時点の抽出・検証結果。
+2026-09-10 時点の抽出・検証結果。
 
 ## 現在の規模
 
-GitHub Actions 上で次を確認した。
+GitHub Actions 上で次を確認している。
 
 - entities: **111**
 - sources: **40**
@@ -15,13 +15,8 @@ GitHub Actions 上で次を確認した。
 - `secondary_transcription`: **21**
 - `pending`: **20**
 - `confirmed` / `observation` かつ `predictable=true` の relation に限定した静的 KGE 三つ組: **50**
-- 同条件で `time.at` が整数年の時系列 facts: **31**
-- 時系列 facts の年代: **1682〜2016年、15 distinct years**
-- Hakken THiGER raw schema に参加する nodes: **35**
 
-当初の 44 claims / 26 triples からはかなり増え、**claims 100件超**という最初の目標は越えた。一方、KGE に安全に使う辺はまだ50件であり、数を増やすために二次転記・未確認情報を正例へ格上げすることはしない。
-
-年代違いで同一の三つ組になる claim は、最初の非時系列実験では一つへ畳んでいる。時系列 export では同一三つ組でも年代を保持する。
+当初の 44 claims / 26 triples からは増えたが、KGE に安全に使う辺はまだ50件である。数を増やすために二次転記・未確認情報を正例へ格上げしない。
 
 ## 証拠を増やすだけでは足りない
 
@@ -36,11 +31,11 @@ GitHub Actions 上で次を確認した。
 
 つまり、実体数を増やし続けても「一度しか現れない地点」が増えるだけならリンク予測には効きにくい。今後は、すでにある河川・橋・地区・河道区間へ複数の独立した辺を結び、**同じ実体が異なる史料・年代・関係で繰り返し現れる密度**を高める必要がある。
 
-## coverage-aware split
+## 静的 coverage-aware split
 
 `python scripts/make_kge_split.py` は、学習データから実体・関係が完全に消えない範囲で既知辺を隠す。
 
-現在の50三つ組では、要求した30% holdoutをそのまま作れず、実際には次までしか安全に分割できなかった。
+現在の50三つ組では、要求した30% holdoutをそのまま作れず、実際には次までしか安全に分割できない。
 
 ```text
 train  44
@@ -48,123 +43,147 @@ valid   2
 test    4
 ```
 
-要求値は `valid=5`, `test=10` だった。まだ評価標本が小さすぎるので、仮に ComplEx / DistMult の評価値が高くても、河川史上の「発見能力」があるとは解釈しない。
+要求値は `valid=5`, `test=10`。まだ評価標本が小さいので、仮に ComplEx / DistMult の評価値が高くても、河川史上の「発見能力」があるとは解釈しない。
 
-## 関係の意味も整理した
+## 時間を二種類に分ける
 
-辺数を増やす途中で、単に数を稼ぐと意味が崩れる例も出たため修正した。
+この調査では「時間」に二つの意味がある。
 
-- 旧初音町の「千川」は、谷端川と別水路が物理的に接続する `connects_to` ではなく、谷端川下流区間であることを表す `part_of` とした。
-- 東池袋雨水調整池が東池袋3・4丁目の浸水対策を担う関係は、物理的河道を意味する `flows_through` ではなく `serves_area` とした。
+### 1. historical time — その状態・出来事がいつ存在したか
 
-この2関係は初期KGEでは `predictable=false` とし、歴史河道のリンク予測へ誤って混入させない。この修正により、保守的KGE辺は52件から50件へ減った。**件数より意味の整合性を優先した結果**である。
+`claim.time.at` を使う。たとえば「1851年の地図で弦巻川が護国寺南西端を通る」「1956年にある区間が暗渠化された」のような、**歴史世界の時間**である。
 
-## 年代付き export
+`python scripts/export_temporal_kge.py` の現在の出力は、
 
-`python scripts/export_temporal_kge.py` は、保守的な relation のうち `time.at` が整数年として明示されたものだけを
+- **24 facts**
+- **1682〜2016年**
+- **11 distinct years**
+
+である。`period` や注記から代表年を推測して埋めず、整数の `time.at` があるものだけを使う。
+
+### 2. discovery / evidence time — その関係をいつの史料で確認できるか
+
+`python scripts/export_discovery_kge.py` は、各 claim が引用する**このリポジトリ内の年代付き出典のうち最古年**を用いて、関係が資料集合へ現れる時点を作る。
+
+現在の出力は、
+
+- **31 facts**
+- **1682〜2024年**
+- **12 distinct years**
+
+である。
+
+これは「人類がその事実を初めて発見した年」ではない。あくまで**現在このリポジトリに結び付いている資料群の中での最古の証拠年**であり、史料追加によって過去へ動く可能性がある。
+
+Hakken 的な「過去までに知られていた関係から、後の資料に現れる関係を予測する」実験では、historical time より **discovery / evidence time を主軸**にする。
+
+## 厳密な時間順 backtest
+
+`make_temporal_backtest.py` は未来の辺を学習側へ移動して coverage を稼がない。後年に初登場する実体・関係は cold-start として別集計する。
+
+### historical-time の診断
+
+`train < 1930`, `1930 <= valid < 1960`, `test >= 1960` では、
 
 ```text
-subject    relation    object    year
+train                 15
+valid                  4
+  valid_seen            0
+  valid_cold_start      4
+test                   5
+  test_seen             0
+  test_cold_start       5
 ```
 
-へ落とす。
+となった。relation は train に6種類すべて現れるが、後期の実体が学習時点に存在しないため、通常の temporal link prediction として評価できる seen fact がない。
 
-現在の出力は **31 facts / 15 distinct years / 1682〜2016年**。整数年がない保守的・予測対象 claim **21件**は除外された。`period` や注記から代表年を推測して埋めることはしない。
+これは historical-time を捨てる理由ではない。歴史地形の状態変化を扱う軸としては必要だが、**現在のデータ量では Hakken 型の未来リンク評価用データとして弱い**という診断である。
 
-この31件は「時系列モデルが学習できる十分な量」という意味ではなく、**年代を捨てずに Hakken 系へ渡せる経路が実際に動いた**という段階である。
+### discovery-time の診断
+
+cutoff scan では、historical-time より seen future が増える。例として、
+
+- `train < 2016`, `2016 <= valid < 2021`, `test >= 2021` では、scan 上 `test_seen=2`
+- `train < 2021`, `2021 <= valid < 2024`, `test >= 2024` では、scan 上 `valid_seen=2`
+
+が得られている。
+
+まだ validation と test の両方に十分な seen fact が揃う段階ではないが、**「後年資料で新しい関係が追加されたか」を試す時間軸としてはこちらの方が適切**である。
+
+CI では `train < 2016`, `2016 <= valid < 2021`, `test >= 2021` の discovery-time backtest も生成し、cold-start と seen を毎回確認する。
 
 ## HakkenOSS への接続
 
 ### 静的 KGE
 
-HakkenOSS には一般的な `TextKGDataset` があり、`train / val / test` の三つ組TSVを直接読める。このリポジトリには設定例として
+HakkenOSS の `TextKGDataset` に、このリポジトリの三つ組 TSV を渡せる。設定例は
 
 ```text
 experiments/kge/hakken/otowa.yaml
 ```
 
-を置いた。
-
-したがって静的な最初の実験は、
-
-```text
-Markdown
-  ↓
-evidence-aware claims
-  ↓
-conservative triples
-  ↓
-coverage-aware train/val/test
-  ↓
-HakkenOSS TextKGDataset
-  ↓
-ComplEx / DistMult
-```
-
-まで HakkenOSS 本体を改造せず試せる。
-
-### THiGER
-
-追加調査で、HakkenOSS の `hakken-models` 内に **THiGER 本体のモデル・学習・評価コードが公開されている**ことを確認した。THiGER は `num_timestamps` を持ち、GNN と Transformer で temporal KG を扱う実装になっている。
-
-一方、論文で使われる **THiGERLLM** の完全な同一実装は確認できない。`THiGERLLM` というモデル名はベンチマーク生成コード等に現れるが、`class THiGERLLM` の実装は見つかっていない。LLM を使う `hakken-agents` は別系統として扱う。
-
-詳細は [`docs/HakkenOSS接続.md`](../../docs/HakkenOSS接続.md) に整理した。
+に置く。
 
 ### THiGER raw schema
 
-HakkenOSS の dataset preparation が読む raw schema に直接合わせる exporter を追加した。
+HakkenOSS の `hakken-models` が読む raw schema に対し、二種類の時間軸を別ディレクトリへ出力する。
 
 ```bash
+# 歴史世界の時間
 python scripts/export_hakken_thiger_raw.py
+
+# 資料上の発見・証拠時間
+python scripts/export_discovery_kge.py
+python scripts/export_hakken_thiger_raw.py \
+  --input experiments/kge/discovery/all.tsv \
+  --output-dir experiments/kge/hakken/raw-discovery
 ```
 
-生成物：
+現在の出力は次の通り。
+
+| 軸 | edge rows | nodes | 年代範囲 |
+|---|---:|---:|---|
+| historical | 24 | 30 | 1682〜2016 |
+| discovery/evidence | 31 | 38 | 1682〜2024 |
+
+生成物はそれぞれ、
 
 ```text
-experiments/kge/hakken/raw/edges.tsv
-experiments/kge/hakken/raw/nodes_corrected.tsv
+experiments/kge/hakken/raw-historical/
+experiments/kge/hakken/raw-discovery/
 ```
 
-GitHub Actions で、
+に置く。
 
-- **31 edge rows**（+ header）
-- **35 nodes**（+ header）
-- domain: `Bridge`, `Canal`, `ChannelSegment`, `ConstructionEvent`, `Drain`, `Place`, `River`
+THiGER の packaged dataset は HakkenOSS 側の dataset preparation に任せ、こちらでは証拠つき `claims` から再生成できる raw ingestion boundary を責務とする。
 
-を確認した。
+## THiGER と THiGERLLM
 
-これは Hakken の raw ingestion boundary まで接続できたことを意味する。THiGER の `DatasetDeployment` が最終的に読む Parquet mapping / NumPy tensor への packaging は、HakkenOSS 側の dataset preparation と責務を分ける。
+HakkenOSS の `hakken-models` には **THiGER 本体のモデル・学習・評価コード**がある。一方、論文で説明される **THiGERLLM** と完全に同一の実装は確認できていない。
 
-## 「未来予測」の次の評価
-
-現在の coverage-aware split は静的リンク予測用であり、未来予測の評価には使わない。
-
-次は年代付き31 factsについて、
+したがって、
 
 ```text
-過去年代のみ train
-次の期間を validation
-さらに後年を test
+THiGER        : OSS 実装を直接試せる
+THiGERLLM     : 論文上の構成。完全な同一実装は未確認
+hakken-agents : LLM を使う抽出・entity resolution 系。別系統
 ```
 
-とする**厳密な時間順 backtest**を作る。
-
-このとき test にしか現れない entity / relation は単純な誤答とせず、cold-start として別集計する。将来的には、ある時点までの史料だけから候補リンクを順位付けし、後年史料で本当に確認されたかを見る。
+として区別する。
 
 ## 次に増やすべきもの
 
-次の目安は **conservative triples 100以上**。ただし、単純な件数より密度を優先する。
+目標は単なる100 triplesではなく、**時間をまたいで同じ語彙が繰り返し現れる100 triples**にする。
 
-優先順位は次の通り。
+優先するのは、
 
-1. 既存の `River` / `ChannelSegment` と複数地点を結ぶ `flows_through`
-2. 同じ河川について複数の橋を結ぶ `bridge_over`
-3. 同一地点・同一河道を異なる年代の一次史料で再観察する claim
-4. 分水・支流について、`branches_from` / `flows_to` / `receives_water_from` を一つの経路として揃える
-5. 暗渠化・改修は、河川全体ではなく可能なら対象 `ChannelSegment` を切って年代別に記録する
+1. 水窪川・弦巻川・谷端川そのものを、複数年代の地図・地誌から同じ relation で記録すること
+2. 既存の橋・地点について別年代の一次史料を追加し、future 側でも train 既知の entity が再登場するようにすること
+3. `flows_through`, `flows_to`, `source_of`, `supplies`, `branches_from` を中心に、relation ごとの例数を増やすこと
+4. 「後世の資料が過去の状態を述べる」場合に historical time と source year を混同しないこと
+5. 未確認資料は `pending` / `secondary_transcription` のまま保持し、原資料確認時だけ更新すること
 
-未確認資料は `pending` / `secondary_transcription` のまま残す。原資料確認が取れた時だけ、対応する claim を根拠付きで更新する。
+この方針なら、Hakken の出力を「史実」として採用するのではなく、**次に確認すべき河道・接続・史料候補の順位付け**として使える。
 
 ## 再現
 
@@ -175,8 +194,20 @@ python scripts/collect_tagged_passages.py --summary-only
 python scripts/export_kge.py
 python scripts/make_kge_split.py
 python scripts/export_temporal_kge.py
+python scripts/scan_temporal_cutoffs.py
+python scripts/make_temporal_backtest.py --train-end 1930 --val-end 1960
+python scripts/export_discovery_kge.py
+python scripts/scan_temporal_cutoffs.py \
+  --input experiments/kge/discovery/all.tsv \
+  --output experiments/kge/discovery/cutoff-scan.json
+python scripts/make_temporal_backtest.py \
+  --input experiments/kge/discovery/all.tsv \
+  --output-dir experiments/kge/discovery/backtest \
+  --train-end 2016 --val-end 2021
 python scripts/export_hakken_thiger_raw.py
-cat experiments/kge/split/metadata.json
+python scripts/export_hakken_thiger_raw.py \
+  --input experiments/kge/discovery/all.tsv \
+  --output-dir experiments/kge/hakken/raw-discovery
 ```
 
 抽出時の規則は [`prompts/extract-knowledge-graph.md`](../../prompts/extract-knowledge-graph.md) を使う。
