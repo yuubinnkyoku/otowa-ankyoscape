@@ -61,7 +61,7 @@ test    4
 - **1682〜2016年**
 - **11 distinct years**
 
-である。`period` や注記から代表年を推測して埋めず、整数の `time.at` があるものだけを使う。
+である。`period` や注記から代表年を推測して埋れず、整数の `time.at` があるものだけを使う。
 
 ### 2. discovery / evidence time — その関係をいつの史料で確認できるか
 
