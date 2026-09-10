@@ -13,8 +13,9 @@ true first historical discovery date.
 
 Sources may optionally carry ``year_kind`` (for example ``publication`` or
 ``page_update``). ``--exclude-year-kinds`` makes it possible to test how much a
-backtest depends on weak artifact dates such as website update years without
-discarding those dates from the evidence catalogue itself.
+backtest depends on weak artifact dates such as website update years or dates
+whose meaning has not yet been classified. A dated source without
+``year_kind`` is exposed to the filter as the synthetic kind ``unspecified``.
 """
 
 from __future__ import annotations
@@ -78,8 +79,9 @@ def parse_args() -> argparse.Namespace:
         "--exclude-year-kinds",
         default="",
         help=(
-            "comma-separated source year_kind values to ignore, e.g. page_update; "
-            "sources without year_kind remain eligible for backward compatibility"
+            "comma-separated source year_kind values to ignore, e.g. "
+            "page_update,unspecified; sources without year_kind are treated as "
+            "the synthetic kind unspecified"
         ),
     )
     parser.add_argument(
@@ -106,7 +108,7 @@ def main() -> int:
 
     sources = load_group("sources")
     claims = load_group("claims")
-    source_years: dict[str, tuple[int | None, str | None]] = {}
+    source_years: dict[str, tuple[int | None, str]] = {}
     source_year_kind_counts: Counter[str] = Counter()
     for source in sources:
         source_id = source.get("id")
@@ -114,12 +116,13 @@ def main() -> int:
             raise ValueError("source id must be a string")
         year = source.get("year")
         year_value = year if isinstance(year, int) and not isinstance(year, bool) else None
-        year_kind = source.get("year_kind")
-        if year_kind is not None and not isinstance(year_kind, str):
+        raw_year_kind = source.get("year_kind")
+        if raw_year_kind is not None and not isinstance(raw_year_kind, str):
             raise ValueError(f"source {source_id!r} year_kind must be a string when present")
+        year_kind = raw_year_kind or "unspecified"
         source_years[source_id] = (year_value, year_kind)
         if year_value is not None:
-            source_year_kind_counts[year_kind or "unspecified"] += 1
+            source_year_kind_counts[year_kind] += 1
 
     first_evidence: dict[tuple[str, str, str], int] = {}
     skipped_relation_policy = 0
