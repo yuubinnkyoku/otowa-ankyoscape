@@ -9,6 +9,7 @@
 1. 静的リンク予測：`TextKGDataset` に三つ組 TSV を渡し、ComplEx / DistMult 等を試す。
 2. 時系列モデル：`hakken-models` の THiGER 用 raw schema に年代付き TSV を変換し、Hakken 側の dataset preparation / training へ渡す。
 3. Hakken 型の未来発見評価：歴史上の出来事年とは別に、**資料上でその関係を確認できる年（discovery / evidence time）**を作り、時間順 backtest を行う。
+4. discovery/evidence time 自体の信頼性を、`source.year_kind` と複数の年代採用方針で感度分析する。
 
 ただし、論文でいう **THiGERLLM と、OSS に実装されている THiGER を同一視しない**。
 
@@ -180,7 +181,7 @@ experiments/kge/hakken/raw-discovery/edges.tsv
 experiments/kge/hakken/raw-discovery/nodes_corrected.tsv
 ```
 
-現在は **31 edge rows / 38 nodes / 1682〜2024年（12 distinct years）**。
+現在の baseline は **38 edge rows / 43 nodes / 1682〜2024年（13 distinct years）**。
 
 `--input` を使った場合、入力 TSV は
 
@@ -215,9 +216,52 @@ Hakken 論文が狙う「その時点までの知識から未来の発見を予�
 
 であって、社会全体・研究史全体での「真の初出年」ではない。古い史料が後から追加されれば年は過去へ動く。この corpus incompleteness は、評価結果と一緒に明示する。
 
+### source.year_kind
+
+さらに、`source.year` の数字だけでは「その年が何を意味するか」が曖昧なので、ontology に `source.year_kind` を導入した。
+
+```text
+publication : 本・論文・記事・報告書・公開資料そのものの刊行・公開年
+creation    : 写真・地図・原史料など資料そのものの作成年
+issue       : 公報・議会速記録など号／会議に対応する年
+page_update : Webページの更新年
+edition     : 版・改訂版の刊行年
+unknown     : 年代の意味を確定できていない
+```
+
+古いレコードで `year_kind` 自体が未設定の場合は、exporter 内で `unspecified` として扱う。これは ontology 上の確定値ではなく、**未分類レコードを感度分析から除外可能にするための合成カテゴリ**である。
+
 ---
 
-## 7. THiGER の packaged dataset は raw TSV とは別形式
+## 7. discovery/evidence time の感度分析
+
+未来予測評価では、Web更新日や意味未分類の年代に結果が依存していないかを分けて確認する。
+
+現在 CI では三種類を生成する。
+
+| timeline | 除外する source 年代 | facts | distinct years |
+|---|---|---:|---:|
+| baseline | なし | 38 | 13 |
+| no-page-update | `page_update` | 31 | 11 |
+| classified-only | `page_update`, `unspecified`, `unknown` | 22 | 6 |
+
+`classified-only` に残る年代は **1682, 1851, 1999, 2000, 2001, 2021**。これは、現時点で意味を明示的に分類済みかつ Web 更新年ではない source だけに寄せた保守的な slice である。
+
+同じ `train < 2016 / valid < 2021 / test >= 2021` で比較すると、
+
+| timeline | train | valid | test | valid_seen | test_seen | test_cold_start |
+|---|---:|---:|---:|---:|---:|---:|
+| baseline | 22 | 2 | 14 | 0 | 2 | 12 |
+| no-page-update | 22 | 1 | 8 | 0 | 2 | 6 |
+| classified-only | 14 | 0 | 8 | 0 | 2 | 6 |
+
+**test_seen の2件は、Web更新日だけでなく未分類年代も除外した `classified-only` でも残る。** したがって、この2件が弱い source date の採用だけで人工的に生じたわけではないことは確認できる。
+
+ただし `classified-only` では validation が0件である。これはモデルの性能を示す結果ではなく、現状の資料密度では通常の temporal link prediction 評価がまだ成立していないことを示す。seen 2件の生存は、あくまで**評価データ側の健全性確認**として扱う。
+
+---
+
+## 8. THiGER の packaged dataset は raw TSV とは別形式
 
 THiGER の学習側で使う `DatasetDeployment` は、最終的には次の構造を読む。
 
@@ -245,7 +289,7 @@ fact tensor は `[subject_idx, relation_idx, object_idx, timestamp_idx]` の4列
 
 ---
 
-## 8. 時間順 backtest
+## 9. 時間順 backtest
 
 未来発見を試すならランダム split を使わない。
 
@@ -261,20 +305,20 @@ test  : val_end <= year
 
 historical time の `train < 1930 / valid < 1960` では、valid 4件・test 5件が**すべて cold-start**になった。この軸は歴史状態の復元には必要だが、現状のグラフでは未来リンク予測評価に向かない。
 
-一方 discovery/evidence time の cutoff scan では、後年にも train 既知の実体を含む fact が少数ながら現れる。たとえば `train < 2016 / valid < 2021` では test 側に seen fact が2件ある。CI ではこの分割も生成して、seen と cold-start を継続観測する。
+discovery/evidence time では test 側に seen fact が2件あるが、三種類の年代方針のどれでも validation に十分な seen fact がない。cutoff scan で `classified-only` の比較的良い候補 `train < 2001 / valid < 2021` を使っても `train=12 / valid=2 / test=8`, `valid_seen=0 / test_seen=2` である。
 
-まだ validation と test の両方に十分な seen fact があるわけではないので、現段階で MRR や Hits@K を「未来発見能力」として解釈しない。
+したがって、現段階で MRR や Hits@K を「未来発見能力」として解釈しない。モデルを本格評価する前に、**同じ実体・同じ relation が複数年代に再登場する資料密度**を増やすことを優先する。
 
 ---
 
-## 9. ChatGPT との役割分担
+## 10. ChatGPT との役割分担
 
 この構成では、ChatGPT は Hakken の出力をそのまま史実へ変換する役ではない。
 
 ```text
 Markdown・史料メモ
         ↓
-ChatGPT: entity / relation / evidence status を抽出
+ChatGPT: entity / relation / evidence status / source year semantics を抽出
         ↓
 証拠つき claims
         ↓
@@ -296,10 +340,14 @@ flowchart LR
     A[Markdown・一次史料メモ] --> B[evidence-aware claims]
     B --> C[静的3列 TSV]
     B --> D[historical-time 4列 TSV]
-    B --> E[discovery-time 4列 TSV]
+    B --> E[discovery-time baseline]
+    E --> E1[no-page-update]
+    E --> E2[classified-only]
     C --> F[Hakken TextKGDataset / KGE]
     D --> G[THiGER raw historical]
     E --> H[THiGER raw discovery]
+    E1 --> V[年代感度分析]
+    E2 --> V
     G --> I[Hakken dataset preparation]
     H --> I
     I --> J[THiGER]
