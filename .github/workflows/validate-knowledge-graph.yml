@@ -16,6 +16,7 @@ on:
       - "scripts/scan_temporal_cutoffs.py"
       - "scripts/collect_tagged_passages.py"
       - "scripts/graph_stats.py"
+      - "scripts/build_research_queue.py"
   pull_request:
     paths:
       - "ontology/**"
@@ -31,6 +32,7 @@ on:
       - "scripts/scan_temporal_cutoffs.py"
       - "scripts/collect_tagged_passages.py"
       - "scripts/graph_stats.py"
+      - "scripts/build_research_queue.py"
 
 permissions:
   contents: read
@@ -56,6 +58,7 @@ jobs:
       - run: python scripts/make_temporal_backtest.py --input experiments/kge/discovery/all.tsv --output-dir experiments/kge/discovery/backtest --train-end 2016 --val-end 2021
       - run: python scripts/export_hakken_thiger_raw.py
       - run: python scripts/export_hakken_thiger_raw.py --input experiments/kge/discovery/all.tsv --output-dir experiments/kge/hakken/raw-discovery
+      - run: python scripts/build_research_queue.py
       - name: Show generated split
         run: |
           cat experiments/kge/split/metadata.json
@@ -72,3 +75,4 @@ jobs:
           echo "--- Hakken THiGER historical raw nodes" && wc -l experiments/kge/hakken/raw-historical/nodes_corrected.tsv
           echo "--- Hakken THiGER discovery raw edges" && wc -l experiments/kge/hakken/raw-discovery/edges.tsv
           echo "--- Hakken THiGER discovery raw nodes" && wc -l experiments/kge/hakken/raw-discovery/nodes_corrected.tsv
+          echo "--- research queue" && cat experiments/kge/research-queue.md
