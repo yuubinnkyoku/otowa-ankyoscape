@@ -5,18 +5,21 @@ The current graph is small enough that the main bottleneck is not model
 capacity but evidence coverage. This script turns that bottleneck into concrete
 research tasks without inventing new historical facts.
 
-It reports three kinds of targets:
+It reports four kinds of targets:
 
 1. temporal-predictable relations that cannot enter the discovery/evidence
    timeline because every cited source currently has an unknown source year;
 2. retained relations with zero or only one exact historical observation year,
    where another dated observation would improve temporal density;
 3. low-degree core hydrological entities that are still weakly connected in
-   the conservative graph.
+   the conservative graph;
+4. dated sources whose ``year_kind`` is still missing or ``unknown``, especially
+   when the source year coincides with a claim's historical time and therefore
+   deserves a check for accidental event-date leakage.
 
-Only ``confirmed`` and ``observation`` claims are used for these diagnostics.
-Pending and secondary-transcription claims remain useful research leads, but
-are not treated as positive training evidence here.
+Only ``confirmed`` and ``observation`` claims are used for graph-density
+diagnostics. Pending and secondary-transcription claims remain useful research
+leads, but are not treated as positive training evidence here.
 """
 
 from __future__ import annotations
@@ -131,9 +134,20 @@ def main() -> int:
     ]
 
     by_triple: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    source_usage_triples: dict[str, set[tuple[str, str, str]]] = defaultdict(set)
+    source_usage_historical_years: dict[str, set[int]] = defaultdict(set)
+
     for claim in retained:
         triple = (claim["subject"], claim["relation"], claim["object"])
         by_triple[triple].append(claim)
+        time = claim.get("time") or {}
+        historical_year = time.get("at") if isinstance(time, dict) else None
+        for source_id in claim.get("sources", []):
+            if not isinstance(source_id, str):
+                continue
+            source_usage_triples[source_id].add(triple)
+            if is_int_year(historical_year):
+                source_usage_historical_years[source_id].add(int(historical_year))
 
     triple_rows: list[dict[str, Any]] = []
     entity_degree: dict[str, set[tuple[str, str, str]]] = defaultdict(set)
@@ -204,9 +218,47 @@ def main() -> int:
             low_degree.append((degree, str(entity.get("label", entity_id)), entity_id))
     low_degree.sort(key=lambda row: (row[0], row[1], row[2]))
 
+    unclassified_dated_sources: list[dict[str, Any]] = []
+    for source in sources:
+        source_year = source.get("year")
+        if not is_int_year(source_year):
+            continue
+        year_kind = source.get("year_kind")
+        if year_kind not in {None, "unknown"}:
+            continue
+        source_id = str(source.get("id", "?"))
+        historical_years = sorted(source_usage_historical_years.get(source_id, set()))
+        used_triples = source_usage_triples.get(source_id, set())
+        same_as_historical = int(source_year) in historical_years
+        unclassified_dated_sources.append(
+            {
+                "id": source_id,
+                "title": str(source.get("title", source_id)),
+                "year": int(source_year),
+                "year_kind": year_kind or "unspecified",
+                "used_triples": len(used_triples),
+                "historical_years": historical_years,
+                "same_as_historical": same_as_historical,
+            }
+        )
+    unclassified_dated_sources.sort(
+        key=lambda row: (
+            -int(row["same_as_historical"]),
+            -row["used_triples"],
+            row["year"],
+            row["id"],
+        )
+    )
+
     exact_temporal_triples = sum(1 for row in triple_rows if row["exact_years"])
     repeated_temporal_triples = sum(1 for row in triple_rows if len(row["exact_years"]) >= 2)
     discovery_eligible_triples = sum(1 for row in triple_rows if row["dated_source_years"])
+    unclassified_used_sources = sum(
+        1 for row in unclassified_dated_sources if row["used_triples"] > 0
+    )
+    possible_event_date_leaks = sum(
+        1 for row in unclassified_dated_sources if row["same_as_historical"]
+    )
 
     out: list[str] = []
     out.append("# 研究キュー：時系列知識グラフの密度を上げる")
@@ -221,6 +273,8 @@ def main() -> int:
     out.append(f"- historical time が2年代以上ある再観測 triples: **{repeated_temporal_triples}**")
     out.append(f"- discovery/evidence time に入れる triples: **{discovery_eligible_triples}**")
     out.append(f"- source year 不明だけが理由で discovery timeline に入らない triples: **{len(blocked_discovery)}**")
+    out.append(f"- year_kind 未分類の年代付き source: **{len(unclassified_dated_sources)}**（うち temporal graph で使用: **{unclassified_used_sources}**）")
+    out.append(f"- source year と historical time が同年で、意味の確認を優先する source: **{possible_event_date_leaks}**")
     out.append("")
 
     out.append("## A. source year を確定すると discovery timeline が増える候補")
@@ -268,10 +322,29 @@ def main() -> int:
         out.append("| — | — | — |")
     out.append("")
 
+    out.append("## D. source.year の意味を確定する候補")
+    out.append("")
+    out.append("`year` は入っているが `year_kind` が未設定または `unknown` の source。")
+    out.append("特に、その source が支える claim の historical time と同じ年の場合は、**史料の刊行・作成年なのか、単に史料本文が述べる出来事年なのか**を先に確認する。後者を discovery/evidence time に使うと未来情報が過去へ漏れる。")
+    out.append("")
+    out.append("| 優先 | source | year | kind | temporal triples | historical time |")
+    out.append("|---|---|---:|---|---:|---|")
+    for row in unclassified_dated_sources[: args.max_rows]:
+        priority = "要確認: 同年" if row["same_as_historical"] else ("使用中" if row["used_triples"] else "未使用")
+        historical = ", ".join(map(str, row["historical_years"])) or "—"
+        source_text = f"`{row['id']}` {markdown_escape(row['title'])}"
+        out.append(
+            f"| {priority} | {source_text} | {row['year']} | `{row['year_kind']}` | "
+            f"{row['used_triples']} | {historical} |"
+        )
+    if not unclassified_dated_sources:
+        out.append("| — | — | — | — | — | — |")
+    out.append("")
+
     out.append("## 読み方")
     out.append("")
-    out.append("A は discovery/evidence time の欠損、B は historical time の疎さ、C は静的グラフの疎さを表す。")
-    out.append("一つの史料確認で A と B の両方が改善する場合を最優先とし、確認できなかった場合も `pending` を正例へ格上げしない。")
+    out.append("A は discovery/evidence time の欠損、B は historical time の疎さ、C は静的グラフの疎さ、D は source 年代の意味の未確定を表す。")
+    out.append("一つの史料確認で A と B の両方が改善する場合を最優先とし、D で年代の意味が曖昧なものは discovery backtest の結果を読む前に確認する。確認できなかった場合も `pending` を正例へ格上げしない。")
     out.append("")
 
     output_path = ROOT / args.output
@@ -284,6 +357,9 @@ def main() -> int:
     print(f"discovery/evidence eligible triples: {discovery_eligible_triples}")
     print(f"blocked by undated sources: {len(blocked_discovery)}")
     print(f"low-degree core entities (degree <= 2): {len(low_degree)}")
+    print(f"dated sources with unclassified year_kind: {len(unclassified_dated_sources)}")
+    print(f"unclassified dated sources used by temporal graph: {unclassified_used_sources}")
+    print(f"possible source/event-year collisions to review: {possible_event_date_leaks}")
     print(f"wrote {output_path.relative_to(ROOT)}")
     return 0
 
