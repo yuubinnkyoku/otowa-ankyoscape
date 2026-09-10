@@ -125,6 +125,14 @@ def main() -> int:
     allowed_statuses = {x["id"] for x in evidence_ontology["evidence_statuses"]}
     allowed_source_classes = set(evidence_ontology["source_classes"])
     allowed_confidence = {"high", "medium", "low", "unknown"}
+    allowed_source_year_kinds = {
+        "publication",
+        "creation",
+        "issue",
+        "page_update",
+        "edition",
+        "unknown",
+    }
 
     entities = load_group("entities")
     sources = load_group("sources")
@@ -150,12 +158,23 @@ def main() -> int:
             ("id", "title", "year", "source_class", "url", "primary_source_checked"),
             errors,
         )
+        row_where = where(row)
         if row.get("source_class") not in allowed_source_classes:
-            errors.append(f"{where(row)}: unknown source_class {row.get('source_class')!r}")
+            errors.append(f"{row_where}: unknown source_class {row.get('source_class')!r}")
         if not isinstance(row.get("primary_source_checked"), bool):
-            errors.append(f"{where(row)}: primary_source_checked must be boolean")
+            errors.append(f"{row_where}: primary_source_checked must be boolean")
         if row.get("source_class") == "primary" and row.get("primary_source_checked") is not True:
-            errors.append(f"{where(row)}: a source classified as primary must be directly checked")
+            errors.append(f"{row_where}: a source classified as primary must be directly checked")
+
+        year = row.get("year")
+        if year is not None and (not isinstance(year, int) or isinstance(year, bool)):
+            errors.append(f"{row_where}: year must be an integer or null")
+        year_kind = row.get("year_kind")
+        if year_kind is not None and year_kind not in allowed_source_year_kinds:
+            errors.append(
+                f"{row_where}: invalid year_kind {year_kind!r}; "
+                f"expected one of {sorted(allowed_source_year_kinds)}"
+            )
 
     for row in claims:
         require_keys(
