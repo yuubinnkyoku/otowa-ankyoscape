@@ -77,6 +77,33 @@ def unique_index(rows: list[dict[str, Any]], errors: list[str]) -> dict[str, dic
     return index
 
 
+def ontology_ids(
+    ontology: dict[str, Any], key: str, errors: list[str]
+) -> set[str]:
+    """Read an ontology list of objects with unique non-empty ``id`` fields."""
+    values = ontology.get(key)
+    if not isinstance(values, list):
+        errors.append(f"ontology/evidence.json: {key!r} must be a list")
+        return set()
+
+    ids: set[str] = set()
+    for index, value in enumerate(values):
+        if not isinstance(value, dict):
+            errors.append(f"ontology/evidence.json: {key}[{index}] must be an object")
+            continue
+        value_id = value.get("id")
+        if not isinstance(value_id, str) or not value_id:
+            errors.append(
+                f"ontology/evidence.json: {key}[{index}].id must be a non-empty string"
+            )
+            continue
+        if value_id in ids:
+            errors.append(f"ontology/evidence.json: duplicate {key} id {value_id!r}")
+            continue
+        ids.add(value_id)
+    return ids
+
+
 def validate_time(value: Any, row_where: str, errors: list[str]) -> None:
     if value is None:
         return
@@ -125,14 +152,9 @@ def main() -> int:
     allowed_statuses = {x["id"] for x in evidence_ontology["evidence_statuses"]}
     allowed_source_classes = set(evidence_ontology["source_classes"])
     allowed_confidence = {"high", "medium", "low", "unknown"}
-    allowed_source_year_kinds = {
-        "publication",
-        "creation",
-        "issue",
-        "page_update",
-        "edition",
-        "unknown",
-    }
+    allowed_source_year_kinds = ontology_ids(
+        evidence_ontology, "source_year_kinds", errors
+    )
 
     entities = load_group("entities")
     sources = load_group("sources")
