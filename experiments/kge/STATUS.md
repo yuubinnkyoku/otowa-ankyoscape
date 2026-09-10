@@ -7,10 +7,10 @@
 GitHub Actions 上で次を確認している。
 
 - entities: **111**
-- sources: **40**
-- claims: **119**
+- sources: **41**
+- claims: **120**
 - hypotheses: **15**
-- `confirmed`: **63**
+- `confirmed`: **64**
 - `observation`: **15**
 - `secondary_transcription`: **21**
 - `pending`: **20**
@@ -18,7 +18,7 @@ GitHub Actions 上で次を確認している。
 
 当初の 44 claims / 26 triples からは増えたが、KGE に安全に使う静的辺はまだ50件である。数を増やすために二次転記・未確認情報を正例へ格上げしない。
 
-今回、既存の豊島区1999年資料から「水窪川 — flows_through → 辻広場」を既存オーラルヒストリーとは別の公的二次資料で再確認し、`confirmed` claim を1件追加した。ただし同一 base triple なので静的50 triples自体は増えない。**同じ関係を独立資料で再確認できたこと**を証拠密度として保持する。
+今回、既存の豊島区1999年資料から「水窪川 — flows_through → 辻広場」を既存オーラルヒストリーとは別の公的二次資料で再確認した。さらに東京都建設局の年代付き公式ページを `S42` として追加し、「千川上水 — branches_from → 玉川上水」を既存 `S08` とは独立に再確認した。どちらも既存 base triple の再確認なので静的50 triples自体は増えないが、**同じ関係を独立資料で再確認できたこと**を証拠密度として保持する。
 
 ## 証拠を増やすだけでは足りない
 
@@ -69,15 +69,15 @@ test    4
 
 現在の出力は、
 
-- **37 facts**
+- **38 facts**
 - **1682〜2024年**
-- **12 distinct years**
+- **13 distinct years**
 
 である。
 
-前回の31 factsから6件増えた。内訳は、練馬区資料 `S11` の資料年を公式ページ上で確認して2024年と記録したことで5 base triplesが timeline に入ったことと、豊島区1999年資料による辻広場の独立再確認を追加したことで1 base tripleが1999年側に入ったことによる。
+31 factsの段階から、練馬区資料 `S11` の資料年を2024年と確認して5 base triplesを追加し、豊島区1999年資料による辻広場の独立再確認で1 base tripleを追加した。今回さらに、東京都建設局 `S42` のページ日付を2018年と記録したことで「千川上水 — branches_from → 玉川上水」が discovery timeline に入り、**2018年が新しい distinct year** になった。
 
-これは「人類がその事実を初めて発見した年」ではない。あくまで**現在このリポジトリに結び付いている資料群の中での最古の証拠年**であり、史料追加によって過去へ動く可能性がある。
+これは「人類がその事実を初めて発見した年」ではない。あくまで**現在このリポジトリに結び付いている資料群の中での最古の証拠年**であり、史料追加によって過去へ動く可能性がある。Webページの更新日を使う場合も、その意味を source note に明示し、歴史上の出来事年とは分離する。
 
 Hakken 的な「過去までに知られていた関係から、後の資料に現れる関係を予測する」実験では、historical time より **discovery / evidence time を主軸**にする。
 
@@ -109,9 +109,9 @@ CI では `train < 2016`, `2016 <= valid < 2021`, `test >= 2021` で厳密に分
 
 ```text
 train                 22
-valid                  1
+valid                  2
   valid_seen            0
-  valid_cold_start      1
+  valid_cold_start      2
 test                  14
   test_seen             2
   test_cold_start      12
@@ -119,7 +119,7 @@ test                  14
 
 である。
 
-S11の資料年確定で2024年側の事実が増えたため test の総数と cold-start は増えた。これはモデル性能が悪化したという意味ではなく、**今まで timeline から欠落していた後年資料の関係が正しく評価集合へ入った**結果である。
+2018年の `S42` が加わったため validation が1件増えた。ただしその関係は学習側の語彙だけでは通常評価できない cold-start であり、`valid_seen` はまだ0のままである。
 
 まだ validation と test の双方に十分な seen fact が揃う段階ではないため、現時点で MRR / Hits@K を「未来発見能力」と解釈しない。
 
@@ -132,21 +132,20 @@ S11の資料年確定で2024年側の事実が増えたため test の総数と 
 - temporal-predictable な保守的 base triples: **42**
 - historical time が1件以上ある triples: **22**
 - historical time が2年代以上ある再観測 triples: **2**
-- discovery/evidence time に入れる triples: **37**
-- source year 不明だけが理由で discovery timeline に入らない base triples: **5**
+- discovery/evidence time に入れる triples: **38**
+- source year 不明だけが理由で discovery timeline に入らない base triples: **4**
 - conservative graph で degree <= 2 の中核水系実体: **37**
 
 である。
 
 特に重要なのは、**42 base triplesのうち、同一関係を2年代以上の historical time で直接再観測できているものがまだ2件しかない**ことである。現状ではモデル選定より、既存実体を別年代の一次史料で再観測する作業の方が価値が高い。
 
-残る discovery-time 欠損5 base triplesは、
+残る discovery-time 欠損4 base triplesはすべて1956年の谷端川暗渠工事関係で、
 
-- 1956年の谷端川・千早町〜長崎区間 `flows_through` 2件
-- 1956年の谷端川・要町区間 `flows_through` 2件
-- 千川上水 `branches_from` 玉川上水 1件
+- 千早町〜長崎区間 `flows_through` 2件
+- 要町区間 `flows_through` 2件
 
-である。前4件は `TOSHIMA_YABATA_TIMELINE`、最後の1件は `S08` の source year を推測せず保留している。Webページの最終更新日を資料作成年と同一視しない。
+である。現在の `TOSHIMA_YABATA_TIMELINE` は出来事年1956年を示すが、discovery/evidence time に使う資料側の年をまだ確定していない。次はこのタイムラインが依拠する**当時の区公報または出典を直接確認する**ことを優先する。
 
 生成先は `experiments/kge/research-queue.md`。CIで毎回再生成し、A: source year欠損、B: historical再観測不足、C: low-degree中核実体の三方向から次の史料調査候補を出す。
 
@@ -182,7 +181,7 @@ python scripts/export_hakken_thiger_raw.py \
 | 軸 | edge rows | nodes | 年代範囲 |
 |---|---:|---:|---|
 | historical | 24 | 30 | 1682〜2016 |
-| discovery/evidence | 37 | 42 | 1682〜2024 |
+| discovery/evidence | 38 | 43 | 1682〜2024 |
 
 生成物はそれぞれ、
 
