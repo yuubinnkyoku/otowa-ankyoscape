@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "evidence_statuses": [
+    {"id": "confirmed", "description": "本研究で根拠資料を確認し、主張として採用できる"},
+    {"id": "observation", "description": "地図・写真・現地等から本研究が直接読み取った観察。史料作成者自身の説明とは区別する"},
+    {"id": "inference", "description": "複数の事実・観察から導いた推定"},
+    {"id": "secondary_transcription", "description": "原資料未確認で、二次資料による転記・引用に依存する"},
+    {"id": "source_location_only", "description": "史料の所在・書誌のみ確認済みで、該当内容は未確認"},
+    {"id": "pending", "description": "有力候補だが追加確認が必要"},
+    {"id": "unconfirmed", "description": "未確認。学習用の正例としては扱わない"}
+  ],
+  "source_classes": [
+    "primary",
+    "official_secondary",
+    "research",
+    "book",
+    "secondary",
+    "oral_history",
+    "observation_record"
+  ],
+  "source_year_kinds": [
+    {"id": "publication", "description": "本・論文・記事・報告書・公開資料そのものの刊行・公開年"},
+    {"id": "creation", "description": "写真・地図・原史料など資料そのものが作成された年"},
+    {"id": "issue", "description": "議会速記録・公報など号や会議日付に対応する年"},
+    {"id": "page_update", "description": "Webページの更新年。資料内容の成立年や歴史上の出来事年とは区別する"},
+    {"id": "edition", "description": "版・改訂版の刊行年"},
+    {"id": "unknown", "description": "year の意味を確定できていない、または year 自体が不明"}
+  ],
+  "rules": [
+    "描かれていないことを不存在へ変換しない",
+    "二次転記を原資料確認済みに格上げしない",
+    "不明な年代・位置を推測で補わない",
+    "source.year に歴史上の出来事年を代入しない。source.year は資料側の年代として記録し、意味を source.year_kind で明示する",
+    "一つの記録に複数の独立主張を詰め込まず分割する",
+    "未解決の候補は claims ではなく hypotheses に置く",
+    "LLM出力は構造検証を通し、史料上の真偽は人間または別工程で確認する"
+  ]
+}

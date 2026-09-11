@@ -1,0 +1,18 @@
+# Copy this file into HakkenOSS/models/packages/kge/config/data_repo/otowa.yaml
+# and set OTOWA_KGE_ROOT to this repository's experiments/kge/split directory.
+#
+# HakkenOSS TextKGDataset accepts ordinary tab-separated subject/relation/object
+# files, so no Hakken fork is required for the first static ComplEx/DistMult run.
+
+_target_: datasets.TextKGDataset
+config:
+  _target_: datasets.TextKGConfig
+  root_folder: ${oc.env:OTOWA_KGE_ROOT}
+  cache: True
+  files_dict:
+    train: train.tsv
+    val: valid.tsv
+    test: test.tsv
+  delimiter: "\t"
+  column_names: ["subject", "relation", "object"]
+  name: otowa
