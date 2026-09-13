@@ -1,0 +1,39 @@
+name: oneoff-marui-1878
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-marui-1878.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update README and remove one-off workflow
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('README.md')
+          s = p.read_text(encoding='utf-8')
+          marker = "- **弦巻川の水源として丸池が公的資料に明記される。**  \n  出典：豊島区公式 [「元池袋史跡公園」](https://www.city.toshima.lg.jp/340/shisetsu/koen/030.html)\n"
+          add = """- **明治11年（1878）の『東京府村誌』は、丸池と弦巻川の規模・流向・灌漑利用を数量付きで記したとされる。** 同書雑司ヶ谷村条の二次転記では、丸池を「本村ノ西」にある**東西6間・南北5間・周囲30間**の池で「弦巻川ノ源」、また「或ハ田ノ用水ト為ル」と記し、弦巻川については丸池から一条の流れとなって**村中央を東流し、西青柳町へ入る**とする。あわせて雑司ヶ谷村の水田を5町3畝15歩、畑を70町余とする数値も紹介されている。〔本文は二次転記／原典所在確認〕  
+  これは、既収録の「丸池＝弦巻川水源」「雑司ヶ谷の用水」という理解に対し、**1878年という時点、池の寸法、流向、田用水利用を具体化する補強材料**になる。一方、水田の全てが弦巻川灌漑だったこと、丸池の1878年時点の実水面が常にこの寸法だったこと、現在の元池袋史跡公園位置を当時の池中心と同一視することはできない。東京都公文書館所蔵原本または影印で雑司ヶ谷村条の文字・数値を直接確認するまでは〔確認〕に上げない。〔観察／既存理解を強める根拠／要原典照合〕  
+  出典：二次転記：[「雑司ヶ谷村用水」](https://ameblo.jp/kazuaruki/entry-12940940738.html) / 原典所在・影印書誌：CiNii Research [『皇国地誌稿本東京府誌』](https://cir.nii.ac.jp/crid/1971712334789334309)（東京都公文書館所蔵『東京府村誌』全15冊・函架番号654-16-CI302～317の影印を含む）
+"""
+          if add.splitlines()[0] in s:
+              raise SystemExit('entry already present')
+          if marker not in s:
+              raise SystemExit('marker not found')
+          s = s.replace(marker, marker + add, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+          rm .github/workflows/oneoff-marui-1878.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md .github/workflows/oneoff-marui-1878.yml
+          git commit -m "Document 1878 Marui and Tsurumaki water use"
+          git push
