@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620">
+  <rect width="900" height="620" fill="white"/>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; fill:#111; }
+    .title { font-size:30px; font-weight:700; }
+    .label { font-size:24px; font-weight:700; }
+    .small { font-size:19px; }
+    .west { stroke:#444; stroke-width:16; fill:none; stroke-linecap:round; }
+    .east { stroke:#777; stroke-width:16; fill:none; stroke-linecap:round; }
+    .branch { stroke:#999; stroke-width:10; fill:none; stroke-linecap:round; }
+    .river { stroke:#555; stroke-width:16; fill:none; stroke-linecap:round; }
+  </style>
+  <text x="450" y="45" text-anchor="middle" class="title">西大下水（谷端川・小石川）と東大下水の概念図</text>
+
+  <text x="180" y="105" text-anchor="middle" class="small">池袋・大塚方面</text>
+  <path class="west" d="M180 125 C180 220, 210 280, 230 355 C245 420, 270 470, 335 520"/>
+  <text x="95" y="300" class="label">西大下水</text>
+  <text x="95" y="330" class="small">＝谷端川／小石川</text>
+
+  <text x="600" y="100" text-anchor="middle" class="small">巣鴨・千石方面</text>
+  <path class="east" d="M600 120 C600 210, 575 285, 560 355 C545 420, 510 465, 420 520"/>
+  <text x="620" y="300" class="label">東大下水</text>
+
+  <text x="760" y="150" text-anchor="middle" class="small">六義園方面</text>
+  <path class="branch" d="M750 170 C700 205, 650 245, 585 290"/>
+
+  <text x="735" y="365" text-anchor="middle" class="small">西片方面</text>
+  <path class="branch" d="M715 380 C660 395, 610 415, 545 430"/>
+
+  <text x="675" y="470" text-anchor="middle" class="small">菊坂方面</text>
+  <path class="branch" d="M655 485 C590 490, 535 500, 475 515"/>
+
+  <circle cx="380" cy="520" r="12" fill="#111"/>
+  <text x="380" y="565" text-anchor="middle" class="label">後楽園付近で合流</text>
+  <path class="river" d="M380 532 C380 555, 380 575, 380 595"/>
+  <text x="470" y="600" class="small">→ 神田川</text>
+
+  <text x="450" y="610" text-anchor="middle" class="small">本調査作成。位置関係を示す模式図で、縮尺・正確な流路線形は示さない。</text>
+</svg>
