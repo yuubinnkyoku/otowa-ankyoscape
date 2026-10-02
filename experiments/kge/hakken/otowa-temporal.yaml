@@ -1,0 +1,18 @@
+# Experimental temporal adapter for HakkenOSS TextKGDataset.
+# This config is only the ingestion boundary. Model-level temporal support must
+# be checked before using a particular KGE model with four-column facts.
+#
+# Expected columns: subject, relation, object, date (integer year)
+
+_target_: datasets.TextKGDataset
+config:
+  _target_: datasets.TextKGConfig
+  root_folder: ${oc.env:OTOWA_TEMPORAL_KGE_ROOT}
+  cache: True
+  files_dict:
+    train: train.tsv
+    val: valid.tsv
+    test: test.tsv
+  delimiter: "\t"
+  column_names: ["subject", "relation", "object", "date"]
+  name: otowa_temporal
