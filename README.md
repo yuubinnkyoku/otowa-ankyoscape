@@ -845,6 +845,15 @@ flowchart TD
   出典：豊島区「[わが街ひすとりぃ 日出・現地ロケ編全文テキスト](https://adeac.jp/toshima-history/texthtml/d000000/mp00500101/ht420120)」（収録年未確認、「辻広場」「東池袋4・5丁目まちづくりセンター」の段）。
 
 
+- **明治期の神田上水の樋線・井戸配置を記録した町域別原図6点が、音羽谷下流に近い小石川・牛込で確認できる。** 東京都水道歴史館所蔵、東京市水道改良事務所作成の「樋線図第5種」（明治中期～後期、1891年の同事務所成立以降と推定）。[K0218 水道端町](https://www.ro-da.jp/suidorekishida/content/detail/K0218)、[K0219 小日向水道町](https://www.ro-da.jp/suidorekishida/content/detail/K0219)、[K0220 金富町](https://www.ro-da.jp/suidorekishida/content/detail/K0220)、[K0221 牛込区西五軒町](https://www.ro-da.jp/suidorekishida/content/detail/K0221)、[K0222 諏訪町](https://www.ro-da.jp/suidorekishida/content/detail/K0222)、[K0223 水道町](https://www.ro-da.jp/suidorekishida/content/detail/K0223)。K0221は表紙の「小石川区」が朱書で「牛込」と訂正されている。〔確認：公的目録／原図細部未読〕  
+  配管は自然河道ではなく、井戸は自然湧水の直接証拠ではない。水窪川・弦巻川との交差点、旧区界の訂正理由は未確定。〔推定／未解決〕
+
+- **東京都の湧水地点数統計（1990～2023年度）は、文京区が7→7→7→8→8→8→2→2、豊島区が2→3→2→2→0→0→0→0（1990／1995／2000／2003／2008／2013／2018／2023年度）と記録する。** 区全体の集計であり、特定の旧河川の湧水が消失したとは断定できない。調査時期・天候・「湧水群」統合による変動にも注意。環境省の2024年度調査では文京区3件（2024年9月確定）で、都の2023年度2地点と異なる。〔確認：公的統計／差異の理由は未解決〕  
+  出典：東京都環境局「[区別の湧水地点数](https://www.kankyo.metro.tokyo.lg.jp/water/conservation/spring_water/current/district)」「[東京の湧水の現状](https://www.kankyo.metro.tokyo.lg.jp/water/conservation/spring_water/current)」／環境省「[東京都の湧水把握件数](https://www.env.go.jp/water/yusui/result/sub1/tokyo.html)」。
+
+- **1988年の豊島区制作映像『豊島の風土を訪ねて 旧長崎町編「風薫る里」』は谷端川・千川上水を関連キーワードに含む。** 豊島区映像目録 **mp01800010**、制作1988年、32分10秒。長崎・千早・要町など旧河道周辺の景観・土地利用の照合候補。ただし映像本編は未閲覧で、谷端川の具体的な橋跡・暗渠が映るか、各場面の撮影年は不明。〔確認：公的目録／映像内容は未確認〕  
+  出典：豊島区「[映像目録](https://adeac.jp/toshima-history/catalog/mp01800010)」。
+
 ## 調査ノート
 
 | テーマ | 文書 |
