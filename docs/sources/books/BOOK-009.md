@@ -1,0 +1,17 @@
+---
+id: BOOK-009
+title: 小石川新聞社編『礫川要覧』
+category: books
+tags: [礫川要覧, 小石川]
+old_ids: [G03]
+status: 直接確認
+verified_by: 未判定
+url: https://dl.ndl.go.jp/pid/764460
+---
+
+# [BOOK-009] 小石川新聞社編『礫川要覧』
+
+- 小石川新聞社、明治43年（1910）10月
+- 国立国会図書館デジタルコレクション
+- https://dl.ndl.go.jp/pid/764460
+- 音羽富士下の池と惣門側の池の接続記述について原頁確認が必要。
