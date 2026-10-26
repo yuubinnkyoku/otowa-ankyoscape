@@ -14,3 +14,4 @@ url: https://archive.library.metro.tokyo.lg.jp/da/detail?tilcod=0000000005-00226
 - 『江戸名所図会』第4巻、天保7年（1836）
 - https://archive.library.metro.tokyo.lg.jp/da/detail?tilcod=0000000005-00226708
 - 護持院・護国寺を描く複数の見開きを収録。
+- 確認者について：2026-10-26、利用者は見たかどうか覚えていない。確認者は未判定のまま。

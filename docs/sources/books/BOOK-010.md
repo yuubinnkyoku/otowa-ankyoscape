@@ -5,7 +5,7 @@ category: books
 tags: [本田創, 東京暗渠学, 護国寺]
 old_ids: [G05]
 status: 直接確認
-verified_by: 未判定
+verified_by: human
 parent: BOOK-005
 url: https://bunshun.jp/articles/-/50033?page=4
 ---
