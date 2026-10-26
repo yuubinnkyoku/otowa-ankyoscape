@@ -31,3 +31,32 @@
 
 - スクリプトはこのフォルダを作業ディレクトリとして実行する前提（相対パスでファイルを参照）。
 - `spn2_progress.jsonl` の status=pending は「IAがジョブを受理した」意味であり、保存完了の確認は `spn2_verify.jsonl` 側で行う。
+
+## URLクリーニング（2026-10-26）
+
+再検査で未保存だった203件を精査したところ、144件は抽出時の混入だった
+（URL末尾に U+E201 と日本語の続きが付着、末尾バッククォート、括弧の欠落など）。
+混入した記法のままでは CDX にヒットしないため「未保存」に見えていた。
+
+- 144件をクリーニングすると実URLは78件に集約される（同一の GitHub README が60件分あった）
+- 78件のうち15件は正形URLで保存確認済みだったもの、63件を CDX で再検査し31件の保存を確認
+  （1998〜2004年の旧保存を含む。消失サイト系は当初から保存されていた）
+- 対応表は url_corrections.jsonl（invalid → cleaned → cleaned_verify）
+
+クリーニング後の実態（SPN2投入対象だった666件について）:
+- 実URL総数は 585件（混入144件を実URL78件に置換したため）
+- 保存確認できたのは 494件、本当に未保存なのは 91件
+  （主なホスト: github.com 32、lotus62ankyo.blog.jp 14、commons.wikimedia.org 6、note.com 6）
+- 再投入の要否は、この91件の範囲で判断する
+
+## SPN2再投入（2026-10-26）
+
+本当に未保存だった91件（resubmit_urls.txt）を SPN2 へ再投入した。
+
+- 84件が pending で受理（spn2_resubmit_progress.jsonl 32件＋spn2_resubmit59_progress.jsonl 52件）
+- 7件は IA 側が一貫して error を返した（再試行でも同じ）:
+  adeac.jp の PDF 2件、commons.wikimedia.org の Special:Redirect ファイルURL 5件
+  （spn2_retry7_progress.jsonl）
+- 投入後約1時間の CDX 確認で 37件に 2026-10-26 の保存を確認（うち github.com 29件）。
+  残り54件は反映待ち（上の error 7件を含む）。結果は spn2_verify.jsonl に追記済み
+- 実URL585件のうち保存確認は 531件になった
