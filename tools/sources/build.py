@@ -103,7 +103,7 @@ def main():
         fm = parse_fm(_txt)
         fm["_body"] = _txt
         if not fm.get("id"): continue
-        fm["_path"] = str(p.relative_to(SRC))
+        fm["_path"] = p.relative_to(SRC).as_posix()
         items.append(fm)
     items.sort(key=lambda f: f["id"])
     out = ["# 出典索引（自動生成）", "",
