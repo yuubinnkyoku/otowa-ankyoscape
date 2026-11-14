@@ -18,3 +18,4 @@ url: https://www2.i-repository.net/contents/myc/text_2rekishihen/rekishihen_honc
 ## 関連
 
 - [BOOK-084](BOOK-084.md)（板橋高校）・[BOOK-070](BOOK-070.md)（武蔵高校『千川上水』）・[GOV-098](../gov/GOV-098.md)（練馬区史歴史編）
+- **追記（2026-11-14 第70回）**: 同一著者による同年の記事「千川上水の灌漑利用について 江戸上水史の一こま」（『西郊文化』1955年6月26日、pp.2–9）を[PAP-049](../papers/PAP-049.md)として新規登録した。単行書との内容異同は本文確認後に判断。
