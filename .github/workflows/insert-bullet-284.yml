@@ -1,4 +1,5 @@
 name: insert-bullet-284
+# 283方式の自己起動fix: workflow新規作成pushはActions発火しないため、本コミットのworkflow変更で再発火させる
 on:
   push:
     branches: [main]
