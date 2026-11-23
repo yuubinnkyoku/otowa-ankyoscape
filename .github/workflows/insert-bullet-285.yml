@@ -1,0 +1,45 @@
+name: insert-bullet-285
+on:
+  push:
+    branches: [main]
+    paths: [".285-bullet.txt", ".github/workflows/insert-bullet-285.yml"]
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert bullet, commit, cleanup
+        run: |
+          set -e
+          python3 - <<'PY'
+          import sys
+          data = open("README.md", "rb").read()
+          bullet = open(".285-bullet.txt", "rb").read().rstrip(b"\n")
+          lines = data.split(b"\n")
+          marker285 = "- **第285回:".encode("utf-8")
+          marker284 = "- **第284回:".encode("utf-8")
+          if any(l.startswith(marker285) for l in lines):
+              print("ALREADY_PRESENT")
+              sys.exit(0)
+          idx = [i for i, l in enumerate(lines) if l.startswith(marker284)]
+          if len(idx) != 1:
+              print("ANCHOR_COUNT_%d" % len(idx))
+              sys.exit(1)
+          lines.insert(idx[0], bullet)
+          open("README.md", "wb").write(b"\n".join(lines))
+          print("INSERTED_BEFORE_LINE_%d" % idx[0])
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- README.md; then CHANGED=0; else CHANGED=1; fi
+          git add README.md
+          git rm -q -f .285-bullet.txt .github/workflows/insert-bullet-285.yml
+          if [ "$CHANGED" -eq 1 ]; then
+            git commit -q -m "README: 第285回bulletを追加（PAP-106・GOV-555/556・BLOG-304/305・BOOK-284・対照表1行・INDEX 1,682 items）"
+            git push
+          else
+            git commit -q -m "insert-bullet-285: README unchanged, cleanup helper files"
+            git push
+          fi
