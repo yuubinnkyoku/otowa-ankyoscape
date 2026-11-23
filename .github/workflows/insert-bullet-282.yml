@@ -1,0 +1,45 @@
+name: insert-bullet-282
+on:
+  push:
+    branches: [main]
+    paths: [".282-bullet.txt"]
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert bullet, commit, cleanup
+        run: |
+          set -e
+          python3 - <<'PY'
+          import sys
+          data = open("README.md", "rb").read()
+          bullet = open(".282-bullet.txt", "rb").read().rstrip(b"\n")
+          lines = data.split(b"\n")
+          marker282 = "- **第282回:".encode("utf-8")
+          marker281 = "- **第281回:".encode("utf-8")
+          if any(l.startswith(marker282) for l in lines):
+              print("ALREADY_PRESENT")
+              sys.exit(0)
+          idx = [i for i, l in enumerate(lines) if l.startswith(marker281)]
+          if len(idx) != 1:
+              print("ANCHOR_COUNT_%d" % len(idx))
+              sys.exit(1)
+          lines.insert(idx[0], bullet)
+          open("README.md", "wb").write(b"\n".join(lines))
+          print("INSERTED_BEFORE_LINE_%d" % idx[0])
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- README.md; then CHANGED=0; else CHANGED=1; fi
+          git add README.md
+          git rm -q -f .282-bullet.txt .github/workflows/insert-bullet-282.yml
+          if [ "$CHANGED" -eq 1 ]; then
+            git commit -q -m "README: 第282回bulletを追加（GOV-552 2017年版135行解読・2026年版159箇所との全行対照・貫井立体訂正）"
+            git push
+          else
+            git commit -q -m "insert-bullet-282: README unchanged, cleanup helper files"
+            git push
+          fi
