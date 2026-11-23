@@ -1,0 +1,48 @@
+name: insert-bullet-283
+on:
+  push:
+    branches: [main]
+    paths: ['.283-bullet.txt']
+permissions:
+  contents: write
+jobs:
+  insert-and-remove:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Insert 第283回 bullet into README (self-removing)
+        run: |
+          set -eu
+          if grep -q '^- \*\*第283回:' README.md; then
+            echo "第283回 bullet already exists; skip insertion"
+          else
+            anchor_count=$(grep -c '^- \*\*第282回:' README.md || true)
+            if [ "$anchor_count" -ne 1 ]; then
+              echo "anchor count = $anchor_count (expected 1); abort"
+              exit 1
+            fi
+            python3 - <<'PY'
+import io
+bullet = open('.283-bullet.txt', encoding='utf-8').read().rstrip('\n')
+lines = io.open('README.md', encoding='utf-8').read().split('\n')
+idx = [i for i, l in enumerate(lines) if l.startswith('- **第282回:')]
+assert len(idx) == 1, 'anchor lines: %r' % idx
+lines.insert(idx[0], bullet)
+with io.open('README.md', 'w', encoding='utf-8', newline='') as f:
+    f.write('\n'.join(lines))
+print('inserted at line', idx[0] + 1)
+PY
+          fi
+      - name: Commit README and remove helper files in the same commit
+        run: |
+          set -eu
+          git config user.name "yuubinnkyoku"
+          git config user.email "137483288+yuubinnkyoku@users.noreply.github.com"
+          git add README.md
+          git rm -q .283-bullet.txt
+          git rm -q .github/workflows/insert-bullet-283.yml
+          git commit -m "README: 第283回bulletを追加（GOV-553/554・BLOG-300/301・INDEX 1,674 items）"
+          git push origin main
