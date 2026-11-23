@@ -1,0 +1,37 @@
+name: insert-bullet-287
+on:
+  push:
+    paths:
+      - '.287-bullet.txt'
+      - '.github/workflows/insert-bullet-287.yml'
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert bullet into README and remove helpers
+        run: |
+          python3 - <<'PY'
+          import pathlib
+          bullet = pathlib.Path('.287-bullet.txt').read_text(encoding='utf-8').rstrip('\n')
+          p = pathlib.Path('README.md')
+          t = p.read_text(encoding='utf-8')
+          anchor = '\n- **第286回:'
+          i = t.find(anchor)
+          assert i != -1, 'anchor not found'
+          assert bullet.startswith('- **第287回:'), 'bullet mismatch'
+          assert t.count('\n- **第286回:') == 1, 'anchor not unique'
+          t2 = t[:i] + '\n' + bullet + t[i:]
+          assert t2 != t, 'no insertion'
+          assert t2.count('\n- **第287回:') == 1, 'bullet duplicated'
+          p.write_text(t2, encoding='utf-8')
+          print('README updated')
+          PY
+          rm .287-bullet.txt .github/workflows/insert-bullet-287.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "README: 第287回bulletを追加（ORG-042/043・対照表3行・INDEX 1,694 items）"
+          git push
