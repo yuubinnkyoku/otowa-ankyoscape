@@ -25,7 +25,7 @@ t = open(p, encoding='utf-8').read()
 old = ', 第302回]'
 assert t.count(old) == 1, 'GOV-577 tags anchor error'
 t = t.replace(old, ', 第302回, 第303回]')
-old = 'status: 原文一次確認（速記録全文86,954字をr.jina.ai経由で取得して2026-11-24に確認・BLOG-312引用文言との全文一致を検証済み・gikaiへの直接curlはWAF 403）'
+old = 'status: 原文一次確認（速記録全文86,954字をr.jna.ai経由で取得して2026-11-24に確認・BLOG-312引用文言との全文一致を検証済み・gikaiへの直接curlはWAF 403）'.replace('r.jna.ai', 'r.jina.ai')
 assert t.count(old) == 1, 'GOV-577 status anchor error'
 t = t.replace(old, 'status: 原文一次確認（速記録全文86,954字をr.jina.ai経由で取得して2026-11-24に確認・BLOG-312引用文言との全文一致を検証済み・gikaiへの直接curlはWAF 403。第303回: 全文の四河川走査を実施）')
 open(p, 'w', encoding='utf-8').write(t)
