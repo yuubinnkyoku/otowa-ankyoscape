@@ -1,0 +1,41 @@
+name: insert-bullet-296
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - insert-bullet-296.yml
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert bullet and clean up
+        run: |
+          set -eu
+          python3 - <<'PYEOF'
+          import sys
+          bullet = open('.296-bullet.txt', encoding='utf-8').read()
+          if not bullet.endswith('\n'):
+              bullet += '\n'
+          bullet = bullet.rstrip('\n') + '\n'
+          readme = open('README.md', encoding='utf-8').read()
+          anchor = '\n- **第295回・続き:'
+          n = readme.count(anchor)
+          assert n == 1, 'anchor count=%d' % n
+          head = bullet.split('\n', 1)[0]
+          assert head not in readme, 'bullet already present'
+          i = readme.index(anchor)
+          end = readme.index('\n', i + 1)
+          new = readme[:end+1] + bullet + readme[end+1:]
+          open('README.md', 'w', encoding='utf-8').write(new)
+          print('bullet inserted')
+          PYEOF
+          rm -f .296-bullet.txt insert-bullet-296.yml
+          git config user.name "otowa-ankyoscape-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "第296回: README bullet挿入とヘルパー削除"
+          git push
