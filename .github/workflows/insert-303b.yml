@@ -1,0 +1,24 @@
+name: insert-303b
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/insert-303b.yml
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply appends, update INDEX row and README bullet, then clean up
+        run: |
+          set -eu
+          python3 .303b-insert.py
+          rm -f .303b-adds-gov080.md .303b-adds-gov156.md .303b-adds-note.md .303b-insert.py .github/workflows/insert-303b.yml
+          git config user.name "otowa-ankyoscape-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "第303回補遺: 追記適用・INDEX行更新・README bullet補遺とヘルパー削除"
+          git push
