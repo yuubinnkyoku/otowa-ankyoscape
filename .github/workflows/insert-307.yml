@@ -1,0 +1,24 @@
+name: insert-307
+on:
+  push:
+    branches: [main]
+    paths: ['.307-bullet.txt', '.307-insert.py', '.github/workflows/insert-307.yml']
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: Run insert script
+        run: python3 .307-insert.py
+      - name: Commit and push
+        run: |
+          git config user.name "otowa-ankyoscape-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "第307回: INDEX行挿入・README bullet挿入とヘルパー削除" || echo "no changes"
+          git push
