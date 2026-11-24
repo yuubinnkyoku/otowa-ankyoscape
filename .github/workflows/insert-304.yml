@@ -1,0 +1,25 @@
+name: insert-304
+# 第304回: README bullet自動挿入（自己削除型）
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/insert-304.yml
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert README bullet and clean up
+        run: |
+          set -eu
+          python3 .304-insert.py
+          rm -f .304-bullet.txt .304-insert.py .github/workflows/insert-304.yml
+          git config user.name "otowa-ankyoscape-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "第304回: README bullet挿入とヘルパー削除"
+          git push
