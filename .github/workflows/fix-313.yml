@@ -1,0 +1,24 @@
+name: fix-313
+on:
+  push:
+    branches: [main]
+    paths: ['.fix313.txt']
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix round-313 bullet typo in README
+        run: |
+          sed -i 's/日本製銅株式会社/日本製銃株式会社/g' README.md
+          if git diff --quiet README.md; then echo "no change"; exit 1; fi
+      - name: Commit README and remove helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q .fix313.txt .github/workflows/fix-313.yml
+          git add README.md
+          git commit -m "第313回: README bulletの誤記修正（日本製銅→日本製銃・workflow自己削除）"
+          git push
