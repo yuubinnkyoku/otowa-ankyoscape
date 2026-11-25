@@ -1,0 +1,22 @@
+name: insert-313
+on:
+  push:
+    branches: [main]
+    paths: ['.313-bullet.txt']
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert round-313 bullet into README
+        run: python3 .313-insert.py
+      - name: Commit README and remove helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q .313-bullet.txt .313-insert.py .github/workflows/insert-313.yml
+          git add README.md
+          git commit -m "第313回: READMEに実行記録bulletを挿入（定期実行bot・ヘルパー自己削除）" || echo "nothing to commit"
+          git push
