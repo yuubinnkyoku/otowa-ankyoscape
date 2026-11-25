@@ -1,0 +1,22 @@
+name: insert-316
+on:
+  push:
+    branches: [main]
+    paths: ['.316-bullet.txt']
+permissions:
+  contents: write
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Insert round-316 bullet into README and INDEX
+        run: python3 .316-insert.py
+      - name: Commit README/INDEX and remove helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q .316-bullet.txt .316-insert.py .github/workflows/insert-316.yml
+          git add README.md docs/sources/INDEX.md
+          git commit -m "第316回: READMEに実行記録bulletを挿入しINDEXにGOV-593/594・BOOK-319/320行を追加（定期実行bot・ヘルパー自己削除）" || echo "nothing to commit"
+          git push
