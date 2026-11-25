@@ -1,0 +1,30 @@
+name: insert-318
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.318-bullet.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run insert script
+        run: python3 .318-insert.py
+      - name: Commit README/INDEX and remove helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/sources/INDEX.md
+          git rm .318-bullet.txt .318-insert.py .github/workflows/insert-318.yml
+          git commit -m "第318回: READMEに実行記録bulletを挿入しINDEXにGOV-596〜598・GAZ-187/188・BOOK-323/324行を追加（定期実行bot・ヘルパー自己削除）"
+          git push
