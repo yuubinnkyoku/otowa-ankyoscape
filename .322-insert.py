@@ -74,11 +74,9 @@ def insert_after(lines, prefix, new_lines, label):
 
 def main():
     with io.open(BULLET, encoding='utf-8') as f:
-        bullet = f.read().strip('
-')
+        bullet = f.read().strip('\n')
     assert bullet.startswith('- **第322回:**'), 'bullet format check failed'
-    assert '
-' not in bullet, 'bullet must be single line'
+    assert '\n' not in bullet, 'bullet must be single line'
 
     # --- README.md ---
     with io.open(README, encoding='utf-8') as f:
@@ -87,14 +85,12 @@ def main():
         print('README: 第322回bullet already present; skip')
     else:
         must_one(readme, '- **第321回:')
-        lines = readme.split('
-')
+        lines = readme.split('\n')
         hits = [i for i, l in enumerate(lines) if l.startswith('- **第321回:')]
         assert len(hits) == 1, 'README anchor 第321回 found %d' % len(hits)
         lines.insert(hits[0] + 1, bullet)
         with io.open(README, 'w', encoding='utf-8', newline='') as f:
-            f.write('
-'.join(lines))
+            f.write('\n'.join(lines))
         print('README: bullet inserted after line %d' % (hits[0] + 1))
 
     # --- docs/sources/INDEX.md ---
@@ -104,11 +100,9 @@ def main():
         print('INDEX: GAZ-190 line already present; skip')
     else:
         must_one(index, '- [GAZ-189](gazetteers/GAZ-189.md)')
-        lines = index.split('
-')
+        lines = index.split('\n')
         lines = insert_after(lines, '- [GAZ-189](gazetteers/GAZ-189.md)', [GAZ190_LINE, GAZ191_LINE, GAZ192_LINE, GAZ193_LINE], 'INDEX-GAZ')
-        index = '
-'.join(lines)
+        index = '\n'.join(lines)
         # 計数更新（各箇所とも1箇所であることを確認して置換）
         index = index.replace('## 地誌・行政史料（189件）', '@@GAZHEAD@@', 1)
         index = index.replace('@@GAZHEAD@@', '## 地誌・行政史料（193件）', 1)
