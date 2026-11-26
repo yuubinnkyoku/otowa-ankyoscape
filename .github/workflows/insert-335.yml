@@ -1,0 +1,31 @@
+name: insert-335
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.335-bullet.txt'
+      - '.335-insert.py'
+
+permissions:
+  contents: write
+
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run insert script
+        run: python3 .335-insert.py
+      - name: Commit README and remove helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/sources/INDEX.md
+          git rm .335-bullet.txt .335-insert.py .github/workflows/insert-335.yml
+          git commit -m "第335回: READMEに実行記録bulletを挿入しINDEXにGOV-606〜608行を追加（定期実行bot・ヘルパー自己削除）"
+          git push
