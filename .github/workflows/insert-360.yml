@@ -1,0 +1,32 @@
+name: insert-360
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.360-bullet.txt'
+      - '.360-insert.py'
+
+permissions:
+  contents: write
+
+jobs:
+  insert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run insert script
+        run: python3 .360-insert.py
+      - name: Commit README/INDEX and remove helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/sources/INDEX.md
+          git commit -m "第360回: READMEに実行記録bulletを挿入しINDEXを更新（定期実行bot・ヘルパー自己削除）"
+          git rm .360-bullet.txt .360-insert.py .github/workflows/insert-360.yml
+          git commit -m "第360回: ヘルパー自己削除"
+          git push
