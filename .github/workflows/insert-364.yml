@@ -26,7 +26,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "ç¬¬364å: READMEã«å®è¡è¨é²bulletãæ¿å¥ï¼å®æå®è¡botã»ãã«ãã¼èªå·±åé¤ï¼"
+          git commit -m "第364回: READMEに実行記録bulletを挿入（定期実行bot・ヘルパー自己削除）"
           git rm .364-bullet.txt .364-insert.py .github/workflows/insert-364.yml
-          git commit -m "ç¬¬364å: ãã«ãã¼èªå·±åé¤"
+          git commit -m "第364回: ヘルパー自己削除"
           git push
