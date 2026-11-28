@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# retrigger: 382 (paths filter firing)
 # -*- coding: utf-8 -*-
 """第382回: READMEに実行記録bulletを挿入し、INDEXにBLOG-394の1行を挿入・計数更新するヘルパー。
 使い方: python3 .382-insert.py [base_dir]  （既定 base_dir='.'）
