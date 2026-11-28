@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # retrigger: 384 (paths filter firing)
+# repush 2026-11-28: workflow paths filter did not fire on first push
 # -*- coding: utf-8 -*-
 """第384回: READMEに実行記録bulletを挿入し、INDEXにBOOK-339/BOOK-340/PAP-125の3行を挿入・PAP-093行を更新・計数更新するヘルパー。
 使い方: python3 .384-insert.py [base_dir]  （既定 base_dir='.'）
