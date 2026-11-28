@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # retrigger: 385 (paths filter firing)
+# repush: retrigger paths filter after first push did not fire
 # -*- coding: utf-8 -*-
 """第385回: READMEに実行記録bulletを挿入し、INDEXにGOV-635・MAP-242の2行を挿入・計数更新するヘルパー。
 使い方: python3 .385-insert.py [base_dir]  （既定 base_dir='.'）
