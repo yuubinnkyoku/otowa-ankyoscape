@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - '.377-bullet.txt'
-      - '.377-insert.py'
+      - '.378-bullet.txt'
+      - '.378-insert.py'
 
 permissions:
   contents: write
@@ -27,6 +27,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md docs/sources/INDEX.md
           git commit -m "第378回: READMEに実行記録bulletを挿入しINDEXを更新（定期実行bot・ヘルパー自己削除）"
-          git rm .377-bullet.txt .377-insert.py .github/workflows/insert-378.yml
+          git rm .378-bullet.txt .378-insert.py .github/workflows/insert-378.yml
           git commit -m "第378回: ヘルパー自己削除"
           git push
